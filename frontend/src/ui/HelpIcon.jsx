@@ -2,8 +2,7 @@ import { clsx } from "clsx"
 
 export default function HelpIcon() {
     return (
-        <a className={clsx(
-        )}>
+        <a>
             <span>
                 <svg xmlns="http://www.w3.org/2000/svg" className={clsx("w-6 h-6")}>
                     <path d="M9.75 9a2.25 2.25 0 1 1 3 2.122 2.25 2.25 0 0 0-1.5 2.122v1.006a.75.75 0 0 0 

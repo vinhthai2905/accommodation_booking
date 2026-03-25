@@ -2,13 +2,19 @@ import { clsx } from "clsx"
 
 export default function HomeIcon() {
     return (
-        <a className={clsx(
+        <div className={clsx(
+            "flex items-center"
         )}>
-            <span className={clsx(
-                "text-white"
+            <a className={clsx(
+                "hover:font-black hover:cursor-pointer"
             )}>
-                Booking
-            </span>
-        </a>
+                <span className={clsx(
+                    "text-white font-bold hover:underline"
+                )}>
+                    Booking.com
+                </span>
+            </a>
+        </div>
+
     )
 }
