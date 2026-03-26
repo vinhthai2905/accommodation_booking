@@ -60,7 +60,7 @@ import FooterSection from "./FooterSection"
 
 export default function Footer() {
     return (
-        <footer className="border-t border-gray-200 bg-white">
+        <footer className="border-t bg-gray-200">
             <div className="mx-auto max-w-6xl px-2 py-10">
                 <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-5">
                     {footerColumns.map((column) => (
