@@ -1,7 +1,7 @@
 import Header from './ui/Header'
 import AppLayout from './ui/AppLayout'
 
-import Login from './ui/pages/Login'
+import Register from './ui/pages/Register'
 
 import './App.css'
 
@@ -15,8 +15,8 @@ function App() {
       element: <AppLayout />
     },
     {
-      path: "/login",
-      element: <Login />
+      path: "/sign-in",
+      element: <Register />
     }
   ])
   return <RouterProvider router={router} />

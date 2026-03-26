@@ -25,8 +25,8 @@ export default function Registry() {
                 <a>
                     <span className={clsx("hover:cursor-pointer hover:underline text-white")}>Đăng chỗ nghỉ của quý vị</span>
                 </a>
-                <ButtonLink title="Đăng nhập" />
-                <ButtonLink title="Đăng ký" />
+                <ButtonLink title="Đăng nhập" to={"/"} />
+                <ButtonLink title="Đăng ký" to={"/sign-in"} />
             </div>
         </div>
     )

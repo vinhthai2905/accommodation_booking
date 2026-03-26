@@ -9,18 +9,21 @@ export default function SmallHeader() {
     return (
         <div className={clsx(
             "bg-[#003b95]",
-            "h-full",
-            "flex justify-between"
         )}>
-            <HomeIcon />
             <div className={clsx(
-                "flex items-center gap-4"
+                "h-full",
+                "flex mx-[20%] justify-between py-7 px-7"
             )}>
+                <HomeIcon />
                 <div className={clsx(
-                    "flex gap-8"
+                    "flex items-center gap-4"
                 )}>
-                    <Flag />
-                    <HelpIcon />
+                    <div className={clsx(
+                        "flex gap-8"
+                    )}>
+                        <Flag />
+                        <HelpIcon />
+                    </div>
                 </div>
             </div>
         </div>
