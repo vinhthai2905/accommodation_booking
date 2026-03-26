@@ -21,7 +21,7 @@ export default function LoginForm() {
       type="signIn"
       fields={fields}
       submitText="Đăng nhập"
-      switchTo="/sign-up"
+      switchTo="/auth/sign-up"
       switchType="logIn"
     />
   )

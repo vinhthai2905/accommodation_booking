@@ -39,7 +39,7 @@ export default function RegisterForm() {
       type="register"
       fields={fields}
       submitText="Tạo tài khoản"
-      switchTo="/sign-in"
+      switchTo="/auth/sign-in"
       switchType="register"
     />
   )

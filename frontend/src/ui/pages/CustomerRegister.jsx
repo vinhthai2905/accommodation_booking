@@ -1,4 +1,3 @@
-import SmallHeader from "../SmallHeader";
 import RegisterForm from "../../features/authentication/RegisterForm"
 
 export default function CustomerRegister() {

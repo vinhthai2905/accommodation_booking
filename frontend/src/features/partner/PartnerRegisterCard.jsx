@@ -1,5 +1,7 @@
 import { clsx } from "clsx"
 
+import { Link } from "react-router"
+
 export default function PartnerRegisterCard() {
     return (
         <div className={clsx(
@@ -66,14 +68,16 @@ export default function PartnerRegisterCard() {
             <div className={clsx(
                 "px-6 py-4"
             )}>
-                <button className={clsx(
-                    "w-full h-12",
-                    "rounded bg-[#0071c2]",
-                    "text-white text-[20px] font-medium",
-                    "hover:cursor-pointer"
-                )}>
-                    Bắt đầu ngay →
-                </button>
+                <Link to={"/auth/partner/sign-up"}>
+                    <span className={clsx(
+                        "w-full py-3 block",
+                        "rounded bg-[#0071c2]",
+                        "text-white text-[20px] font-medium text-center",
+                        "hover:cursor-pointer"
+                    )}>Bắt đầu ngay →
+
+                    </span>
+                </Link>
             </div>
 
             <div className="border-t border-gray-300"></div>

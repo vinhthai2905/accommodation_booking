@@ -1,4 +1,3 @@
-import SmallHeader from "../SmallHeader"
 import LoginForm from "../../features/authentication/LoginForm"
 
 export default function CustomerSignIn() {

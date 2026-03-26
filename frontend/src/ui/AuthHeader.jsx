@@ -23,11 +23,11 @@ export default function AuthHeader() {
                     <Flag />
                     <HelpIcon />
                 </div>
-                <Link to={"/partner/sign-up"}>
+                <Link to={"/partner"}>
                     <span className={clsx("hover:cursor-pointer hover:underline text-white")}>Đăng chỗ nghỉ của quý vị</span>
                 </Link>
-                <ButtonLink title="Đăng nhập" to={"/sign-in"} />
-                <ButtonLink title="Đăng ký" to={"/sign-up"} />
+                <ButtonLink title="Đăng nhập" to={"/auth/sign-in"} />
+                <ButtonLink title="Đăng ký" to={"/auth/sign-up"} />
             </div>
         </div>
     )

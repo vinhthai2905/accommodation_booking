@@ -8,6 +8,8 @@ import './App.css'
 
 import { createBrowserRouter, RouterProvider } from "react-router"
 import PartnerRegister from './ui/pages/PartnerRegister'
+import AuthLayout from './ui/AuthLayout'
+import PartnerLanding from './features/authentication/PartnerLanding'
 
 
 function App() {
@@ -17,19 +19,37 @@ function App() {
       element: <AppLayout />
     },
     {
-      path: "/sign-up",
-      element: <CustomerRegister />
-    }
-    ,
+      path: "/auth",
+      element: <AuthLayout />,
+      children: [
+        {
+          path: "sign-up",
+          element: <CustomerRegister />
+        },
+        {
+          path: "sign-in",
+          element: <CustomerSignIn />
+        },
+        {
+          path: "partner/sign-up",
+          element: <PartnerRegister />
+        }
+      ]
+    },
     {
-      path: "/sign-in",
-      element: <CustomerSignIn />
+      path: "/partner",
+      element: <PartnerLanding />
     }
-    ,
-    {
-      path: "/partner/sign-up/",
-      element: <PartnerRegister />
-    }
+    // {
+    //   path: "/auth/sign-up",
+    //   element: <CustomerRegister />
+    // }
+    // ,
+    // {
+    //   path: "/auth/sign-in",
+    //   element: <CustomerSignIn />
+    // }
+    // ,
   ])
   return <RouterProvider router={router} />
 }

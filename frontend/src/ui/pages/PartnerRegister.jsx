@@ -1,7 +1,8 @@
-import Header from "../Header";
+import PartnerLanding from "../../features/authentication/PartnerLanding"
+import RegisterForm from "../../features/authentication/RegisterForm"
 
 export default function PartnerRegister() {
     return (
-        <Header userFor="partner" />
+        <RegisterForm />
     )
 }

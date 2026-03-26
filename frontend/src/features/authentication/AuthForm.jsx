@@ -5,6 +5,9 @@ import FormInput from "../../ui/FormInput"
 import SocialLoginSection from "./SocialLoginSection"
 import Policies from "../../ui/Policies"
 
+import { UserContext } from "../UserContext"
+import { useContext } from "react"
+
 export default function AuthForm({
     type,
     fields,
@@ -12,6 +15,9 @@ export default function AuthForm({
     switchTo,
     switchType,
 }) {
+
+    const user = useContext(UserContext)
+
     return (
         <>
             <SmallHeader />
@@ -42,7 +48,7 @@ export default function AuthForm({
                         <AuthSwitchLink to={switchTo} authType={switchType} />
                     </form>
 
-                    <SocialLoginSection />
+                    {user === "user" && <SocialLoginSection />}
                     <Policies />
                 </div>
             </div>

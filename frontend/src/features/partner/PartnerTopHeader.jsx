@@ -36,7 +36,7 @@ export default function PartnerTopHeader() {
 
                     <ButtonLink
                         title="Đăng nhập"
-                        to="/partner/auth/sign-in"
+                        to="/auth/partner/sign-in"
                     />
 
                     <ButtonLink

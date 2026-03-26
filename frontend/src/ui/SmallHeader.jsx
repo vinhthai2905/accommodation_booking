@@ -6,13 +6,14 @@ import Flag from "./Flag"
 
 
 export default function SmallHeader() {
+
     return (
         <div className={clsx(
             "bg-[#003b95]",
         )}>
             <div className={clsx(
                 "h-full",
-                "flex mx-[20%] justify-between py-7 px-7"
+                "flex mx-[20%] justify-between py-7 px-7",
             )}>
                 <HomeIcon />
                 <div className={clsx(
