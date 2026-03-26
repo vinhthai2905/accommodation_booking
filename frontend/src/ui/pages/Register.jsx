@@ -3,9 +3,6 @@ import RegisterForm from "../RegisterForm"
 
 export default function Register() {
     return (
-        <div>
-            <SmallHeader />
-            <RegisterForm />
-        </div>
+        <RegisterForm />
     )
 }
