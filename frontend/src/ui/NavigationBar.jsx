@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import Registry from "./Registry"
+import AuthHeader from "./AuthHeader"
 import MenuHeader from "./MenuHeader"
 
 export default function NavigationBar() {
@@ -9,7 +9,7 @@ export default function NavigationBar() {
             "flex flex-col py-3 gap-4 mx-[10%]",
             "xl:mx-[20%]"
         )}>
-            <Registry />
+            <AuthHeader />
             <MenuHeader />
         </div>
     )

@@ -1,11 +1,13 @@
 import Header from './ui/Header'
 import AppLayout from './ui/AppLayout'
 
-import Register from './ui/pages/Register'
+import CustomerRegister from './ui/pages/CustomerRegister'
+import CustomerSignIn from './ui/pages/CustomerSignIn'
 
 import './App.css'
 
 import { createBrowserRouter, RouterProvider } from "react-router"
+import PartnerRegister from './ui/pages/PartnerRegister'
 
 
 function App() {
@@ -15,8 +17,18 @@ function App() {
       element: <AppLayout />
     },
     {
+      path: "/sign-up",
+      element: <CustomerRegister />
+    }
+    ,
+    {
       path: "/sign-in",
-      element: <Register />
+      element: <CustomerSignIn />
+    }
+    ,
+    {
+      path: "/partner/sign-up/",
+      element: <PartnerRegister />
     }
   ])
   return <RouterProvider router={router} />

@@ -13,10 +13,7 @@ export default function SocialLoginButton({ loginType, path_1, path_2, path_3, p
         google: ["#4285F4", "#EA4335", "#FBBC05", "#34A853"]
     }
 
-    console.log(viewBoxColor["google"])
-
     const paths = [path_1, path_2, path_3, path_4]
-
 
     return (
         <a

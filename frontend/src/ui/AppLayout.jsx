@@ -1,11 +1,11 @@
 import Header from "./Header"
-import Home from "./Home"
+import Home from "./pages/Home"
 import Footer from "./Footer"
 
 export default function AppLayout() {
     return (
         <>
-            <Header />
+            <Header userFor={"user"}/>
             <Home />
             <Footer />
         </>

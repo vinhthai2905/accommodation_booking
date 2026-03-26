@@ -1,9 +1,9 @@
-import SmallHeader from "./SmallHeader"
+import SmallHeader from "../../ui/SmallHeader"
 import AuthHeader from "./AuthHeader"
 import AuthSwitchLink from "./AuthSwitchLink"
-import FormInput from "./FormInput"
+import FormInput from "../../ui/FormInput"
 import SocialLoginSection from "./SocialLoginSection"
-import Policies from "./Policies"
+import Policies from "../../ui/Policies"
 
 export default function AuthForm({
     type,

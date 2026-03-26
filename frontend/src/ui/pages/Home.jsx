@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 
-import HotelCardSlider from "./HotelCardSlider";
-import OffersSection from "./OffersSection";
+import HotelCardSlider from "../HotelCardSlider";
+import OffersSection from "../OffersSection";
 
 export default function Home() {
 

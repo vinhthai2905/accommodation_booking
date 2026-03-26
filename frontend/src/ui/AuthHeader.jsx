@@ -1,16 +1,34 @@
-export default function AuthHeader({ type }) {
-    return (
-        <>
-            <h1 className="text-3xl text-center font-bold leading-tight text-[#1a1a1a]">
-                {type === "signIn" ? "Đăng nhập" : "Đăng ký"}
-            </h1>
+import { clsx } from "clsx"
 
-            {type === "signIn" 
-                ||
-                <p className="text-center mt-4 leading-7 text-[#1a1a1a]">
-                    Tạo tài khoản để sử dụng các dịch vụ của chúng tôi.
-                </p>
-            }
-        </>
+import HelpIcon from "./HelpIcon"
+import HomeIcon from "./HomeIcon"
+import Flag from "./Flag"
+import ButtonLink from "./ButtonLink"
+
+import { Link } from "react-router"
+
+export default function AuthHeader() {
+    return (
+        <div className={clsx(
+            "h-full",
+            "flex justify-between mx-[0.5%]"
+        )}>
+            <HomeIcon />
+            <div className={clsx(
+                "flex items-center gap-4"
+            )}>
+                <div className={clsx(
+                    "flex gap-8"
+                )}>
+                    <Flag />
+                    <HelpIcon />
+                </div>
+                <Link to={"/partner/sign-up"}>
+                    <span className={clsx("hover:cursor-pointer hover:underline text-white")}>Đăng chỗ nghỉ của quý vị</span>
+                </Link>
+                <ButtonLink title="Đăng nhập" to={"/sign-in"} />
+                <ButtonLink title="Đăng ký" to={"/sign-up"} />
+            </div>
+        </div>
     )
 }
