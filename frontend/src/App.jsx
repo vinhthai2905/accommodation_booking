@@ -1,6 +1,7 @@
-import Header from './ui/Header'
 import AppLayout from './ui/AppLayout'
+import Home from './ui/pages/Home'
 
+import SearchResults from "./ui/pages/SearchResults"
 import CustomerRegister from './ui/pages/CustomerRegister'
 import CustomerSignIn from './ui/pages/CustomerSignIn'
 
@@ -16,7 +17,17 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <AppLayout />
+      element: <AppLayout />,
+      children: [
+        {
+          path: "",
+          element: <Home />
+        },
+        {
+          path: "searchresults",
+          element: <SearchResults />
+        }
+      ]
     },
     {
       path: "/auth",

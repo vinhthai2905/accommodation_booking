@@ -1,6 +1,6 @@
 export default function HotelCard() {
     return (
-        <div className="w-[268px] overflow-hidden rounded-xl bg-[#f5f5f5] shadow-md shrink-0">
+        <div className="w-67 overflow-hidden rounded-xl bg-[#f5f5f5] shadow-md">
             <div className="relative">
                 <img
                     src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop"
@@ -24,7 +24,7 @@ export default function HotelCard() {
                 <p className="mt-1 text-sm text-gray-500">Hue, Vietnam</p>
 
                 <div className="mt-3 flex items-start gap-2">
-                    <div className="rounded-[4px] bg-[#003b95] px-[6px] py-[2px] text-sm font-bold text-white">
+                    <div className="rounded-sm bg-[#003b95] px-1.5 py-0.5 text-sm font-bold text-white">
                         9.1
                     </div>
 
