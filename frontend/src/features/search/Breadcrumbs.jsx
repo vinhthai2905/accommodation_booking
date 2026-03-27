@@ -16,7 +16,7 @@ export default function Breadcrumbs() {
             )}>
                 {
                     items.map(item => {
-                        return <BreadcrumItem key={item.label} item={item} />
+                        return <BreadcrumItem item={item} />
                     })
                 }
                 <li>Search result</li>
