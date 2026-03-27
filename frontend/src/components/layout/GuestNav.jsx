@@ -1,13 +1,13 @@
 import { clsx } from "clsx"
 
-import HelpIcon from "./HelpIcon"
-import HomeIcon from "./HomeIcon"
-import Flag from "./Flag"
-import ButtonLink from "./ButtonLink"
+import HelpIcon from "/src/components/ui/HelpIcon"
+import HomeIcon from "/src/components/ui/HomeIcon"
+import Flag from "/src/components/ui/Flag"
+import ButtonLink from "/src/components/ui/ButtonLink"
 
 import { Link } from "react-router"
 
-export default function AuthHeader() {
+export default function GuestNav() {
     return (
         <div className={clsx(
             "h-full",

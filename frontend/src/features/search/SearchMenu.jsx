@@ -1,8 +1,8 @@
 import { clsx } from "clsx"
+import { useLocation } from "react-router"
 
 import SearchBar from "./SearchBar"
 
-import { useLocation } from "react-router"
 
 export default function SearchMenu() {
     const url = useLocation()

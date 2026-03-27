@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 
 import NavigationBar from "./NavigationBar"
-import SearchMenu from "./SearchMenu"
+import SearchMenu from "../../features/search/SearchMenu"
 
 export default function Header() {
     

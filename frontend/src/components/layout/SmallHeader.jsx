@@ -1,8 +1,8 @@
 import { clsx } from "clsx"
 
-import HelpIcon from "./HelpIcon"
-import HomeIcon from "./HomeIcon"
-import Flag from "./Flag"
+import HelpIcon from "/src/components/ui/HelpIcon"
+import HomeIcon from "/src/components/ui/HomeIcon"
+import Flag from "/src/components/ui/Flag"
 
 
 export default function SmallHeader() {

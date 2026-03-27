@@ -2,7 +2,7 @@ import { Link } from "react-router"
 
 export default function BreadcrumItem({ item }) {
     return (
-        <li className="flex gap-1" key={item.label}>
+        <li className="flex gap-1" >
             <Link className="hover:cursor-pointer hover:underline">
                 {item.label}
             </Link>

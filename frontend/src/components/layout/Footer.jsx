@@ -56,7 +56,7 @@ const footerColumns = [
     },
 ]
 
-import FooterSection from "./FooterSection"
+import FooterSection from "/src/components/ui/FooterSection"
 
 export default function Footer() {
     return (

@@ -1,8 +1,8 @@
 import { clsx } from "clsx"
 
-import AnimatedLandingText from "./AnimatedLandingText"
+import AnimatedLandingText from "/src/components/ui/AnimatedLandingText"
 
-export default function LandingPage() {
+export default function HeroContent() {
 
     return (
         <div className={clsx(

@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { UserContext } from "../UserContext"
 
-export default function AuthHeader({ type }) {
+export default function AuthTitle({ type }) {
     const user = useContext(UserContext)
 
     return (

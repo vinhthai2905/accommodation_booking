@@ -1,8 +1,8 @@
 import Header from "./Header"
-import Footer from "./Footer"
+
+import Footer from "/src/components/layout/Footer"
 
 import { clsx } from "clsx"
-
 import { Outlet } from "react-router"
 
 export default function AppLayout() {

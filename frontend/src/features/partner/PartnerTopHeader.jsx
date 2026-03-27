@@ -1,9 +1,9 @@
 import { Link } from "react-router"
 import clsx from "clsx"
 
-import HomeIcon from "../../ui/HomeIcon"
-import Flag from "../../ui/Flag"
-import ButtonLink from "../../ui/ButtonLink"
+import HomeIcon from "/src/components/ui/HomeIcon"
+import Flag from "/src/components/ui/Flag"
+import ButtonLink from "/src/components/ui/ButtonLink"
 
 export default function PartnerTopHeader() {
     return (

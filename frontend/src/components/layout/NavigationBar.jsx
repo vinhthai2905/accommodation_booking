@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 
-import AuthHeader from "./AuthHeader"
-import MenuHeader from "./MenuHeader"
+import GuestNav from "./GuestNav"
+import ServiceNav from "./ServiceNav"
 
 export default function NavigationBar() {
     return (
@@ -9,8 +9,8 @@ export default function NavigationBar() {
             "flex flex-col pt-3 gap-2 mx-[10%]",
             "xl:mx-[20%]"
         )}>
-            <AuthHeader />
-            <MenuHeader />
+            <GuestNav />
+            <ServiceNav />
         </div>
     )
 }

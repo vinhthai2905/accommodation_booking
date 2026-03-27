@@ -1,16 +1,17 @@
-import AppLayout from './ui/AppLayout'
-import Home from './ui/pages/Home'
+import AppLayout from '/src/components/layout/AppLayout'
+import AuthLayout from './components/layout/AuthLayout'
 
-import SearchResults from "./ui/pages/SearchResults"
-import CustomerRegister from './ui/pages/CustomerRegister'
-import CustomerSignIn from './ui/pages/CustomerSignIn'
+import Home from './pages/Home'
+import SearchResults from "./pages/SearchResults"
+import CustomerRegister from './pages/CustomerRegister'
+import CustomerSignIn from './pages/CustomerSignIn'
+import PartnerRegister from './pages/PartnerRegister'
+import PartnerLanding from './pages/PartnerLanding'
 
 import './App.css'
 
 import { createBrowserRouter, RouterProvider } from "react-router"
-import PartnerRegister from './ui/pages/PartnerRegister'
-import AuthLayout from './ui/AuthLayout'
-import PartnerLanding from './features/authentication/PartnerLanding'
+
 
 
 function App() {

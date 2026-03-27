@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-export default function MenuHeaderItem({ pathLink, serviceName }) {
+export default function ServiceItem({ pathLink, serviceName }) {
     return (
         <li className={clsx(
             "px-2 py-2",

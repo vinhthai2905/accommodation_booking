@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 import { MapContainer, TileLayer, Marker } from "react-leaflet"
 
-import Icon from "./Icon";
+import Icon from "/src/components/ui/Icon";
 
 export default function MapCard() {
 
@@ -16,7 +16,7 @@ export default function MapCard() {
                     center={[10.7769, 106.7009]}
                     zoom={13}
                     className={clsx(
-                        "h-40 w-65"
+                        "h-40 w-65 rounded-lg"
                     )}
                 >
                     <TileLayer

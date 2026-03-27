@@ -1,8 +1,8 @@
 import clsx from "clsx"
 
-import PartnerTopHeader from "../partner/PartnerTopHeader";
-import LandingPage from "../../ui/LandingPage";
-import PartnerRegisterCard from "../partner/PartnerRegisterCard";
+import PartnerTopHeader from "/src/features/partner/PartnerTopHeader";
+import HeroContent from "/src/features/partner/HeroContent";
+import PartnerRegisterCard from "/src/features/partner/PartnerRegisterCard";
 
 export default function PartnerLanding() {
     return (
@@ -19,7 +19,7 @@ export default function PartnerLanding() {
                     "flex justify-between items-start",
                     "gap-16"
                 )}>
-                    <LandingPage />
+                    <HeroContent />
                     <PartnerRegisterCard />
                 </div>
             </div>

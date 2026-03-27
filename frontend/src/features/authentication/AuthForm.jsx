@@ -1,9 +1,11 @@
-import SmallHeader from "../../ui/SmallHeader"
-import AuthHeader from "./AuthHeader"
+import AuthTitle from "./AuthTitle"
 import AuthSwitchLink from "./AuthSwitchLink"
-import FormInput from "../../ui/FormInput"
+
+import SmallHeader from "/src/components/layout/SmallHeader"
+
+import FormInput from "/src/components/ui/FormInput"
 import SocialLoginSection from "./SocialLoginSection"
-import Policies from "../../ui/Policies"
+import Policies from "/src/components/ui/Policies"
 
 import { UserContext } from "../UserContext"
 import { useContext } from "react"
@@ -23,7 +25,7 @@ export default function AuthForm({
             <SmallHeader />
             <div className="flex justify-center px-4 py-10 text-sm">
                 <div className="w-full max-w-107.5">
-                    <AuthHeader type={type} />
+                    <AuthTitle type={type} />
 
                     <form className="mt-8">
                         <div className="space-y-5">
