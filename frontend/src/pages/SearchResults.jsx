@@ -11,7 +11,7 @@ export default function SearchResults() {
             "mx-[20%] mt-10",
             "flex flex-col"
         )}>
-            <Breadcrumbs />
+            <Breadcrumbs usedFor={"searchResults"} />
             <div className={clsx(
                 "mt-2 my-6 grid grid-cols-[auto_1fr] gap-5",
                 "text-black",

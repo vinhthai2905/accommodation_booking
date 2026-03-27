@@ -2,12 +2,22 @@ import { clsx } from "clsx"
 
 import BreadcrumItem from "./BreadcrumItem"
 
-export default function Breadcrumbs() {
-    const items = [
-        { label: "Home page", to: "/" },
-        { label: "Vietnam", to: "/vietnam" },
-        { label: "TP. Ho Chi Minh", to: "/hcm" },
-    ]
+const searchNav = [
+    { label: "Home page", to: "/" },
+    { label: "Vietnam", to: "/vietnam" },
+    { label: "TP. Ho Chi Minh", to: "/hcm" },
+]
+
+const hotelNav = [
+    { label: "Trang chủ", to: "/" },
+    { label: "Khách sạn", to: "/hotels" },
+    { label: "Tất cả căn hộ", to: "/hotels/apartments" },
+    { label: "Việt Nam", to: "/vietnam" },
+    { label: "Khu vực TP. Hồ Chí Minh", to: "/vietnam/hcm/area" },
+    { label: "TP. Hồ Chí Minh", to: "/vietnam/hcm" },
+]
+
+export default function Breadcrumbs({ usedFor }) {
 
     return (
         <div className="text-xs text-[#066ce4]">
@@ -15,11 +25,25 @@ export default function Breadcrumbs() {
                 "flex gap-2"
             )}>
                 {
-                    items.map(item => {
-                        return <BreadcrumItem item={item} />
-                    })
+                    usedFor === "searchResults"
+                        ? (
+                            searchNav.map(item => {
+                                return <BreadcrumItem item={item} />
+                            })
+                        )
+                        : (
+                            hotelNav.map(item => {
+                                return <BreadcrumItem item={item} />
+                            })
+                        )
                 }
-                <li>Search result</li>
+                <li className="text-black">
+                    {
+                        usedFor === "searchResults"
+                            ? " Search result"
+                            : "Ưu đãi cho Diny ApartHotel - Rooftop Pool - The Manor 2 (Căn hộ) (Việt Nam)"
+                    }
+                </li>
             </ul>
         </div>
     )

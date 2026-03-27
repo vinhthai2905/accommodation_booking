@@ -7,7 +7,7 @@ import SearchBar from "./SearchBar"
 export default function SearchMenu() {
     const url = useLocation()
 
-    let currentPage = url.pathname.includes("searchresults")
+    let currentPage = url.pathname.includes("index")
 
     return (
         <div className={clsx(
@@ -16,7 +16,7 @@ export default function SearchMenu() {
             "xl:mx-[20%]"
         )}>
             {
-                currentPage === false
+                currentPage === true
                     && (
                     <div className={clsx(
                         "flex flex-col pt-5 gap-2",

@@ -2,6 +2,7 @@ import AppLayout from '/src/components/layout/AppLayout'
 import AuthLayout from './components/layout/AuthLayout'
 
 import Home from './pages/Home'
+import Hotel from './pages/Hotel'
 import SearchResults from "./pages/SearchResults"
 import CustomerRegister from './pages/CustomerRegister'
 import CustomerSignIn from './pages/CustomerSignIn'
@@ -21,12 +22,16 @@ function App() {
       element: <AppLayout />,
       children: [
         {
-          path: "",
+          path: "index",
           element: <Home />
         },
         {
           path: "searchresults",
           element: <SearchResults />
+        },
+        {
+          path: "hotel",
+          element: <Hotel />
         }
       ]
     },

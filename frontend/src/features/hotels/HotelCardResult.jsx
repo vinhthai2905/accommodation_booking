@@ -1,5 +1,7 @@
 import { clsx } from "clsx"
 
+import { Link } from "react-router"
+
 export default function HotelCardResult() {
     return (
         <div className={clsx(
@@ -8,11 +10,13 @@ export default function HotelCardResult() {
         )}>
             {/* Image */}
             <div className="relative">
-                <img
-                    src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop"
-                    alt="Hotel room"
-                    className="h-55 w-full object-cover"
-                />
+                <Link to="/hotel">
+                    <img
+                        src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop"
+                        alt="Hotel room"
+                        className="h-55 w-full object-cover"
+                    />
+                </Link>
 
                 <button
                     type="button"
@@ -28,7 +32,7 @@ export default function HotelCardResult() {
             </div>
 
             {/* Content */}
-            
+
             <div className="p-3">
                 <h2 className={clsx(
                     "text-md font-bold",

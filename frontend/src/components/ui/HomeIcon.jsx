@@ -11,7 +11,7 @@ export default function HomeIcon() {
                 className={clsx(
                 "hover:font-black hover:cursor-pointer"
             )}
-                to={"/"}
+                to={"/index"}
             >
                 <span className={clsx(
                     "text-white font-bold hover:underline"
