@@ -4,14 +4,14 @@ export default function ReviewBox() {
   return (
     <div
       className={clsx(
-        "flex flex-col",
-        "w-full border border-gray-300 bg-white",
+        "flex flex-col gap-2 grow-1",
+        "w-full border rounded-sm border-gray-300 bg-white",
         "p-4"
       )}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="text-right ml-auto">
-          <p className="text-md font-light  text-gray-900">Xuất sắc</p>
+          <p className="text-sm font-light  text-gray-900">Xuất sắc</p>
           <p className="mt-1 text-sm text-gray-500">330 đánh giá</p>
         </div>
 
@@ -25,8 +25,8 @@ export default function ReviewBox() {
         </div>
       </div>
 
-      <div className="border-t border-gray-200">
-        <p className="text-base font-semibold text-gray-900">Khách lưu trú ở đây thích điều gì?</p>
+      <div className="border-t pt-2 border-gray-200">
+        <p className="text-sm font-bold text-gray-900">Khách lưu trú ở đây thích điều gì?</p>
         <p className="text-sm  text-gray-400">“</p>
         <p className="text-sm  text-gray-800">
           Anh chủ nhiệt tình, dễ thương. Như các căn khác ở đây, nội thất hơi cũ nhưng vẫn sử dụng được rất tốt. Căn hộ, gọn gàng, sạch sẽ. Giá phòng tốt so...
@@ -50,8 +50,8 @@ export default function ReviewBox() {
         </div>
       </div>
 
-      <div className="flex items-center justify-between border-t border-gray-200 pt-4">
-        <p className="text-md font-semibold  text-gray-900">Nhân viên phục vụ</p>
+      <div className="flex items-center justify-between border-t border-gray-200 pt-2">
+        <p className="text-sm font-bold text-gray-900">Nhân viên phục vụ</p>
 
         <div
           className={clsx(
