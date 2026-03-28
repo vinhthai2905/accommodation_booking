@@ -1,10 +1,10 @@
 import { clsx } from "clsx"
 import { useLocation } from "react-router"
 
-import SearchBar from "./SearchBar"
+import BookingSearchBar from "./BookingSearchBar"
 
 
-export default function SearchMenu() {
+export default function BookingSearchMenu() {
     const url = useLocation()
 
     let currentPage = url.pathname.includes("index")
@@ -35,7 +35,7 @@ export default function SearchMenu() {
                     </div>
                 )
             }
-            <SearchBar />
+            <BookingSearchBar />
         </div>
     )
 }

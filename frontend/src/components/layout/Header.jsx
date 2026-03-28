@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 
 import NavigationBar from "./NavigationBar"
-import SearchMenu from "../../features/search/SearchMenu"
+import BookingSearchMenu from "../../features/search/BookingSearchMenu"
 
 export default function Header() {
     return (
@@ -10,7 +10,7 @@ export default function Header() {
 
         )}>
             <NavigationBar />
-            <SearchMenu />
+            <BookingSearchMenu />
         </header>
     )
 }

@@ -2,6 +2,7 @@ import HotelImageGallery from "./HotelImageGallery"
 import HotelMapCard from "./HotelMapCard"
 import HotelReview from "./HotelReview"
 import Amenities from "./Amenities"
+import RoomSelection from "./RoomSelection"
 
 export default function HotelOverview() {
     return (
@@ -14,6 +15,7 @@ export default function HotelOverview() {
                 </div>
             </div>
             <Amenities />
+            <RoomSelection />
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-export default function SearchInput({ inputInfo, inputFor, path }) {
+export default function BookingSearchInput({ inputInfo, inputFor, path }) {
     return (
         <div className={clsx(
             "flex gap-2",
