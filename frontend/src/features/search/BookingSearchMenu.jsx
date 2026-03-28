@@ -1,13 +1,13 @@
 import { clsx } from "clsx"
-import { useLocation } from "react-router"
+import { useContext } from "react"
 
 import BookingSearchBar from "./BookingSearchBar"
 
+import { HeaderContext } from "../../context/HeaderContext"
+
 
 export default function BookingSearchMenu() {
-    const url = useLocation()
-
-    let currentPage = url.pathname.includes("index")
+    const currentPage = useContext(HeaderContext)
 
     return (
         <div className={clsx(
@@ -17,25 +17,27 @@ export default function BookingSearchMenu() {
         )}>
             {
                 currentPage === true
-                    && (
-                    <div className={clsx(
-                        "flex flex-col pt-5 gap-2",
-                        "sm:text-2xl"
-                    )}>
-                        <h1 className={clsx(
-                            "font-bold text-4xl"
+                && (
+                    <>
+                        <div className={clsx(
+                            "flex flex-col pt-5 gap-2",
+                            "sm:text-2xl"
                         )}>
-                            Tìm chỗ nghỉ tiếp theo
-                        </h1>
-                        <p className={clsx(
-                            "font-medium"
-                        )}>
-                            Tìm khách sạn, chỗ nghỉ dạng nhà và nhiều hơn nữa...
-                        </p>
-                    </div>
+                            <h1 className={clsx(
+                                "font-bold text-4xl"
+                            )}>
+                                Tìm chỗ nghỉ tiếp theo
+                            </h1>
+                            <p className={clsx(
+                                "font-medium"
+                            )}>
+                                Tìm khách sạn, chỗ nghỉ dạng nhà và nhiều hơn nữa...
+                            </p>
+                        </div>
+                        <BookingSearchBar />
+                    </>
                 )
             }
-            <BookingSearchBar />
         </div>
     )
 }

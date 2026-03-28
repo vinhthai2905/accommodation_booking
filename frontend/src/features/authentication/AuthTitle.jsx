@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { UserContext } from "../UserContext"
+import { UserContext } from "../../context/UserContext"
 
 export default function AuthTitle({ type }) {
     const user = useContext(UserContext)

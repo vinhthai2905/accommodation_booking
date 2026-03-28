@@ -4,7 +4,7 @@ export default function ReviewBox() {
   return (
     <div
       className={clsx(
-        "flex flex-col gap-2 grow-1",
+        "flex flex-col gap-2 grow",
         "w-full border rounded-sm border-gray-300 bg-white",
         "p-4"
       )}

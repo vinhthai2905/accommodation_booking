@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router"
 
-import { UserContext } from "../../features/UserContext"
+import { UserContext } from "../../context/UserContext"
 
 export default function AuthLayout() {
 

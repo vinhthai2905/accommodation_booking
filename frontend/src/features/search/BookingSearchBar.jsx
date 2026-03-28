@@ -26,6 +26,5 @@ export default function BookingSearchBar() {
 
             </div>
         </form>
-
     )
 }

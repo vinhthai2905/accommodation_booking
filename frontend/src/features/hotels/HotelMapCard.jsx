@@ -9,7 +9,7 @@ export default function HotelMapCard() {
 
     return (
         <div className={clsx(
-            "relative w-full grow-1"
+            "relative w-full grow"
         )}>
             <MapContainer
                 center={[10.7769, 106.7009]}

@@ -7,7 +7,7 @@ import FormInput from "/src/components/ui/FormInput"
 import SocialLoginSection from "./SocialLoginSection"
 import Policies from "/src/components/ui/Policies"
 
-import { UserContext } from "../UserContext"
+import { UserContext } from "../../context/UserContext"
 import { useContext } from "react"
 
 export default function AuthForm({

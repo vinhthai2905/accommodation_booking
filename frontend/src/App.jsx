@@ -8,6 +8,7 @@ import CustomerRegister from './pages/CustomerRegister'
 import CustomerSignIn from './pages/CustomerSignIn'
 import PartnerRegister from './pages/PartnerRegister'
 import PartnerLanding from './pages/PartnerLanding'
+import Payment from './pages/Payment'
 
 import './App.css'
 
@@ -32,11 +33,11 @@ function App() {
         {
           path: "hotel",
           element: <Hotel />
-        }
+        },
       ]
     },
     {
-      path: "/auth",
+      path: "auth",
       element: <AuthLayout />,
       children: [
         {
@@ -56,6 +57,10 @@ function App() {
     {
       path: "/partner",
       element: <PartnerLanding />
+    },
+    {
+      path: "/hotel/payment",
+      element: <Payment />
     }
     // {
     //   path: "/auth/sign-up",
