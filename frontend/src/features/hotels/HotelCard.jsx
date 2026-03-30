@@ -1,6 +1,6 @@
 export default function HotelCard() {
     return (
-        <div className="w-67 overflow-hidden rounded-xl bg-[#f5f5f5] shadow-md">
+        <div className="w-67 shrink-0 overflow-hidden rounded-xl bg-[#f5f5f5] shadow-md">
             <div className="relative">
                 <img
                     src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop"

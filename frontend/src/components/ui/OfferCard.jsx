@@ -9,7 +9,7 @@ export default function OfferCard({ eyebrow, title, description, buttonText, ima
                     {title}
                 </h3>
 
-                <p className="mt-2 text-lg leading-7 text-gray-700">
+                <p className="mt-2 leading-7 text-gray-700">
                     {description}
                 </p>
 

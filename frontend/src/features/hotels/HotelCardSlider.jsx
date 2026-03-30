@@ -22,16 +22,14 @@ export default function HotelCardSlider() {
         })
     }
     return (
-
         <div className={clsx(
             "flex flex-col"
         )}>
             <h1>Bạn vẫn quan tâm</h1>
             <div className="relative">
-
                 <ButtonSlide direction="left" scrollFunc={scrollLeft} />
 
-                <div className="overflow-x-hidden">
+                <div className="overflow-hidden">
                     <div
                         ref={scrollRef}
                         className="flex gap-4 overflow-x-auto scroll-smooth no-scrollbar py-2"
