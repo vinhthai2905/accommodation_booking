@@ -1,4 +1,5 @@
 import { clsx } from "clsx"
+import { Link } from "react-router"
 
 export default function HotelHeader() {
     return (
@@ -38,7 +39,8 @@ export default function HotelHeader() {
                     <button className="text-gray-500 hover:text-black">♡</button>
                     <button className="text-gray-500 hover:text-black">🔗</button>
 
-                    <button
+                    <Link
+                        to={"/hotel/checkout"}
                         className={clsx(
                             "rounded-md bg-blue-600 px-4 py-2",
                             "text-sm font-medium text-white",
@@ -46,7 +48,7 @@ export default function HotelHeader() {
                         )}
                     >
                         Đặt căn hộ của bạn
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Bottom link */}
