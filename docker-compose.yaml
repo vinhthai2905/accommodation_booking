@@ -1,0 +1,20 @@
+services:
+  postgres_DB:
+    container_name: postgres_DB
+    image: postgis/postgis:17-3.5
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=hotelbooking_db
+    volumes:
+      - ./db/postgres_data/:/var/lib/postgresql/data
+
+  pgAdmin:
+    container_name: pgAdmin
+    image: dpage/pgadmin4
+    ports:
+      - '5000:80'
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=vinhthai2905@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=12345
