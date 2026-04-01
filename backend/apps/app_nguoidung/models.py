@@ -2,8 +2,9 @@ from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManage
 from django.db import models
 from django.utils import timezone
 
-import uuid
+from apps.app_nguoidung.choices import RoleChoice
 
+import uuid
 
 class NguoiDungManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
@@ -99,14 +100,12 @@ class NguoiDung(AbstractUser):
 
     last_login = models.DateTimeField(
         verbose_name="Lần đăng nhập cuối",
-        blank=True,
         null=True,
         db_column="lan_dang_nhap_cuoi",
     )
 
     last_updated = models.DateTimeField(
         verbose_name="Lần cập nhật cuối",
-        blank=True,
         null=True,
         auto_now=True,
         db_column="lan_cap_nhat_cuoi"
@@ -121,7 +120,6 @@ class NguoiDung(AbstractUser):
     groups = models.ManyToManyField(
         "auth.Group",
         verbose_name="Nhóm quyền",
-        blank=True,
         related_name="nguoi_dung_set",
         related_query_name="nguoi_dung",
         help_text="Các nhóm mà người dùng này thuộc về.",
@@ -130,7 +128,6 @@ class NguoiDung(AbstractUser):
     user_permissions = models.ManyToManyField(
         "auth.Permission",
         verbose_name="Quyền riêng",
-        blank=True,
         related_name="nguoi_dung_set",
         related_query_name="nguoi_dung",
         help_text="Các quyền được gán trực tiếp cho người dùng này.",
@@ -163,15 +160,37 @@ class ThongTinNguoiDung(models.Model):
     first_name = models.CharField(
         verbose_name="Tên",
         max_length=150,
-        blank=True,
         db_column="ten",
+        null=True,
     )
 
     last_name = models.CharField(
         verbose_name="Họ",
         max_length=150,
-        blank=True,
         db_column="ho",
+        null=True
+    )
+    
+    country = models.CharField(
+        verbose_name="Quốc gia",
+        max_length=50,
+        db_column="quoc_gia",
+        null=True
+    )
+    
+    phone_number = models.CharField(
+        verbose_name="Số điện thoại",
+        max_length=15,
+        db_column="so_dien_thoai",
+        null=True,
+    ),
+    
+    role = models.CharField(
+        verbose_name="Vai trò",
+        max_length=10,
+        db_column="vai_tro",
+        choices=RoleChoice,
+        null=True
     )
     
     class Meta:

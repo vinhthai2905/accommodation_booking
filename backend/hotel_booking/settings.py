@@ -31,7 +31,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'rest_framework',
-    'app_nguoidung'
+    'apps.app_nguoidung',
+    'apps.app_khachsan',
 ]
 
 MIDDLEWARE = [
@@ -78,9 +79,10 @@ WSGI_APPLICATION = 'hotel_booking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
         "NAME": os.getenv("DB_NAME"),
         "USER": os.getenv("DB_USER"),
         "PASSWORD": os.getenv("DB_PASSWORD"),
