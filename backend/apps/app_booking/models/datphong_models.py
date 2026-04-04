@@ -1,16 +1,13 @@
 from django.conf import settings
 from django.db import models
 
+from apps.common.models import TimeStampedModel
+from app_booking.choices import TrangThaiDatPhong
+
 import uuid
 
-class TrangThaiDatPhong(models.TextChoices):
-        PENDING = "PENDING", "Chờ xác nhận"
-        CONFIRMED = "CONFIRMED", "Đã xác nhận"
-        CANCELLED = "CANCELLED", "Đã hủy"
-        COMPLETED = "COMPLETED", "Hoàn tất"
 
-class DatPhong(models.Model):
-
+class DatPhong(TimeStampedModel):
     id_booking = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -18,7 +15,7 @@ class DatPhong(models.Model):
         db_column="ma_dat_phong",
     )
 
-    user = models.ForeignKey(
+    id_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         null=True,
@@ -27,7 +24,7 @@ class DatPhong(models.Model):
         db_column="ma_nguoi_dung",
     )
 
-    room_type = models.ForeignKey(
+    id_room = models.ForeignKey(
         "app_khachsan.LoaiPhong",
         on_delete=models.PROTECT,
         related_name="bookings",
@@ -65,8 +62,8 @@ class DatPhong(models.Model):
 
     status = models.CharField(
         max_length=20,
-        choices=TrangThai.choices,
-        default=TrangThai.PENDING,
+        choices=TrangThaiDatPhong.choices,
+        default=TrangThaiDatPhong.PENDING,
         db_column="trang_thai",
     )
 

@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.app_khachsan.api.models.khachsan_models import KhachSan
+from apps.app_khachsan.models.khachsan_models import KhachSan
 from apps.app_nguoidung.models import NguoiDung
 
 
