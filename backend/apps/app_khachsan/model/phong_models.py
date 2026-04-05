@@ -1,9 +1,9 @@
 from django.db import models
 
-from app_khachsan.models.khachsan_models import KhachSan
-from app_khachsan.models.giuong_models import Giuong
+from .khachsan_models import KhachSan
+from .giuong_models import Giuong
 
-from common.models import TimeStampedModel
+from apps.common.models import TimeStampedModel
 
 class LoaiPhong(TimeStampedModel):
     id_room_type = models.AutoField(

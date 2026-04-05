@@ -1,9 +1,8 @@
 import uuid
 from django.db import models
 
-from app_nguoidung.models import NguoiDung
-from app_khachsan.models import KhachSan
-
+from apps.app_nguoidung.models import NguoiDung
+from apps.app_khachsan.models import KhachSan
 
 class NhanVienDoiTac(models.Model):
     id_employee = models.UUIDField(

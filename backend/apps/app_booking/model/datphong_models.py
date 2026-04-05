@@ -2,8 +2,8 @@ import uuid
 
 from django.db import models
 
-from app_nguoidung.models import NguoiDung
-from app_khachsan.models.phong_models import LoaiPhong
+from apps.app_nguoidung.models import NguoiDung
+from apps.app_khachsan.model.phong_models import LoaiPhong
 
 
 class DatPhong(models.Model):

@@ -1,6 +1,6 @@
 from django.db import models
 
-from khachsan_models import KhachSan
+from .khachsan_models import KhachSan
 
 class CoSoVatChat(models.Model):
     id_facility = models.AutoField(

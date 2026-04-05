@@ -3,9 +3,8 @@ import uuid
 from django.db import models
 from django.contrib.gis.db import models as postgis_models
 
-from app_nguoidung.models import NguoiDung
-from app_vitri.models.phuong_models import Phuong
-
+from apps.app_nguoidung.models import NguoiDung
+from apps.app_vitri.model.phuong_models import Phuong
 
 class LoaiKhachSan(models.Model):
     id = models.AutoField(
@@ -53,7 +52,7 @@ class KhachSan(models.Model):
         related_name="hotels",
     )
 
-    ward = models.ForeignKey(
+    id_ward = models.ForeignKey(
         Phuong,
         on_delete=models.PROTECT,
         db_column="id_phuong",

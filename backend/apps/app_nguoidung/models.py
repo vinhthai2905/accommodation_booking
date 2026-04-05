@@ -1,12 +1,9 @@
 from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManager
 from django.db import models
-from django.utils import timezone
 
-from apps.common.models import TimeStampedModel
 from apps.app_nguoidung.choices import RoleChoice
 
 import uuid
-
 
 class NguoiDungManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
@@ -43,11 +40,17 @@ class NguoiDung(AbstractUser):
     first_name = None
     last_name = None
 
-    id_nguoi_dung = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False, db_column="id_nguoi_dung"
+    id_user = models.UUIDField(
+        primary_key=True, 
+        default=uuid.uuid4, 
+        editable=False, db_column="id_nguoi_dung"
     )
 
-    id_google = models.CharField(max_length=50, null=True, db_column="id_google")
+    id_google = models.CharField(
+        max_length=50, 
+        null=True, 
+        db_column="id_google"
+    )
 
     email = models.EmailField(unique=True, db_column="email")
 
@@ -58,6 +61,7 @@ class NguoiDung(AbstractUser):
     loai_xac_thuc = models.CharField(
         max_length=20, null=True, db_column="loai_xac_thuc"
     )
+    
     is_superuser = models.BooleanField(default=False, db_column="la_superuser")
 
     is_staff = models.BooleanField(default=False, db_column="la_nhan_vien_he_thong")
@@ -71,7 +75,7 @@ class NguoiDung(AbstractUser):
 
     is_active = models.BooleanField(default=True, db_column="dang_hoat_dong")
 
-    last_updated = models.DateTimeField(
+    updated_at = models.DateTimeField(
         auto_now=True, db_column="lan_cap_nhat_cuoi", blank=True
     )
 
@@ -93,7 +97,7 @@ class NguoiDung(AbstractUser):
 
 
 class ThongTinNguoiDung(models.Model):
-    id_nguoi_dung = models.OneToOneField(
+    id_user = models.OneToOneField(
         NguoiDung, on_delete=models.CASCADE, primary_key=True, db_column="id_nguoi_dung"
     )
 

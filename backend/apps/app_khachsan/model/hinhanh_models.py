@@ -1,8 +1,7 @@
 from django.db import models
 
-from app_khachsan.models.khachsan_models import KhachSan
-from app_khachsan.models.phong_models import LoaiPhong
-
+from .khachsan_models import KhachSan
+from .phong_models import LoaiPhong
 
 class LoaiHinhAnh(models.Model):
     id_image_type = models.AutoField(
@@ -41,7 +40,6 @@ class HinhAnhKhachSan(models.Model):
         db_column="id_loai_phong",
         related_name="images",
         null=True,
-        blank=True,
     )
 
     id_hotel = models.ForeignKey(
@@ -49,6 +47,7 @@ class HinhAnhKhachSan(models.Model):
         on_delete=models.CASCADE,
         db_column="id_khach_san",
         related_name="images",
+        null=True
     )
 
     name = models.CharField(
