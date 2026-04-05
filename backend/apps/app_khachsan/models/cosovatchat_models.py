@@ -3,7 +3,7 @@ from django.db import models
 from khachsan_models import KhachSan
 
 class CoSoVatChat(models.Model):
-    id = models.AutoField(
+    id_facility = models.AutoField(
         primary_key=True,
         db_column="id",
     )
@@ -27,7 +27,7 @@ class CoSoVatChat(models.Model):
 
 
 class TienNghiKhachSan(models.Model):
-    id = models.AutoField(
+    id_amenity = models.AutoField(
         primary_key=True,
         db_column="id_tien_nghi",
     )

@@ -7,7 +7,7 @@ class TimeStampedModel(models.Model):
         db_column="ngay_tao",
     )
 
-    last_updated = models.DateTimeField(
+    updated_at = models.DateTimeField(
         auto_now=True, 
         db_column="lan_cuoi_cap_nhat"
     )

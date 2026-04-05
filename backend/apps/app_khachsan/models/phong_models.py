@@ -1,93 +1,81 @@
 from django.db import models
 
-from apps.common.models import TimeStampedModel
-from apps.app_khachsan.api.models.khachsan_models import KhachSan
+from app_khachsan.models.khachsan_models import KhachSan
+from app_khachsan.models.giuong_models import Giuong
 
-import uuid
+from common.models import TimeStampedModel
 
 class LoaiPhong(TimeStampedModel):
-    id_type_room = models.UUIDField(
+    id_room_type = models.AutoField(
         primary_key=True,
-        default=uuid.uuid4,
-        db_column="ma_loai_phong",
+        db_column="id_loai_phong",
     )
-    
+
+    id_hotel = models.ForeignKey(
+        KhachSan,
+        on_delete=models.CASCADE,
+        db_column="id_khach_san",
+        related_name="room_types",
+    )
+
     name = models.CharField(
-        max_length=70,
-        db_column="ten_loai_phong"
+        max_length=25,
+        db_column="ten",
     )
-    
-   
-    bed_count = models.CharField(
-        max_length=2,
-        db_column="so_luong_giuong"
+
+    quantity = models.SmallIntegerField(
+        db_column="so_luong_phong",
     )
-    
-    quantity = models.CharField(
-        max_length=3,
-        db_column="so_luong_phong"
+
+    max_guests = models.SmallIntegerField(
+        db_column="khach_toi_da",
     )
-    
-    maxGuests = models.CharField(
-        max_length=2,
-        db_column="khach_toi_da"
-    )
-    
+
     price = models.DecimalField(
         max_digits=12,
         decimal_places=2,
-        db_column="gia_phong"
+        db_column="gia_phong",
     )
 
     class Meta:
         db_table = "loai_phong"
-    
 
-class PhongKhachSan(TimeStampedModel):
-    id_room = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        db_column="ma_phong",
-    )
-    
-    id_hotel = models.ForeignKey(
-        to=KhachSan,
-        on_delete=models.CASCADE,
-        db_column="ma_khach_san"
-    )
-    
-    id_type_room = models.ForeignKey(
-        to=LoaiPhong,
-        db_column="ma_loai_phong"
-    )
-    
-    class Meta:
-        db_table = "phong_khach_san"
-    
+    def __str__(self):
+        return self.name
 
-class Giuong(models.Model):
-    id_bed = models.UUIDField(
+
+class ChiTietLoaiPhong(models.Model):
+    id = models.AutoField(
         primary_key=True,
-        default=uuid.uuid4,
-        db_column="ma_giuong"
-    ),
-    
-    id_room = models.ForeignKey(
-        to=LoaiPhong,
+        db_column="id_chi_tiet_loai_phong",
+    )
+
+    id_room_type = models.ForeignKey(
+        LoaiPhong,
         on_delete=models.CASCADE,
-        db_column="ma_phong"
+        db_column="id_loai_phong",
+        related_name="bed_details",
     )
-    
-    name_bed = models.CharField(
-        max_length=30,
-        db="ten_giuong"
+
+    id_bed = models.ForeignKey(
+        Giuong,
+        on_delete=models.PROTECT,
+        db_column="id_giuong",
+        related_name="room_type_details",
     )
-    
-    bed_type = models.CharField(
-        max_length=30,
-        db_column="loai_giuong"
+
+    quantity = models.SmallIntegerField(
+        db_column="so_luong_giuong",
     )
-    
 
     class Meta:
-        db_table = "giuong_khach_san"
+        db_table = "chi_tiet_loai_phong"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["room_type", "bed"],
+                name="unique_room_type_bed",
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.room_type} - {self.bed}"

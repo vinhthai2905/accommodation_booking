@@ -1,34 +1,37 @@
 import uuid
-
-from app_nguoidung.models import NguoiDung
-from app_khachsan.models.khachsan_models import KhachSan
-
 from django.db import models
 
+from app_nguoidung.models import NguoiDung
+from app_khachsan.models import KhachSan
+
+
 class NhanVienDoiTac(models.Model):
-    id_nhan_vien = models.UUIDField(
+    id_employee = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
         editable=False,
-        db_column="id_nhan_vien"
+        db_column="id_nhan_vien",
     )
 
-    id_nguoi_dung = models.ForeignKey(
+    id_user = models.ForeignKey(
         NguoiDung,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         db_column="id_nguoi_dung",
-        related_name="nhan_vien_doi_tac"
+        related_name="partner_staff",
     )
 
-    id_khach_san = models.ForeignKey(
-        KhachSan,        
+    id_hotel = models.ForeignKey(
+        KhachSan,
         on_delete=models.CASCADE,
         db_column="id_khach_san",
-        related_name="nhan_vien"
+        related_name="staffs",
     )
 
     class Meta:
         db_table = "nhan_vien_doi_tac"
-        constraint = [
-            models.UniqueConstraint(fields=["id_nguoi_dung", "id_khach_san"])
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "hotel"],
+                name="unique_user_hotel_staff",
+            )
         ]
