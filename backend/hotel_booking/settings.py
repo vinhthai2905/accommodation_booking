@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'apps.app_nguoidung',
     'apps.app_khachsan',
+    'apps.app_vitri',
+    'apps.app_booking',
 ]
 
 MIDDLEWARE = [
