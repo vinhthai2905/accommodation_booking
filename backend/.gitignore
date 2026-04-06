@@ -215,5 +215,5 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-*/migrations/*
-!*/migrations/__init__.py
+apps/*/migrations/*
+!apps/*/migrations/__init__.py

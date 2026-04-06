@@ -20,6 +20,7 @@ class Phuong(models.Model):
 
     class Meta:
         db_table = "phuong"
+        verbose_name = "Phường"
 
     def __str__(self):
         return self.ten_phuong

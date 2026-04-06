@@ -50,7 +50,7 @@ class TienNghiKhachSan(models.Model):
         db_table = "tien_nghi_khach_san"
         constraints = [
             models.UniqueConstraint(
-                fields=["hotel", "facility"],
+                fields=["id_hotel", "id_facility"],
                 name="unique_hotel_facility",
             )
         ]

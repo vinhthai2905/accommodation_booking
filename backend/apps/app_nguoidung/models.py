@@ -94,6 +94,7 @@ class NguoiDung(AbstractUser):
 
     class Meta:
         db_table = "nguoi_dung"
+        verbose_name = "Người dùng"
 
 
 class ThongTinNguoiDung(models.Model):

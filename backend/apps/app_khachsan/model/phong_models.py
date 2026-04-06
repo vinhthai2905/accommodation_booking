@@ -72,8 +72,8 @@ class ChiTietLoaiPhong(models.Model):
         db_table = "chi_tiet_loai_phong"
         constraints = [
             models.UniqueConstraint(
-                fields=["room_type", "bed"],
-                name="unique_room_type_bed",
+                fields=["id_room_type", "id_bed"],
+                name="unique_id_room_type_id_bed",
             )
         ]
 
