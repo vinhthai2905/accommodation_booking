@@ -11,8 +11,14 @@ export default function RegisterForm() {
     {
       idFor: "name",
       type: "text",
-      labelFor: "Họ và tên",
-      placeHolderFor: "Nhập họ và tên",
+      labelFor: "Họ",
+      placeHolderFor: "Nhập họ",
+    },
+    {
+      idFor: "name",
+      type: "text",
+      labelFor: "Tên",
+      placeHolderFor: "Nhập tên",
     },
     {
       idFor: "phone",

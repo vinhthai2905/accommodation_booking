@@ -1,0 +1,1 @@
+from .views.auth_views import UserRegisterView

@@ -1,14 +1,18 @@
 from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManager
 from django.db import models
 
-from apps.app_nguoidung.choices import RoleChoice
+from apps.app_nguoidung.choices import RoleChoice, AuthTypeChoice
 
 import uuid
+
 
 class NguoiDungManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError("Email bắt buộc phải có.")
+            raise ValueError("Email is required!")
+
+        if not password:
+            raise ValueError("Password is required!")
 
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
@@ -16,13 +20,26 @@ class NguoiDungManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email, password, **extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
         extra_fields.setdefault("is_active", True)
-        return self._create_user(email, password, **extra_fields)
 
-    def create_superuser(self, email, password=None, **extra_fields):
+        first_name = extra_fields.pop("first_name")
+        last_name = extra_fields.pop("last_name")
+        phone_number = extra_fields.pop("phone_number")
+
+        user = self._create_user(email, password, **extra_fields)
+        user_profile = ThongTinNguoiDung(
+            id_user=user, 
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=phone_number
+        ).save()
+
+        return user
+
+    def create_superuser(self, email, password, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
@@ -41,16 +58,10 @@ class NguoiDung(AbstractUser):
     last_name = None
 
     id_user = models.UUIDField(
-        primary_key=True, 
-        default=uuid.uuid4, 
-        editable=False, db_column="id_nguoi_dung"
+        primary_key=True, default=uuid.uuid4, editable=False, db_column="id_nguoi_dung"
     )
 
-    id_google = models.CharField(
-        max_length=50, 
-        null=True, 
-        db_column="id_google"
-    )
+    id_google = models.CharField(max_length=50, null=True, db_column="id_google")
 
     email = models.EmailField(unique=True, db_column="email")
 
@@ -59,9 +70,9 @@ class NguoiDung(AbstractUser):
     )
 
     loai_xac_thuc = models.CharField(
-        max_length=20, null=True, db_column="loai_xac_thuc"
+        max_length=20, choices=AuthTypeChoice, default=AuthTypeChoice.EMAIL
     )
-    
+
     is_superuser = models.BooleanField(default=False, db_column="la_superuser")
 
     is_staff = models.BooleanField(default=False, db_column="la_nhan_vien_he_thong")
@@ -99,34 +110,37 @@ class NguoiDung(AbstractUser):
 
 class ThongTinNguoiDung(models.Model):
     id_user = models.OneToOneField(
-        NguoiDung, on_delete=models.CASCADE, primary_key=True, db_column="id_nguoi_dung"
+        NguoiDung,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        db_column="id_nguoi_dung",
     )
 
-    ho = models.CharField(
+    first_name = models.CharField(
         max_length=10,
         db_column="ho",
         null=True,
     )
 
-    ten = models.CharField(
+    last_name = models.CharField(
         max_length=15,
         db_column="ten",
         null=True,
     )
 
-    quoc_gia = models.CharField(
+    country = models.CharField(
         max_length=20,
         db_column="quoc_gia",
         null=True,
     )
 
-    so_dien_thoai = models.CharField(
+    phone_number = models.CharField(
         max_length=25,
         db_column="so_dien_thoai",
         null=True,
     )
 
-    gioi_tinh = models.CharField(
+    gender = models.CharField(
         max_length=3,
         db_column="gioi_tinh",
         null=True,
@@ -136,7 +150,11 @@ class ThongTinNguoiDung(models.Model):
         db_table = "thongtin_nguoidung"
         constraints = [
             models.CheckConstraint(
-                condition=models.Q(gioi_tinh__in=["Nam", "Nữ"]) | models.Q(gioi_tinh__isnull=True), 
-                name="gioi_tinh_hop_le"
+                condition=models.Q(gender__in=["Nam", "Nữ"])
+                | models.Q(gender__isnull=True),
+                name="gioi_tinh_hop_le",
             )
         ]
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
