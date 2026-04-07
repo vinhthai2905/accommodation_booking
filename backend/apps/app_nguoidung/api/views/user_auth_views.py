@@ -9,35 +9,55 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from  apps.app_nguoidung.api.serializers import UserSerializer
+from django.contrib.auth import authenticate
+
+from apps.app_nguoidung.api.serializers import UserSerializer, LoginSerializer
+from apps.app_nguoidung.api.permissions import IsCustomer
+
 
 class UserRegisterView(APIView):
     http_method_names = ["post"]
     permission_classes = [AllowAny]
-    
+
     # renderer_classes = [JSONRenderer]
     serializer_class = UserSerializer
-    
+
     def post(self, request: Request, *args, **kwargs):
         user_serializer: UserSerializer = self.serializer_class(data=request.data)
-        
+
         user_serializer.peform_validation()
         user = user_serializer.create(validated_data=user_serializer.validated_data)
-        
+
         refresh = RefreshToken.for_user(user=user)
-        
-        return Response({
-            "user": user_serializer.data,
-            "access_token": str(refresh.access_token),
-            "refresh": str(refresh)
-        },
-        status=status.HTTP_201_CREATED)
+
+        return Response(
+            {
+                "user": user_serializer.data,
+                "access_token": str(refresh.access_token),
+                "refresh": str(refresh),
+            },
+            status=status.HTTP_201_CREATED,
+        )
+
 
 class LoginView(APIView):
-    permission_classes = [IsAuthenticated]
-    
-    def get(self, request: Request):
-        return Response({
-            "message": "Authenticated",
-            "user": str(request.user)
-        })
+    http_method_names = ["post"]
+    permission_classes = [AllowAny]
+
+    serializer_class = LoginSerializer
+
+    def post(self, request: Request, *args, **kwargs):
+        login_serializer: LoginSerializer = self.serializer_class(data=request.data)
+
+        login_serializer.is_valid(raise_exception=True)
+
+        refresh = RefreshToken.for_user(login_serializer.validated_data["user"])
+
+        return Response(
+            {
+                "user": login_serializer.data,
+                "access_token": str(refresh.access_token),
+                "refresh": str(refresh),
+            },
+            status=status.HTTP_200_OK
+        )

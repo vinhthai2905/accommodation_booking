@@ -24,6 +24,7 @@ class NguoiDungManager(BaseUserManager):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
         extra_fields.setdefault("is_active", True)
+        extra_fields.setdefault("role", "Khách hàng")
 
         first_name = extra_fields.pop("first_name")
         last_name = extra_fields.pop("last_name")
@@ -58,40 +59,68 @@ class NguoiDung(AbstractUser):
     last_name = None
 
     id_user = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False, db_column="id_nguoi_dung"
+        primary_key=True, 
+        default=uuid.uuid4, 
+        editable=False, 
+        db_column="id_nguoi_dung"
     )
 
-    id_google = models.CharField(max_length=50, null=True, db_column="id_google")
+    id_google = models.CharField(
+        max_length=50, 
+        null=True, 
+        blank=True,
+        db_column="id_google"
+    )
 
-    email = models.EmailField(unique=True, db_column="email")
+    email = models.EmailField(
+        unique=True, 
+        db_column="email"
+    )
 
     lan_xac_nhan_email = models.DateTimeField(
-        null=True, db_column="lan_xac_nhan_email", blank=True
+        null=True, 
+        blank=True,
+        db_column="lan_xac_nhan_email", 
     )
 
     loai_xac_thuc = models.CharField(
-        max_length=20, choices=AuthTypeChoice, default=AuthTypeChoice.EMAIL
+        max_length=20, 
+        choices=AuthTypeChoice, 
+        default=AuthTypeChoice.EMAIL
     )
 
-    is_superuser = models.BooleanField(default=False, db_column="la_superuser")
+    is_superuser = models.BooleanField(
+        default=False, 
+        db_column="la_superuser"
+    )
 
-    is_staff = models.BooleanField(default=False, db_column="la_nhan_vien_he_thong")
+    is_staff = models.BooleanField(
+        default=False, 
+        db_column="la_nhan_vien_he_thong"
+    )
 
-    vai_tro = models.CharField(
+    role = models.CharField(
         max_length=20,
         null=True,
         choices=RoleChoice,
         db_column="vai_tro",
     )
 
-    is_active = models.BooleanField(default=True, db_column="dang_hoat_dong")
+    is_active = models.BooleanField(
+        default=True, 
+        db_column="dang_hoat_dong"
+    )
 
     updated_at = models.DateTimeField(
-        auto_now=True, db_column="lan_cap_nhat_cuoi", blank=True
+        auto_now=True, 
+        blank=True,
+        db_column="lan_cap_nhat_cuoi", 
     )
 
     last_login = models.DateTimeField(
-        null=True, db_column="lan_dang_nhap_cuoi", blank=True
+        null=True, 
+        blank=True,
+        db_column="lan_dang_nhap_cuoi", 
     )
 
     date_joined = models.DateTimeField(
