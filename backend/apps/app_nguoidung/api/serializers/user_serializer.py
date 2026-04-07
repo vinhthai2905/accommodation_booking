@@ -25,7 +25,7 @@ class UserSerializer(ModelSerializer):
 
         return user
     
-    def password_validation(self):
+    def check_password_confirmation(self):
         if self.validated_data["password"] != self.validated_data["confirm_password"]:
             raise ValidationError("The password confirmation does not match!")
     
@@ -33,7 +33,7 @@ class UserSerializer(ModelSerializer):
         """Check to see whether the confirmation password is correct and validate data."""
         
         self.is_valid(raise_exception=True)
-        self.password_validation()
+        self.check_password_confirmation()
         
 
 

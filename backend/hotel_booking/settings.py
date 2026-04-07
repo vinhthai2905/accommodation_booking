@@ -42,10 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'rest_framework',
+    'rest_framework_simplejwt',
     'apps.app_nguoidung',
     'apps.app_khachsan',
     'apps.app_vitri',
-    'apps.app_booking',
+    'apps.app_booking'
 ]
 
 MIDDLEWARE = [
@@ -136,4 +137,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 AUTH_USER_MODEL = "app_nguoidung.NguoiDung"
+
+SIMPLE_JWT = {
+    "USER_ID_FIELD": "id_user",
+    "USER_ID_CLAIM": "user_id"
+}
 

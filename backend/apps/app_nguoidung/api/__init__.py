@@ -1,1 +1,1 @@
-from .views.auth_views import UserRegisterView
+from .views.user_auth_views import UserRegisterView, TestAuthView
