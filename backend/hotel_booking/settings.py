@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'apps.app_nguoidung',
     'apps.app_khachsan',
     'apps.app_vitri',

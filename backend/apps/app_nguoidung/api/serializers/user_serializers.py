@@ -1,6 +1,9 @@
-from rest_framework.serializers import ModelSerializer, Serializer, ValidationError
 from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, Serializer, ValidationError
 from rest_framework.exceptions import AuthenticationFailed
+
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.contrib.auth import authenticate
 
@@ -64,6 +67,7 @@ class LoginSerializer(Serializer):
         
         if user is None:
             raise AuthenticationFailed("Invalid credentials.")
+        
         return user
     
     def validate_email(self, email):
@@ -71,6 +75,19 @@ class LoginSerializer(Serializer):
         
         return NguoiDung.objects.normalize_email(email=email).lower()     
         
+class LogoutSerializer(Serializer):
+    refresh = serializers.CharField(write_only=True)
+    
+    def validate_refresh(self, refresh):
+        # try:
+        refresh_token = RefreshToken(token=refresh, verify=True)
+        # except TokenError:
+            # raise ValidationError("Invalid or expired token.")
+        
+        return refresh_token
+        
+    def perform_blacklist(self, refresh: RefreshToken):
+        refresh.blacklist()
     
         
 

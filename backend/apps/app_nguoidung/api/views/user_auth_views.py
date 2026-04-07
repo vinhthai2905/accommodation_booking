@@ -4,15 +4,15 @@ from rest_framework.views import Request, Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authentication import SessionAuthentication
 from rest_framework import status
+from rest_framework.exceptions import APIException, ValidationError
 
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from django.contrib.auth import authenticate
 
-from apps.app_nguoidung.api.serializers import UserSerializer, LoginSerializer
-from apps.app_nguoidung.api.permissions import IsCustomer
+from apps.app_nguoidung.api.serializers import UserSerializer, LoginSerializer, LogoutSerializer
 
 
 class UserRegisterView(APIView):
@@ -31,7 +31,7 @@ class UserRegisterView(APIView):
         refresh = RefreshToken.for_user(user=user)
 
         return Response(
-            {
+            data={
                 "user": user_serializer.data,
                 "access_token": str(refresh.access_token),
                 "refresh": str(refresh),
@@ -54,10 +54,24 @@ class LoginView(APIView):
         refresh = RefreshToken.for_user(login_serializer.validated_data["user"])
 
         return Response(
-            {
+            data={
                 "user": login_serializer.data,
                 "access_token": str(refresh.access_token),
                 "refresh": str(refresh),
             },
             status=status.HTTP_200_OK
+        )
+
+
+class LogoutView(APIView):
+    http_method_names = ["post"]
+    
+    serializer_class = LogoutSerializer
+    
+    def post(self, request: Request, *args, **kwargs):
+        logout_serializer = self.serializer_class(data=request.data)
+        logout_serializer.is_valid(raise_exception=True)
+        
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
         )
