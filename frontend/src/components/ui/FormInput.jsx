@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-export default function FormInput({ idFor, type, labelFor, placeHolderFor }) {
+export default function FormInput({ register, idFor, type, labelFor, placeHolderFor, error }) {
     return (
         <div className={clsx(
             "text-black"
@@ -9,9 +9,10 @@ export default function FormInput({ idFor, type, labelFor, placeHolderFor }) {
                 htmlFor={idFor}
                 className="mb-2 block font-medium text-[#1a1a1a]"
             >
-                {labelFor}
+               {labelFor} <span className="text-red-500">(*)</span>
             </label>
             <input
+                {...register}
                 id={idFor}
                 type={type}
                 placeholder={placeHolderFor}
@@ -20,9 +21,16 @@ export default function FormInput({ idFor, type, labelFor, placeHolderFor }) {
                     "rounded border border-[#949494]",
                     "text-sm",
                     "outline-none",
-                    "focus:border-[#006ce4]"
+                    "focus:border-[#006ce4] hover:border-[#006ce4]",
+                    error && "border-red-600"
                 )}
             />
+
+            {error && (
+                <p className="my-5 text-sm text-red-500">
+                    {error.message}
+                </p>
+            )}
         </div>
     )
 }

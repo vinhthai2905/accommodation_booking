@@ -49,7 +49,7 @@ class LoginSerializer(Serializer):
         }
     )
     
-    def validate(self, attrs):
+    def validate(self, attrs: dict):
         """Calling is_valid() would validate the data and authenticate the user."""
         
         attrs["user"] = self.validate_user(credentials=attrs)
@@ -79,15 +79,17 @@ class LogoutSerializer(Serializer):
     refresh = serializers.CharField(write_only=True)
     
     def validate_refresh(self, refresh):
-        # try:
-        refresh_token = RefreshToken(token=refresh, verify=True)
-        # except TokenError:
-            # raise ValidationError("Invalid or expired token.")
+        try:
+            refresh_token = RefreshToken(token=refresh, verify=True)
+        except TokenError:
+            raise ValidationError("Invalid or expired token.")
         
         return refresh_token
         
-    def perform_blacklist(self, refresh: RefreshToken):
-        refresh.blacklist()
+    def perform_blacklist(self):
+        """Attempt to delete the token after being validated."""
+        
+        RefreshToken.blacklist(self.validated_data["refresh"])
     
         
 

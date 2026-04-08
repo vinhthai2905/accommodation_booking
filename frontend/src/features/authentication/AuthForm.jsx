@@ -3,7 +3,7 @@ import AuthSwitchLink from "./AuthSwitchLink"
 
 import SmallHeader from "/src/components/layout/SmallHeader"
 
-import FormInput from "/src/components/ui/FormInput"
+import Form from "/src/features/authentication/Form"
 import SocialLoginSection from "./SocialLoginSection"
 import Policies from "/src/components/ui/Policies"
 
@@ -27,29 +27,13 @@ export default function AuthForm({
                 <div className="w-full max-w-107.5">
                     <AuthTitle type={type} />
 
-                    <form className="mt-8">
-                        <div className="space-y-5">
-                            {fields.map((field) => (
-                                <FormInput
-                                    key={field.idFor}
-                                    idFor={field.idFor}
-                                    type={field.type}
-                                    labelFor={field.labelFor}
-                                    placeHolderFor={field.placeHolderFor}
-                                />
-                            ))}
-                        </div>
+                    <Form
+                        type={type}
+                        fields={fields}
+                        submitText={submitText}
+                     />
 
-                        <button
-                            type="submit"
-                            className="mt-6 w-full rounded bg-[#006ce4] px-4 py-3 font-medium text-white hover:bg-[#0057c2]"
-                        >
-                            {submitText}
-                        </button>
-
-                        <AuthSwitchLink to={switchTo} authType={switchType} />
-                    </form>
-
+                    <AuthSwitchLink to={switchTo} authType={switchType} />
                     {user === "user" && <SocialLoginSection />}
                     <Policies />
                 </div>

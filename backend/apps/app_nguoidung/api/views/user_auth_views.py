@@ -70,8 +70,11 @@ class LogoutView(APIView):
     
     def post(self, request: Request, *args, **kwargs):
         logout_serializer = self.serializer_class(data=request.data)
+        
         logout_serializer.is_valid(raise_exception=True)
+        logout_serializer.perform_blacklist()
         
         return Response(
+            data={"message": "Token successfully deleted."},
             status=status.HTTP_204_NO_CONTENT
         )
