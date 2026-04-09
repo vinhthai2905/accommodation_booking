@@ -35,7 +35,7 @@ export const fields = [
     }
   },
   {
-    idFor: "phone",
+    idFor: "phoneNumber",
     type: "tel",
     labelFor: "Số điện thoại",
     placeHolderFor: "Nhập số điện thoại",

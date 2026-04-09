@@ -10,6 +10,8 @@ import Policies from "/src/components/ui/Policies"
 import { UserContext } from "../../context/UserContext"
 import { useContext } from "react"
 
+import useRegisterForm from "../../hooks/useRegisterForm"
+
 export default function AuthForm({
     type,
     fields,
@@ -24,6 +26,7 @@ export default function AuthForm({
         <>
             <SmallHeader />
             <div className="flex justify-center px-4 py-10 text-sm">
+
                 <div className="w-full max-w-107.5">
                     <AuthTitle type={type} />
 
@@ -31,7 +34,9 @@ export default function AuthForm({
                         type={type}
                         fields={fields}
                         submitText={submitText}
-                     />
+                        useFormHook={useRegisterForm}
+                    >
+                    </Form>
 
                     <AuthSwitchLink to={switchTo} authType={switchType} />
                     {user === "user" && <SocialLoginSection />}

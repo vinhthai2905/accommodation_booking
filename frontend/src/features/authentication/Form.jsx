@@ -1,44 +1,15 @@
 import FormInput from "../../components/ui/FormInput"
-
 import { clsx } from "clsx"
-import { useForm } from "react-hook-form"
 
-
-export default function Form({ fields, submitText }) {
+export default function Form({ fields, submitText, useFormHook }) {
     const {
         register,
         handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm({
-        shouldFocusError: false,
-        mode: "onChange"
-    })
-
-    const onSubmit = async (data) => {
-        const response = await fetch("http://localhost:8000/api/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: `${data.email}`
-            })
-        })
-
-        console.log(response.status)
-    }
-
-    const test = new Promise()
-
-    test.then()
-
-    const onError = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
-    }
+        errors,
+        isLoading,
+        onSubmit,
+        onError,
+    } = useFormHook()
 
     return (
         <form className="mt-8" onSubmit={handleSubmit(onSubmit, onError)} noValidate>
@@ -54,7 +25,6 @@ export default function Form({ fields, submitText }) {
                         error={errors[field.idFor]}
                     />
                 ))}
-
             </div>
 
             <button
@@ -63,10 +33,12 @@ export default function Form({ fields, submitText }) {
                     "w-full mt-6 px-4 py-3",
                     "font-medium text-white",
                     "rounded bg-[#006ce4]",
-                    "hover:bg-[#0057c2] hover:cursor-pointer"
+                    "hover:bg-[#0057c2] hover:cursor-pointer",
+                    isLoading && "cursor-not-allowed opacity-70 hover:bg-[#006ce4]"
                 )}
+                disabled={isLoading}
             >
-                {submitText}
+                {isLoading ? "Đang xử lý..." : submitText}
             </button>
         </form>
     )
