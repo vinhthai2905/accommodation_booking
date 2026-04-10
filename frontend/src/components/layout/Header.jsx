@@ -10,7 +10,7 @@ export default function Header() {
     const url = useLocation()
 
     let currentPage = url.pathname.includes("index")
-
+    
     return (
         <HeaderContext value={currentPage}>
             <header className={clsx(

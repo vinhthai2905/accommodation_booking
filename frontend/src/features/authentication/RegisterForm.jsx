@@ -3,8 +3,6 @@ import AuthForm from "./AuthForm"
 import {fields} from "./configs/RegisterFields"
 
 export default function RegisterForm() {
- 
-
   return (
     <AuthForm
       type="register"

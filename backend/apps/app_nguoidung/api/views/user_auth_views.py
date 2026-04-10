@@ -29,10 +29,14 @@ class UserRegisterView(APIView):
         user = user_serializer.create(validated_data=user_serializer.validated_data)
 
         refresh = RefreshToken.for_user(user=user)
+        
+        print(user_serializer.validated_data)
+        print(user_serializer.data)
 
         return Response(
             data={
-                "user": user_serializer.data,
+                "name": user_serializer.data["first_name"] + " " + user_serializer.data["last_name"],
+                "email" : user_serializer.data["email"],
                 "access_token": str(refresh.access_token),
                 "refresh": str(refresh),
             },

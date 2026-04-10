@@ -1,12 +1,20 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { useNavigate } from "react-router"
 import { useForm } from "react-hook-form"
-import { registerUser } from "../services/authAPI"
-
 import toaster from "react-hot-toast"
+
+import { registerUser } from "../services/authAPI"
+import { AuthContext } from "../context/AuthContext"
+
+import { defaultTestValues } from "../features/authentication/configs/RegisterFields"
 
 
 export default function useRegisterForm() {
   const [isLoading, setLoading] = useState(false)
+
+  const authValue = useContext(AuthContext)
+
+  const navigate = useNavigate()
 
   const {
     register,
@@ -17,6 +25,7 @@ export default function useRegisterForm() {
   } = useForm({
     shouldFocusError: false,
     mode: "onChange",
+    defaultValues: defaultTestValues,
   })
 
   const onSubmit = async (data) => {
@@ -25,10 +34,16 @@ export default function useRegisterForm() {
     const response = await registerUser(data)
 
     if (response.ok) {
+      const userData = await response.json()
+
+      authValue.setUser(userData)
+
+
       toaster.success("Tạo tài khoản thành công.")
       setLoading(false)
       reset()
-      const result = await response.json()
+
+      navigate("/index")
     }
   }
 

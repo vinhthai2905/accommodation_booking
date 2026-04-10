@@ -10,8 +10,8 @@ from django.contrib.auth import authenticate
 from apps.app_nguoidung.models import NguoiDung, ThongTinNguoiDung
 
 class UserSerializer(ModelSerializer):
-    first_name = serializers.CharField(write_only=True)
-    last_name = serializers.CharField(write_only=True)
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
     phone_number = serializers.CharField(write_only=True)
     confirm_password = serializers.CharField(write_only=True)
     

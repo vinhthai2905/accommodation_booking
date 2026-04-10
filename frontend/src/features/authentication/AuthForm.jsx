@@ -1,14 +1,11 @@
 import AuthTitle from "./AuthTitle"
 import AuthSwitchLink from "./AuthSwitchLink"
 
-import SmallHeader from "/src/components/layout/SmallHeader"
-
 import Form from "/src/features/authentication/Form"
 import SocialLoginSection from "./SocialLoginSection"
 import Policies from "/src/components/ui/Policies"
 
-import { UserContext } from "../../context/UserContext"
-import { useContext } from "react"
+import { useOutletContext } from "react-router"
 
 import useRegisterForm from "../../hooks/useRegisterForm"
 
@@ -20,18 +17,16 @@ export default function AuthForm({
     switchType,
 }) {
 
-    const user = useContext(UserContext)
+    const user = useOutletContext()
 
     return (
         <>
-            <SmallHeader />
             <div className="flex justify-center px-4 py-10 text-sm">
 
                 <div className="w-full max-w-107.5">
                     <AuthTitle type={type} />
 
                     <Form
-                        type={type}
                         fields={fields}
                         submitText={submitText}
                         useFormHook={useRegisterForm}

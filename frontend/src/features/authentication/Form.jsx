@@ -1,4 +1,6 @@
 import FormInput from "../../components/ui/FormInput"
+import Spinner from "../../components/layout/Spinner"
+
 import { clsx } from "clsx"
 
 export default function Form({ fields, submitText, useFormHook }) {
@@ -30,6 +32,7 @@ export default function Form({ fields, submitText, useFormHook }) {
             <button
                 type="submit"
                 className={clsx(
+                    "flex justify-center",
                     "w-full mt-6 px-4 py-3",
                     "font-medium text-white",
                     "rounded bg-[#006ce4]",
@@ -38,7 +41,14 @@ export default function Form({ fields, submitText, useFormHook }) {
                 )}
                 disabled={isLoading}
             >
-                {isLoading ? "Đang xử lý..." : submitText}
+                {isLoading
+                    ? (
+                        <Spinner className="mr-2 h-5 w-5" />
+                    )
+                    : (
+                        submitText
+                    )
+                }
             </button>
         </form>
     )
