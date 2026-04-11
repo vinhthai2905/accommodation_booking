@@ -6,7 +6,7 @@ import toaster from "react-hot-toast"
 import { registerUser } from "../services/authAPI"
 import { AuthUserContext } from "../context/AuthUserContext"
 
-import { defaultTestValues } from "../features/authentication/configs/RegisterFields"
+import { defaultTestValues } from "../features/authentication/configs/DefaultValues"
 
 
 export default function useRegisterForm() {
@@ -28,7 +28,7 @@ export default function useRegisterForm() {
     defaultValues: defaultTestValues,
   })
 
-  const onSubmit = async (data) => {
+  const onValidSubmit = async (data) => {
     setLoading(true)
 
     const response = await registerUser(data)
@@ -38,16 +38,16 @@ export default function useRegisterForm() {
 
       authValue.setUser(userData)
 
-
       toaster.success("Tạo tài khoản thành công.")
       setLoading(false)
       reset()
 
       navigate("/index")
     }
+   
   }
 
-  const onError = () => {
+  const onErrorSubmit = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -61,7 +61,7 @@ export default function useRegisterForm() {
     reset,
     errors,
     isLoading,
-    onSubmit,
-    onError,
+    onValidSubmit,
+    onErrorSubmit,
   }
 }

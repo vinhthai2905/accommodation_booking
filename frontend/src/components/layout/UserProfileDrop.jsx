@@ -1,5 +1,7 @@
 import { clsx } from "clsx"
 
+import { Link } from "react-router"
+
 import {
     CircleUserRound,
     BriefcaseBusiness,
@@ -11,13 +13,13 @@ import {
 } from "lucide-react"
 
 const menuItems = [
-    { title: "My account", icon: CircleUserRound },
+    { title: "My account", icon: CircleUserRound, to: "/" },
     { title: "Bookings & Trips", icon: BriefcaseBusiness },
     { title: "Genius loyalty program", icon: BadgeDollarSign },
     { title: "Rewards & Wallet", icon: Wallet },
     { title: "Reviews", icon: MessageSquareText },
     { title: "Saved", icon: Heart },
-    { title: "Sign out", icon: LogOut },
+    { title: "Sign out", icon: LogOut, to: "/" },
 ]
 
 export default function UserProfileDrop() {
@@ -30,9 +32,8 @@ export default function UserProfileDrop() {
                 const Icon = item.icon
 
                 return (
-                    <button
+                    <Link
                         key={item.title}
-                        type="button"
                         className={clsx(
                             "w-full px-5 py-3 flex items-center gap-2",
                             "text-left text-[#1a1a1a] text-[0.8rem]",
@@ -41,7 +42,7 @@ export default function UserProfileDrop() {
                     >
                         <Icon size={18} strokeWidth={1.75} className="text-[#3d3d3d]" />
                         <span>{item.title}</span>
-                    </button>
+                    </Link>
                 )
             })}
         </div>

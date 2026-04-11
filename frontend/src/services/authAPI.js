@@ -11,3 +11,7 @@ export const registerUser = async (data) => {
 
     return response
 }
+
+// export const fetchUser = async (data) => {
+
+// }

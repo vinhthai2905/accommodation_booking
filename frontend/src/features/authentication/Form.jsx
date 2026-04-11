@@ -1,55 +1,104 @@
 import FormInput from "../../components/ui/FormInput"
-import Spinner from "../../components/layout/Spinner"
+import ButtonSpinner from "../../components/ui/ButtonSpinner"
 
-import { clsx } from "clsx"
-
-export default function Form({ fields, submitText, useFormHook }) {
+export default function Form({ submitText, useFormHook }) {
     const {
         register,
         handleSubmit,
+        watch,
         errors,
         isLoading,
-        onSubmit,
-        onError,
+        onValidSubmit,
+        onErrorSubmit,
     } = useFormHook()
 
-    return (
-        <form className="mt-8" onSubmit={handleSubmit(onSubmit, onError)} noValidate>
-            <div className="space-y-5">
-                {fields.map((field) => (
-                    <FormInput
-                        register={register(field.idFor, field.rules)}
-                        key={field.idFor}
-                        idFor={field.idFor}
-                        type={field.type}
-                        labelFor={field.labelFor}
-                        placeHolderFor={field.placeHolderFor}
-                        error={errors[field.idFor]}
-                    />
-                ))}
-            </div>
+    const password = watch("password")
 
-            <button
-                type="submit"
-                className={clsx(
-                    "flex justify-center",
-                    "w-full mt-6 px-4 py-3",
-                    "font-medium text-white",
-                    "rounded bg-[#006ce4]",
-                    "hover:bg-[#0057c2] hover:cursor-pointer",
-                    isLoading && "cursor-not-allowed opacity-70 hover:bg-[#006ce4]"
-                )}
-                disabled={isLoading}
-            >
-                {isLoading
-                    ? (
-                        <Spinner className="mr-2 h-5 w-5" />
-                    )
-                    : (
-                        submitText
-                    )
-                }
-            </button>
+    return (
+        <form
+            className="mt-8"
+            onSubmit={handleSubmit(onValidSubmit, onErrorSubmit)}
+            noValidate
+        >
+            <div className="space-y-5">
+                <FormInput
+                    register={
+                        register("email", {
+                        required: "Email không được để trống.",
+                        pattern: {
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                            message: "Email không hợp lệ.",
+                        },
+                    }
+                    )}
+                    idFor="email"
+                    type="email"
+                    labelFor="Địa chỉ email"
+                    placeHolderFor="Nhập email của bạn"
+                    error={errors.email}
+                />
+
+                <FormInput
+                    register={register("firstName", {
+                        required: "Họ không được để trống.",
+                    })}
+                    idFor="firstName"
+                    type="text"
+                    labelFor="Họ"
+                    placeHolderFor="Nhập họ"
+                    error={errors.firstName}
+                />
+
+                <FormInput
+                    register={register("lastName", {
+                        required: "Tên không được để trống.",
+                    })}
+                    idFor="lastName"
+                    type="text"
+                    labelFor="Tên"
+                    placeHolderFor="Nhập tên"
+                    error={errors.lastName}
+                />
+
+                <FormInput
+                    register={register("phoneNumber", {
+                        required: "Số điện thoại không được để trống.",
+                    })}
+                    idFor="phoneNumber"
+                    type="tel"
+                    labelFor="Số điện thoại"
+                    placeHolderFor="Nhập số điện thoại"
+                    error={errors.phoneNumber}
+                />
+
+                <FormInput
+                    register={register("password", {
+                        required: "Mật khẩu không được để trống.",
+                    })}
+                    idFor="password"
+                    type="password"
+                    labelFor="Mật khẩu"
+                    placeHolderFor="Nhập mật khẩu"
+                    error={errors.password}
+                />
+
+                <FormInput
+                    register={register("confirmPassword", {
+                        required: "Xác nhận mật khẩu không được để trống.",
+                        validate: (value) =>
+                            value === password || "Mật khẩu xác nhận không khớp.",
+                    })}
+                    idFor="confirmPassword"
+                    type="password"
+                    labelFor="Xác nhận mật khẩu"
+                    placeHolderFor="Nhập lại mật khẩu"
+                    error={errors.confirmPassword}
+                />
+            </div>
+            <ButtonSpinner
+                isLoading={isLoading}
+                submitText={submitText}
+            />
         </form>
     )
 }
