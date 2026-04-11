@@ -1,6 +1,8 @@
 import FormInput from "../../components/ui/FormInput"
 import ButtonSpinner from "../../components/ui/ButtonSpinner"
 
+import { useEffect } from "react"
+
 export default function Form({ submitText, useFormHook }) {
     const {
         register,
@@ -24,13 +26,13 @@ export default function Form({ submitText, useFormHook }) {
                 <FormInput
                     register={
                         register("email", {
-                        required: "Email không được để trống.",
-                        pattern: {
-                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                            message: "Email không hợp lệ.",
-                        },
-                    }
-                    )}
+                            required: "Email không được để trống.",
+                            pattern: {
+                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                message: "Email không hợp lệ.",
+                            },
+                        }
+                        )}
                     idFor="email"
                     type="email"
                     labelFor="Địa chỉ email"
