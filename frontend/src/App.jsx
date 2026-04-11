@@ -3,6 +3,7 @@ import AuthLayout from './components/layout/AuthLayout'
 
 import Home from './pages/Home'
 import Hotel from './pages/Hotel'
+import Profile from './pages/Profile'
 import SearchResults from "./pages/SearchResults"
 import CustomerRegister from './pages/CustomerRegister'
 import CustomerSignIn from './pages/CustomerSignIn'
@@ -10,12 +11,15 @@ import PartnerRegister from './pages/PartnerRegister'
 import PartnerLanding from './pages/PartnerLanding'
 import Checkout from './pages/Checkout'
 
+import './features/account/UserProfile'
+
 import './App.css'
 
 import { createBrowserRouter, RouterProvider } from "react-router"
 import { Toaster } from 'react-hot-toast'
 
 import AuthUserProvider from './context/AuthUserProvider'
+import UserProfile from './features/account/UserProfile'
 
 
 function App() {
@@ -28,11 +32,18 @@ function App() {
         { path: "searchresults", element: <SearchResults /> },
         {
           path: "hotel",
+          element: <Hotel />,
           children: [
             { path: "checkout", element: <Checkout /> }
           ],
-          element: <Hotel />
         },
+        {
+          path: "profile",
+          element: <Profile />,
+          children: [
+            { path: "user", element: <UserProfile /> }
+          ]
+        }
       ],
     },
     {
