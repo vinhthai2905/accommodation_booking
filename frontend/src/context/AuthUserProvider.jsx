@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { AuthContext } from "./AuthContext";
+import { AuthUserContext } from "./AuthUserContext";
 
-export default function AuthProvider({ children }) {
+export default function AuthUserProvider({ children }) {
     const [user, setUser] = useState(null)
 
     const authValue = {
@@ -12,9 +12,9 @@ export default function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext value={authValue}>
+        <AuthUserContext value={authValue}>
             {children}
-        </AuthContext>
+        </AuthUserContext>
     )
 
 }

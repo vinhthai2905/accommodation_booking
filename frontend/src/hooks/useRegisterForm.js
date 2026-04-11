@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import toaster from "react-hot-toast"
 
 import { registerUser } from "../services/authAPI"
-import { AuthContext } from "../context/AuthContext"
+import { AuthUserContext } from "../context/AuthUserContext"
 
 import { defaultTestValues } from "../features/authentication/configs/RegisterFields"
 
@@ -12,7 +12,7 @@ import { defaultTestValues } from "../features/authentication/configs/RegisterFi
 export default function useRegisterForm() {
   const [isLoading, setLoading] = useState(false)
 
-  const authValue = useContext(AuthContext)
+  const authValue = useContext(AuthUserContext)
 
   const navigate = useNavigate()
 

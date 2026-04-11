@@ -30,9 +30,6 @@ class UserRegisterView(APIView):
 
         refresh = RefreshToken.for_user(user=user)
         
-        print(user_serializer.validated_data)
-        print(user_serializer.data)
-
         return Response(
             data={
                 "name": user_serializer.data["first_name"] + " " + user_serializer.data["last_name"],

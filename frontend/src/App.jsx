@@ -15,7 +15,7 @@ import './App.css'
 import { createBrowserRouter, RouterProvider } from "react-router"
 import { Toaster } from 'react-hot-toast'
 
-import AuthProvider from './context/AuthProvider'
+import AuthUserProvider from './context/AuthUserProvider'
 
 
 function App() {
@@ -60,7 +60,7 @@ function App() {
     // ,
   ])
   return (
-    <AuthProvider>
+    <AuthUserProvider>
       <Toaster
         position="top-right"
         reverseOrder={false}
@@ -91,7 +91,7 @@ function App() {
         }}
       />
       <RouterProvider router={router} />
-    </AuthProvider>
+    </AuthUserProvider>
   )
 }
 

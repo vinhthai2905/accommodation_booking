@@ -6,11 +6,11 @@ import UserProfileBadge from "./UserProfileBadge"
 import { clsx } from "clsx"
 import { useContext } from "react"
 
-import { AuthContext } from "../../context/AuthContext"
+import { AuthUserContext } from "../../context/AuthUserContext"
 
 
 export default function HeaderNav() {
-    const authValue = useContext(AuthContext)
+    const authValue = useContext(AuthUserContext)
 
     return (
         <div className={clsx(
