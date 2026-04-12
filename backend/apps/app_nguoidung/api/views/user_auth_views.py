@@ -11,9 +11,7 @@ from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-
 from apps.app_nguoidung.api.serializers import UserSerializer, LoginSerializer, LogoutSerializer
-
 
 class UserRegisterView(APIView):
     http_method_names = ["post"]
@@ -24,22 +22,34 @@ class UserRegisterView(APIView):
 
     def post(self, request: Request, *args, **kwargs):
         user_serializer: UserSerializer = self.serializer_class(data=request.data)
+        
+        print(request._request.headers)
 
         user_serializer.peform_validation()
         user = user_serializer.create(validated_data=user_serializer.validated_data)
 
         refresh = RefreshToken.for_user(user=user)
         
-        return Response(
+        response=Response(
             data={
                 "name": user_serializer.data["first_name"] + " " + user_serializer.data["last_name"],
                 "email" : user_serializer.data["email"],
                 "access_token": str(refresh.access_token),
-                "refresh": str(refresh),
             },
             status=status.HTTP_201_CREATED,
         )
-
+        
+        response.set_cookie(
+            key="refresh_token",
+            value=str(refresh),
+            httponly=True,
+            secure=True,
+            samesite="lax",   
+            path="/",         
+        )
+        
+        return response
+        
 
 class LoginView(APIView):
     http_method_names = ["post"]
@@ -62,7 +72,6 @@ class LoginView(APIView):
             },
             status=status.HTTP_200_OK
         )
-
 
 class LogoutView(APIView):
     http_method_names = ["post"]

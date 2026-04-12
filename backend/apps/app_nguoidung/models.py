@@ -5,7 +5,6 @@ from apps.app_nguoidung.choices import RoleChoice, AuthTypeChoice
 
 import uuid
 
-
 class NguoiDungManager(BaseUserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
@@ -51,7 +50,6 @@ class NguoiDungManager(BaseUserManager):
             raise ValueError("Superuser phải có is_superuser=True.")
 
         return self._create_user(email, password, **extra_fields)
-
 
 class NguoiDung(AbstractUser):
     username = None
@@ -135,7 +133,6 @@ class NguoiDung(AbstractUser):
     class Meta:
         db_table = "nguoi_dung"
         verbose_name = "Người dùng"
-
 
 class ThongTinNguoiDung(models.Model):
     id_user = models.OneToOneField(
