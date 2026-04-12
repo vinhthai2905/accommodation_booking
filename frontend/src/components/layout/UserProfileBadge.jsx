@@ -8,9 +8,9 @@ import { AuthUserContext } from "../../context/AuthUserContext"
 
 export default function UserProfileBadge() {
   const [isOpen, setIsOpen] = useState(false)
-  const authValue = useContext(AuthUserContext)
+  const authUserContext = useContext(AuthUserContext)
 
-  const initials = authValue.user?.name?.charAt(0)?.toUpperCase() || "U"
+  const initials = authUserContext.user?.name?.charAt(0)?.toUpperCase() || "U"
   const level = "Genius Level 1"
 
   return (

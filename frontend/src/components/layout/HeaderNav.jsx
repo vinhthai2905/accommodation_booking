@@ -10,7 +10,7 @@ import { AuthUserContext } from "../../context/AuthUserContext"
 
 
 export default function HeaderNav() {
-    const authValue = useContext(AuthUserContext)
+    const authUserContext = useContext(AuthUserContext)
 
     return (
         <div className={clsx(
@@ -22,7 +22,7 @@ export default function HeaderNav() {
                 "flex items-center gap-4"
             )}>
                 <HeaderUltilities />
-                {authValue.isAuthenticated ? <UserProfileBadge /> : <GuestNav />}
+                {authUserContext.isAuthenticated ? <UserProfileBadge /> : <GuestNav />}
             </div>
         </div>
     )

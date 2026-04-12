@@ -12,6 +12,10 @@ import {
     LogOut,
 } from "lucide-react"
 
+import { useContext } from "react"
+
+import { AuthUserContext } from "../../context/AuthUserContext"
+
 const menuItems = [
     { title: "My account", icon: CircleUserRound, to: "/" },
     { title: "Bookings & Trips", icon: BriefcaseBusiness },
@@ -19,10 +23,12 @@ const menuItems = [
     { title: "Rewards & Wallet", icon: Wallet },
     { title: "Reviews", icon: MessageSquareText },
     { title: "Saved", icon: Heart },
-    { title: "Sign out", icon: LogOut, to: "/" },
+    { title: "Sign out", icon: LogOut, to: "/index" },
 ]
 
 export default function UserProfileDrop() {
+    const { clearAuthState } = useContext(AuthUserContext)
+
     return (
         <div className={clsx(
             "overflow-hidden rounded-xl bg-white",
@@ -33,12 +39,14 @@ export default function UserProfileDrop() {
 
                 return (
                     <Link
+                        to={"/index"}
                         key={item.title}
                         className={clsx(
                             "w-full px-5 py-3 flex items-center gap-2",
                             "text-left text-[#1a1a1a] text-[0.8rem]",
                             "hover:bg-gray-100"
                         )}
+                        onClick={clearAuthState}
                     >
                         <Icon size={18} strokeWidth={1.75} className="text-[#3d3d3d]" />
                         <span>{item.title}</span>

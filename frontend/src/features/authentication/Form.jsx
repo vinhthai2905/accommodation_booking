@@ -1,8 +1,6 @@
 import FormInput from "../../components/ui/FormInput"
 import ButtonSpinner from "../../components/ui/ButtonSpinner"
 
-import { useEffect } from "react"
-
 export default function Form({ submitText, useFormHook }) {
     const {
         register,

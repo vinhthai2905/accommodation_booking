@@ -103,3 +103,6 @@ class LogoutSerializer(Serializer):
         """Attempt to delete the token after being validated."""
 
         RefreshToken.blacklist(self.validated_data["refresh"])
+        
+    
+    

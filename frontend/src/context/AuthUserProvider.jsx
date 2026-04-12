@@ -1,18 +1,66 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import { AuthUserContext } from "./AuthUserContext";
 
-export default function AuthUserProvider({ children }) {
-    const [user, setUser] = useState(null)
+import { toast } from "react-hot-toast"
 
-    const authValue = {
+import { fetchUser, logoutUser } from "../services/authAPI";
+
+export default function AuthUserProvider({ children }) {
+    const [user, setUserState] = useState(null)
+
+    const setAccessToken = (token) => {
+        if (!token)
+            throw new Error("Token không được cấp.")
+
+        localStorage.setItem("access_token", token)
+    }
+
+    const setCurrentUser = (user) => {
+        if (!user.name || !user.email)
+            throw new Error("Thông tin không tồn tại")
+        
+        setUserState({
+            ...user
+        })
+    }
+
+    const fetchUserState = useCallback(async () => {
+        try {
+            const response = await fetchUser()
+            const responseData = await response.json()
+
+            setCurrentUser(responseData)
+        }
+        catch (error) {
+            toast.error(`Hệ thống xảy ra lỗi. ${error}`)
+        }
+    }, [])
+
+    const clearAuthState = async () => {
+        try {
+            await logoutUser()
+
+            localStorage.removeItem("access_token")
+
+            setUserState(null)
+        }
+        catch (error) {
+            toast.error(`Hệ thống xảy ra lỗi. ${error}`)
+        }
+    }
+
+    const authUserContext = {
         user,
-        setUser,
+        setAccessToken,
+        setCurrentUser,
+        fetchUserState,
+        clearAuthState,
         isAuthenticated: !!user,
     }
 
     return (
-        <AuthUserContext value={authValue}>
+        <AuthUserContext value={authUserContext}>
             {children}
         </AuthUserContext>
     )

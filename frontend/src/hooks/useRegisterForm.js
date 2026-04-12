@@ -11,7 +11,7 @@ import { defaultTestValues } from "../features/authentication/configs/DefaultVal
 export default function useRegisterForm() {
   const [isLoading, setLoading] = useState(false)
 
-  const authValue = useContext(AuthUserContext)
+  const authContext = useContext(AuthUserContext)
 
   const navigate = useNavigate()
 
@@ -47,18 +47,24 @@ export default function useRegisterForm() {
         }
       }
       else {
-        authValue.setUser(responseData)
+        const { access_token, email, name } = responseData
+
+        authContext.setAccessToken(access_token)
+        authContext.setCurrentUser({email, name})
+
         toaster.success("Tạo tài khoản thành công.")
         reset()
+
+        navigate("/index")
       }
+
     }
     catch (error) {
-      toaster.error(`Đăng ký không thành công. ${error.message}`)
+      toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau.`)
     }
     finally {
       setLoading(false)
     }
-
   }
 
   const onErrorSubmit = () => {

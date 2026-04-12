@@ -11,7 +11,13 @@ from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from apps.app_nguoidung.api.serializers import UserSerializer, LoginSerializer, LogoutSerializer
+from apps.app_nguoidung.api.serializers import (
+    UserSerializer,
+    LoginSerializer,
+    LogoutSerializer,
+)
+from apps.app_nguoidung.models import NguoiDung
+
 
 class UserRegisterView(APIView):
     http_method_names = ["post"]
@@ -22,34 +28,36 @@ class UserRegisterView(APIView):
 
     def post(self, request: Request, *args, **kwargs):
         user_serializer: UserSerializer = self.serializer_class(data=request.data)
-        
+
         print(request._request.headers)
 
         user_serializer.peform_validation()
         user = user_serializer.create(validated_data=user_serializer.validated_data)
 
         refresh = RefreshToken.for_user(user=user)
-        
-        response=Response(
+
+        response = Response(
             data={
-                "name": user_serializer.data["first_name"] + " " + user_serializer.data["last_name"],
-                "email" : user_serializer.data["email"],
+                "name": user_serializer.data["first_name"]
+                + " "
+                + user_serializer.data["last_name"],
+                "email": user_serializer.data["email"],
                 "access_token": str(refresh.access_token),
             },
             status=status.HTTP_201_CREATED,
         )
-        
+
         response.set_cookie(
             key="refresh_token",
             value=str(refresh),
             httponly=True,
             secure=True,
-            samesite="lax",   
-            path="/",         
+            samesite="lax",
+            path="/",
         )
-        
+
         return response
-        
+
 
 class LoginView(APIView):
     http_method_names = ["post"]
@@ -70,21 +78,43 @@ class LoginView(APIView):
                 "access_token": str(refresh.access_token),
                 "refresh": str(refresh),
             },
-            status=status.HTTP_200_OK
+            status=status.HTTP_200_OK,
         )
+
 
 class LogoutView(APIView):
     http_method_names = ["post"]
-    
+
     serializer_class = LogoutSerializer
-    
+
     def post(self, request: Request, *args, **kwargs):
-        logout_serializer = self.serializer_class(data=request.data)
-        
+        logout_serializer = self.serializer_class(
+            data={"refresh": request.COOKIES.get("refresh_token")}
+        )
+
         logout_serializer.is_valid(raise_exception=True)
         logout_serializer.perform_blacklist()
-        
-        return Response(
+
+        response = Response(
             data={"message": "Token successfully deleted."},
-            status=status.HTTP_204_NO_CONTENT
+            status=status.HTTP_204_NO_CONTENT,
+        )
+        
+        response.delete_cookie("refresh_token")
+        
+        return response
+
+
+class FetchUserView(APIView):
+    http_method_names = ["post"]
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request: Request, *args, **kwargs):
+        first_name = request.user.thong_tin_nguoi_dung.first_name
+        last_name = request.user.thong_tin_nguoi_dung.last_name
+
+        return Response(
+            data={"name": first_name + " " + last_name, "email": request.user.email},
+            status=status.HTTP_200_OK,
         )

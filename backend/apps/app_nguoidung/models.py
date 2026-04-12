@@ -140,6 +140,7 @@ class ThongTinNguoiDung(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
         db_column="id_nguoi_dung",
+        related_name="thong_tin_nguoi_dung"
     )
 
     first_name = models.CharField(
