@@ -1,5 +1,7 @@
-import AppLayout from '/src/components/layout/AppLayout'
+import AppLayout from './components/layout/AppLayout'
 import AuthLayout from './components/layout/AuthLayout'
+import PartnerLayout from './components/layout/PartnerLayout'
+import AdminLayout from "./components/layout/AdminLayout"
 
 import Home from './pages/Home'
 import Hotel from './pages/Hotel'
@@ -7,9 +9,13 @@ import Profile from './pages/Profile'
 import SearchResults from "./pages/SearchResults"
 import CustomerRegister from './pages/CustomerRegister'
 import CustomerSignIn from './pages/CustomerSignIn'
+import Checkout from './pages/Checkout'
+
 import PartnerRegister from './pages/PartnerRegister'
 import PartnerLanding from './pages/PartnerLanding'
-import Checkout from './pages/Checkout'
+import PartnerDashboard from './pages/partner/PartnerDashboard'
+
+import AdminDashboard from './pages/admin/AdminDashboard'
 
 import './features/account/UserProfile'
 
@@ -20,7 +26,6 @@ import { Toaster } from 'react-hot-toast'
 
 import AuthUserProvider from './context/AuthUserProvider'
 import UserProfile from './features/account/UserProfile'
-
 
 function App() {
   const router = createBrowserRouter([
@@ -56,19 +61,20 @@ function App() {
       ]
     },
     {
-      path: "/partner",
-      element: <PartnerLanding />
+      path: "partner",
+      element: <PartnerLayout />,
+      children: [
+        { path: "dashboard", element: <PartnerDashboard /> }
+      ]
     },
-    // {
-    //   path: "/auth/sign-up",
-    //   element: <CustomerRegister />
-    // }
-    // ,
-    // {
-    //   path: "/auth/sign-in",
-    //   element: <CustomerSignIn />
-    // }
-    // ,
+    {
+      path: "admin",
+      element: <AdminLayout />,
+      children: [
+        { path: "dashboard", element: <AdminDashboard /> }
+      ]
+    }
+
   ])
   return (
     <AuthUserProvider>
