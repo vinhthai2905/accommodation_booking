@@ -5,8 +5,6 @@ import HotelCardSlider from "/src/features/hotels/HotelCardSlider";
 import OffersSection from "/src/components/ui/OffersSection";
 
 export default function Home() {
-
-
     return (
         <main className={clsx(
             "text-black mt-10",

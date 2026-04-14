@@ -17,7 +17,7 @@ import { useContext } from "react"
 import { AuthUserContext } from "../../context/AuthUserContext"
 
 const menuItems = [
-    { title: "My account", icon: CircleUserRound, to: "/" },
+    { title: "My account", icon: CircleUserRound, to: "/index" },
     { title: "Bookings & Trips", icon: BriefcaseBusiness },
     { title: "Genius loyalty program", icon: BadgeDollarSign },
     { title: "Rewards & Wallet", icon: Wallet },

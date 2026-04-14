@@ -1,7 +1,7 @@
-import RegisterForm from "../features/authentication/RegisterForm"
+import RegisterSection from "../features/authentication/RegisterSection"
 
 export default function PartnerRegister() {
     return (
-        <RegisterForm />
+        <RegisterSection />
     )
 }

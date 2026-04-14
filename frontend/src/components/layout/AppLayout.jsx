@@ -18,7 +18,7 @@ export default function AppLayout() {
 
         fetchUserState()
         
-    }, [fetchUserState])
+    }, [])
 
     return (
         <div className={clsx(
