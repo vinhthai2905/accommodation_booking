@@ -46,8 +46,9 @@ export default function useRegisterForm() {
           )
         }
       }
+
       else {
-        const { access_token, email, name } = responseData
+        const { name, email, access_token } = responseData
 
         authContext.setAccessToken(access_token)
         authContext.setCurrentUser({email, name})

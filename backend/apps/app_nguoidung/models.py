@@ -140,7 +140,7 @@ class ThongTinNguoiDung(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
         db_column="id_nguoi_dung",
-        related_name="thong_tin_nguoi_dung"
+        related_name="personal_info"
     )
 
     first_name = models.CharField(
@@ -174,7 +174,7 @@ class ThongTinNguoiDung(models.Model):
     )
 
     class Meta:
-        db_table = "thongtin_nguoidung"
+        db_table = "thong_tin_nguoi_dung"
         constraints = [
             models.CheckConstraint(
                 condition=models.Q(gender__in=["Nam", "Nữ"])

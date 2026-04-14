@@ -16,12 +16,13 @@ export default function AuthUserProvider({ children }) {
         localStorage.setItem("access_token", token)
     }
 
-    const setCurrentUser = (user) => {
-        if (!user.name || !user.email)
+    const setCurrentUser = (name, email) => {
+        if (!name || !email)
             throw new Error("Thông tin không tồn tại")
         
         setUserState({
-            ...user
+            name,
+            email
         })
     }
 
@@ -30,7 +31,7 @@ export default function AuthUserProvider({ children }) {
             const response = await fetchUser()
             const responseData = await response.json()
 
-            setCurrentUser(responseData)
+            setCurrentUser(responseData.name, responseData.email)
         }
         catch (error) {
             toast.error(`Hệ thống xảy ra lỗi. ${error}`)
