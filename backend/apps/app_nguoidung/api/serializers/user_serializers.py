@@ -40,6 +40,7 @@ class UserSerializer(ModelSerializer):
         """Create and save the user to database."""
 
         validated_data.pop("confirm_password", None)
+        validated_data["role_name"] = "Khách hàng"
 
         user = NguoiDung.objects.create_user(**validated_data)
 
