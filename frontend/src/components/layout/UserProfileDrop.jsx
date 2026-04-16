@@ -1,6 +1,7 @@
 import { clsx } from "clsx"
 
 import { Link } from "react-router"
+import { useContext } from "react"
 
 import {
     CircleUserRound,
@@ -12,7 +13,6 @@ import {
     LogOut,
 } from "lucide-react"
 
-import { useContext } from "react"
 
 import { AuthUserContext } from "../../context/AuthUserContext"
 
@@ -46,7 +46,7 @@ export default function UserProfileDrop() {
                             "text-left text-[#1a1a1a] text-[0.8rem]",
                             "hover:bg-gray-100"
                         )}
-                        onClick={clearAuthState}
+                        onClick={item.title === "Sign out" ? clearAuthState : ""}
                     >
                         <Icon size={18} strokeWidth={1.75} className="text-[#3d3d3d]" />
                         <span>{item.title}</span>

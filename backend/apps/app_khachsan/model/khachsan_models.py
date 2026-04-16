@@ -58,7 +58,7 @@ class KhachSan(models.Model):
         db_column="id_phuong",
         related_name="hotels",
     )
-
+    
     slug = models.SlugField(
         unique=True,
         max_length=70,
@@ -80,30 +80,6 @@ class KhachSan(models.Model):
         null=True,
         blank=True,
         db_column="vi_tri",
-    )
-
-    checkin_from = models.TimeField(
-        null=True,
-        blank=True,
-        db_column="gio_checkin_tu",
-    )
-
-    checkin_to = models.TimeField(
-        null=True,
-        blank=True,
-        db_column="gio_checkin_den",
-    )
-
-    checkout_from = models.TimeField(
-        null=True,
-        blank=True,
-        db_column="gio_checkout_tu",
-    )
-
-    checkout_to = models.TimeField(
-        null=True,
-        blank=True,
-        db_column="gio_checkout_den",
     )
 
     class Meta:

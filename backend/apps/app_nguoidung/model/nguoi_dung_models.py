@@ -140,13 +140,13 @@ class ThongTinNguoiDung(models.Model):
     )
 
     first_name = models.CharField(
-        max_length=10,
+        max_length=30,
         db_column="ho",
         null=True,
     )
 
     last_name = models.CharField(
-        max_length=15,
+        max_length=30,
         db_column="ten",
         null=True,
     )

@@ -5,26 +5,23 @@ export default function FormInput({ register, idFor, type, labelFor, placeHolder
         <div className={clsx(
             "text-black"
         )}>
-            <label
-                htmlFor={idFor}
-                className="mb-2 block font-medium text-[#1a1a1a]"
-            >
-               {labelFor} <span className="text-red-500">(*)</span>
-            </label>
-            <input
-                {...register}
-                id={idFor}
-                type={type}
-                placeholder={placeHolderFor}
-                className={clsx(
-                    "w-full px-4 py-3",
-                    "rounded border border-[#949494]",
-                    "text-sm",
-                    "outline-none",
-                    "focus:border-[#006ce4] hover:border-[#006ce4]",
-                    error && "border-red-600"
-                )}
-            />
+            <fieldset className="rounded border border-[#949494] px-4 pb-3 pt-1">
+                <legend className="px-1 text-[0.75rem] font-medium text-[#1a1a1a]">
+                    {labelFor} <span className="text-red-500">(*)</span>
+                </legend>
+
+                <input
+                    {...register}
+                    id={idFor}
+                    type={type}
+                    placeholder={placeHolderFor}
+                    className={clsx(
+                        "w-full border-none bg-transparent px-0 py-0",
+                        "text-sm outline-none",
+                        
+                    )}
+                />
+            </fieldset>
 
             {error && (
                 <p className="my-5 text-sm text-red-500">

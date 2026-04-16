@@ -5,20 +5,14 @@ from django.db import models
 from apps.app_nguoidung.models import NguoiDung
 from apps.app_khachsan.model.phong_models import LoaiPhong
 
+from apps.common.models import TimeStampedModel
 
-class DatPhong(models.Model):
+class DatPhong(TimeStampedModel):
     id_booking = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
         editable=False,
         db_column="id_dat_phong",
-    )
-
-    id_room_type = models.ForeignKey(
-        LoaiPhong,
-        on_delete=models.PROTECT,
-        db_column="id_loai_phong",
-        related_name="bookings",
     )
 
     id_user = models.ForeignKey(
@@ -28,19 +22,21 @@ class DatPhong(models.Model):
         related_name="bookings",
     )
 
-    checkin_date = models.DateField(
+    check_in_date = models.DateField(
         db_column="ngay_nhan_phong",
     )
 
-    checkout_date = models.DateField(
+    check_out_date = models.DateField(
         db_column="ngay_tra_phong",
     )
 
-    room_quantity = models.SmallIntegerField(
+    total_room_quantity = models.PositiveSmallIntegerField(
+        null=True,
         db_column="so_luong_phong",
     )
 
-    guest_quantity = models.SmallIntegerField(
+    total_guest_quantity = models.PositiveSmallIntegerField(
+        null=True,
         db_column="so_luong_khach",
     )
 
@@ -60,13 +56,51 @@ class DatPhong(models.Model):
         db_column="phuong_thuc_thanh_toan",
     )
 
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        db_column="ngay_tao",
-    )
-
     class Meta:
         db_table = "dat_phong"
 
     def __str__(self):
-        return f"{self.user} - {self.room_type}"
+        return f"{self.booking_id} - {self.user}"
+
+
+class ChiTietDatPhong(models.Model):
+    id_booking_detail = models.AutoField(
+        primary_key=True,
+        db_column="id_chi_tiet",
+    )
+
+    id_booking = models.ForeignKey(
+        DatPhong,
+        on_delete=models.CASCADE,
+        db_column="id_dat_phong",
+        related_name="booking_details",
+    )
+
+    id_room_type = models.ForeignKey(
+        LoaiPhong,
+        on_delete=models.PROTECT,
+        db_column="id_loai_phong",
+        related_name="booking_details",
+    )
+
+    room_quantity = models.PositiveSmallIntegerField(
+        db_column="so_luong_phong",
+    )
+
+    room_price_total = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        db_column="tong_tien_phong",
+    )
+
+    class Meta:
+        db_table = "chi_tiet_dat_phong"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["id_booking", "id_room_type"],
+                name="unique_booking_room_type",
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.booking_id} - {self.room_type}"

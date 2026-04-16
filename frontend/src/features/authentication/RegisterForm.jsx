@@ -33,7 +33,7 @@ export default function RegisterForm({ submitText, useFormHook }) {
                         )}
                     idFor="email"
                     type="email"
-                    labelFor="Địa chỉ email"
+                    labelFor="Email"
                     placeHolderFor="Nhập email của bạn"
                     error={errors.email}
                 />
