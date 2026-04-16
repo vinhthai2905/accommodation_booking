@@ -1,13 +1,22 @@
 from django.db import models
 
+from .thanh_pho_models import ThanhPho
 
 class Phuong(models.Model):
-    id_phuong = models.AutoField(
+    id_ward = models.AutoField(
         primary_key=True,
         db_column="id_phuong"
     )
+    
+    id_city = models.ForeignKey(
+        ThanhPho,
+        on_delete=models.CASCADE,
+        db_column="id_thanh_pho",
+        related_name="wards",
+        null=True
+    )
 
-    ten_phuong = models.CharField(
+    ward_name = models.CharField(
         max_length=15,
         db_column="ten_phuong"
     )
@@ -23,4 +32,4 @@ class Phuong(models.Model):
         verbose_name = "Phường"
 
     def __str__(self):
-        return self.ten_phuong
+        return self.ward_name

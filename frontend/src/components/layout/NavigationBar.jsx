@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import GuestNav from "./GuestNav"
+import HeaderNav from "./HeaderNav"
 import ServiceNav from "./ServiceNav"
 
 import { useContext } from "react"
@@ -15,7 +15,7 @@ export default function NavigationBar() {
             "mx-[10%] xl:mx-[20%]",
             currentPage === true ? "py-3" : "py-4"
         )}>
-            <GuestNav />
+            <HeaderNav />
             {currentPage === true ? <ServiceNav /> : ""}
         </div>
     )

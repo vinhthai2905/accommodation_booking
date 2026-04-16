@@ -1,0 +1,1 @@
+from .views.user_auth_views import UserRegisterView, LoginView, LogoutView, FetchUserView

@@ -1,4 +1,4 @@
-import LoginForm from "../features/authentication/LoginForm"
+import LoginForm from "../features/authentication/LoginSection"
 
 export default function CustomerSignIn() {
     return (
