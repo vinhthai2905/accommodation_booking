@@ -8,7 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.contrib.auth import authenticate
 
-from apps.app_nguoidung.models import NguoiDung
+from apps.app_user.models import NguoiDung
 
 
 class UserSerializer(ModelSerializer):

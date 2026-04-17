@@ -2,8 +2,8 @@ from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManage
 from django.db import models
 from rest_framework.exceptions import ValidationError
 
-from apps.app_nguoidung.choices import AuthTypeChoice
-from apps.app_nguoidung import models as table
+from apps.app_user.choices import AuthTypeChoice
+from apps.app_user import models as table
 
 import uuid
 

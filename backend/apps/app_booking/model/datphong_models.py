@@ -2,8 +2,8 @@ import uuid
 
 from django.db import models
 
-from apps.app_nguoidung.models import NguoiDung
-from apps.app_khachsan.model.phong_models import LoaiPhong
+from apps.app_user.models import NguoiDung
+from apps.app_hotel.model.phong_models import LoaiPhong
 
 from apps.common.models import TimeStampedModel
 

@@ -3,8 +3,8 @@ import uuid
 from django.db import models
 from django.contrib.gis.db import models as postgis_models
 
-from apps.app_nguoidung.models import NguoiDung
-from apps.app_vitri.model.phuong_models import Phuong
+from apps.app_user.models import NguoiDung
+from apps.app_location.model.phuong_models import Phuong
 
 class LoaiKhachSan(models.Model):
     id = models.AutoField(

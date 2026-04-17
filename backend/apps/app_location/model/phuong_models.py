@@ -5,6 +5,7 @@ from .thanh_pho_models import ThanhPho
 class Phuong(models.Model):
     id_ward = models.AutoField(
         primary_key=True,
+        editable=False,    
         db_column="id_phuong"
     )
     

@@ -13,12 +13,12 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from helpers import get_user_name, get_email
 
-from apps.app_nguoidung.api.serializers import (
+from apps.app_user.api.serializers import (
     UserSerializer,
     LoginSerializer,
     LogoutSerializer,
 )
-from apps.app_nguoidung.models import NguoiDung
+from apps.app_user.models import NguoiDung
 
 
 class UserRegisterView(APIView):

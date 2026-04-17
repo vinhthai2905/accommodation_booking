@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.app_nguoidung import models as table
+from apps.app_user import models as table
 
 class VaiTro(models.Model):
     id_role = models.AutoField(

@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class AppKhachsanConfig(AppConfig):
-    name = 'apps.app_khachsan'
+    name = 'apps.app_hotel'
