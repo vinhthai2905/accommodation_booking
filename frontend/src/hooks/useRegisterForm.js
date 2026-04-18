@@ -51,7 +51,7 @@ export default function useRegisterForm() {
         const { name, email, access_token } = responseData
 
         authContext.setAccessToken(access_token)
-        authContext.setCurrentUser({email, name})
+        authContext.setCurrentUser(email, name)
 
         toaster.success("Tạo tài khoản thành công.")
         reset()
@@ -61,7 +61,7 @@ export default function useRegisterForm() {
 
     }
     catch (error) {
-      toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau.`)
+      toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}` )
     }
     finally {
       setLoading(false)

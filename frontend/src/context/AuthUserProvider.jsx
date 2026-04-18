@@ -1,62 +1,21 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 import { AuthUserContext } from "./AuthUserContext";
 
-import { toast } from "react-hot-toast"
-
-import { fetchUser, logoutUser } from "../services/authAPI";
+import useRefreshUser from "../hooks/useRefreshUser";
+import useAuthActions from "../hooks/useAuthActions";
 
 export default function AuthUserProvider({ children }) {
     const [user, setUserState] = useState(null)
-
-    const setAccessToken = (token) => {
-        if (!token)
-            throw new Error("Token không được cấp.")
-
-        localStorage.setItem("access_token", token)
-    }
-
-    const setCurrentUser = (name, email) => {
-        if (!name || !email)
-            throw new Error("Thông tin không tồn tại")
-        
-        setUserState({
-            name,
-            email
-        })
-    }
-
-    const fetchUserState = useCallback(async () => {
-        try {
-            const response = await fetchUser()
-            const responseData = await response.json()
-
-            setCurrentUser(responseData.name, responseData.email)
-        }
-        catch (error) {
-            toast.error(`Hệ thống xảy ra lỗi. ${error}`)
-        }
-    }, [])
-
-    const clearAuthState = async () => {
-        try {
-            await logoutUser()
-
-            localStorage.removeItem("access_token")
-
-            setUserState(null)
-        }
-        catch (error) {
-            toast.error(`Hệ thống xảy ra lỗi. ${error}`)
-        }
-    }
+    const { fetchUserState, clearAuthState, setAccessToken, setCurrentUser } = useAuthActions(setUserState)
+    const { isPending, error, data } = useRefreshUser(fetchUserState)
 
     const authUserContext = {
         user,
-        setAccessToken,
-        setCurrentUser,
         fetchUserState,
         clearAuthState,
+        setAccessToken,
+        setCurrentUser,
         isAuthenticated: !!user,
     }
 
