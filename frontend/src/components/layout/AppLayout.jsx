@@ -9,16 +9,16 @@ import { AuthUserContext } from "../../context/AuthUserContext"
 import { useContext, useEffect } from "react"
 
 export default function AppLayout() {
-    const { fetchUserState } = useContext(AuthUserContext)
+    // const { fetchUserState } = useContext(AuthUserContext)
 
-    useEffect(() => {
-        const accessToken = localStorage.getItem("access_token")
+    // useEffect(() => {
+    //     const accessToken = localStorage.getItem("access_token")
 
-        if (!accessToken) return
+    //     if (!accessToken) return
 
-        fetchUserState()
+    //     fetchUserState()
         
-    }, [])
+    // }, [])
 
     return (
         <div className={clsx(

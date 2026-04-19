@@ -61,7 +61,7 @@ export default function useRegisterForm() {
 
     }
     catch (error) {
-      toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}` )
+      toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}`)
     }
     finally {
       setLoading(false)

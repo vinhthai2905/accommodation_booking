@@ -1,5 +1,4 @@
 import toast from "react-hot-toast"
-import { useCallback } from "react"
 
 import { logoutUser, fetchUser } from "../services/authAPI"
 
@@ -38,6 +37,10 @@ export default function useAuthActions(setUserState) {
     const fetchUserState = async () => {
         try {
             const response = await fetchUser()
+
+            if (!response.ok) 
+                throw new Error(`Response status: ${response.status}`)
+            
             const responseData = await response.json()
 
             setCurrentUser(responseData.name, responseData.email)

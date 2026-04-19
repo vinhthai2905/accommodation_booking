@@ -1,20 +1,35 @@
-import { clsx } from "clsx"
-
 import UserProfileDrop from "./UserProfileDrop"
 import UserProfileButton from "./UserProfileButton"
 
-import { useContext, useState } from "react"
+import { clsx } from "clsx"
+import { useContext, useEffect, useRef, useState } from "react"
 import { AuthUserContext } from "../../context/AuthUserContext"
 
 export default function UserProfileBadge() {
   const [isOpen, setIsOpen] = useState(false)
+  const profileDropRef = useRef(null)
   const authUserContext = useContext(AuthUserContext)
 
   const initials = authUserContext.user?.name?.charAt(0)?.toUpperCase() || "U"
   const level = "Genius Level 1"
 
+  useEffect(() => {
+    function clickOutsideEvent(event) {
+      if (profileDropRef.current && !profileDropRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener("click", clickOutsideEvent)
+
+    return () => {
+      document.removeEventListener("click", clickOutsideEvent)
+    }
+
+  })
+
   return (
-    <div className="relative">
+    <div ref={profileDropRef} className="relative">
       <UserProfileButton
         initials={initials}
         level={level}

@@ -28,6 +28,8 @@ import AuthUserProvider from './context/AuthUserProvider'
 import UserProfile from './features/account/UserProfile'
 import ToasterUI from './components/ui/ToasterUI'
 
+import ReactDateRange from './test/ReactDateRange'
+
 const queryClient = new QueryClient()
 
 function App() {
@@ -52,7 +54,8 @@ function App() {
           children: [
             { path: "user", element: <UserProfile /> }
           ]
-        }
+        },
+
       ],
 
     },
@@ -79,7 +82,11 @@ function App() {
         { path: "dashboard", element: <AdminDashboard /> }
       ]
     }
-
+    ,
+    {
+      path: "testground",
+      element: <ReactDateRange />
+    }
   ])
   return (
     <QueryClientProvider client={queryClient}>
