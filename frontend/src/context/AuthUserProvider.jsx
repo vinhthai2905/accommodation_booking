@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { AuthUserContext } from "./AuthUserContext";
 
-import useRefreshUser from "../hooks/useRefreshUser";
-import useAuthActions from "../hooks/useAuthActions";
+import useRefreshUser from "../hooks/authentication/useRefreshUser";
+import useAuthActions from "../hooks/authentication/useAuthActions";
 
 export default function AuthUserProvider({ children }) {
     const [user, setUserState] = useState(null)

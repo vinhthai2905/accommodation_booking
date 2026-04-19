@@ -2,7 +2,7 @@ import { clsx } from "clsx"
 import { useLocation } from "react-router"
 
 import NavigationBar from "./NavigationBar"
-import BookingSearchMenu from "../../features/search/BookingSearchMenu"
+import BookingSearchMenu from "../../features/search/section/BookingSearchMenu"
 
 import { HeaderContext } from "../../context/HeaderContext"
 

@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import BreadcrumItem from "./BreadcrumItem"
+import BreadcrumItem from "../components/BreadcrumItem"
 
 const searchNav = [
     { label: "Home page", to: "/" },

@@ -1,44 +1,61 @@
-import BookingSearchInput from "./BookingSearchInput"
+import BookingSearchInput from "../components/BookingSearchInput"
 import DestinationSearch from "./DestinationSearch"
 import DateSearch from "./DateSearch"
 import GuestSearch from "./GuestSearch"
 
 import { MapPin, Calendar, Users } from "lucide-react"
-
+import { useNavigate } from "react-router"
 import { clsx } from "clsx"
-import { useState } from "react"
 import { format } from "date-fns"
-import { startOfDay } from "date-fns";
 
-import useClickOutside from "../../hooks/useClickOutside"
+import useLocationInput from "../../../hooks/search/useLocationInput"
+import useBookingDateInput from "../../../hooks/search/useBookingDateInput"
+import useGuestOptionInput from "../../../hooks/search/useGuestOptionInput"
 
 export default function BookingSearchBar() {
-    const [isLocationOpened, setIsLocationOpened] = useState(false)
-    const { ref: placeRef } = useClickOutside(setIsLocationOpened)
-    const [selectedPlace, setSelectedPlace] = useState("")
+    const {
+        isLocationOpened,
+        setIsLocationOpened,
+        selectedPlace,
+        setSelectedPlace,
+        placeRef
+    } = useLocationInput()
 
+    const {
+        isDateOpened,
+        setIsDateOpened,
+        ranges,
+        setRanges,
+        dateRef
+    } = useBookingDateInput()
 
-    const [isDateOpened, setIsDateOpened] = useState(false)
-    const { ref: dateRef } = useClickOutside(setIsDateOpened)
-    const [ranges, setRanges] = useState([
-        {
-            startDate: startOfDay(new Date()),
-            endDate: startOfDay(new Date()),
-            key: "bookingDate",
-        },
-    ])
+    const {
+        isGuestOpened,
+        setIsGuestOpened,
+        guestOptions,
+        setGuestOptions,
+        guestRef
+    } = useGuestOptionInput()
 
-    const [isGuestOpened, setIsGuestOpened] = useState(false)
-    const { ref: guestRef } = useClickOutside(setIsGuestOpened)
-    const [guestOptions, setGuestOptions] = useState({
-        adults: 1,
-        rooms: 1
-    })
+    const navigate = useNavigate()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const params = new URLSearchParams({
+            checkIn: format(ranges[0].startDate, "dd-MM-yyyy"),
+            checkOut: format(ranges[0].endDate, "dd-MM-yyyy"),
+            location: selectedPlace,
+            guests: guestOptions.adults,
+            rooms: guestOptions.rooms,
+        })
+
+        navigate(`/searchresults?${params.toString()}`)
+    }
 
 
     return (
-        <form className={clsx(
-        )}>
+        <form onSubmit={handleSubmit}>
             <div className={clsx(
                 "flex",
                 "bg-orange-300 rounded-md w-[20%]",
@@ -47,6 +64,7 @@ export default function BookingSearchBar() {
                 "translate-y-1/2"
             )}>
                 <BookingSearchInput
+                    name={"location"}
                     inputInfo={"Khu vực bạn muốn ở?"}
                     inputFor={"text"}
                     ref={placeRef}
@@ -66,11 +84,12 @@ export default function BookingSearchBar() {
                 </BookingSearchInput>
 
                 <BookingSearchInput
+                    name={"bookingDate"}
                     inputInfo={""}
                     inputFor={"text"}
                     ref={dateRef}
                     onClick={() => setIsDateOpened(!isDateOpened)}
-                    onChange={() => {}}
+                    onChange={() => { }}
                     value={`${format(ranges[0].startDate, "dd/MM/yyyy")} - ${format(ranges[0].endDate, "dd/MM/yyyy")}`}
                     icon={Calendar}
                 >
@@ -82,12 +101,13 @@ export default function BookingSearchBar() {
                     )}
                 </BookingSearchInput>
 
-                <BookingSearchInput 
-                    inputFor={"text"} 
+                <BookingSearchInput
+                    name={"guestOption"}
+                    inputFor={"text"}
                     ref={guestRef}
                     onClick={() => setIsGuestOpened(!isGuestOpened)}
-                    value={`${guestOptions.adults} adult${guestOptions.adults > 1 ? "s" : ""} · ${guestOptions.rooms} room${guestOptions.rooms > 1 ? "s" : ""}`}
-                    icon={Users} 
+                    value={`${guestOptions.adults} adult${guestOptions.adults > 1 ? "s" : ""} - ${guestOptions.rooms} room${guestOptions.rooms > 1 ? "s" : ""}`}
+                    icon={Users}
                 >
                     {isGuestOpened && (
                         <GuestSearch
@@ -98,13 +118,16 @@ export default function BookingSearchBar() {
                     )}
                 </BookingSearchInput>
 
-                <div className={clsx(
-                    "px-6 py-2 bg-blue-500 border-orange-300 rounded-md border-2",
-                    "hover:bg-blue-600 hover:cursor-pointer",
-                    "md:py-4",
-                )}>
-                    <button type="submit">Tìm</button>
-                </div>
+                <button
+                    className={clsx(
+                        "px-6 py-2 bg-blue-500 border-orange-300 rounded-md border-2",
+                        "hover:bg-blue-600 cursor-pointer",
+                        "md:py-4",
+                    )}
+                    type="submit"
+                >
+                    Tìm
+                </button>
 
             </div>
 

@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-export default function BookingSearchInput({ inputInfo, inputFor, ref, icon: Icon, onClick, value, onChange, children }) {
+export default function BookingSearchInput({name, inputInfo, inputFor, ref, icon: Icon, onClick, value, onChange, children }) {
     return (
         <div className={clsx(
             "relative",
@@ -20,6 +20,7 @@ export default function BookingSearchInput({ inputInfo, inputFor, ref, icon: Ico
                     "w-full text-sm text-black placeholder:text-black",
                     "focus: outline-0",
                 )}
+                name={name}
                 placeholder={inputInfo}
                 onClick={onClick}
                 type={inputFor}

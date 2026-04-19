@@ -7,7 +7,7 @@ import Policies from "/src/components/ui/Policies"
 
 import { useOutletContext } from "react-router"
 
-import useRegisterForm from "../../hooks/useRegisterForm"
+import useRegisterForm from "../../hooks/authentication/useRegisterForm"
 
 export default function RegisterSection() {
   const user = useOutletContext()

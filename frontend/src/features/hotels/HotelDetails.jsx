@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import Breadcrumbs from "../search/Breadcrumbs"
+import Breadcrumbs from "../search/section/Breadcrumbs"
 import PropertyTabs from "./PropertyTabs"
 import HotelInformation from "./HotelInformation"
 

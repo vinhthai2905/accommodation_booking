@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import SortOptionItem from "./SortOptionItem"
+import SortOptionItem from "../components/SortOptionItem"
 
 export default function SortDropdown() {
     return (

@@ -1,12 +1,12 @@
 import { clsx } from "clsx"
 
-import { Link } from "react-router";
-
+import { Link, useLocation } from "react-router"
 import { MapContainer, TileLayer, Marker } from "react-leaflet"
 
-import Icon from "/src/components/ui/Icon";
+import Icon from "/src/components/ui/Icon"
 
 export default function MapCard() {
+    const location = useLocation()
 
     return (
             <div className={clsx(
@@ -24,7 +24,13 @@ export default function MapCard() {
                     />
                     <Marker position={[10.7769, 106.7009]} />
                 </MapContainer>
-                <Link>
+                <Link
+                    to={{
+                        pathname: location.pathname,
+                        search: location.search,
+                        hash: "map_opened"
+                    }}
+                >
                     <span className={clsx(
                         "absolute left-13 right-13 bottom-7 z-1000 py-1",
                         "bg-blue-500 rounded-sm",

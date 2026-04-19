@@ -18,11 +18,22 @@ export default function GuestSearch({ guestOptions, setGuestOptions, onDone }) {
             "bg-white shadow-[0_4px_24px_rgba(0,0,0,0.15)] rounded-lg p-6",
             "flex flex-col z-50 cursor-default"
         )}>
-            <div className="flex flex-col gap-6">
+            <div className={clsx(
+                "flex flex-col gap-6"
+            )}>
                 {/* Adults Row */}
-                <div className="flex justify-between items-center gap-2">
-                    <span className="text-sm text-gray-800">Adults</span>
-                    <div className="flex items-center justify-between border border-gray-400 rounded w-32 px-4 py-1.5">
+                <div className={clsx(
+                    "flex items-center justify-between gap-2"
+                )}>
+                    <span className={clsx(
+                        "text-sm",
+                        "text-gray-800"
+                    )}>Adults</span>
+                    <div className={clsx(
+                        "flex items-center justify-between",
+                        "w-32 px-4 py-1.5",
+                        "border border-gray-400 rounded"
+                    )}>
                         <button
                             type="button"
                             className={clsx(
@@ -35,10 +46,17 @@ export default function GuestSearch({ guestOptions, setGuestOptions, onDone }) {
                             &#8722;
                             {/* decrease guest by 1 */}
                         </button>
-                        <span className="text-sm">{guestOptions.adults}</span>
+                        <span className={clsx(
+                            "text-sm"
+                        )}>{guestOptions.adults}</span>
                         <button
                             type="button"
-                            className="text-2xl leading-none pb-1 text-blue-500 hover:text-blue-700 hover:cursor-pointer"
+                            className={clsx(
+                                "pb-1",
+                                "text-2xl leading-none",
+                                "text-blue-500",
+                                "hover:cursor-pointer hover:text-blue-700"
+                            )}
                             onClick={() => handleGuestOption("adults", "increase")}
                         >
                             &#43;
@@ -48,9 +66,18 @@ export default function GuestSearch({ guestOptions, setGuestOptions, onDone }) {
                 </div>
 
                 {/* Rooms Row */}
-                <div className="flex justify-between items-center gap-2">
-                    <span className="text-sm text-gray-800">Rooms</span>
-                    <div className="flex items-center justify-between border border-gray-400 rounded w-32 px-4 py-1.5">
+                <div className={clsx(
+                    "flex items-center justify-between gap-2"
+                )}>
+                    <span className={clsx(
+                        "text-sm",
+                        "text-gray-800"
+                    )}>Rooms</span>
+                    <div className={clsx(
+                        "flex items-center justify-between",
+                        "w-32 px-4 py-1.5",
+                        "border border-gray-400 rounded"
+                    )}>
                         <button
                             type="button"
                             className={clsx(
@@ -62,10 +89,17 @@ export default function GuestSearch({ guestOptions, setGuestOptions, onDone }) {
                         >
                             &#8722;
                         </button>
-                        <span className="text-sm">{guestOptions.rooms}</span>
+                        <span className={clsx(
+                            "text-sm"
+                        )}>{guestOptions.rooms}</span>
                         <button
                             type="button"
-                            className="text-2xl leading-none pb-1 text-blue-500 hover:text-blue-700 hover:cursor-pointer"
+                            className={clsx(
+                                "pb-1",
+                                "text-2xl leading-none",
+                                "text-blue-500",
+                                "hover:cursor-pointer hover:text-blue-700"
+                            )}
                             onClick={() => handleGuestOption("rooms", "increase")}
                         >
                             &#43;
@@ -77,7 +111,13 @@ export default function GuestSearch({ guestOptions, setGuestOptions, onDone }) {
             <button
                 type="button"
                 onClick={onDone}
-                className="w-full mt-6 py-2 border border-blue-600 text-blue-600 rounded font-medium hover:bg-blue-50 transition-colors"
+                className={clsx(
+                    "w-full mt-6 py-2",
+                    "border border-blue-600 rounded font-medium",
+                    "text-blue-600",
+                    "transition-colors",
+                    "hover:bg-blue-50"
+                )}
             >
                 Done
             </button>

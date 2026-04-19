@@ -1,5 +1,5 @@
-import ViewToggle from "../ViewToggle"
-import SortDropdown from "../SortDropdown"
+import ViewToggle from "../components/ViewToggle"
+import SortDropdown from "../section/SortDropdown"
 
 export default function SearchSummary() {
     return (

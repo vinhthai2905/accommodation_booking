@@ -3,7 +3,7 @@ import { useContext } from "react"
 
 import BookingSearchBar from "./BookingSearchBar"
 
-import { HeaderContext } from "../../context/HeaderContext"
+import { HeaderContext } from "../../../context/HeaderContext"
 
 
 export default function BookingSearchMenu() {

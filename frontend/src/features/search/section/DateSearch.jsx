@@ -5,7 +5,7 @@ import { isSameDay, startOfDay } from "date-fns";
 
 import "react-date-range/dist/styles.css"
 import "react-date-range/dist/theme/default.css"
-import "./css/dateRangeOverrides.css"
+import "../css/dateRangeOverrides.css"
 
 
 export default function DateSearch({ ranges, setRanges }) {

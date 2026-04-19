@@ -8,8 +8,6 @@ export default function useBookingCalendar() {
 
     const today = startOfDay(new Date())
     const isSelectingCheckout = focusedRange[1] === 1
-    
-
 
     return {
         today,
