@@ -1,7 +1,6 @@
-import { forwardRef } from "react"
 import { clsx } from "clsx"
 
-const BookingSearchInput = forwardRef(({ inputInfo, inputFor, path, onClick, value, onChange, children }, ref) => {
+export default function BookingSearchInput({ inputInfo, inputFor, ref, icon: Icon, onClick, value, onChange, children }) {
     return (
         <div className={clsx(
             "relative",
@@ -13,10 +12,8 @@ const BookingSearchInput = forwardRef(({ inputInfo, inputFor, path, onClick, val
         )}
             ref={ref}
         >
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={"20px"} fill="black">
-                    <path d={path}></path>
-                </svg>
+            <div className="flex items-center text-black">
+                {Icon && <Icon size={20} strokeWidth={2} />}
             </div>
             <input
                 className={clsx(
@@ -32,6 +29,4 @@ const BookingSearchInput = forwardRef(({ inputInfo, inputFor, path, onClick, val
             {children}
         </div>
     )
-})
-
-export default BookingSearchInput
+}
