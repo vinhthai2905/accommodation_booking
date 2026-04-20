@@ -24,21 +24,21 @@ export default function BaseMap({ onClose }) {
             "relative z-0 h-full flex-1",
             "hidden md:block"
         )}>
+            <button onClick={onClose} className={clsx(
+                "absolute z-1000 right-3 top-3",
+                "flex items-center gap-2",
+                "px-4 py-2",
+                "rounded-md bg-blue-600 shadow-sm",
+                "text-sm font-medium text-white",
+                "transition-colors hover:cursor-pointer hover:bg-blue-700"
+            )}>
+                <ListIcon size={18} />
+                Show List
+            </button>
+
             <MapContainer center={[10.7769, 106.7009]} zoom={13} scrollWheelZoom={true} className={clsx(
                 "z-0 h-full w-full"
             )}>
-                <button onClick={onClose} className={clsx(
-                    "absolute z-1000 right-3 top-3",
-                    "flex items-center gap-2",
-                    "px-4 py-2",
-                    "rounded-md bg-blue-600 shadow-sm",
-                    "text-sm font-medium text-white",
-                    "transition-colors hover:cursor-pointer hover:bg-blue-700"
-                )}>
-                    <ListIcon size={18} />
-                    Show List
-                </button>
-
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -54,7 +54,6 @@ export default function BaseMap({ onClose }) {
                     </Popup>
                 </Marker>
             </MapContainer>
-
         </div>
     )
 }
