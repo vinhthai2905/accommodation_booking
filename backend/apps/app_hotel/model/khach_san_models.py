@@ -13,12 +13,12 @@ class LoaiKhachSan(models.Model):
     )
 
     name = models.CharField(
-        max_length=20,
-        db_column="loai_khach_san",
+        max_length=50,
+        db_column="ten_loai_khach_san",
     )
 
     slug = models.SlugField(
-        max_length=50,
+        max_length=100,
         unique=True,
         db_column="slug",
     )
@@ -47,6 +47,7 @@ class KhachSan(models.Model):
 
     id_user = models.ForeignKey(
         NguoiDung,
+        unique=True,
         on_delete=models.CASCADE,
         db_column="id_doi_tac",
         related_name="hotels",

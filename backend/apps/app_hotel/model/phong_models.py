@@ -1,9 +1,10 @@
 from django.db import models
 
-from .khachsan_models import KhachSan
+from .khach_san_models import KhachSan
 from .giuong_models import Giuong
 
 from apps.common.models import TimeStampedModel
+
 
 class LoaiPhong(TimeStampedModel):
     id_room_type = models.AutoField(
@@ -23,11 +24,7 @@ class LoaiPhong(TimeStampedModel):
         db_column="ten",
     )
 
-    quantity = models.SmallIntegerField(
-        db_column="so_luong_phong",
-    )
-
-    max_guests = models.SmallIntegerField(
+    max_capacity = models.SmallIntegerField(
         db_column="khach_toi_da",
     )
 
@@ -39,15 +36,17 @@ class LoaiPhong(TimeStampedModel):
 
     class Meta:
         db_table = "loai_phong"
+        verbose_name = "Loại phòng"
+        verbose_name_plural = "Loại phòng"
 
     def __str__(self):
         return self.name
 
 
 class ChiTietLoaiPhong(models.Model):
-    id = models.AutoField(
+    id_room_type_detail = models.AutoField(
         primary_key=True,
-        db_column="id_chi_tiet_loai_phong",
+        db_column="id",
     )
 
     id_room_type = models.ForeignKey(
@@ -59,23 +58,46 @@ class ChiTietLoaiPhong(models.Model):
 
     id_bed = models.ForeignKey(
         Giuong,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         db_column="id_giuong",
         related_name="room_type_details",
     )
 
-    quantity = models.SmallIntegerField(
+    bed_quantity = models.SmallIntegerField(
         db_column="so_luong_giuong",
     )
 
     class Meta:
         db_table = "chi_tiet_loai_phong"
-        constraints = [
-            models.UniqueConstraint(
-                fields=["id_room_type", "id_bed"],
-                name="unique_id_room_type_id_bed",
-            )
-        ]
+        verbose_name = "Chi tiết loại phòng"
+        verbose_name_plural = "Chi tiết loại phòng"
 
     def __str__(self):
-        return f"{self.room_type} - {self.bed}"
+        return f"{self.id_room_type} - {self.id_bed}"
+    
+
+class PhongKhachSan(models.Model):
+    id_room = models.AutoField(
+        primary_key=True,
+        db_column="id_phong",
+    )
+
+    id_room_type = models.ForeignKey(
+        LoaiPhong,
+        on_delete=models.CASCADE,
+        db_column="id_loai_phong",
+        related_name="rooms",
+    )
+
+    room_name = models.CharField(
+        max_length=30,
+        db_column="ten_phong",
+    )
+
+    class Meta:
+        db_table = "phong_khach_san"
+        verbose_name = "Phòng khách sạn"
+        verbose_name_plural = "Phòng khách sạn"
+
+    def __str__(self):
+        return self.name

@@ -3,9 +3,10 @@ import uuid
 from django.db import models
 
 from apps.app_user.models import NguoiDung
-from apps.app_hotel.model.phong_models import LoaiPhong
+from apps.app_hotel.models import KhachSan, PhongKhachSan
 
 from apps.common.models import TimeStampedModel
+
 
 class DatPhong(TimeStampedModel):
     id_booking = models.UUIDField(
@@ -22,6 +23,13 @@ class DatPhong(TimeStampedModel):
         related_name="bookings",
     )
 
+    id_hotel = models.ForeignKey(
+        KhachSan,
+        on_delete=models.PROTECT,
+        db_column="id_khach_san",
+        related_name="bookings",
+    )
+
     check_in_date = models.DateField(
         db_column="ngay_nhan_phong",
     )
@@ -31,12 +39,10 @@ class DatPhong(TimeStampedModel):
     )
 
     total_room_quantity = models.PositiveSmallIntegerField(
-        null=True,
-        db_column="so_luong_phong",
+        db_column="tong_so_phong",
     )
 
     total_guest_quantity = models.PositiveSmallIntegerField(
-        null=True,
         db_column="so_luong_khach",
     )
 
@@ -58,9 +64,11 @@ class DatPhong(TimeStampedModel):
 
     class Meta:
         db_table = "dat_phong"
+        verbose_name = "Đặt phòng"
+        verbose_name_plural = "Đặt phòng"
 
     def __str__(self):
-        return f"{self.booking_id} - {self.user}"
+        return str(self.id_booking)
 
 
 class ChiTietDatPhong(models.Model):
@@ -76,31 +84,23 @@ class ChiTietDatPhong(models.Model):
         related_name="booking_details",
     )
 
-    id_room_type = models.ForeignKey(
-        LoaiPhong,
+    id_room = models.ForeignKey(
+        PhongKhachSan,
         on_delete=models.PROTECT,
-        db_column="id_loai_phong",
+        db_column="id_phong",
         related_name="booking_details",
     )
 
-    room_quantity = models.PositiveSmallIntegerField(
-        db_column="so_luong_phong",
-    )
-
-    room_price_total = models.DecimalField(
+    amount = models.DecimalField(
         max_digits=12,
         decimal_places=2,
-        db_column="tong_tien_phong",
+        db_column="thanh_tien",
     )
 
     class Meta:
         db_table = "chi_tiet_dat_phong"
-        constraints = [
-            models.UniqueConstraint(
-                fields=["id_booking", "id_room_type"],
-                name="unique_booking_room_type",
-            )
-        ]
+        verbose_name = "Chi tiết đặt phòng"
+        verbose_name_plural = "Chi tiết đặt phòng"
 
     def __str__(self):
-        return f"{self.booking_id} - {self.room_type}"
+        return f"{self.id_booking} - {self.id_room}"

@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.app_booking.model.datphong_models import DatPhong
+from .dat_phong_models import DatPhong
 
 class HoaDon(models.Model):
     id = models.AutoField(

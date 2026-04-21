@@ -10,6 +10,17 @@ class Giuong(models.Model):
         max_length=30,
         db_column="ten_giuong",
     )
+    
+    max_capacity = models.SmallIntegerField(
+        null=True,
+        db_column="toi_da_khach"
+    )
+    
+    size = models.CharField(
+        null=True,
+        max_length=20,
+        db_column="kich_thuoc"
+    )
 
     class Meta:
         db_table = "giuong"

@@ -1,12 +1,12 @@
+from django.conf import settings
 from django.db import models
 
-from apps.app_booking.model.datphong_models import DatPhong
-
+from backend.apps.app_booking.model.dat_phong_models import DatPhong
 from apps.common.models import TimeStampedModel
 
 
 class DanhGiaKhachSan(TimeStampedModel):
-    id = models.AutoField(
+    id_rating = models.AutoField(
         primary_key=True,
         db_column="id_danh_gia",
     )
@@ -16,6 +16,13 @@ class DanhGiaKhachSan(TimeStampedModel):
         on_delete=models.CASCADE,
         db_column="id_dat_phong",
         related_name="reviews",
+    )
+
+    id_user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        db_column="id_nguoi_dung",
+        related_name="hotel_reviews",
     )
 
     content = models.TextField(

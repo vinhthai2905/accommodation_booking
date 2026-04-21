@@ -13,7 +13,7 @@ class ThanhPho(models.Model):
     )
     
     slug = models.SlugField(
-        max_length=50,
+        max_length=100,
         unique=True,
         db_column="slug"
     )

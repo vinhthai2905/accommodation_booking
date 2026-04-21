@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManager
 from django.db import models
-from rest_framework.exceptions import ValidationError
 
 from apps.app_user.choices import AuthTypeChoice
 from apps.app_user import models as table
@@ -74,19 +73,34 @@ class NguoiDung(AbstractUser):
     last_name = None
 
     id_user = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False, db_column="id_nguoi_dung"
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+        db_column="id_nguoi_dung",
     )
 
     id_google = models.CharField(
-        max_length=50, null=True, blank=True, db_column="id_google"
+        max_length=50,
+        null=True,
+        blank=True,
+        db_column="id_google",
     )
 
-    email = models.EmailField(unique=True, db_column="email")
+    email = models.EmailField(
+        unique=True,
+        max_length=254,
+        db_column="email",
+    )
 
     lan_xac_nhan_email = models.DateTimeField(
         null=True,
         blank=True,
         db_column="lan_xac_nhan_email",
+    )
+
+    password = models.CharField(
+        max_length=255,
+        db_column="mat_khau",
     )
 
     loai_xac_thuc = models.CharField(
@@ -96,16 +110,24 @@ class NguoiDung(AbstractUser):
         db_column="loai_xac_thuc",
     )
 
-    is_superuser = models.BooleanField(default=False, db_column="la_superuser")
+    is_superuser = models.BooleanField(
+        default=False,
+        db_column="la_superuser",
+    )
 
-    is_staff = models.BooleanField(default=False, db_column="la_nhan_vien_he_thong")
+    is_staff = models.BooleanField(
+        default=False,
+        db_column="la_nhan_vien_he_thong",
+    )
 
-    is_active = models.BooleanField(default=True, db_column="dang_hoat_dong")
+    is_active = models.BooleanField(
+        default=True,
+        db_column="dang_hoat_dong",
+    )
 
     updated_at = models.DateTimeField(
         auto_now=True,
-        blank=True,
-        db_column="lan_cap_nhat_cuoi",
+        db_column="lan_cuoi_cap_nhat",
     )
 
     last_login = models.DateTimeField(
@@ -116,7 +138,6 @@ class NguoiDung(AbstractUser):
 
     date_joined = models.DateTimeField(
         auto_now_add=True,
-        blank=True,
         db_column="ngay_tham_gia",
     )
 
@@ -128,6 +149,10 @@ class NguoiDung(AbstractUser):
     class Meta:
         db_table = "nguoi_dung"
         verbose_name = "Người dùng"
+        verbose_name_plural = "Người dùng"
+
+    def __str__(self):
+        return self.email
 
 
 class ThongTinNguoiDung(models.Model):
