@@ -196,6 +196,7 @@ class ThongTinNguoiDung(models.Model):
 
     class Meta:
         db_table = "thong_tin_nguoi_dung"
+        verbose_name_plural = "Thông tin người dùng"
         constraints = [
             models.CheckConstraint(
                 condition=models.Q(gender__in=["Nam", "Nữ"])

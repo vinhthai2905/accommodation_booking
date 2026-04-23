@@ -20,6 +20,7 @@ class ThanhPho(models.Model):
 
     class Meta:
         db_table = "thanh_pho"
+        verbose_name_plural = "Thành phố"
 
     def __str__(self):
         return self.city_name

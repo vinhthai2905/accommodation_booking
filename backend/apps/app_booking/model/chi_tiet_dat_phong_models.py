@@ -38,15 +38,25 @@ class ChiTietDatPhong(models.Model):
         return f"{self.id_booking} - {self.id_room}"
     
 class ChiTietKhachTreEm(models.Model):
-    id_tre_em = models.AutoField(primary_key=True)
-    id_dat_phong = models.ForeignKey(
+    id_child = models.AutoField(primary_key=True, db_column="id_tre_em")
+
+    id_booking = models.ForeignKey(
         DatPhong,
         on_delete=models.CASCADE,
         db_column="id_dat_phong",
-        related_name="chi_tiet_khach_tre_em"
+        related_name="child_details", 
     )
-    so_tuoi = models.PositiveSmallIntegerField()
-    gia_phu_thu = models.DecimalField(max_digits=12, decimal_places=2)
+
+    age = models.PositiveSmallIntegerField(db_column="so_tuoi")
+    surcharge_price = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        db_column="gia_phu_thu",
+    )
 
     class Meta:
         db_table = "chi_tiet_khach_tre_em"
+        verbose_name_plural = "Chi tiết khách trẻ em"
+
+    def __str__(self):
+        return f"Child {self.age} - {self.id_booking}"

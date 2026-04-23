@@ -19,7 +19,7 @@ class LoaiPhong(TimeStampedModel):
         related_name="room_types",
     )
 
-    name = models.CharField(
+    type_name = models.CharField(
         max_length=25,
         db_column="ten",
     )
@@ -46,7 +46,7 @@ class LoaiPhong(TimeStampedModel):
         verbose_name_plural = "Loại phòng"
 
     def __str__(self):
-        return self.name
+        return f'{self.type_name} room type - {self.id_hotel}'
 
 
 class ChiTietLoaiPhong(models.Model):
@@ -106,4 +106,7 @@ class PhongKhachSan(models.Model):
         verbose_name_plural = "Phòng khách sạn"
 
     def __str__(self):
-        return self.name
+        return f'{self.room_name} - {self.get_hotel_name()}'
+    
+    def get_hotel_name(self):
+        return self.id_room_type.id_hotel

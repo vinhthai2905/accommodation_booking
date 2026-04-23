@@ -16,6 +16,7 @@ class VaiTro(models.Model):
 
     class Meta:
         db_table = "vai_tro"
+        verbose_name_plural = "Vai trò"
 
     def __str__(self):
         return self.role_name
@@ -43,6 +44,7 @@ class VaiTroNguoiDung(models.Model):
 
     class Meta:
         db_table = "vai_tro_nguoi_dung"
+        verbose_name_plural = "Vai trò người dùng"
         constraints = [
             models.UniqueConstraint(
                 fields=["id_role", "id_user"],

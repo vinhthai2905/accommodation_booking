@@ -24,6 +24,7 @@ class Giuong(models.Model):
 
     class Meta:
         db_table = "giuong"
+        verbose_name_plural = "Giường"
 
     def __str__(self):
         return self.name

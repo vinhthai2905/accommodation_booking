@@ -25,6 +25,7 @@ class LoaiKhachSan(models.Model):
 
     class Meta:
         db_table = "loai_khach_san"
+        verbose_name_plural = "Loại khách sạn"
 
     def __str__(self):
         return self.name
@@ -84,6 +85,7 @@ class KhachSan(models.Model):
 
     class Meta:
         db_table = "khach_san"
+        verbose_name_plural = "Khách sạn"
 
     def __str__(self):
         return self.name
