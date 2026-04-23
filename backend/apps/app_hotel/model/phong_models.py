@@ -24,8 +24,14 @@ class LoaiPhong(TimeStampedModel):
         db_column="ten",
     )
 
-    max_capacity = models.SmallIntegerField(
+    max_capacity = models.PositiveSmallIntegerField(
+        null=True,
         db_column="khach_toi_da",
+    )
+    
+    total_rooms = models.PositiveSmallIntegerField(
+        null=True,
+        db_column="so_luong_phong"
     )
 
     price = models.DecimalField(
@@ -63,7 +69,7 @@ class ChiTietLoaiPhong(models.Model):
         related_name="room_type_details",
     )
 
-    bed_quantity = models.SmallIntegerField(
+    bed_quantity = models.PositiveSmallIntegerField(
         db_column="so_luong_giuong",
     )
 

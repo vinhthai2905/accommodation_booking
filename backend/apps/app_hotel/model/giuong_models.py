@@ -11,7 +11,7 @@ class Giuong(models.Model):
         db_column="ten_giuong",
     )
     
-    max_capacity = models.SmallIntegerField(
+    max_capacity = models.PositiveSmallIntegerField(
         null=True,
         db_column="toi_da_khach"
     )

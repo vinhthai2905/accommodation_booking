@@ -3,7 +3,7 @@ import uuid
 from django.db import models
 
 from apps.app_user.models import NguoiDung
-from apps.app_hotel.models import KhachSan, PhongKhachSan
+from apps.app_hotel.models import KhachSan
 
 from apps.common.models import TimeStampedModel
 
@@ -42,8 +42,14 @@ class DatPhong(TimeStampedModel):
         db_column="tong_so_phong",
     )
 
-    total_guest_quantity = models.PositiveSmallIntegerField(
-        db_column="so_luong_khach",
+    total_adults = models.PositiveSmallIntegerField(
+        null=True,
+        db_column="so_nguoi_lon"
+    )
+    
+    total_children = models.PositiveSmallIntegerField(
+        null=True,
+        db_column="so_tre_em"
     )
 
     note = models.TextField(
@@ -71,36 +77,4 @@ class DatPhong(TimeStampedModel):
         return str(self.id_booking)
 
 
-class ChiTietDatPhong(models.Model):
-    id_booking_detail = models.AutoField(
-        primary_key=True,
-        db_column="id_chi_tiet",
-    )
 
-    id_booking = models.ForeignKey(
-        DatPhong,
-        on_delete=models.CASCADE,
-        db_column="id_dat_phong",
-        related_name="booking_details",
-    )
-
-    id_room = models.ForeignKey(
-        PhongKhachSan,
-        on_delete=models.PROTECT,
-        db_column="id_phong",
-        related_name="booking_details",
-    )
-
-    amount = models.DecimalField(
-        max_digits=12,
-        decimal_places=2,
-        db_column="thanh_tien",
-    )
-
-    class Meta:
-        db_table = "chi_tiet_dat_phong"
-        verbose_name = "Chi tiết đặt phòng"
-        verbose_name_plural = "Chi tiết đặt phòng"
-
-    def __str__(self):
-        return f"{self.id_booking} - {self.id_room}"

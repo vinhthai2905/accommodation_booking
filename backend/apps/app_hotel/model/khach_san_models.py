@@ -45,9 +45,8 @@ class KhachSan(models.Model):
         related_name="hotels",
     )
 
-    id_user = models.ForeignKey(
+    id_user = models.OneToOneField(
         NguoiDung,
-        unique=True,
         on_delete=models.CASCADE,
         db_column="id_doi_tac",
         related_name="hotels",
