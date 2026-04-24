@@ -8,7 +8,7 @@ import "react-date-range/dist/theme/default.css"
 import "../css/dateRangeOverrides.css"
 
 
-export default function DateSearch({ ranges, setRanges }) {
+export default function DateSearchDropdown({ ranges, setRanges }) {
     const today = startOfDay(new Date())
 
     const [focusedRange, setFocusedRange] = useState([0, 0])

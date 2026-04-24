@@ -1,7 +1,8 @@
 import BookingSearchInput from "../components/BookingSearchInput"
-import DestinationSearch from "./DestinationSearch"
-import DateSearch from "./DateSearch"
-import GuestSearch from "./GuestSearch"
+
+import DestinationSearchDropdown from "./DestinationSearchDropdown"
+import DateSearchDropdown from "./DateSearchDropdown"
+import GuestSearchDropdown from "./GuestSearchDropdown"
 
 import { MapPin, Calendar, Users } from "lucide-react"
 import { useNavigate } from "react-router"
@@ -46,8 +47,10 @@ export default function BookingSearchBar() {
             checkIn: format(ranges[0].startDate, "dd-MM-yyyy"),
             checkOut: format(ranges[0].endDate, "dd-MM-yyyy"),
             location: selectedPlace,
-            guests: guestOptions.adults,
             rooms: guestOptions.rooms,
+            adults: guestOptions.adults,
+            children: guestOptions.children,
+            ...guestOptions.childrenAge
         })
 
         navigate(`/searchresults?${params.toString()}`)
@@ -55,7 +58,10 @@ export default function BookingSearchBar() {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form 
+            search-box={"booking-search-bar"}
+            onSubmit={handleSubmit}
+        >
             <div className={clsx(
                 "flex",
                 "bg-orange-300 rounded-md w-[20%]",
@@ -74,7 +80,7 @@ export default function BookingSearchBar() {
                     icon={MapPin}
                 >
                     {isLocationOpened && (
-                        <DestinationSearch
+                        <DestinationSearchDropdown
                             onSelect={(place) => {
                                 setSelectedPlace(place);
                                 setIsLocationOpened(false);
@@ -94,7 +100,7 @@ export default function BookingSearchBar() {
                     icon={Calendar}
                 >
                     {isDateOpened && (
-                        <DateSearch
+                        <DateSearchDropdown
                             ranges={ranges}
                             setRanges={setRanges}
                         />
@@ -106,11 +112,11 @@ export default function BookingSearchBar() {
                     inputFor={"text"}
                     ref={guestRef}
                     onClick={() => setIsGuestOpened(!isGuestOpened)}
-                    value={`${guestOptions.adults} adult${guestOptions.adults > 1 ? "s" : ""} - ${guestOptions.rooms} room${guestOptions.rooms > 1 ? "s" : ""}`}
+                    value={`${guestOptions.adults} adult${guestOptions.adults > 1 ? "s" : ""} - ${guestOptions.children} ${guestOptions.children === 1 ? "child" : "children"} - ${guestOptions.rooms} room${guestOptions.rooms > 1 ? "s" : ""}`}
                     icon={Users}
                 >
                     {isGuestOpened && (
-                        <GuestSearch
+                        <GuestSearchDropdown
                             guestOptions={guestOptions}
                             setGuestOptions={setGuestOptions}
                             onDone={() => setIsGuestOpened(false)}

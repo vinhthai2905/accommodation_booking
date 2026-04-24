@@ -28,7 +28,7 @@ import AuthUserProvider from './context/AuthUserProvider'
 import UserProfile from './features/account/UserProfile'
 import ToasterUI from './components/ui/ToasterUI'
 
-import ReactDateRange from './test/ReactDateRange'
+import ChildAgeInput from './features/search/components/ChildAgeInput'
 
 const queryClient = new QueryClient()
 
@@ -85,7 +85,7 @@ function App() {
     ,
     {
       path: "testground",
-      element: <ReactDateRange />
+      element: <ChildAgeInput />
     }
   ])
   return (

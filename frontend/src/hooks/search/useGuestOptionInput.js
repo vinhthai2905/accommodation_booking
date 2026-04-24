@@ -5,8 +5,10 @@ export default function useGuestOptionInput() {
     const [isGuestOpened, setIsGuestOpened] = useState(false)
     const { ref: guestRef } = useClickOutside(setIsGuestOpened)
     const [guestOptions, setGuestOptions] = useState({
+        rooms: 1,
         adults: 1,
-        rooms: 1
+        children: 1,
+        childrenAge : {}
     })
 
     return {

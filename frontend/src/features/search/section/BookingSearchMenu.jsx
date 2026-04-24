@@ -17,26 +17,27 @@ export default function BookingSearchMenu() {
         )}>
             {
                 currentPage === true
-                && (
-                    <>
-                        <div className={clsx(
-                            "flex flex-col pt-5 gap-2",
-                            "sm:text-2xl"
-                        )}>
-                            <h1 className={clsx(
-                                "font-bold text-4xl"
+                    ? (
+                        <>
+                            <div className={clsx(
+                                "flex flex-col pt-5 gap-2",
+                                "sm:text-2xl"
                             )}>
-                                Tìm chỗ nghỉ tiếp theo
-                            </h1>
-                            <p className={clsx(
-                                "font-medium"
-                            )}>
-                                Tìm khách sạn, chỗ nghỉ dạng nhà và nhiều hơn nữa...
-                            </p>
-                        </div>
-                        <BookingSearchBar />
-                    </>
-                )
+                                <h1 className={clsx(
+                                    "font-bold text-4xl"
+                                )}>
+                                    Tìm chỗ nghỉ tiếp theo
+                                </h1>
+                                <p className={clsx(
+                                    "font-medium"
+                                )}>
+                                    Tìm khách sạn, chỗ nghỉ dạng nhà và nhiều hơn nữa...
+                                </p>
+                            </div>
+                            <BookingSearchBar />
+                        </>
+                    )
+                    : <BookingSearchBar />
             }
 
         </div>
