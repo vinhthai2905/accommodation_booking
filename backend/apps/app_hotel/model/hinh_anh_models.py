@@ -43,7 +43,7 @@ class HinhAnhKhachSan(models.Model):
         verbose_name_plural = "Hình ảnh khách sạn"
 
     def __str__(self):
-        return self.image_name
+        return f'{self.image_name} - {self.id_hotel.name}'
 
 
 class HinhAnhPhong(models.Model):

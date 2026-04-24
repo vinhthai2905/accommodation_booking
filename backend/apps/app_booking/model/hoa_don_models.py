@@ -2,8 +2,9 @@ from django.db import models
 
 from .dat_phong_models import DatPhong
 
+
 class HoaDon(models.Model):
-    id = models.AutoField(
+    id_invoice = models.AutoField(
         primary_key=True,
         db_column="id_hoa_don",
     )
@@ -15,11 +16,22 @@ class HoaDon(models.Model):
         related_name="invoice",
     )
 
-    paid_at = models.DateTimeField(
-        db_column="ngay_thanh_toan",
+    total_child_surcharge = models.DecimalField(
+        null=True,
+        max_digits=12,
+        decimal_places=2,
+        db_column="tong_phu_thu_tre_em",
+    )
+
+    room_amount = models.DecimalField(
+        null=True,
+        max_digits=12,
+        decimal_places=2,
+        db_column="tong_tien_phong",
     )
 
     total_amount = models.DecimalField(
+        null=True,
         max_digits=12,
         decimal_places=2,
         db_column="tong_hoa_don",
@@ -27,6 +39,8 @@ class HoaDon(models.Model):
 
     class Meta:
         db_table = "hoa_don"
+        verbose_name = "Hóa đơn"
+        verbose_name_plural = "Hóa đơn"
 
     def __str__(self):
-        return f"Invoice {self.id}"
+        return f"Invoice {self.id_invoice}"

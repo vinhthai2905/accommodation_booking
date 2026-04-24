@@ -6,7 +6,7 @@ from .dat_phong_models import DatPhong
 class ChiTietDatPhong(models.Model):
     id_booking_detail = models.AutoField(
         primary_key=True,
-        db_column="id_chi_tiet",
+        db_column="id_chi_tiet_dat_phong",
     )
 
     id_booking = models.ForeignKey(
@@ -21,12 +21,6 @@ class ChiTietDatPhong(models.Model):
         on_delete=models.PROTECT,
         db_column="id_phong",
         related_name="booking_details",
-    )
-
-    amount = models.DecimalField(
-        max_digits=12,
-        decimal_places=2,
-        db_column="thanh_tien",
     )
 
     class Meta:

@@ -1,1 +1,1 @@
-from .views import HotelRoomView, RoomTypeView
+from .views import HotelRoomView, RoomTypeView, HotelSearchView
