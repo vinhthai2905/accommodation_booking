@@ -2,7 +2,7 @@ import { clsx } from "clsx"
 
 import { Link } from "react-router"
 
-export default function HotelCardResult() {
+export default function HotelCardSearchResult({ hotel }) {
     return (
         <div className={clsx(
             "w-full overflow-hidden rounded-lg",
@@ -12,7 +12,7 @@ export default function HotelCardResult() {
             <div className="relative">
                 <Link to="/hotel">
                     <img
-                        src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop"
+                        src={hotel.primary_image}
                         alt="Hotel room"
                         className="h-55 w-full object-cover"
                     />
@@ -38,7 +38,7 @@ export default function HotelCardResult() {
                     "text-md font-bold",
                     "text-blue-700"
                 )}>
-                    The Rixx Everich 2 beds 2 bath at Chinatown with pool and gym and Netflix
+                    {hotel.name}
                 </h2>
 
                 <div className={clsx(
@@ -54,7 +54,7 @@ export default function HotelCardResult() {
                     "mt-3 text-sm",
                     "text-blue-700 underline"
                 )}>
-                    <a href="/">District 5, TP. Ho Chi Minh</a>
+                    <a href="/">{hotel.full_address}</a>
                     <span className="mx-2 text-gray-500 no-underline">·</span>
                     <a href="/">View on the map</a>
                 </div>

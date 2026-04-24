@@ -6,3 +6,8 @@ export const parsedData = (data) => ({
     password: data.password,
     confirm_password: data.confirmPassword,
 })
+
+
+export const parseHotelParams = (data) => ({
+
+})

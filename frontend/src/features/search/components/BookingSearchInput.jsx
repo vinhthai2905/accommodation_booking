@@ -2,18 +2,18 @@ import { clsx } from "clsx"
 
 import DropdownIcon from "../../../components/ui/DropdownIcon"
 
-export default function BookingSearchInput({name, inputInfo, inputFor, ref, icon: Icon, onClick, value, onChange, children }) {
+export default function BookingSearchInput({ name, inputFor, ref, icon: Icon, onClick, onChange, value, children }) {
     return (
-        <div 
+        <div
             search-input={"booking-search-input"}
             className={clsx(
-            "relative",
-            "flex gap-2",
-            "px-3 py-2",
-            "border-x-3 border-orange-300 rounded-md bg-white",
-            "xl:border-y-4 xl:flex-1",
-            "md:border-y-2 md:py-4",
-        )}
+                "relative",
+                "flex gap-2",
+                "px-3 py-2",
+                "border-x-3 border-orange-300 rounded-md bg-white",
+                "xl:border-y-4 xl:flex-1",
+                "md:border-y-2 md:py-4",
+            )}
             ref={ref}
         >
             <div className="flex items-center text-black">
@@ -26,16 +26,17 @@ export default function BookingSearchInput({name, inputInfo, inputFor, ref, icon
                     name !== "location" && "caret-transparent"
                 )}
                 name={name}
-                placeholder={inputInfo}
+                placeholder={name === "location" ? "Khu vực bạn muốn ở" : undefined}
                 onClick={onClick}
                 type={inputFor}
                 value={value}
                 onChange={onChange}
+                // readOnly
             />
             {children}
 
             {name === "guestOption" ? <DropdownIcon /> : undefined}
-            
+
         </div>
     )
 }

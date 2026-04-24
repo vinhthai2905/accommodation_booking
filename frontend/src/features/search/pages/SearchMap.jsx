@@ -1,9 +1,9 @@
 import { clsx } from "clsx"
 
-import HotelCardResult from "../../hotels/HotelCardResult"
+import HotelCardSearchResult from "../../hotels/HotelCardSearchResultItem"
 import BaseMap from "../../map/components/BaseMap"
 
-export default function SearchMap({ onClose }) {
+export default function SearchMap({ onClose, hotelList }) {
     return (
         <div className={clsx(
             "relative h-screen w-full overflow-hidden",
@@ -22,11 +22,9 @@ export default function SearchMap({ onClose }) {
                     "flex flex-col gap-6",
                     "pb-8 pt-2"
                 )}>
-                    <HotelCardResult />
-                    <HotelCardResult />
-                    <HotelCardResult />
-                    <HotelCardResult />
-                    <HotelCardResult />
+                    {hotelList.map((hotel) => {
+                        return <HotelCardSearchResult key={hotel.id_hotel} hotel={hotel}/>
+                    })}
                 </div>
             </aside>
 

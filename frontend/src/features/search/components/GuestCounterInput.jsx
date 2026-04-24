@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-export default function GuestCounterInput({ guestKey, handleGuestOptions, guestOptions }) {
+export default function GuestCounterInput({ label, guestKey, handleGuestOptions, guestOptions }) {
     return (
         <div className={clsx(
             "flex items-center justify-between gap-2"
@@ -8,7 +8,7 @@ export default function GuestCounterInput({ guestKey, handleGuestOptions, guestO
             <span className={clsx(
                 "text-sm",
                 "text-gray-800 capitalize"
-            )}>{guestKey}</span>
+            )}>{label}</span>
 
             <div className={clsx(
                 "flex items-center justify-between",

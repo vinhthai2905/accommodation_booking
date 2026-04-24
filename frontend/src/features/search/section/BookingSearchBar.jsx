@@ -17,6 +17,8 @@ export default function BookingSearchBar() {
     const {
         isLocationOpened,
         setIsLocationOpened,
+        isPlaceSelected,
+        setIsPlacedSelected,
         selectedPlace,
         setSelectedPlace,
         placeRef
@@ -58,7 +60,7 @@ export default function BookingSearchBar() {
 
 
     return (
-        <form 
+        <form
             search-box={"booking-search-bar"}
             onSubmit={handleSubmit}
         >
@@ -71,12 +73,11 @@ export default function BookingSearchBar() {
             )}>
                 <BookingSearchInput
                     name={"location"}
-                    inputInfo={"Khu vực bạn muốn ở?"}
                     inputFor={"text"}
                     ref={placeRef}
                     value={selectedPlace}
                     onClick={() => setIsLocationOpened(!isLocationOpened)}
-                    onChange={(e) => setSelectedPlace(e.target.value)}
+                    onChange={(e) => setSelectedPlace(e.currentTarget.value)}
                     icon={MapPin}
                 >
                     {isLocationOpened && (
@@ -84,6 +85,7 @@ export default function BookingSearchBar() {
                             onSelect={(place) => {
                                 setSelectedPlace(place);
                                 setIsLocationOpened(false);
+                                setIsPlacedSelected(true);
                             }}
                         />
                     )}
@@ -91,7 +93,6 @@ export default function BookingSearchBar() {
 
                 <BookingSearchInput
                     name={"bookingDate"}
-                    inputInfo={""}
                     inputFor={"text"}
                     ref={dateRef}
                     onClick={() => setIsDateOpened(!isDateOpened)}
@@ -112,7 +113,7 @@ export default function BookingSearchBar() {
                     inputFor={"text"}
                     ref={guestRef}
                     onClick={() => setIsGuestOpened(!isGuestOpened)}
-                    value={`${guestOptions.adults} adult${guestOptions.adults > 1 ? "s" : ""} - ${guestOptions.children} ${guestOptions.children === 1 ? "child" : "children"} - ${guestOptions.rooms} room${guestOptions.rooms > 1 ? "s" : ""}`}
+                    value={`${guestOptions.adults} Người lớn - ${guestOptions.children} Trẻ em - ${guestOptions.rooms} Phòng`}
                     icon={Users}
                 >
                     {isGuestOpened && (

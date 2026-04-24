@@ -25,16 +25,16 @@ export default function GuestSearchDropdown({ guestOptions, setGuestOptions, onD
                 "flex flex-col gap-6"
             )}>
                 {/* Adults Row */}
-                <GuestCounterInput guestKey="adults" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
+                <GuestCounterInput label="Người lớn" guestKey="adults" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
 
                 {/* Children Row */}
-                <GuestCounterInput guestKey="children" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
+                <GuestCounterInput label="Trẻ em" guestKey="children" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
 
                 {/* Children Age Inputs */}
                 <ChildrenAgeSearch childrenCount={guestOptions.children} setGuestOptions={setGuestOptions}/>
 
                 {/* Rooms Row */}
-                <GuestCounterInput guestKey="rooms" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
+                <GuestCounterInput label="Phòng" guestKey="rooms" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
             </div>
 
             <button

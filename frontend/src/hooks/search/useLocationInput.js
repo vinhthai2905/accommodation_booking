@@ -6,10 +6,13 @@ export default function useLocationInput() {
     const [isLocationOpened, setIsLocationOpened] = useState(false)
     const { ref: placeRef } = useClickOutside(setIsLocationOpened)
     const [selectedPlace, setSelectedPlace] = useState("")
+    const [isPlaceSelected, setIsPlacedSelected] = useState(false)
 
     return {
         isLocationOpened,
         setIsLocationOpened,
+        isPlaceSelected,
+        setIsPlacedSelected,
         selectedPlace,
         setSelectedPlace,
         placeRef

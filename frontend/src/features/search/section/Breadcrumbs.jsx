@@ -28,12 +28,12 @@ export default function Breadcrumbs({ usedFor }) {
                     usedFor === "searchResults"
                         ? (
                             searchNav.map(item => {
-                                return <BreadcrumItem item={item} />
+                                return <BreadcrumItem key={item.label} item={item} />
                             })
                         )
                         : (
                             hotelNav.map(item => {
-                                return <BreadcrumItem item={item} />
+                                return <BreadcrumItem key={item.label} item={item} />
                             })
                         )
                 }

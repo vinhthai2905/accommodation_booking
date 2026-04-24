@@ -15,7 +15,7 @@ export default function Header() {
         <HeaderContext value={currentPage}>
             <header className={clsx(
                 "bg-[#003b95]",
-                "z-50"
+                "z-2000"
 
             )}>
                 <NavigationBar />

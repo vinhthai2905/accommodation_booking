@@ -29,7 +29,7 @@ export default function ChildAgeInput({ index, setGuestOptions }) {
                 name="childAge"
                 id="childAge"
             >
-                <option key={-1} value={-1}>Age needed</option>
+                <option key={-1} value={-1}>Chọn tuổi</option>
                 {
                     Array.from({ length: 18 }, (_, i) => i).map((age) => {
                         return (
@@ -38,7 +38,7 @@ export default function ChildAgeInput({ index, setGuestOptions }) {
                                 value={age}
                                 onClick={() => handleAddChildAge(age)}
                             >
-                                {age} years old
+                                {age} tuổi
                             </option>
                         )
                     })

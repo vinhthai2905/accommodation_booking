@@ -1,11 +1,13 @@
-import { clsx } from "clsx"
-
 import Breadcrumbs from "../section/Breadcrumbs"
 import FilterPanel from "../filter/FilterPanel"
-import HotelCardGrid from "/src/features/hotels/HotelCardGrid"
+import HotelCardSearchGrid from "/src/features/hotels/HotelCardSearchGrid"
 import SearchSummary from "../filter/SearchSummary"
 
-export default function SearchList({ OpenMap }) {
+import { clsx } from "clsx"
+
+export default function SearchList({ onOpenMap, hotelList }) {
+   
+
     return (
         <div className={clsx(
             "mx-[20%] mt-10",
@@ -21,7 +23,7 @@ export default function SearchList({ OpenMap }) {
                 </aside>
                 <div className="flex flex-col">
                     <SearchSummary />
-                    <HotelCardGrid />
+                    <HotelCardSearchGrid hotelList={hotelList} />
                 </div>
             </div>
         </div>

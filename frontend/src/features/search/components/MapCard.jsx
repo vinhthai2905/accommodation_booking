@@ -16,7 +16,8 @@ export default function MapCard() {
                     center={[10.7769, 106.7009]}
                     zoom={13}
                     className={clsx(
-                        "h-40 w-65 rounded-lg"
+                        "h-40 w-65 rounded-lg",
+                        "-z-1"
                     )}
                 >
                     <TileLayer
@@ -30,9 +31,10 @@ export default function MapCard() {
                         search: location.search,
                         hash: "map_opened"
                     }}
+
                 >
                     <span className={clsx(
-                        "absolute left-13 right-13 bottom-7 z-1000 py-1",
+                        "absolute left-13 right-13 bottom-7 py-1 z-1000",
                         "bg-blue-500 rounded-sm",
                         "text-center text-white text-sm font-medium",
                         "hover:cursor-pointer hover:bg-blue-600"
