@@ -1,20 +1,18 @@
 import BookingSearchInput from "../components/BookingSearchInput"
+import ErrorLocationInput from "../components/ErrorLocationInput"
 
 import PlaceSearchDropdown from "./PlaceSearchDropdown"
 import DateSearchDropdown from "./DateSearchDropdown"
 import GuestSearchDropdown from "./GuestSearchDropdown"
 
-import ErrorLocationInput from "../components/ErrorLocationInput"
-
-import { useNavigate } from "react-router"
-import { clsx } from "clsx"
-import { MapPin, Calendar, Users } from "lucide-react"
-import { format } from "date-fns"
-
 import useLocationInput from "../../../hooks/search/useLocationInput"
 import useBookingDateInput from "../../../hooks/search/useBookingDateInput"
 import useGuestOptionInput from "../../../hooks/search/useGuestOptionInput"
+import useHotelSearchSubmit from "../../../hooks/search/useHotelSearchSubmit"
 
+import { clsx } from "clsx"
+import { MapPin, Calendar, Users } from "lucide-react"
+import { format } from "date-fns"
 
 export default function BookingSearchBar() {
     const {
@@ -28,7 +26,7 @@ export default function BookingSearchBar() {
         showLocationError,
         setShowLocationError
     } = useLocationInput()
-    
+
     const {
         isDateOpened,
         setIsDateOpened,
@@ -36,7 +34,6 @@ export default function BookingSearchBar() {
         setRanges,
         dateRef
     } = useBookingDateInput()
-
 
     const {
         isGuestOpened,
@@ -48,36 +45,18 @@ export default function BookingSearchBar() {
         setShowAgeError
     } = useGuestOptionInput()
 
-    const navigate = useNavigate()
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        if (!isPlaceSelected || !selectedPlace) {
-            setShowLocationError(true)
-            return
-        }
-
-        const params = new URLSearchParams({
-            checkIn: format(ranges[0].startDate, "dd-MM-yyyy"),
-            checkOut: format(ranges[0].endDate, "dd-MM-yyyy"),
-            location: selectedPlace,
-            rooms: guestOptions.rooms,
-            adults: guestOptions.adults,
-            ...(guestOptions.children >= 1 && {
-                children: guestOptions.children,
-
-            }),
-        })
-
-        navigate(`/searchresults?${params.toString()}`)
-    }
-
+    const { handleSearchSubmit } = useHotelSearchSubmit({ 
+        selectedPlace, 
+        isPlaceSelected, 
+        ranges, 
+        guestOptions,
+        setShowLocationError, 
+    })
 
     return (
         <form
             search-box={"booking-search-bar"}
-            onSubmit={handleSubmit}
+            onSubmit={handleSearchSubmit}
         >
             <div className={clsx(
                 "flex",

@@ -39,8 +39,7 @@ export default function useLoginForm() {
             else {
                 const { name, email, access_token } = responseData
 
-                authContext.setAccessToken(access_token)
-                authContext.setCurrentUser(name, email)
+                authContext.setAuthUserState(access_token, name, email)
 
                 toast.success("Đăng nhập thành công")
 
@@ -48,7 +47,7 @@ export default function useLoginForm() {
             }
         }
         catch (error) {
-            toast.error("Hệ thống xảy ra lỗi, vui lòng thử lại sau.")
+            toast.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error}`)
         }
         finally {
             setIsLoading(false)

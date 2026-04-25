@@ -8,6 +8,3 @@ export const parsedData = (data) => ({
 })
 
 
-export const parseHotelParams = (data) => ({
-
-})

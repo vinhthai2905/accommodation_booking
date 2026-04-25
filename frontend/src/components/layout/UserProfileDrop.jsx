@@ -27,7 +27,7 @@ const menuItems = [
 ]
 
 export default function UserProfileDrop() {
-    const { clearAuthState } = useContext(AuthUserContext)
+    const { clearAuthUserState } = useContext(AuthUserContext)
 
     return (
         <div
@@ -48,7 +48,7 @@ export default function UserProfileDrop() {
                             "text-left text-[#1a1a1a] text-[0.8rem]",
                             "hover:bg-gray-100"
                         )}
-                        onClick={item.title === "Sign out" ? clearAuthState : ""}
+                        onClick={item.title === "Sign out" ? clearAuthUserState : ""}
                     >
                         <Icon size={18} strokeWidth={1.75} className="text-[#3d3d3d]" />
                         <span>{item.title}</span>

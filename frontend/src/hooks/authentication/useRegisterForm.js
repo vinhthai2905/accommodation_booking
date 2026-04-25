@@ -50,8 +50,7 @@ export default function useRegisterForm() {
       else {
         const { name, email, access_token } = responseData
 
-        authContext.setAccessToken(access_token)
-        authContext.setCurrentUser(email, name)
+        authContext.setAuthUserState(access_token, name, email)
 
         toaster.success("Tạo tài khoản thành công.")
         reset()

@@ -21,7 +21,12 @@ export default function useAuthActions(setUserState) {
         })
     }
 
-    const clearAuthState = async () => {
+    const setAuthUserState = (access_token, name, email) => {
+        setAccessToken(access_token),
+            setCurrentUser(name, email)
+    }
+
+    const clearAuthUserState = async () => {
         try {
             await logoutUser()
 
@@ -34,13 +39,13 @@ export default function useAuthActions(setUserState) {
         }
     }
 
-    const fetchUserState = async () => {
+    const fetchAuthUserState = async () => {
         try {
             const response = await fetchUser()
 
-            if (!response.ok) 
+            if (!response.ok)
                 throw new Error(`Response status: ${response.status}`)
-            
+
             const responseData = await response.json()
 
             setCurrentUser(responseData.name, responseData.email)
@@ -54,9 +59,8 @@ export default function useAuthActions(setUserState) {
     }
 
     return {
-        clearAuthState,
-        fetchUserState,
-        setAccessToken,
-        setCurrentUser
+        setAuthUserState,
+        fetchAuthUserState,
+        clearAuthUserState,
     }
 }
