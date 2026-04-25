@@ -3,7 +3,7 @@ import { clsx } from "clsx"
 import { useQuery } from "@tanstack/react-query";
 import { fetchWard } from "../../../services/locationAPI";
 
-export default function DestinationSearchDropdown({ onSelect }) {
+export default function PlaceSearchDropdown({ onSelect }) {
     const { data, isPending, error } = useQuery({
         queryKey: ["destinationQueries"],
         queryFn: fetchWard

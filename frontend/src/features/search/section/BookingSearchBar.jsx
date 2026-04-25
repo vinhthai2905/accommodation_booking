@@ -1,17 +1,20 @@
 import BookingSearchInput from "../components/BookingSearchInput"
 
-import DestinationSearchDropdown from "./DestinationSearchDropdown"
+import PlaceSearchDropdown from "./PlaceSearchDropdown"
 import DateSearchDropdown from "./DateSearchDropdown"
 import GuestSearchDropdown from "./GuestSearchDropdown"
 
-import { MapPin, Calendar, Users } from "lucide-react"
+import ErrorLocationInput from "../components/ErrorLocationInput"
+
 import { useNavigate } from "react-router"
 import { clsx } from "clsx"
+import { MapPin, Calendar, Users } from "lucide-react"
 import { format } from "date-fns"
 
 import useLocationInput from "../../../hooks/search/useLocationInput"
 import useBookingDateInput from "../../../hooks/search/useBookingDateInput"
 import useGuestOptionInput from "../../../hooks/search/useGuestOptionInput"
+
 
 export default function BookingSearchBar() {
     const {
@@ -21,9 +24,11 @@ export default function BookingSearchBar() {
         setIsPlacedSelected,
         selectedPlace,
         setSelectedPlace,
-        placeRef
+        placeRef,
+        showLocationError,
+        setShowLocationError
     } = useLocationInput()
-
+    
     const {
         isDateOpened,
         setIsDateOpened,
@@ -32,12 +37,15 @@ export default function BookingSearchBar() {
         dateRef
     } = useBookingDateInput()
 
+
     const {
         isGuestOpened,
         setIsGuestOpened,
         guestOptions,
         setGuestOptions,
-        guestRef
+        guestRef,
+        showAgeError,
+        setShowAgeError
     } = useGuestOptionInput()
 
     const navigate = useNavigate()
@@ -45,14 +53,21 @@ export default function BookingSearchBar() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
+        if (!isPlaceSelected || !selectedPlace) {
+            setShowLocationError(true)
+            return
+        }
+
         const params = new URLSearchParams({
             checkIn: format(ranges[0].startDate, "dd-MM-yyyy"),
             checkOut: format(ranges[0].endDate, "dd-MM-yyyy"),
             location: selectedPlace,
             rooms: guestOptions.rooms,
             adults: guestOptions.adults,
-            children: guestOptions.children,
-            ...guestOptions.childrenAge
+            ...(guestOptions.children >= 1 && {
+                children: guestOptions.children,
+
+            }),
         })
 
         navigate(`/searchresults?${params.toString()}`)
@@ -76,18 +91,27 @@ export default function BookingSearchBar() {
                     inputFor={"text"}
                     ref={placeRef}
                     value={selectedPlace}
-                    onClick={() => setIsLocationOpened(!isLocationOpened)}
-                    onChange={(e) => setSelectedPlace(e.currentTarget.value)}
+                    onClick={() => {
+                        setIsLocationOpened(!isLocationOpened)
+                        setShowLocationError(false)
+                    }}
+                    onChange={(e) => {
+                        setSelectedPlace(e.currentTarget.value)
+                        setIsPlacedSelected(true)
+                    }}
                     icon={MapPin}
                 >
                     {isLocationOpened && (
-                        <DestinationSearchDropdown
+                        <PlaceSearchDropdown
                             onSelect={(place) => {
-                                setSelectedPlace(place);
-                                setIsLocationOpened(false);
-                                setIsPlacedSelected(true);
+                                setSelectedPlace(place)
+                                setIsLocationOpened(false)
+                                setIsPlacedSelected(true)
                             }}
                         />
+                    )}
+                    {showLocationError && (
+                        <ErrorLocationInput />
                     )}
                 </BookingSearchInput>
 

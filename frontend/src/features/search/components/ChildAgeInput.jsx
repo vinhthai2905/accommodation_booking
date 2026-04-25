@@ -1,15 +1,15 @@
 import { clsx } from "clsx"
 import { ChevronDown } from "lucide-react"
 
-export default function ChildAgeInput({ index, setGuestOptions }) {
+export default function ChildAgeInput({ setGuestOptions }) {
     const handleAddChildAge = (age) => {
-        setGuestOptions((prev) => ({
-                ...prev,
-                childrenAge: {
-                    ...prev.childrenAge,
-                    [`child_${index}_age`]: age
-                }
-            })
+        setGuestOptions((prevOption) => ({
+            ...prevOption,
+            childrenAge: [
+                ...prevOption.childrenAge,
+                age
+            ]
+        })
         )
     }
 

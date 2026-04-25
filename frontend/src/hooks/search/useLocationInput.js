@@ -7,6 +7,7 @@ export default function useLocationInput() {
     const { ref: placeRef } = useClickOutside(setIsLocationOpened)
     const [selectedPlace, setSelectedPlace] = useState("")
     const [isPlaceSelected, setIsPlacedSelected] = useState(false)
+    const [showLocationError, setShowLocationError] = useState(false)
 
     return {
         isLocationOpened,
@@ -15,6 +16,8 @@ export default function useLocationInput() {
         setIsPlacedSelected,
         selectedPlace,
         setSelectedPlace,
-        placeRef
+        placeRef,
+        showLocationError,
+        setShowLocationError,
     }
 }
