@@ -1,15 +1,17 @@
 import { clsx } from "clsx"
 import { ChevronDown } from "lucide-react"
 
-export default function ChildAgeInput({ setGuestOptions }) {
+export default function ChildAgeInput({ index, setGuestOptions, guestOptions }) {
     const handleAddChildAge = (age) => {
-        setGuestOptions((prevOption) => ({
-            ...prevOption,
-            childrenAge: [
-                ...prevOption.childrenAge,
-                age
-            ]
-        })
+        setGuestOptions((prevOption) => {
+            const newChildrenAge = [...(prevOption.childrenAge || null)]
+            newChildrenAge[index] = age
+            
+            return {
+                ...prevOption,
+                childrenAge: newChildrenAge
+            }
+        }
         )
     }
 
@@ -28,6 +30,8 @@ export default function ChildAgeInput({ setGuestOptions }) {
                 )}
                 name="childAge"
                 id="childAge"
+                value={guestOptions.childrenAge[index] ? guestOptions.childrenAge[index] : -1}
+                onChange={() => { }}
             >
                 <option key={-1} value={-1}>Chọn tuổi</option>
                 {

@@ -7,3 +7,8 @@ class HotelSearchParamsSerializer(serializers.Serializer):
     rooms = serializers.IntegerField(min_value=1, required=True)
     adults = serializers.IntegerField(min_value=1, required=True)
     children = serializers.IntegerField(min_value=0, required=False, default=0)
+    children_ages = serializers.ListField(
+        child=serializers.IntegerField(min_value=0, max_value=17),
+        required=False,
+        default=list
+    )

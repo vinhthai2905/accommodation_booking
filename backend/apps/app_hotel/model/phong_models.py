@@ -20,7 +20,7 @@ class LoaiPhong(TimeStampedModel):
     )
 
     type_name = models.CharField(
-        max_length=25,
+        max_length=100,
         db_column="ten",
     )
 
@@ -96,7 +96,7 @@ class PhongKhachSan(models.Model):
     )
 
     room_name = models.CharField(
-        max_length=30,
+        max_length=100,
         db_column="ten_phong",
     )
 

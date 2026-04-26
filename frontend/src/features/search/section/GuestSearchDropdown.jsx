@@ -5,11 +5,23 @@ import ChildrenAgeSearch from "../components/ChildrenAgeSearch"
 
 export default function GuestSearchDropdown({ guestOptions, setGuestOptions, onDone }) {
     const handleGuestOptions = (optionKey, operation) => {
-        setGuestOptions((prev) => {
-            let newValue = operation === "increase" ? prev[optionKey] + 1 : prev[optionKey] - 1
+        setGuestOptions((prevGuestOptions) => {
+            let newValue = operation === "increase" ? prevGuestOptions[optionKey] + 1 : prevGuestOptions[optionKey] - 1
+
+            // if (optionKey === "children" && operation === "increase") {
+            //     // let childrenLength = prevGuestOptions.childrenAge.length
+            //     return {
+            //         ...prevGuestOptions,
+            //         [optionKey]: newValue,
+            //         childrenAge: {
+            //             ...prevGuestOptions.childrenAge,
+            //             [prevGuestOptions.children + 1]: null,
+            //         },
+            //     }
+            // }
 
             return {
-                ...prev,
+                ...prevGuestOptions,
                 [optionKey]: newValue,
             }
         })
@@ -25,16 +37,16 @@ export default function GuestSearchDropdown({ guestOptions, setGuestOptions, onD
                 "flex flex-col gap-6"
             )}>
                 {/* Adults Row */}
-                <GuestCounterInput label="Người lớn" guestKey="adults" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
+                <GuestCounterInput label="Người lớn" optionKey="adults" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
 
                 {/* Children Row */}
-                <GuestCounterInput label="Trẻ em" guestKey="children" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
+                <GuestCounterInput label="Trẻ em" optionKey="children" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
 
                 {/* Children Age Inputs */}
-                <ChildrenAgeSearch childrenCount={guestOptions.children} setGuestOptions={setGuestOptions}/>
+                <ChildrenAgeSearch childrenCount={guestOptions.children} setGuestOptions={setGuestOptions} guestOptions={guestOptions} />
 
                 {/* Rooms Row */}
-                <GuestCounterInput label="Phòng" guestKey="rooms" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
+                <GuestCounterInput label="Phòng" optionKey="rooms" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
             </div>
 
             <button

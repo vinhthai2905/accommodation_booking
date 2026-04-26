@@ -74,7 +74,7 @@ class DatPhong(TimeStampedModel):
         verbose_name_plural = "Đặt phòng"
 
     def __str__(self):
-        return str(f'{self.id_user.email} booked {self.id_hotel.name} {self.id_booking}')
+        return str(f'{self.id_user.email} - {self.id_hotel.name}')
 
 
 

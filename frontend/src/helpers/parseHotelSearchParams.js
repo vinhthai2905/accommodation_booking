@@ -2,8 +2,8 @@ import format from "date-fns/format"
 
 export const parseHotelSearchParams = (location, bookingRanges, guestOptions) => {
     const params = new URLSearchParams({
-        checkIn: format(bookingRanges[0].startDate, "dd-MM-yyyy"),
-        checkOut: format(bookingRanges[0].endDate, "dd-MM-yyyy"),
+        check_in: format(bookingRanges[0].startDate, "dd-MM-yyyy"),
+        check_out: format(bookingRanges[0].endDate, "dd-MM-yyyy"),
         location: location,
         rooms: guestOptions.rooms,
         adults: guestOptions.adults,
@@ -12,8 +12,10 @@ export const parseHotelSearchParams = (location, bookingRanges, guestOptions) =>
         }),
     })
 
-    if (guestOptions.children >= 1) 
+    if (guestOptions.children >= 1)
         guestOptions.childrenAge.forEach(age => {
+            if (age === undefined)
+                return
             params.append("age", age)
         });
 

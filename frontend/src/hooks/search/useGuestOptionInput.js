@@ -8,7 +8,7 @@ export default function useGuestOptionInput() {
         rooms: 1,
         adults: 1,
         children: 0,
-        childrenAge : []
+        childrenAge: []
     })
 
     const [showAgeError, setShowAgeError] = useState(false)

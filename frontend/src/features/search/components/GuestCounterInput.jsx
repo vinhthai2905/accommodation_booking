@@ -1,6 +1,8 @@
 import { clsx } from "clsx"
 
-export default function GuestCounterInput({ label, guestKey, handleGuestOptions, guestOptions }) {
+import { isForChildren } from "../../../utils/validateDisabled"
+
+export default function GuestCounterInput({ label, optionKey, handleGuestOptions, guestOptions }) {
     return (
         <div className={clsx(
             "flex items-center justify-between gap-2"
@@ -19,10 +21,10 @@ export default function GuestCounterInput({ label, guestKey, handleGuestOptions,
                     type="button"
                     className={clsx(
                         "text-2xl leading-none pb-1",
-                        guestOptions[guestKey] <= 1 ? "text-gray-300 cursor-not-allowed" : "text-blue-500 hover:text-blue-700 hover:cursor-pointer"
+                        guestOptions[optionKey] <= isForChildren(label) ? "text-gray-300 cursor-not-allowed" : "text-blue-500 hover:text-blue-700 hover:cursor-pointer"
                     )}
-                    onClick={() => handleGuestOptions(guestKey, "decrease")}
-                    disabled={guestOptions[guestKey] <= 1}
+                    onClick={() => handleGuestOptions(optionKey, "decrease")}
+                    disabled={guestOptions[optionKey] === isForChildren(label)}
                     button-for={"decrement"}
                 >
                     &#8722;
@@ -32,9 +34,9 @@ export default function GuestCounterInput({ label, guestKey, handleGuestOptions,
                     className={clsx(
                         "text-sm"
                     )}
-                    data-guest-key={guestKey}
+                    data-guest-key={optionKey}
                 >
-                    {guestOptions[guestKey]}
+                    {guestOptions[optionKey]}
                 </span>
                 <button
                     type="button"
@@ -44,7 +46,7 @@ export default function GuestCounterInput({ label, guestKey, handleGuestOptions,
                         "text-blue-500",
                         "hover:cursor-pointer hover:text-blue-700"
                     )}
-                    onClick={() => handleGuestOptions(guestKey, "increase")}
+                    onClick={() => handleGuestOptions(optionKey, "increase")}
                     button-for={"increment"}
                 >
                     &#43;

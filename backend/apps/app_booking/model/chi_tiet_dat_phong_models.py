@@ -29,7 +29,7 @@ class ChiTietDatPhong(models.Model):
         verbose_name_plural = "Chi tiết đặt phòng"
 
     def __str__(self):
-        return f"{self.id_booking} - {self.id_room}"
+        return f"{self.id_booking} - {self.id_room.room_name}" 
     
 class ChiTietKhachTreEm(models.Model):
     id_child = models.AutoField(primary_key=True, db_column="id_tre_em")

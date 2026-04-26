@@ -31,7 +31,7 @@ export default function BookingSearchInput({ name, inputFor, ref, icon: Icon, on
                 type={inputFor}
                 value={value}
                 onChange={onChange}
-                // readOnly
+                readOnly
             />
             {children}
 
