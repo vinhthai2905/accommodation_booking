@@ -18,7 +18,7 @@ class HinhAnhKhachSan(models.Model):
     )
 
     image_name = models.CharField(
-        max_length=100,
+        max_length=150,
         db_column="ten_hinh_anh",
     )
 
@@ -28,7 +28,7 @@ class HinhAnhKhachSan(models.Model):
     )
 
     slug = models.SlugField(
-        max_length=50,
+        max_length=150,
         db_column="slug",
     )
 
@@ -60,12 +60,12 @@ class HinhAnhPhong(models.Model):
     )
 
     image_name = models.CharField(
-        max_length=100,
+        max_length=150,
         db_column="ten_hinh_anh",
     )
 
     slug = models.SlugField(
-        max_length=50,
+        max_length=150,
         db_column="slug",
     )
 
