@@ -7,7 +7,6 @@ from apps.app_hotel.models import KhachSan
 
 from apps.common.models import TimeStampedModel
 
-
 class DatPhong(TimeStampedModel):
     id_booking = models.UUIDField(
         primary_key=True,

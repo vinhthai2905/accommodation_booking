@@ -42,6 +42,7 @@ class ChiTietKhachTreEm(models.Model):
     )
 
     age = models.PositiveSmallIntegerField(db_column="so_tuoi")
+    
     surcharge_price = models.DecimalField(
         max_digits=12,
         decimal_places=2,
