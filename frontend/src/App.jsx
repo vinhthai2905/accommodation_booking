@@ -42,7 +42,7 @@ function App() {
         { path: "index", element: <Home /> },
         { path: "searchresults", element: <SearchResults /> },
         {
-          path: "hotel",
+          path: "hotel/:slug/:uuid",
           element: <Hotel />,
           children: [
             { path: "checkout", element: <Checkout /> }

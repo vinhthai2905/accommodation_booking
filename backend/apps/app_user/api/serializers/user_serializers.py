@@ -44,8 +44,6 @@ class UserSerializer(ModelSerializer):
 
         user = NguoiDung.objects.create_user(**validated_data)
 
-        user.save()
-
         return user
     
     def check_password_confirmation(self):

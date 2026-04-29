@@ -1,19 +1,22 @@
 from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework import generics
 from rest_framework import exceptions
 
 from django.db.models import QuerySet
 from django.http import QueryDict
 
-from apps.app_hotel.models import KhachSan, ChinhSachTreEm, LoaiPhong
-from apps.app_booking.models import DatPhong, ChiTietDatPhong
+from uuid import UUID
+
+from apps.app_hotel.models import KhachSan, ChinhSachTreEm
+from apps.app_booking.models import DatPhong
 from apps.app_location.models import Phuong
 
-from apps.app_hotel.api.serializers import HotelSerializer, HotelSearchParamsSerializer
-
+from apps.app_hotel.api.serializers import HotelSearchSerializer, HotelSerializer, HotelSearchParamsSerializer
+ 
 class HotelSearchView(APIView):
-    serializer_class = HotelSerializer
+    serializer_class = HotelSearchSerializer
     hotel_model = KhachSan
     booking_model = DatPhong
     ward_model = Phuong
@@ -30,6 +33,8 @@ class HotelSearchView(APIView):
         return query_params
 
     def _get_hotel_search_params(self, request: Request) -> dict:
+        """Normalize each parameter in the query and validate each."""
+        
         hotel_filters = {}
         
         query_params = self._normalize_search_query_params(request)
@@ -154,3 +159,19 @@ class HotelSearchView(APIView):
         serializer = self.serializer_class(instance=available_hotels_list, many=True)
 
         return Response(serializer.data)
+    
+
+class HotelView(APIView):
+    serializer_class = HotelSerializer
+    hotel_model = KhachSan
+    
+    def get(self, request: Request, id_hotel: UUID):
+        try:
+            hotel = self.hotel_model.objects.get(id_hotel=id_hotel)
+        except self.hotel_model.DoesNotExist:
+            raise exceptions.NotFound("Hotel not found.")
+        
+        serializer = self.serializer_class(instance=hotel)
+        
+        return Response(serializer.data)
+

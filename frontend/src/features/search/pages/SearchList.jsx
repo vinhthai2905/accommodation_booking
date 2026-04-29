@@ -6,8 +6,6 @@ import SearchSummary from "../filter/SearchSummary"
 import { clsx } from "clsx"
 
 export default function SearchList({ onOpenMap, hotelList }) {
-   
-
     return (
         <div className={clsx(
             "mx-[20%] mt-10",
@@ -22,7 +20,7 @@ export default function SearchList({ onOpenMap, hotelList }) {
                     <FilterPanel />
                 </aside>
                 <div className="flex flex-col">
-                    <SearchSummary />
+                    <SearchSummary hotelList={hotelList} />
                     <HotelCardSearchGrid hotelList={hotelList} />
                 </div>
             </div>

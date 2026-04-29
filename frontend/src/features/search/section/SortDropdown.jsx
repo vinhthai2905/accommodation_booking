@@ -2,11 +2,11 @@ import { clsx } from "clsx"
 
 import SortOptionItem from "../components/SortOptionItem"
 
-export default function SortDropdown() {
+export default function SortDropdown({ hotelList }) {
     return (
-        <div className="flex flex-col gap-3">
+        <div className="relative flex flex-col gap-3">
             <h2 className="text-lg font-semibold text-black">
-                TP. Ho Chi Minh: 4,111 properties suitable for search
+                TP. Ho Chi Minh: tìm thấy {hotelList.length} chỗ nghĩ
             </h2>
             <div className={clsx(
                 "w-fit inline items-center",

@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import HotelCardSearchResult from "../../hotels/HotelCardSearchResultItem"
+import HotelCardSearchResultItem from "../../hotels/HotelCardSearchResultItem"
 import BaseMap from "../../map/components/BaseMap"
 
 export default function SearchMap({ onClose, hotelList }) {
@@ -23,7 +23,7 @@ export default function SearchMap({ onClose, hotelList }) {
                     "pb-8 pt-2"
                 )}>
                     {hotelList.map((hotel) => {
-                        return <HotelCardSearchResult key={hotel.id_hotel} hotel={hotel}/>
+                        return <HotelCardSearchResultItem key={hotel.id_hotel} hotel={hotel}/>
                     })}
                 </div>
             </aside>

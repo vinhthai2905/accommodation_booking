@@ -5,9 +5,9 @@ from .phong_models import LoaiPhong
 
 
 class HinhAnhKhachSan(models.Model):
-    id_hinh_anh_ks = models.AutoField(
+    id_hotel_image = models.AutoField(
         primary_key=True,
-        db_column="id_hinh_anh_ks",
+        db_column="id_hinh_anh_hotel",
     )
 
     id_hotel = models.ForeignKey(

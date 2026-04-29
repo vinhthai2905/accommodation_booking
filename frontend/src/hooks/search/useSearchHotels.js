@@ -6,12 +6,10 @@ import { fetchHotelResult } from "../../services/hotelAPI"
 export default function useSearchHotels() {
     const [hotelSearchParams, setHotelSearchParams] = useSearchParams()
 
-    // const location = useLocation()
-
-    // console.log(location)
+    const location = useLocation()
 
     const { isLoading, error, data } = useQuery({
-        queryKey: ["fetchHotelResult", hotelSearchParams.toString()],
+        queryKey: ["fetchHotelResult", hotelSearchParams.toString(), location.key],
         queryFn: (() => fetchHotelResult(hotelSearchParams))
     })
 

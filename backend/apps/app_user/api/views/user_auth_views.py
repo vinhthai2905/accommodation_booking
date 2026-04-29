@@ -18,8 +18,8 @@ from apps.app_user.api.serializers import (
     LoginSerializer,
     LogoutSerializer,
 )
-from apps.app_user.models import NguoiDung
 
+from apps.app_user.models import NguoiDung
 
 class UserRegisterView(APIView):
     http_method_names = ["post"]
@@ -55,7 +55,6 @@ class UserRegisterView(APIView):
 
         return response
 
-
 class LoginView(APIView):
     http_method_names = ["post"]
     permission_classes = [AllowAny]
@@ -89,7 +88,6 @@ class LoginView(APIView):
 
         return response
 
-
 class LogoutView(APIView):
     http_method_names = ["post"]
 
@@ -112,14 +110,12 @@ class LogoutView(APIView):
 
         return response
 
-
 class FetchUserView(APIView):
     http_method_names = ["post"]
 
     permission_classes = [IsAuthenticated]
 
     def post(self, request: Request, *args, **kwargs):
-
         return Response(
             data={"name": get_user_name(request.user), "email": request.user.email},
             status=status.HTTP_200_OK,

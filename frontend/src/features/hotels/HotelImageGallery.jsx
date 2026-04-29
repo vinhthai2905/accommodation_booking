@@ -15,10 +15,12 @@ const topImages = images.slice(0, 3)
 const bottomImages = images.slice(3)
 
 export default function HotelImageGallery() {
+    
+
     return (
         <div className="flex flex-col w-[80%] gap-2 text-black">
-            <TopGallery images={topImages}/>
-            <BottomGallery images={bottomImages}/>
+            <TopGallery images={topImages} />
+            <BottomGallery images={bottomImages} />
         </div>
     )
 }

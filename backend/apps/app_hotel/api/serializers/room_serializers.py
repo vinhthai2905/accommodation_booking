@@ -1,22 +1,6 @@
 from rest_framework import serializers
 
-from apps.app_hotel.models import PhongKhachSan, LoaiPhong
-
-
-class RoomTypeSerializer(serializers.ModelSerializer):
-    rooms = serializers.StringRelatedField(many=True)
-    
-    class Meta:
-        model = LoaiPhong
-        fields = [
-            "id_room_type", 
-            "id_hotel", 
-            "type_name",
-            "max_capacity",
-            "total_rooms",
-            "price",
-            "rooms"
-        ]
+from apps.app_hotel.models import PhongKhachSan
 
 class HotelRoomSerializer(serializers.ModelSerializer):
     room_type = serializers.CharField(source="id_room_type.type_name", read_only=True)

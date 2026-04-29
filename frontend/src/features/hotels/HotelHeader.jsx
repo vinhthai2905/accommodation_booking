@@ -1,7 +1,12 @@
 import { clsx } from "clsx"
 import { Link } from "react-router"
 
+import useHotelDetails from "../../hooks/hotel/useHotelDetails"
+
 export default function HotelHeader() {
+    const { hotelQuery } = useHotelDetails()
+    const { isLoading, data: hotel, error } = hotelQuery
+
     return (
         <div
             className={clsx(
@@ -13,22 +18,15 @@ export default function HotelHeader() {
             <div className="flex flex-col gap-2">
                 {/* Title */}
                 <h1 className="text-2xl font-bold text-black">
-                    Diny ApartHotel - Rooftop Pool - The Manor 2
+                    {hotel.name}
                 </h1>
 
                 {/* Address */}
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                     <span>📍</span>
                     <span>
-                        91 Nguyễn Hữu Cảnh, Quận Bình Thạnh, TP. Hồ Chí Minh, Việt Nam
+                        {hotel.full_address}
                     </span>
-
-                    <a
-                        href="/"
-                        className="text-blue-600 hover:underline"
-                    >
-                        Vị trí xuất sắc - hiển thị bản đồ
-                    </a>
                 </div>
             </div>
 
