@@ -9,3 +9,10 @@ class HotelRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = PhongKhachSan
         fields = ["id_room", "id_room_type", "room_name", "room_type", "hotel_name"]
+
+class HotelRoomAvailabilitySerializer(serializers.ModelSerializer):
+    room_type = serializers.CharField(source="id_room_type.type_name", read_only=True)
+    
+    class Meta:
+        model = PhongKhachSan
+        fields = ["id_room", "id_room_type", "room_type", "room_name"]

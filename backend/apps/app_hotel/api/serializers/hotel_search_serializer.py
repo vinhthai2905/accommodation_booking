@@ -29,7 +29,6 @@ class HotelSearchSerializer(serializers.ModelSerializer):
             "id_hotel_type",
             "id_user",
             "id_ward",
-            "slug",
             "name",
             "full_address",
             "primary_image",

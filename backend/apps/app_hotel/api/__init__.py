@@ -2,7 +2,7 @@ from .views import (
     HotelView,
     HotelImageView,
     HotelRoomView, 
-    RoomTypeView, 
+    RoomTypeAvailabilityView, 
 )
 
 from .views import (
