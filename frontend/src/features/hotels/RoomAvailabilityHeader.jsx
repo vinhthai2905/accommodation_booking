@@ -15,11 +15,23 @@ export default function RoomAvailabilityHeader() {
             )}>
                 Số lượng khách
             </div>
+            
+            <div className={clsx(
+                "border-l border-blue-300",
+                "px-4 py-2 font-bold"
+            )}
+            >
+                Giá phòng
+            </div>
 
             <div className={clsx(
                 "border-l border-blue-300",
                 "px-4 py-2 font-bold"
-            )} />
+            )}
+            >
+                Chọn phòng
+            </div>
+
         </>
     )
 }

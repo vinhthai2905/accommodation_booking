@@ -1,17 +1,15 @@
-import RoomDetails from "./RoomDetails"
-import RoomGuests from "./RoomGuests"
+import RoomDetailsColumn from "./RoomDetailsColumn"
+import RoomGuestsColumn from "./RoomGuestsColumn"
+import RoomPhysicalColumn from "./RoomPhysicalColumn"
+import RoomPriceColumn from "./RoomPriceColumn"
 
-export default function RoomRow({ room }) {
+export default function RoomRow({ roomType }) {
     return (
-        <div className="grid grid-cols-[1.8fr_0.5fr_0.8fr] border-t border-gray-300">
-            <RoomDetails room={room} />
-            <RoomGuests room={room} />
-
-            <div className="border-l border-blue-300 p-4">
-                <button className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-                    Hiển thị giá
-                </button>
-            </div>
+        <div className="grid grid-cols-[0.3fr_0.3fr_0.3fr_0.5fr] border-t border-gray-300">
+            <RoomDetailsColumn roomType={roomType} />
+            <RoomGuestsColumn roomType={roomType} />
+            <RoomPriceColumn roomType={roomType}/>
+            <RoomPhysicalColumn roomType={roomType} />
         </div>
     )
 }

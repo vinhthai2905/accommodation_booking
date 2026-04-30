@@ -1,6 +1,8 @@
 import RoomRow from "./RoomRow"
 import RoomAvailabilityHeader from "./RoomAvailabilityHeader"
 
+import useHotelDetails from "../../hooks/hotel/useHotelDetails"
+
 const rooms = [
     {
         id: 1,
@@ -59,14 +61,17 @@ const rooms = [
 ]
 
 export default function RoomAvailability() {
+    const { roomTypesQuery } = useHotelDetails()
+    const { data: roomTypes } = roomTypesQuery
+
     return (
-        <div className="overflow-hidden rounded-md border border-gray-300 bg-white">
-            <div className="grid grid-cols-[1.8fr_0.5fr_0.8fr] bg-[#4f79b6] text-white">
+        <div className="overflow-hidden rounded-md border border-gray-300 bg-white text-sm">
+            <div className="grid grid-cols-[0.3fr_0.3fr_0.3fr_0.5fr] bg-[#4f79b6] text-white">
                 <RoomAvailabilityHeader />
             </div>
 
-            {rooms.map((room) => (
-                <RoomRow key={room.id} room={room} />
+            {roomTypes.map((roomType) => (
+                <RoomRow key={roomType.id_room_type} roomType={roomType} />
             ))}
         </div>
     )

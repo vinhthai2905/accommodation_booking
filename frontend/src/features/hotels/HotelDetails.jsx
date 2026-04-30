@@ -9,9 +9,9 @@ import { clsx } from "clsx"
 import useHotelDetails from "../../hooks/hotel/useHotelDetails"
 
 export default function HotelDetails() {
-    const { hotelQuery } = useHotelDetails()
+    const { hotelQuery, roomTypesQuery } = useHotelDetails()
 
-    if (hotelQuery.isLoading)
+    if (hotelQuery.isLoading || roomTypesQuery.isLoading)
         return <LoadingScreen />
 
     return (

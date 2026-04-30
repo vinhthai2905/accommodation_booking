@@ -8,7 +8,7 @@ function getDetailIcon(detail) {
     return <FaBed className="inline ml-1 text-sm text-gray-700" />
 }
 
-export default function RoomDetails({ room }) {
+export default function RoomDetailsColumn({ roomType }) {
     return (
         <div className="p-4">
             <div className="flex items-start gap-2">
@@ -18,17 +18,17 @@ export default function RoomDetails({ room }) {
                         href="#"
                         className="font-bold text-blue-700 underline hover:text-blue-900"
                     >
-                        {room.name}
+                        {roomType.type_name}
                     </a>
 
-                    <div className="mt-2 space-y-1 text-sm text-gray-800">
+                    {/* <div className="mt-2 space-y-1 text-sm text-gray-800">
                         {room.details.map((detail, index) => (
                             <div key={index}>
                                 {detail}
                                 {getDetailIcon(detail)}
                             </div>
                         ))}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

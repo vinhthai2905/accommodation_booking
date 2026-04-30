@@ -6,7 +6,6 @@ from apps.app_hotel.api.serializers.room_serializers import (
     HotelRoomAvailabilitySerializer
 )
 
-
 class RoomTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = LoaiPhong
