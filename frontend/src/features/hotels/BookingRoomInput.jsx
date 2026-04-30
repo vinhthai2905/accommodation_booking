@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-export default function BookingRoomInput({ inputInfo, inputFor, path }) {
+export default function BookingRoomInput({ inputInfo, path }) {
     return (
         <div className={clsx(
             "flex gap-2",

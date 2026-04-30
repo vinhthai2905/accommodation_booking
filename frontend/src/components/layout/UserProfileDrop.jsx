@@ -17,7 +17,7 @@ import {
 import { AuthUserContext } from "../../context/AuthUserContext"
 
 const menuItems = [
-    { title: "My account", icon: CircleUserRound, to: "/index" },
+    { title: "My account", icon: CircleUserRound, to: "/profile" },
     { title: "Bookings & Trips", icon: BriefcaseBusiness },
     { title: "Genius loyalty program", icon: BadgeDollarSign },
     { title: "Rewards & Wallet", icon: Wallet },
@@ -27,13 +27,15 @@ const menuItems = [
 ]
 
 export default function UserProfileDrop() {
-    const { clearAuthState } = useContext(AuthUserContext)
+    const { clearAuthUserState } = useContext(AuthUserContext)
 
     return (
-        <div className={clsx(
-            "overflow-hidden rounded-xl bg-white",
-            "shadow-[0_4px_20px_rgba(0,0,0,0.18)]",
-        )}>
+        <div
+            className={clsx(
+                "overflow-hidden rounded-xl bg-white",
+                "shadow-[0_4px_20px_rgba(0,0,0,0.18)]",
+            )}
+        >
             {menuItems.map((item) => {
                 const Icon = item.icon
 
@@ -46,7 +48,7 @@ export default function UserProfileDrop() {
                             "text-left text-[#1a1a1a] text-[0.8rem]",
                             "hover:bg-gray-100"
                         )}
-                        onClick={item.title === "Sign out" ? clearAuthState : ""}
+                        onClick={item.title === "Sign out" ? clearAuthUserState : ""}
                     >
                         <Icon size={18} strokeWidth={1.75} className="text-[#3d3d3d]" />
                         <span>{item.title}</span>

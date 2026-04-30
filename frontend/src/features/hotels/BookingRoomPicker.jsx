@@ -6,9 +6,7 @@ export default function BookingRoomPicker() {
     return (
         <div className="flex flex-col gap-2">
             <hr className="border-gray-300"></hr>
-            <h1 className="text-2xl font-bold">
-                Phòng trống
-            </h1>
+           
             <form className={clsx(
                 "w-[65%]"
             )}>

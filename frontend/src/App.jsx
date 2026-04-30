@@ -12,7 +12,6 @@ import CustomerSignIn from './pages/CustomerSignIn'
 import Checkout from './pages/Checkout'
 
 import PartnerRegister from './pages/PartnerRegister'
-import PartnerLanding from './pages/PartnerLanding'
 import PartnerDashboard from './pages/partner/PartnerDashboard'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -21,11 +20,17 @@ import './features/account/UserProfile'
 
 import './App.css'
 
-import { createBrowserRouter, RouterProvider } from "react-router"
-import { Toaster } from 'react-hot-toast'
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import AuthUserProvider from './context/AuthUserProvider'
 import UserProfile from './features/account/UserProfile'
+import ToasterUI from './components/ui/ToasterUI'
+
+import ChildAgeInput from './features/search/components/ChildAgeInput'
+
+const queryClient = new QueryClient()
 
 function App() {
   const router = createBrowserRouter([
@@ -33,10 +38,11 @@ function App() {
       path: "/",
       element: <AppLayout />,
       children: [
+        { index: true, element: <Navigate to="/index" replace /> },
         { path: "index", element: <Home /> },
         { path: "searchresults", element: <SearchResults /> },
         {
-          path: "hotel",
+          path: "hotel/:slug/:uuid",
           element: <Hotel />,
           children: [
             { path: "checkout", element: <Checkout /> }
@@ -48,8 +54,10 @@ function App() {
           children: [
             { path: "user", element: <UserProfile /> }
           ]
-        }
+        },
+
       ],
+
     },
     {
       path: "auth",
@@ -74,41 +82,20 @@ function App() {
         { path: "dashboard", element: <AdminDashboard /> }
       ]
     }
-
+    ,
+    {
+      path: "testground",
+      element: <ChildAgeInput />
+    }
   ])
   return (
-    <AuthUserProvider>
-      <Toaster
-        position="top-right"
-        reverseOrder={false}
-        gutter={10}
-        toastOptions={{
-          duration: 3000,
-          style: {
-            background: "#ffffff",
-            color: "#1f2937",
-            border: "1px solid #e5e7eb",
-            padding: "12px 16px",
-            borderRadius: "10px",
-          },
-          success: {
-            style: {
-              background: "#ecfdf5",
-              color: "#065f46",
-              border: "1px solid #a7f3d0",
-            },
-          },
-          error: {
-            style: {
-              background: "#fef2f2",
-              color: "#991b1b",
-              border: "1px solid #fecaca",
-            },
-          },
-        }}
-      />
-      <RouterProvider router={router} />
-    </AuthUserProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthUserProvider>
+        <ToasterUI />
+        <RouterProvider router={router} />
+      </AuthUserProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
 

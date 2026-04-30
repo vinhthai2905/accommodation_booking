@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-    'apps.app_nguoidung',
-    'apps.app_khachsan',
-    'apps.app_vitri',
+    'apps.app_user',
+    'apps.app_hotel',
+    'apps.app_location',
     'apps.app_booking'
 ]
 
@@ -141,7 +141,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-AUTH_USER_MODEL = "app_nguoidung.NguoiDung"
+AUTH_USER_MODEL = "app_user.NguoiDung"
 
 SIMPLE_JWT = {
     "USER_ID_FIELD": "id_user",

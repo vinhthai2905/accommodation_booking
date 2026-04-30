@@ -1,29 +1,26 @@
-import { clsx } from "clsx"
+import SearchList from "../features/search/pages/SearchList"
+import SearchMap from "../features/search/pages/SearchMap"
 
-import Breadcrumbs from "../features/search/Breadcrumbs"
-import FilterPanel from "../features/search/filter/FilterPanel"
-import HotelCardGrid from "/src/features/hotels/HotelCardGrid"
-import SearchSummary from "../features/search/filter/SearchSummary"
+import LoadingScreen from "../components/ui/LoadingScreen"
+
+import useSearchHotels from "../hooks/search/useSearchHotels"
+import useOpenMap from "../hooks/search/useOpenMap"
 
 export default function SearchResults() {
-    return (
-        <div className={clsx(
-            "mx-[20%] mt-10",
-            "flex flex-col"
-        )}>
-            <Breadcrumbs usedFor={"searchResults"} />
-            <div className={clsx(
-                "mt-2 my-6 grid grid-cols-[auto_1fr] gap-5",
-                "text-black",
-            )}>
-                <aside>
-                    <FilterPanel />
-                </aside>
-                <div className="flex flex-col">
-                    <SearchSummary />
-                    <HotelCardGrid />
-                </div>
-            </div>
-        </div>
-    )
+    const { isLoading, error, data } = useSearchHotels()
+
+    const { isMapOpened, openMap, closeMap } = useOpenMap()
+
+    if (isLoading) return <LoadingScreen />
+    if (error) return <p>Something went wrong</p>
+
+
+    return isMapOpened
+        ? (
+            <SearchMap onClose={closeMap} hotelList={data} />
+        )
+        : (
+            <SearchList onOpenMap={openMap} hotelList={data} />
+        )
+
 }
