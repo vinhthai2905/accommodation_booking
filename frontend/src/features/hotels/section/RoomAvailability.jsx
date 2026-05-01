@@ -11,20 +11,24 @@ export default function RoomAvailability() {
 
     const [selectedRooms, setSelectedRooms] = useState({})
 
-    const handleRoomSelection = (roomTypeId, roomPrice, roomId, isSelected) => {
+    const handleRoomSelection = (roomTypeId, roomPrice, roomName, roomId, isSelected) => {
         setSelectedRooms(prev => {
             const next = { ...prev }
-            if (isSelected) {
-                next[roomId] = { roomTypeId, price: roomPrice }
-            } else {
-                delete next[roomId]
-            }
+            isSelected
+                ? next[roomId] = { roomTypeId, price: roomPrice, roomName }
+                : delete next[roomId]
+
             return next
         })
     }
 
     const selectedRoomIds = Object.keys(selectedRooms)
-    const totalPrice = Object.values(selectedRooms).reduce((sum, room) => sum + room.price, 0)
+    console.log(Object.values(selectedRooms))
+    const totalPrice = (
+        Object
+            .values(selectedRooms)
+            .reduce((sum, room) => sum + Number(room.price), 0)
+    )
     const totalSelected = selectedRoomIds.length
 
     return (
@@ -39,7 +43,7 @@ export default function RoomAvailability() {
             )}>
                 <div className="flex-4 flex flex-col">
                     <div className={clsx(
-                        "grid grid-cols-[0.28fr_0.22fr_0.28fr_0.32f",
+                        "grid grid-cols-[0.28fr_0.22fr_0.28fr_0.32fr]",
                         "bg-[#4f79b6] text-white"
                     )}>
                         <RoomAvailabilityHeaderRow />
@@ -49,15 +53,7 @@ export default function RoomAvailability() {
                         <RoomRow
                             key={roomType.id_room_type}
                             roomType={roomType}
-                            selectedRooms={selectedRoomIds}
-                            onRoomSelect={(roomId, isSelected) => {
-                                handleRoomSelection(
-                                    roomType.id_room_type,
-                                    roomType.price,
-                                    roomId,
-                                    isSelected
-                                )
-                            }}
+                            handleRoomSelection={handleRoomSelection}
                         />
                     ))}
 
@@ -72,7 +68,8 @@ export default function RoomAvailability() {
                         "p-4",
                         "text-center"
                     )}>
-                        {totalSelected > 0 ? (
+                        {totalSelected > 0 
+                            ? (
                             <>
                                 <span className="text-sm text-gray-600">
                                     {totalSelected} phòng
@@ -88,7 +85,8 @@ export default function RoomAvailability() {
                                     Đặt ngay
                                 </button>
                             </>
-                        ) : (
+                        )   
+                            : (
                             <span className="mt-4 text-sm text-gray-500">
                                 Chưa chọn phòng
                             </span>
