@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 import { Link } from "react-router"
 
-import useHotelDetails from "../../hooks/hotel/useHotelDetails"
+import useHotelDetails from "../../../hooks/hotel/useHotelDetails"
 
 export default function HotelHeader() {
     const { hotelQuery } = useHotelDetails()

@@ -4,7 +4,7 @@ export default function RoomPriceColumn({ roomType }) {
     return (
         <div className="border-l border-blue-300 p-4 flex flex-col gap-1">
             <div className="flex items-center gap-1">
-                <span className="text-lg font-bold">VND {roomType.price.toLocaleString('vi-VN')}</span>
+                <span className="text-lg font-bold">VND {Intl.NumberFormat("vi-VN").format(roomType.price)}</span>
                 <Info className="h-4 w-4 text-gray-500" />
             </div>
             

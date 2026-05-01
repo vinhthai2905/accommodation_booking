@@ -1,5 +1,5 @@
-import TopGallery from "./TopGallery"
-import BottomGallery from "./BottomGallery"
+import TopGallery from "../components/TopGallery"
+import BottomGallery from "../components/BottomGallery"
 
 const images = [
     "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1200&auto=format&fit=crop",
@@ -15,8 +15,6 @@ const topImages = images.slice(0, 3)
 const bottomImages = images.slice(3)
 
 export default function HotelImageGallery() {
-    
-
     return (
         <div className="flex flex-col w-[80%] gap-2 text-black">
             <TopGallery images={topImages} />

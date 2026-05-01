@@ -1,4 +1,4 @@
-export default function RoomPhysicalColumn({ roomType }) {
+export default function RoomPhysicalColumn({ roomType, selectedRooms, onRoomSelect }) {
     const availableRooms = roomType?.available_rooms || [];
 
     return (
@@ -14,6 +14,8 @@ export default function RoomPhysicalColumn({ roomType }) {
                             <input
                                 type="checkbox"
                                 value={room.id_room}
+                                checked={selectedRooms.includes(String(room.id_room))}
+                                onChange={(e) => onRoomSelect(room.id_room, e.target.checked)}
                                 className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                             />
                             <span>{room.room_name}</span>

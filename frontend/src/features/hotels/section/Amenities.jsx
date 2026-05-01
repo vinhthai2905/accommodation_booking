@@ -1,4 +1,4 @@
-import { AmenityItem } from "./AmenityItem";
+import { AmenityItem } from "../components/AmenityItem";
 
 export default function Amenities() {
   return (

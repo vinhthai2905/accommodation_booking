@@ -1,4 +1,4 @@
-import useHotelDetails from "../../hooks/hotel/useHotelDetails"
+import useHotelDetails from "../../../hooks/hotel/useHotelDetails"
 
 export default function TopGallery({ images }) {
   const { hotelQuery } = useHotelDetails()

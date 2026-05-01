@@ -17,8 +17,6 @@ class HotelSearchParamsSerializer(serializers.Serializer):
 )
     
 class HotelSearchSerializer(serializers.ModelSerializer):
-    latitude = serializers.FloatField(write_only=True, required=False)
-    longitude = serializers.FloatField(write_only=True, required=False)
     primary_image = serializers.SerializerMethodField()
     full_address = serializers.SerializerMethodField()
 
@@ -27,13 +25,11 @@ class HotelSearchSerializer(serializers.ModelSerializer):
         fields = [
             "id_hotel",
             "id_hotel_type",
-            "id_user",
             "id_ward",
             "name",
+            "slug",
             "full_address",
             "primary_image",
-            "latitude",
-            "longitude",
         ]
         extra_kwargs = {
             "id_user": {"write_only": True},

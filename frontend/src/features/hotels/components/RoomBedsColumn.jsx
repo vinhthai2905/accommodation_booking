@@ -1,4 +1,5 @@
 import { FaBed, FaCouch, FaChevronRight } from "react-icons/fa"
+import { clsx } from "clsx"
 
 function getDetailIcon(detail) {
     if (detail.toLowerCase().includes("sofa")) {
@@ -8,7 +9,7 @@ function getDetailIcon(detail) {
     return <FaBed className="inline ml-1 text-sm text-gray-700" />
 }
 
-export default function RoomDetailsColumn({ roomType }) {
+export default function RoomBedsColumn({ roomType }) {
     return (
         <div className="p-4">
             <div className="flex items-start gap-2">

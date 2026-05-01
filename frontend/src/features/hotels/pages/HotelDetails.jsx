@@ -1,15 +1,17 @@
-import Breadcrumbs from "../search/section/Breadcrumbs"
-import PropertyTabs from "./PropertyTabs"
-import HotelInformation from "./HotelInformation"
+import Breadcrumbs from "../../search/section/Breadcrumbs"
+import PropertyTabs from "../section/PropertyTabs"
+import HotelInformation from "../section/HotelInformation"
 
-import LoadingScreen from "../../components/ui/LoadingScreen"
+import LoadingScreen from "../../../components/ui/LoadingScreen"
+
+import useHotelDetails from "../../../hooks/hotel/useHotelDetails"
 
 import { clsx } from "clsx"
 
-import useHotelDetails from "../../hooks/hotel/useHotelDetails"
-
 export default function HotelDetails() {
     const { hotelQuery, roomTypesQuery } = useHotelDetails()
+
+    console.log(roomTypesQuery.error)
 
     if (hotelQuery.isLoading || roomTypesQuery.isLoading)
         return <LoadingScreen />

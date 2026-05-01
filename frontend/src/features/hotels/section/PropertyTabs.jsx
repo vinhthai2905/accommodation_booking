@@ -9,7 +9,6 @@ const tabLinkClassName = clsx(
     "hover:bg-gray-300 cursor-pointer border-2"
 )
 
-
 export default function PropertyTabs() {
     return (
         <div className="mt-5 border-b border-gray-300">

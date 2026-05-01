@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import HotelCardSearchResultItem from "./HotelCardSearchResultItem"
+import HotelCardSearchResultItem from "../components/HotelCardSearchResultItem"
 
 export default function HotelCardSearchGrid({ hotelList }) {
     return (

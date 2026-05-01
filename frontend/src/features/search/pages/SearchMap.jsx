@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import HotelCardSearchResultItem from "../../hotels/HotelCardSearchResultItem"
+import HotelCardSearchResultItem from "../../hotels/components/HotelCardSearchResultItem"
 import BaseMap from "../../map/components/BaseMap"
 
 export default function SearchMap({ onClose, hotelList }) {

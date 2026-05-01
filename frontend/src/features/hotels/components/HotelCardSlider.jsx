@@ -1,5 +1,4 @@
-import HotelCard from "/src/features/hotels/HotelCard"
-
+import HotelCard from "/src/features/hotels/components/HotelCard"
 import ButtonSlide from "/src/components/ui/ButtonSlide"
 
 import { useRef } from "react"
