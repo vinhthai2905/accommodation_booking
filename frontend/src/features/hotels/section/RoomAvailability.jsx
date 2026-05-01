@@ -1,9 +1,11 @@
-import { clsx } from "clsx"
-import { useState } from "react"
 import RoomRow from "../components/RoomRow"
 import RoomAvailabilityHeaderRow from "../components/RoomAvailabilityHeaderRow"
 
 import useHotelDetails from "../../../hooks/hotel/useHotelDetails"
+
+import { clsx } from "clsx"
+import { useState } from "react"
+import { Link } from "react-router"
 
 export default function RoomAvailability() {
     const { roomTypesQuery } = useHotelDetails()
@@ -77,13 +79,16 @@ export default function RoomAvailability() {
                                 <span className="text-lg font-bold text-blue-600">
                                     VND {Intl.NumberFormat("vi-VN").format(totalPrice)}
                                 </span>
-                                <button className={clsx(
+                                <Link 
+                                    to={"/book"}
+                                    className={clsx(
                                     "w-full mt-2 px-4 py-2",
                                     "bg-blue-600 hover:bg-blue-700 text-white",
-                                    "font-bold rounded-md transition-colors"
+                                    "font-bold rounded-md transition-colors",
+                                    "cursor-pointer"
                                 )}>
                                     Đặt ngay
-                                </button>
+                                </Link>
                             </>
                         )   
                             : (

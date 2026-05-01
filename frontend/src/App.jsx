@@ -9,7 +9,7 @@ import Profile from './pages/Profile'
 import SearchResults from "./pages/SearchResults"
 import CustomerRegister from './pages/CustomerRegister'
 import CustomerSignIn from './pages/CustomerSignIn'
-import Checkout from './pages/Checkout'
+import Book from './pages/Book'
 
 import PartnerRegister from './pages/PartnerRegister'
 import PartnerDashboard from './pages/partner/PartnerDashboard'
@@ -35,6 +35,15 @@ const queryClient = new QueryClient()
 function App() {
   const router = createBrowserRouter([
     {
+      path: "auth",
+      element: <AuthLayout />,
+      children: [
+        { path: "sign-up", element: <CustomerRegister /> },
+        { path: "sign-in", element: <CustomerSignIn /> },
+        { path: "partner/sign-up", element: <PartnerRegister /> }
+      ]
+    },
+    {
       path: "/",
       element: <AppLayout />,
       children: [
@@ -44,9 +53,6 @@ function App() {
         {
           path: "hotel/:slug/:uuid",
           element: <Hotel />,
-          children: [
-            { path: "checkout", element: <Checkout /> }
-          ],
         },
         {
           path: "profile",
@@ -57,16 +63,10 @@ function App() {
         },
 
       ],
-
     },
     {
-      path: "auth",
-      element: <AuthLayout />,
-      children: [
-        { path: "sign-up", element: <CustomerRegister /> },
-        { path: "sign-in", element: <CustomerSignIn /> },
-        { path: "partner/sign-up", element: <PartnerRegister /> }
-      ]
+      path: "book",
+      element: <Book />
     },
     {
       path: "partner",

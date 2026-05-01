@@ -1,9 +1,9 @@
-import UserProfileDrop from "./UserProfileDrop"
-import UserProfileButton from "./UserProfileButton"
+import UserProfileDrop from "../../../components/layout/UserProfileDrop"
+import UserProfileButton from "../../../components/layout/UserProfileButton"
 
 import { clsx } from "clsx"
 import { useContext, useEffect, useRef, useState } from "react"
-import { AuthUserContext } from "../../context/AuthUserContext"
+import { AuthUserContext } from "../../../context/AuthUserContext"
 
 export default function UserProfileBadge() {
   const [isOpen, setIsOpen] = useState(false)

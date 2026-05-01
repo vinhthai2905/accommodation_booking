@@ -1,16 +1,16 @@
 import { clsx } from "clsx"
 
-import BookingDetailsCard from "./BookingDetailsCard"
-import HotelSummaryCard from "./HotelSummaryCard"
-import PriceSummaryCard from "./PriceSummaryCard"
-import CheckoutGuestForm from "./CheckoutGuestForm"
+import BookingDetailsCard from "../components/BookingDetailsCard"
+import HotelSummaryCard from "../components/HotelSummaryCard"
+import PriceSummaryCard from "../components/PriceSummaryCard"
+import CheckoutGuestForm from "../components/CheckoutGuestForm"
 
 export default function CheckoutSummary() {
     return (
         <div className={clsx(
             "flex gap-3"
         )}>
-            <aside className="flex flex-col w-[45%] gap-3">
+            <aside className="flex flex-col w-[35%] gap-3">
                 <HotelSummaryCard />
                 <BookingDetailsCard />
                 <PriceSummaryCard />

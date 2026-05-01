@@ -1,4 +1,4 @@
-import StepProcess from "./StepProcess"
+import StepProcess from "../components/StepProcess"
 
 const steps = [
     { id: 1, label: "Bạn chọn" },

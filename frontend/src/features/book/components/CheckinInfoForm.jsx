@@ -1,6 +1,6 @@
 import { CircleCheck } from "lucide-react"
 
-import CheckoutFormBorder from "../../components/ui/CheckoutFormBorder"
+import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
 
 export default function CheckinInfoForm() {
   return (

@@ -1,8 +1,8 @@
 import { clsx } from "clsx"
 import { motion } from "framer-motion"
 
-import CheckoutSteps from "./CheckoutSteps"
-import CheckoutSummary from "./CheckoutSummary"
+import CheckoutSteps from "../section/CheckoutSteps"
+import CheckoutSummary from "../section/CheckoutSummary"
 
 export default function CheckoutProcess({ currentStep = 2 }) {
     return (

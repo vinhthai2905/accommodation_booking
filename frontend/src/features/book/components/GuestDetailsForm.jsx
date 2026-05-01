@@ -1,4 +1,5 @@
-import CheckoutFormBorder from "../../components/ui/CheckoutFormBorder"
+import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
+
 import GuestFormHeader from "./GuestFormHeader"
 import CheckoutGuestInput from "./CheckoutGuestInput"
 import CheckoutGuestSelect from "./CheckoutGuestSelect"

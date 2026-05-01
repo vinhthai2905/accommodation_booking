@@ -1,4 +1,4 @@
-import CheckoutFormBorder from "../../components/ui/CheckoutFormBorder"
+import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
 
 export default function SelectedRoomCard() {
     return (
