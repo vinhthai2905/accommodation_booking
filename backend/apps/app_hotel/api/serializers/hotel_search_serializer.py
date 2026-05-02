@@ -6,7 +6,7 @@ from apps.app_hotel.api.serializers.booking_date_serializers import BookingDateS
 
 
 class HotelSearchParamsSerializer(BookingDateSerializer):
-    """Validate hotel search query params."""
+    """Deserialize hotel search query params."""
     
     location = serializers.CharField(required=True)
     requested_rooms = serializers.IntegerField(min_value=1, required=True)
@@ -21,7 +21,7 @@ class HotelSearchParamsSerializer(BookingDateSerializer):
 
 class HotelSearchResultSerializer(serializers.ModelSerializer):
     """Serialize each hotel which met the search requirements, 
-    then exposed to public API Search Hotels."""
+    then expose to public API Search Hotels."""
     
     primary_image = serializers.SerializerMethodField()
     full_address = serializers.SerializerMethodField()

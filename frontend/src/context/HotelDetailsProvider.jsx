@@ -2,7 +2,7 @@ import { HotelDetailsContext } from "./HotelDetailsContext"
 import { useQuery } from "@tanstack/react-query"
 import { useParams, useSearchParams } from "react-router"
 
-import { fetchHotel, fetchHotelRoomTypes } from "../services/hotelAPI"
+import { fetchHotel, fetchHotelRoomTypes } from "../services/hotelServices"
 
 export default function HotelDetailsProvider({ children }) {
     const { uuid } = useParams()

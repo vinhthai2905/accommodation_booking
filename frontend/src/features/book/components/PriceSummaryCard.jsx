@@ -1,8 +1,34 @@
+import { useSearchParams } from "react-router"
+
+import { calculateChildFee } from "../../../helpers/calculateChildFee"
+
+import useBookingSummary from "../../../hooks/booking/useBookingSummary"
+
 export default function PriceSummaryCard({ totalRoomPrice }) {
+    const [searchParams, setSearchParams] = useSearchParams()
+    const { data: hotel } = useBookingSummary()
+
+    const childFees = calculateChildFee(
+        hotel.child_policy.max_free_age,
+        hotel.child_policy.max_surcharge_age,
+        hotel.child_policy.surcharge_amount,
+        searchParams.getAll("age")
+    )
+
+    const finalPrice = totalRoomPrice + childFees
+
     return (
         <div className="overflow-hidden rounded-2xl border border-gray-300 bg-white">
-            <div className="p-5">
-                <h2 className="text-lg font-bold text-slate-900">Tóm tắt giá</h2>
+            <div className="p-5 text-slate-900">
+                <h2 className="text-lg font-bold">Tóm tắt giá</h2>
+                <div className="flex flex-col gap-2">
+                    <p className="mt-2 leading-none">
+                        Giá phòng: {Intl.NumberFormat("vi-VN").format(totalRoomPrice)} VND
+                    </p>
+                    <p>
+                        Tổng phụ thụ trẻ em: {Intl.NumberFormat("vi-VN").format(childFees)} VND
+                    </p>
+                </div>
             </div>
 
             <div className="bg-blue-50 p-5">
@@ -13,13 +39,14 @@ export default function PriceSummaryCard({ totalRoomPrice }) {
 
                     <div>
                         <p className="mt-2 font-bold leading-none text-slate-900">
-                            Giá phòng: {Intl.NumberFormat("vi-VN").format(totalRoomPrice)} VND
+                            Giá phòng: {Intl.NumberFormat("vi-VN").format(finalPrice)} VND
                         </p>
 
                         <p className="mt-2 text-slate-600">
                             Đã bao gồm thuế và phí
                         </p>
                     </div>
+
                 </div>
             </div>
 

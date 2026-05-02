@@ -1,6 +1,6 @@
 import toast from "react-hot-toast"
 
-import { logoutUser, fetchUser } from "../../services/authAPI"
+import { logoutUser, fetchUser } from "../../services/authServices"
 
 
 export default function useAuthActions(setUserState) {

@@ -3,14 +3,13 @@ import { useNavigate } from "react-router"
 import { useForm } from "react-hook-form"
 import toaster, { toast } from "react-hot-toast"
 
-import { registerUser } from "../../services/authAPI"
+import { registerUser } from "../../services/authServices"
 import { AuthUserContext } from "../../context/AuthUserContext"
 
 import { defaultTestValues } from "../../features/authentication/configs/DefaultValues"
 
 export default function useRegisterForm() {
   const [isLoading, setLoading] = useState(false)
-
   const authContext = useContext(AuthUserContext)
 
   const navigate = useNavigate()

@@ -29,7 +29,7 @@ class HotelSearchView(APIView):
 
         query_params.pop("age", None)
         query_params.pop("rooms", None)
-
+        
         return query_params
 
     def _get_hotel_search_params(self, request: Request) -> dict:
@@ -161,7 +161,7 @@ class HotelSearchView(APIView):
         return Response(serializer.data)
     
 
-class HotelView(APIView):
+class HotelDetailView(APIView):
     serializer_class = HotelDetailSerializer
     hotel_model = KhachSan
     

@@ -33,3 +33,10 @@ export const fetchHotelImages = async (hotelID) => {
   const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/images`)
   return data
 }
+
+export const fetchHotelPolicy = async (hotelID) => {
+  const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/child_policy`)
+
+  return data
+}
+

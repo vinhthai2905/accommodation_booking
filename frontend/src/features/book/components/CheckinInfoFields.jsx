@@ -1,8 +1,12 @@
-import { CircleCheck } from "lucide-react"
-
 import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
 
+import { CircleCheck } from "lucide-react"
+import { useFormContext } from "react-hook-form"
+import { clsx } from "clsx"
+
 export default function CheckinInfoFields() {
+  const { register } = useFormContext()
+
   return (
     <CheckoutFormBorder>
       <h2 className="text-xl font-bold text-slate-900">Thông tin nhận phòng</h2>
@@ -20,7 +24,12 @@ export default function CheckinInfoFields() {
           <span className="text-slate-500">(không bắt buộc)</span>
         </label>
 
-        <select className="mt-3 w-full rounded-md border border-gray-400 px-3 py-2 outline-none focus:border-blue-500">
+        <select
+          {...register("checkInTime")}
+          className={clsx(
+            "mt-3 w-full rounded-md border",
+            "border-gray-400 px-3 py-2 outline-none focus:border-blue-500"
+          )}>
           <option>Vui lòng chọn</option>
           <option>14:00 - 15:00</option>
           <option>15:00 - 16:00</option>

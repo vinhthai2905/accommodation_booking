@@ -3,7 +3,7 @@ from rest_framework import exceptions
 
 
 class BookingDateSerializer(serializers.Serializer):
-    """Serialize requested date range."""
+    """Deserialize requested date range."""
     
     check_in = serializers.DateField(
         input_formats=["%d-%m-%Y"], required=True

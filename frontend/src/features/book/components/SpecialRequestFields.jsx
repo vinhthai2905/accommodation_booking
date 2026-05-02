@@ -1,6 +1,9 @@
+import { useFormContext } from "react-hook-form"
 import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
 
 export default function SpecialRequestFields() {
+    const { register } = useFormContext()
+
     return (
         <CheckoutFormBorder>
             <h2 className="text-xl font-bold text-slate-900">Các Yêu Cầu Đặc Biệt</h2>
@@ -18,9 +21,13 @@ export default function SpecialRequestFields() {
                 </label>
 
                 <textarea
+                    {...register("note", {
+                        required: "Vui lòng nhập ghi chú.",
+                    })}
                     rows={4}
                     className="w-full rounded-md border border-gray-400 px-3 py-3 outline-none focus:border-blue-500"
                 />
+              
             </div>
 
         </CheckoutFormBorder>

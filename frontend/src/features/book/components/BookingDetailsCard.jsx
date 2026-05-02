@@ -1,3 +1,5 @@
+import { Link } from "react-router"
+
 export default function BookingDetailsCard({ selectedRooms, checkInDate, checkOutDate }) {
   return (
     <div className="text-sm rounded-2xl border border-gray-300 bg-white p-5">
@@ -47,12 +49,12 @@ export default function BookingDetailsCard({ selectedRooms, checkInDate, checkOu
           })}
         </ul>
 
-        <button
+        <Link
           type="button"
-          className="mt-3 font-medium text-blue-600"
+          className="mt-3 font-medium text-blue-600 hover:underline"
         >
           Đổi lựa chọn của bạn
-        </button>
+        </Link>
       </div>
     </div>
   )
