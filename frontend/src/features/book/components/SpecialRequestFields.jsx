@@ -1,6 +1,6 @@
 import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
 
-export default function SpecialRequestForm() {
+export default function SpecialRequestFields() {
     return (
         <CheckoutFormBorder>
             <h2 className="text-xl font-bold text-slate-900">Các Yêu Cầu Đặc Biệt</h2>

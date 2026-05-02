@@ -4,14 +4,12 @@ import HotelInformation from "../section/HotelInformation"
 
 import LoadingScreen from "../../../components/ui/LoadingScreen"
 
-import useHotelDetails from "../../../hooks/hotel/useHotelDetails"
+import useHotelDetailsContext from "../../../hooks/hotel/useHotelDetailsContext"
 
 import { clsx } from "clsx"
 
 export default function HotelDetails() {
-    const { hotelQuery, roomTypesQuery } = useHotelDetails()
-
-    console.log(roomTypesQuery.error)
+    const { hotelQuery, roomTypesQuery } = useHotelDetailsContext()
 
     if (hotelQuery.isLoading || roomTypesQuery.isLoading)
         return <LoadingScreen />

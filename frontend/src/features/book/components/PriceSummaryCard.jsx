@@ -1,15 +1,8 @@
-export default function PriceSummaryCard() {
+export default function PriceSummaryCard({ totalRoomPrice }) {
     return (
         <div className="overflow-hidden rounded-2xl border border-gray-300 bg-white">
             <div className="p-5">
                 <h2 className="text-lg font-bold text-slate-900">Tóm tắt giá</h2>
-
-                <div className="mt-2 space-y-6">
-                    <div className="flex items-start justify-between gap-6">
-                        <p className="text-slate-900">Giá gốc</p>
-                        <p className="text-slate-900">VND 660.000</p>
-                    </div>
-                </div>
             </div>
 
             <div className="bg-blue-50 p-5">
@@ -19,12 +12,8 @@ export default function PriceSummaryCard() {
                     </h3>
 
                     <div>
-                        <p className="text-red-500 line-through">
-                            VND 660.000
-                        </p>
-
                         <p className="mt-2 font-bold leading-none text-slate-900">
-                            VND 396.000
+                            Giá phòng: {Intl.NumberFormat("vi-VN").format(totalRoomPrice)} VND
                         </p>
 
                         <p className="mt-2 text-slate-600">

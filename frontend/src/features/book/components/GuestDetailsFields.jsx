@@ -1,11 +1,17 @@
 import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
-
 import GuestFormHeader from "./GuestFormHeader"
 import CheckoutGuestInput from "./CheckoutGuestInput"
 import CheckoutGuestSelect from "./CheckoutGuestSelect"
 import CheckoutGuestPhoneInput from "./CheckoutGuestPhoneInput"
 
-export default function GuestDetailsForm() {
+
+import { useContext } from "react"
+import { AuthUserContext } from "../../../context/AuthUserContext"
+
+export default function GuestDetailsFields() {
+    const { isAuthenticated, user } = useContext(AuthUserContext)
+    const personalInfo = isAuthenticated ? user.personal_info : undefined
+
     return (
         <CheckoutFormBorder>
             <GuestFormHeader />
@@ -17,6 +23,7 @@ export default function GuestDetailsForm() {
                     required
                     type="text"
                     placeholder="ví dụ: Nguyễn"
+                    defaultValue={isAuthenticated ? personalInfo?.first_name : undefined}
                 />
 
                 <CheckoutGuestInput
@@ -24,6 +31,7 @@ export default function GuestDetailsForm() {
                     required
                     type="text"
                     placeholder="ví dụ: Tuấn"
+                    defaultValue={isAuthenticated ? personalInfo?.last_name : undefined}
                 />
             </div>
 
@@ -34,6 +42,7 @@ export default function GuestDetailsForm() {
                     required
                     type="email"
                     placeholder="ví dụ: nguyentuan@email.com"
+                    defaultValue={isAuthenticated ? user.email : undefined}
                 />
 
                 <p className="mt-2 text-sm text-slate-600">
@@ -55,27 +64,12 @@ export default function GuestDetailsForm() {
                     codeDefaultValue="VN +84"
                     codeOptions={["VN +84", "TH +66", "SG +65", "JP +81"]}
                     placeholder="ví dụ: 912345678"
+                    defaultValue={isAuthenticated ? personalInfo?.phone_number : undefined}
                 />
 
                 <p className="mt-2 text-sm text-slate-600">
                     Để xác minh đơn đặt và để chỗ nghỉ liên lạc khi cần
                 </p>
-            </div>
-
-
-            <div className="mt-5 border-gray-300 pb-6">
-                <label className="flex items-start gap-3">
-                    <input type="checkbox" className="mt-1 h-6 w-6" />
-
-                    <div>
-                        <p className=" text-slate-900">
-                            Có, tôi muốn xác nhận điện tử miễn phí (được đề xuất)
-                        </p>
-                        <p className="text-slate-600">
-                            Chúng tôi sẽ nhắn tin cho bạn đường dẫn để tải ứng dụng
-                        </p>
-                    </div>
-                </label>
             </div>
         </CheckoutFormBorder>
     )

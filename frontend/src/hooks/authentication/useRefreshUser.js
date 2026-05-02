@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 
 export default function useRefreshUser(fetchAuthUserState) {
     const token = localStorage.getItem("access_token")
-    const { isPending, error, data } = useQuery({
+    const { isLoading, error, data } = useQuery({
         queryKey: ["fetchUser"],
         queryFn: () => {
             if (token) {
@@ -13,7 +13,7 @@ export default function useRefreshUser(fetchAuthUserState) {
     })
 
     return {
-        isPending,
+        isLoading,
         error,
         data
     }

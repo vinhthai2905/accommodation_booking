@@ -1,4 +1,6 @@
-import clsx from "clsx"
+import { ChevronDown } from "lucide-react"
+
+import { clsx } from "clsx"
 
 export default function CheckoutGuestSelect(props) {
     const {
@@ -18,21 +20,28 @@ export default function CheckoutGuestSelect(props) {
                 </label>
             )}
 
-            <select
-                defaultValue={defaultValue}
-                className={clsx(
-                    "w-full rounded-md border border-gray-400 px-3 py-3 outline-none",
-                    "focus:border-blue-500",
-                    className
-                )}
-                {...restProps}
-            >
-                {options.map((option) => (
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
-            </select>
+            <div className="relative">
+                <select
+                    defaultValue={defaultValue}
+                    className={clsx(
+                        "w-full rounded-md border border-gray-400 px-3 py-3 pr-10 outline-none",
+                        "focus:border-blue-500 appearance-none",
+                        className
+                    )}
+                    {...restProps}
+                >
+                    {options.map((option) => (
+                        <option key={option} value={option}>
+                            {option}
+                        </option>
+                    ))}
+                </select>
+
+                <ChevronDown
+                    size={18}
+                    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-gray-600"
+                />
+            </div>
         </div>
     )
 }

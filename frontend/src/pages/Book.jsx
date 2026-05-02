@@ -1,15 +1,20 @@
-import { useContext } from "react"
 import BookHeader from "../features/book/components/BookHeader"
 import CheckoutProcess from "../features/book/pages/CheckoutProcess"
+import LoadingScreen from "../components/ui/LoadingScreen"
+
+import { useContext } from "react"
 import { AuthUserContext } from "../context/AuthUserContext"
 
 export default function Book() {
-    const { isAuthenticated } = useContext(AuthUserContext)
-    
+    const { isAuthenticated, isFetchingUser } = useContext(AuthUserContext)
+
+     if (isFetchingUser)
+        return <LoadingScreen />
+
     return (
         <>
             <BookHeader isAuthenticated={isAuthenticated}/>
-            <CheckoutProcess isAuthenticated={isAuthenticated}/>
+            <CheckoutProcess/>
         </>
     )
 }

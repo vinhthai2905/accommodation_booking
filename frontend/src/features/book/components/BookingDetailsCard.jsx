@@ -1,4 +1,4 @@
-export default function BookingDetailsCard() {
+export default function BookingDetailsCard({ selectedRooms, checkInDate, checkOutDate }) {
   return (
     <div className="text-sm rounded-2xl border border-gray-300 bg-white p-5">
       <h2 className="text-lg font-bold text-slate-900">
@@ -9,18 +9,16 @@ export default function BookingDetailsCard() {
         <div className="pr-6">
           <p className="text-slate-900">Nhận phòng</p>
           <p className="mt-3 font-bold leading-tight text-slate-900">
-            T3, 21 tháng 4
+            {checkInDate}
           </p>
-          <p className="mt-2 font-bold text-slate-900">2026</p>
           <p className="mt-2 text-slate-600">14:00 – 23:30</p>
         </div>
 
         <div className="border-l border-gray-300 pl-6">
           <p className="text-slate-900">Trả phòng</p>
           <p className="mt-3 font-bold leading-tight text-slate-900">
-            T4, 22 tháng 4
+            {checkOutDate}
           </p>
-          <p className="mt-2 font-bold text-slate-900">2026</p>
           <p className="mt-2 text-slate-600">06:00 – 12:00</p>
         </div>
       </div>
@@ -35,17 +33,23 @@ export default function BookingDetailsCard() {
       <div className="mt-5 border-t border-gray-300 pt-4">
         <p className="text-slate-900">Bạn đã chọn</p>
 
-        <p className="font-bold text-slate-900">
-          1 đêm, 1 phòng cho 2 người lớn
+        <p className="font-bold text-slate-900 mb-2">
+          {Object.entries(selectedRooms).length} phòng
         </p>
 
-        <p className="text-slate-900">
-          1 x Phòng Giường Đôi Hạng Tiết Kiệm
-        </p>
+        <ul>
+          {Object.entries(selectedRooms).map(room => {
+            return (
+              <p key={room[0]} className="text-slate-900 mb-1">
+                {room[1].roomName}
+              </p>
+            )
+          })}
+        </ul>
 
         <button
           type="button"
-          className="font-medium text-blue-600"
+          className="mt-3 font-medium text-blue-600"
         >
           Đổi lựa chọn của bạn
         </button>

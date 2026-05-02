@@ -1,10 +1,10 @@
 import { clsx } from "clsx"
 import { Link } from "react-router"
 
-import useHotelDetails from "../../../hooks/hotel/useHotelDetails"
+import useHotelDetailsContext from "../../../hooks/hotel/useHotelDetailsContext"
 
 export default function HotelHeader() {
-    const { hotelQuery } = useHotelDetails()
+    const { hotelQuery } = useHotelDetailsContext()
     const { isLoading, data: hotel, error } = hotelQuery
 
     return (

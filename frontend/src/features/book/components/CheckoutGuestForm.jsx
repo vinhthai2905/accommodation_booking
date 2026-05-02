@@ -1,23 +1,33 @@
-import { clsx } from "clsx"
-
-import GuestDetailsForm from "./GuestDetailsForm"
+import GuestDetailsFields from "./GuestDetailsFields"
 import CheckoutRoomCard from "./CheckoutRoomCard"
-import SpecialRequestForm from "./SpecialRequestForm"
-import CheckinInfoForm from "./CheckinInfoForm"
+import SpecialRequestFields from "./SpecialRequestFields"
+import CheckinInfoFields from "./CheckinInfoFields"
 import CheckoutAction from "./CheckoutAction"
 
+import { clsx } from "clsx"
+import { useForm, FormProvider } from "react-hook-form"
+
 export default function CheckoutGuestForm() {
+    const methods = useForm()
+
     return (
         <div className={clsx(
             "rounded-2xl bg-white",
-            "flex flex-col gap-3",
             "text-black text-sm"
         )}>
-            <GuestDetailsForm />
-            <CheckoutRoomCard />
-            <SpecialRequestForm />
-            <CheckinInfoForm />
-            <CheckoutAction />
-        </ div>
+            <FormProvider {...methods}>
+                <form>
+                    <div className={clsx(
+                        "flex flex-col gap-3"
+                    )}>
+                        <GuestDetailsFields />
+                        <CheckoutRoomCard />
+                        <SpecialRequestFields />
+                        <CheckinInfoFields />
+                        <CheckoutAction />
+                    </div>
+                </form>
+            </FormProvider>
+        </div>
     )
 }

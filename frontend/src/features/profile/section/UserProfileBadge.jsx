@@ -2,36 +2,31 @@ import UserProfileDrop from "../../../components/layout/UserProfileDrop"
 import UserProfileButton from "../../../components/layout/UserProfileButton"
 
 import { clsx } from "clsx"
-import { useContext, useEffect, useRef, useState } from "react"
+import { useContext, useState } from "react"
+
 import { AuthUserContext } from "../../../context/AuthUserContext"
+
+import useClickOutside from "../../../hooks/useClickOutside"
+
+import { parseFullName } from "../../../helpers/parseFullName"
 
 export default function UserProfileBadge() {
   const [isOpen, setIsOpen] = useState(false)
-  const profileDropRef = useRef(null)
+  const { ref } = useClickOutside(setIsOpen)
   const authUserContext = useContext(AuthUserContext)
 
-  const initials = authUserContext.user?.name?.charAt(0)?.toUpperCase() || "U"
+  const userName = (
+    parseFullName(
+      authUserContext.user.personal_info.first_name, 
+      authUserContext.user.personal_info.last_name
+    )
+  )
   const level = "Genius Level 1"
 
-  useEffect(() => {
-    function clickOutsideEvent(event) {
-      if (profileDropRef.current && !profileDropRef.current.contains(event.target)) {
-        setIsOpen(false)
-      }
-    }
-
-    document.addEventListener("click", clickOutsideEvent)
-
-    return () => {
-      document.removeEventListener("click", clickOutsideEvent)
-    }
-
-  })
-
   return (
-    <div ref={profileDropRef} className="relative">
+    <div ref={ref} className="relative">
       <UserProfileButton
-        initials={initials}
+        userName={userName}
         level={level}
         setIsOpen={setIsOpen}
       />

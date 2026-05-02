@@ -1,11 +1,12 @@
 import clsx from "clsx"
 
 export default function CheckoutGuestInput({
+    className,
     label,
-    required = false,
     type = "text",
     placeholder = "",
-    className,
+    required = false,
+    defaultValue = ""
 }) {
     return (
         <div>
@@ -16,6 +17,7 @@ export default function CheckoutGuestInput({
             <input
                 type={type}
                 placeholder={placeholder}
+                defaultValue={defaultValue}
                 className={clsx(
                     "w-full rounded-md border border-gray-400 px-3 py-3 outline-none",
                     "focus:border-blue-500",

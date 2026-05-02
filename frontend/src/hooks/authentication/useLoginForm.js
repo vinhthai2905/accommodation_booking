@@ -33,13 +33,15 @@ export default function useLoginForm() {
             const response = await loginUser(data)
             const responseData = await response.json()
 
+            console.log(responseData)
+
             if (!response.ok) {
                 toast.error("Đăng nhập không thành công.")
             }
             else {
-                const { name, email, access_token } = responseData
+                const { user, access_token } = responseData
 
-                authContext.setAuthUserState(access_token, name, email)
+                authContext.setAuthUserState(access_token, user.email, user.personal_info)
 
                 toast.success("Đăng nhập thành công")
 

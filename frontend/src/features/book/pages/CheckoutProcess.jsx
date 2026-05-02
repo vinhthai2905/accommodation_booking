@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import CheckoutSteps from "../section/CheckoutSteps"
 import CheckoutSummary from "../section/CheckoutSummary"
 
-export default function CheckoutProcess({ currentStep = 2 }) {
+export default function CheckoutProcess({ currentStep = 2}) {
     return (
         <motion.main
             initial={{ opacity: 0, x: -40 }}

@@ -25,6 +25,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import AuthUserProvider from './context/AuthUserProvider'
+import BookingProvider from './context/BookingProvider'
+
 import UserProfile from './features/account/UserProfile'
 import ToasterUI from './components/ui/ToasterUI'
 
@@ -65,7 +67,7 @@ function App() {
       ],
     },
     {
-      path: "book",
+      path: "book.html",
       element: <Book />
     },
     {
@@ -91,8 +93,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthUserProvider>
-        <ToasterUI />
-        <RouterProvider router={router} />
+        <BookingProvider>
+          <ToasterUI />
+          <RouterProvider router={router} />
+        </BookingProvider>
       </AuthUserProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

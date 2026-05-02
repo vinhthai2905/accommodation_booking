@@ -1,7 +1,7 @@
-import useHotelDetails from "../../../hooks/hotel/useHotelDetails"
+import useHotelDetailsContext from "../../../hooks/hotel/useHotelDetailsContext"
 
 export default function TopGallery({ images }) {
-  const { hotelQuery } = useHotelDetails()
+  const { hotelQuery } = useHotelDetailsContext()
   const { data: hotel } = hotelQuery
 
   const mainImage = hotel.hotel_images.find(

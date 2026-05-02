@@ -2,7 +2,7 @@ import { CircleCheck } from "lucide-react"
 
 import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
 
-export default function CheckinInfoForm() {
+export default function CheckinInfoFields() {
   return (
     <CheckoutFormBorder>
       <h2 className="text-xl font-bold text-slate-900">Thông tin nhận phòng</h2>

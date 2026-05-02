@@ -6,7 +6,7 @@ import UserProfileBadge from "../../profile/section/UserProfileBadge"
 
 import { clsx } from "clsx"
 
-export default function BookHeader() {
+export default function BookHeader({ isAuthenticated }) {
     return (
         <>
             <div className={clsx(
@@ -26,6 +26,7 @@ export default function BookHeader() {
                             <Flag />
                             <HelpIcon />
                         </div>
+                        {isAuthenticated ? <UserProfileBadge /> : undefined}
                     </div>
                 </div>
             </div>

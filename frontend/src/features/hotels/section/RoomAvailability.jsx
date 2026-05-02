@@ -1,37 +1,28 @@
 import RoomRow from "../components/RoomRow"
 import RoomAvailabilityHeaderRow from "../components/RoomAvailabilityHeaderRow"
 
-import useHotelDetails from "../../../hooks/hotel/useHotelDetails"
-
 import { clsx } from "clsx"
-import { useState } from "react"
 import { Link } from "react-router"
+import { useContext } from "react"
+
+import { BookingContext } from "../../../context/BookingContext"
+import useHotelDetailsContext from "../../../hooks/hotel/useHotelDetailsContext"
+import useBookingNavigation from "../../../hooks/hotel/useBookingNavigation"
 
 export default function RoomAvailability() {
-    const { roomTypesQuery } = useHotelDetails()
+    const { roomTypesQuery } = useHotelDetailsContext()
     const { data: roomTypes } = roomTypesQuery
 
-    const [selectedRooms, setSelectedRooms] = useState({})
+    const {
+        handleRoomSelection,
+        selectedRoomIds,
+        totalPrice,
+    } = useContext(BookingContext)
 
-    const handleRoomSelection = (roomTypeId, roomPrice, roomName, roomId, isSelected) => {
-        setSelectedRooms(prev => {
-            const next = { ...prev }
-            isSelected
-                ? next[roomId] = { roomTypeId, price: roomPrice, roomName }
-                : delete next[roomId]
+    const {
+        bookingSearchParams
+    } = useBookingNavigation()
 
-            return next
-        })
-    }
-
-    const selectedRoomIds = Object.keys(selectedRooms)
-    console.log(Object.values(selectedRooms))
-    const totalPrice = (
-        Object
-            .values(selectedRooms)
-            .reduce((sum, room) => sum + Number(room.price), 0)
-    )
-    const totalSelected = selectedRoomIds.length
 
     return (
         <div className="flex flex-col gap-2 text-black">
@@ -70,32 +61,35 @@ export default function RoomAvailability() {
                         "p-4",
                         "text-center"
                     )}>
-                        {totalSelected > 0 
+                        {selectedRoomIds.length > 0
                             ? (
-                            <>
-                                <span className="text-sm text-gray-600">
-                                    {totalSelected} phòng
-                                </span>
-                                <span className="text-lg font-bold text-blue-600">
-                                    VND {Intl.NumberFormat("vi-VN").format(totalPrice)}
-                                </span>
-                                <Link 
-                                    to={"/book"}
-                                    className={clsx(
-                                    "w-full mt-2 px-4 py-2",
-                                    "bg-blue-600 hover:bg-blue-700 text-white",
-                                    "font-bold rounded-md transition-colors",
-                                    "cursor-pointer"
-                                )}>
-                                    Đặt ngay
-                                </Link>
-                            </>
-                        )   
+                                <>
+                                    <span className="text-sm text-gray-600">
+                                        {selectedRoomIds.length} phòng
+                                    </span>
+                                    <span className="text-lg font-bold text-blue-600">
+                                        VND {Intl.NumberFormat("vi-VN").format(totalPrice)}
+                                    </span>
+                                    <Link
+                                        to={{
+                                            pathname: "/book.html",
+                                            search: `?${bookingSearchParams}`
+                                        }}
+                                        className={clsx(
+                                            "w-full mt-2 px-4 py-2",
+                                            "bg-blue-600 hover:bg-blue-700 text-white",
+                                            "font-bold rounded-md transition-colors",
+                                            "cursor-pointer"
+                                        )}>
+                                        Đặt ngay
+                                    </Link>
+                                </>
+                            )
                             : (
-                            <span className="mt-4 text-sm text-gray-500">
-                                Chưa chọn phòng
-                            </span>
-                        )}
+                                <span className="mt-4 text-sm text-gray-500">
+                                    Chưa chọn phòng
+                                </span>
+                            )}
                     </div>
                 </div>
 
