@@ -6,9 +6,8 @@ from rest_framework import exceptions
 from django.db.models import QuerySet
 
 from apps.app_hotel.api.serializers import (
-    HotelRoomSerializer,
-    RoomTypeSerializer,
-    RoomAvailabilitySerializer,
+    RoomSerializer,
+    RoomTypeAvailabilitySerializer,
     BookingDateSerializer,
 )
 from apps.app_hotel.models import PhongKhachSan, LoaiPhong, KhachSan
@@ -18,7 +17,7 @@ from uuid import UUID
 
 
 class RoomTypeAvailabilityView(APIView):
-    serializer_class = RoomAvailabilitySerializer
+    serializer_class = RoomTypeAvailabilitySerializer
     query_set = LoaiPhong
     hotel_model = KhachSan
     booking_model = DatPhong
@@ -75,7 +74,7 @@ class RoomTypeAvailabilityView(APIView):
 
 
 class HotelRoomView(APIView):
-    serializer_class = HotelRoomSerializer
+    serializer_class = RoomSerializer
     query_set = PhongKhachSan
 
     def get(self, request: Request, *args, **kwargs):
