@@ -16,8 +16,7 @@ import useBookingSummary from "../../../hooks/booking/useBookingSummary"
 export default function CheckoutSummary() {
     const { isAuthenticated } = useContext(AuthUserContext)
     const { selectedRooms, totalPrice } = useContext(BookingContext)
-    const [searchParams, setSearchParams] = useSearchParams()
-    const { data: hotelSummary } = useBookingSummary()
+    const [searchParams] = useSearchParams()
 
     return (
         <div className={clsx(

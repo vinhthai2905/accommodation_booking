@@ -1,11 +1,12 @@
 import clsx from "clsx"
 
 export default function CheckoutGuestPhoneInput({
+    className,
     register,
     codeDefaultValue,
     codeOptions,
     placeholder,
-    className,
+    defaultValue,
 }) {
     return (
         <div>
@@ -27,6 +28,7 @@ export default function CheckoutGuestPhoneInput({
                     {...register}
                     type="tel"
                     placeholder={placeholder}
+                    defaultValue={defaultValue}
                     className={clsx(
                         "flex-1 rounded-md border border-gray-400 px-3 outline-none",
                         "focus:border-blue-500",

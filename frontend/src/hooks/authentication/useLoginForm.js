@@ -9,9 +9,7 @@ import { AuthUserContext } from "../../context/AuthUserContext"
 
 export default function useLoginForm() {
     const [isLoading, setIsLoading] = useState(false)
-
     const authContext = useContext(AuthUserContext)
-
     const navigate = useNavigate()
 
     const {

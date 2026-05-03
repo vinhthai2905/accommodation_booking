@@ -7,3 +7,4 @@ from .models import DatPhong, ChiTietDatPhong, ChiTietKhachTreEm, HoaDon
 admin.site.register(DatPhong)
 admin.site.register(ChiTietDatPhong)
 admin.site.register(ChiTietKhachTreEm)
+admin.site.register(HoaDon)

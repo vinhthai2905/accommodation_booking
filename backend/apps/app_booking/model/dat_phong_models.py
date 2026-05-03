@@ -36,6 +36,11 @@ class DatPhong(TimeStampedModel):
     check_out_date = models.DateField(
         db_column="ngay_tra_phong",
     )
+    
+    check_in_time = models.TimeField(
+        null=True,
+        db_column="thoi_gian_check_in"
+    )
 
     total_room_quantity = models.PositiveSmallIntegerField(
         db_column="tong_so_phong",
@@ -63,7 +68,7 @@ class DatPhong(TimeStampedModel):
     )
 
     payment_method = models.CharField(
-        max_length=10,
+        max_length=15,
         db_column="phuong_thuc_thanh_toan",
     )
 

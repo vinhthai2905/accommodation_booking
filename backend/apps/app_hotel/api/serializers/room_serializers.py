@@ -11,6 +11,12 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = PhongKhachSan
         fields = ["id_room", "id_room_type", "room_name", "room_type", "hotel_name"]
+        
+
+class RoomBookingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PhongKhachSan
+        fields = ["id_room", "room_name"]
 
 
 class RoomAvailabilitySerializer(serializers.ModelSerializer):

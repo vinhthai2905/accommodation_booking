@@ -1,8 +1,9 @@
 import clsx from "clsx"
+import ErrorValidation from "../../../components/ui/ErrorValidation"
+import { getFieldBorderClass } from "../../../utils/getFieldErrorBorder"
 
 export default function CheckoutGuestInput({
     register,
-    className,
     label,
     type = "text",
     placeholder,
@@ -22,17 +23,12 @@ export default function CheckoutGuestInput({
                 defaultValue={defaultValue}
                 className={clsx(
                     "w-full rounded-md border px-3 py-3 outline-none",
-                    error 
-                        ? "border-red-600 focus:border-red-600" 
-                        : "border-gray-400 focus:border-blue-500",
-                    className
+                    getFieldBorderClass(error)
                 )}
             />
 
             {error && (
-                <p className="mt-1.5 text-sm text-red-600 font-medium">
-                    {error.message}
-                </p>
+                <ErrorValidation message={error.message} />
             )}
         </div>
     )

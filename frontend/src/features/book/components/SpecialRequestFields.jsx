@@ -22,12 +22,10 @@ export default function SpecialRequestFields() {
 
                 <textarea
                     {...register("note", {
-                        required: "Vui lòng nhập ghi chú.",
                     })}
                     rows={4}
                     className="w-full rounded-md border border-gray-400 px-3 py-3 outline-none focus:border-blue-500"
                 />
-              
             </div>
 
         </CheckoutFormBorder>

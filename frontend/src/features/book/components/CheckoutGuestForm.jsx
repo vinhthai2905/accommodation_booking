@@ -5,20 +5,18 @@ import CheckinInfoFields from "./CheckinInfoFields"
 import CheckoutAction from "./CheckoutAction"
 
 import { clsx } from "clsx"
-import { useForm, FormProvider } from "react-hook-form"
+import { FormProvider } from "react-hook-form"
+
+import useFormBooking from "../../../hooks/booking/useFormBooking"
+import useBookingPayload from "../../../hooks/booking/useBookingPayLoad"
+import useCreateBooking from "../../../hooks/booking/useCreateBooking"
 
 export default function CheckoutGuestForm() {
-    const methods = useForm({
-        mode: "onChange"
-    })
-
-    const onSuccessValidated = (data) => {
-        console.log(data)
-    }
-
-    const onErrorValidated = () => {
-
-    }
+    const buildPayload  = useBookingPayload()
+    const createBookingMutation = useCreateBooking()
+    const { methods, onSuccessValidated, onErrorValidated } = (
+        useFormBooking(buildPayload, createBookingMutation)
+    )
 
     return (
         <div className={clsx(
