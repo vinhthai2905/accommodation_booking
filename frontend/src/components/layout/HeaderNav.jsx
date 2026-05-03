@@ -1,13 +1,13 @@
 import HomeIcon from "/src/components/ui/HomeIcon"
 import HeaderUltilities from "./HeaderUltilities"
 import GuestNav from "./GuestNav"
-import UserProfileBadge from "./UserProfileBadge"
+
+import UserProfileBadge from "../../features/profile/section/UserProfileBadge"
 
 import { clsx } from "clsx"
 import { useContext } from "react"
 
 import { AuthUserContext } from "../../context/AuthUserContext"
-
 
 export default function HeaderNav() {
     const authUserContext = useContext(AuthUserContext)

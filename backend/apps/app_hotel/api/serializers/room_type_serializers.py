@@ -3,9 +3,8 @@ from rest_framework import exceptions
 
 from apps.app_hotel.models import LoaiPhong
 from apps.app_hotel.api.serializers.room_serializers import (
-    HotelRoomAvailabilitySerializer
+    RoomAvailabilitySerializer
 )
-
 
 class RoomTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,7 +20,10 @@ class RoomTypeSerializer(serializers.ModelSerializer):
         ]
 
 
-class RoomAvailabilitySerializer(serializers.ModelSerializer):
+class RoomTypeAvailabilitySerializer(serializers.ModelSerializer):
+    """Serialize each room type with its available rooms for the resquested date range, 
+    then expose it to the public API."""
+    
     available_rooms = serializers.SerializerMethodField()
 
     class Meta:
@@ -51,6 +53,6 @@ class RoomAvailabilitySerializer(serializers.ModelSerializer):
         ]
 
         return (
-            HotelRoomAvailabilitySerializer(instance=rooms, many=True)
+            RoomAvailabilitySerializer(instance=rooms, many=True)
             .data
         )

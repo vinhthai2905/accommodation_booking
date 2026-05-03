@@ -2,10 +2,12 @@ from rest_framework import serializers
 
 from apps.app_hotel.models import KhachSan
 from apps.app_hotel.helpers import get_full_address
+from apps.app_hotel.api.serializers.booking_date_serializers import BookingDateSerializer
 
-class HotelSearchParamsSerializer(serializers.Serializer):
-    check_in = serializers.DateField(input_formats=["%d-%m-%Y"], required=True)
-    check_out = serializers.DateField(input_formats=["%d-%m-%Y"], required=True)
+
+class HotelSearchParamsSerializer(BookingDateSerializer):
+    """Deserialize hotel search query params."""
+    
     location = serializers.CharField(required=True)
     requested_rooms = serializers.IntegerField(min_value=1, required=True)
     adults = serializers.IntegerField(min_value=1, required=True)
@@ -13,12 +15,14 @@ class HotelSearchParamsSerializer(serializers.Serializer):
     children_ages = serializers.ListField(
         child=serializers.IntegerField(min_value=0, max_value=17),
         required=False,
-        default=list
-)
+        default=list,
+    )
+
+
+class HotelSearchResultSerializer(serializers.ModelSerializer):
+    """Serialize each hotel which met the search requirements, 
+    then expose to public API Search Hotels."""
     
-class HotelSearchSerializer(serializers.ModelSerializer):
-    latitude = serializers.FloatField(write_only=True, required=False)
-    longitude = serializers.FloatField(write_only=True, required=False)
     primary_image = serializers.SerializerMethodField()
     full_address = serializers.SerializerMethodField()
 
@@ -27,17 +31,19 @@ class HotelSearchSerializer(serializers.ModelSerializer):
         fields = [
             "id_hotel",
             "id_hotel_type",
-            "id_user",
             "id_ward",
             "name",
+            "slug",
             "full_address",
             "primary_image",
-            "latitude",
-            "longitude",
         ]
-        extra_kwargs = {
-            "id_user": {"write_only": True},
-        }
+        read_only_fields = [
+            "id_hotel",
+            "id_hotel_type",
+            "id_ward",
+            "name",
+            "slug",
+        ]
 
     def get_primary_image(self, obj: KhachSan):
         primary_image = obj.hotel_images.filter(is_primary=True).first()

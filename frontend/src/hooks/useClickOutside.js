@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 
 export default function useClickOutside(setIsOpened) {
-    const ref = useRef()
+    const ref = useRef(null)
 
     useEffect(() => {
         function handleClickOutside(event) {

@@ -7,17 +7,17 @@ export const parseHotelSearchParams = (location, bookingRanges, guestOptions) =>
         location: location,
         rooms: guestOptions.rooms,
         adults: guestOptions.adults,
-        ...(guestOptions.children >= 1 && {
-            children: guestOptions.children,
-        }),
+        children: guestOptions.children,
     })
 
-    if (guestOptions.children >= 1)
+    if (guestOptions.children >= 1) {
         guestOptions.childrenAge.forEach(age => {
             if (age === undefined)
                 return
             params.append("age", age)
         });
+    }
+
 
     return params
 }

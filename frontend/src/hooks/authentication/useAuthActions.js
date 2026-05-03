@@ -1,6 +1,6 @@
 import toast from "react-hot-toast"
 
-import { logoutUser, fetchUser } from "../../services/authAPI"
+import { logoutUser, fetchUser } from "../../services/authServices"
 
 
 export default function useAuthActions(setUserState) {
@@ -11,19 +11,19 @@ export default function useAuthActions(setUserState) {
         localStorage.setItem("access_token", token)
     }
 
-    const setCurrentUser = (name, email) => {
-        if (!name || !email)
+    const setCurrentUser = (email, personal_info) => {
+        if (!personal_info || !email)
             throw new Error("Thông tin không tồn tại")
 
         setUserState({
-            name,
-            email
+            email,
+            personal_info
         })
     }
 
-    const setAuthUserState = (access_token, name, email) => {
+    const setAuthUserState = (access_token, email, personal_info) => {
         setAccessToken(access_token),
-            setCurrentUser(name, email)
+        setCurrentUser(email, personal_info)
     }
 
     const clearAuthUserState = async () => {
@@ -48,7 +48,7 @@ export default function useAuthActions(setUserState) {
 
             const responseData = await response.json()
 
-            setCurrentUser(responseData.name, responseData.email)
+            setCurrentUser(responseData.user.email, responseData.user.personal_info)
 
             return responseData
 

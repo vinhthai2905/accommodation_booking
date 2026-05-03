@@ -1,8 +1,8 @@
 import { clsx } from "clsx"
 
-import HotelCardSlider from "/src/features/hotels/HotelCardSlider";
+import HotelCardSlider from "../features/hotels/components/HotelCardSlider"
 
-import OffersSection from "/src/components/ui/OffersSection";
+import OffersSection from "/src/components/ui/OffersSection"
 
 export default function Home() {
     return (

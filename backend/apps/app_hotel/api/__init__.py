@@ -1,10 +1,15 @@
 from .views import (
-    HotelView,
+    HotelDetailView,
     HotelImageView,
     HotelRoomView, 
-    RoomTypeAvailabilityView, 
+    RoomTypeAvailabilityView,
+    ChildPolicyView
 )
 
 from .views import (
     HotelSearchView
+)
+
+from .views import (
+    HotelBookingView
 )

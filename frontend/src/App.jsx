@@ -9,7 +9,7 @@ import Profile from './pages/Profile'
 import SearchResults from "./pages/SearchResults"
 import CustomerRegister from './pages/CustomerRegister'
 import CustomerSignIn from './pages/CustomerSignIn'
-import Checkout from './pages/Checkout'
+import Book from './pages/Book'
 
 import PartnerRegister from './pages/PartnerRegister'
 import PartnerDashboard from './pages/partner/PartnerDashboard'
@@ -25,6 +25,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import AuthUserProvider from './context/AuthUserProvider'
+import BookingProvider from './context/BookingProvider'
+
 import UserProfile from './features/account/UserProfile'
 import ToasterUI from './components/ui/ToasterUI'
 
@@ -35,6 +37,15 @@ const queryClient = new QueryClient()
 function App() {
   const router = createBrowserRouter([
     {
+      path: "auth",
+      element: <AuthLayout />,
+      children: [
+        { path: "sign-up", element: <CustomerRegister /> },
+        { path: "sign-in", element: <CustomerSignIn /> },
+        { path: "partner/sign-up", element: <PartnerRegister /> }
+      ]
+    },
+    {
       path: "/",
       element: <AppLayout />,
       children: [
@@ -44,9 +55,6 @@ function App() {
         {
           path: "hotel/:slug/:uuid",
           element: <Hotel />,
-          children: [
-            { path: "checkout", element: <Checkout /> }
-          ],
         },
         {
           path: "profile",
@@ -57,16 +65,10 @@ function App() {
         },
 
       ],
-
     },
     {
-      path: "auth",
-      element: <AuthLayout />,
-      children: [
-        { path: "sign-up", element: <CustomerRegister /> },
-        { path: "sign-in", element: <CustomerSignIn /> },
-        { path: "partner/sign-up", element: <PartnerRegister /> }
-      ]
+      path: "book.html",
+      element: <Book />
     },
     {
       path: "partner",
@@ -91,8 +93,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthUserProvider>
-        <ToasterUI />
-        <RouterProvider router={router} />
+        <BookingProvider>
+          <ToasterUI />
+          <RouterProvider router={router} />
+        </BookingProvider>
       </AuthUserProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

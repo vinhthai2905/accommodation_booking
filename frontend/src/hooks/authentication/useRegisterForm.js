@@ -3,14 +3,13 @@ import { useNavigate } from "react-router"
 import { useForm } from "react-hook-form"
 import toaster, { toast } from "react-hot-toast"
 
-import { registerUser } from "../../services/authAPI"
+import { registerUser } from "../../services/authServices"
 import { AuthUserContext } from "../../context/AuthUserContext"
 
 import { defaultTestValues } from "../../features/authentication/configs/DefaultValues"
 
 export default function useRegisterForm() {
   const [isLoading, setLoading] = useState(false)
-
   const authContext = useContext(AuthUserContext)
 
   const navigate = useNavigate()
@@ -48,9 +47,9 @@ export default function useRegisterForm() {
       }
 
       else {
-        const { name, email, access_token } = responseData
+        const { user, access_token } = responseData
 
-        authContext.setAuthUserState(access_token, name, email)
+        authContext.setAuthUserState(access_token, user.email, user.personal_info)
 
         toaster.success("Tạo tài khoản thành công.")
         reset()

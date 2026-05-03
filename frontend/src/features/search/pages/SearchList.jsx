@@ -1,6 +1,6 @@
 import Breadcrumbs from "../section/Breadcrumbs"
 import FilterPanel from "../filter/FilterPanel"
-import HotelCardSearchGrid from "/src/features/hotels/HotelCardSearchGrid"
+import HotelCardSearchGrid from "/src/features/hotels/section/HotelCardSearchGrid"
 import SearchSummary from "../filter/SearchSummary"
 
 import { clsx } from "clsx"

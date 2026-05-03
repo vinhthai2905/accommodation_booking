@@ -13,10 +13,10 @@ from apps.app_hotel.models import KhachSan, ChinhSachTreEm
 from apps.app_booking.models import DatPhong
 from apps.app_location.models import Phuong
 
-from apps.app_hotel.api.serializers import HotelSearchSerializer, HotelSerializer, HotelSearchParamsSerializer
+from apps.app_hotel.api.serializers import HotelSearchResultSerializer, HotelDetailSerializer, HotelSearchParamsSerializer
  
 class HotelSearchView(APIView):
-    serializer_class = HotelSearchSerializer
+    serializer_class = HotelSearchResultSerializer
     hotel_model = KhachSan
     booking_model = DatPhong
     ward_model = Phuong
@@ -29,7 +29,7 @@ class HotelSearchView(APIView):
 
         query_params.pop("age", None)
         query_params.pop("rooms", None)
-
+        
         return query_params
 
     def _get_hotel_search_params(self, request: Request) -> dict:
@@ -161,8 +161,8 @@ class HotelSearchView(APIView):
         return Response(serializer.data)
     
 
-class HotelView(APIView):
-    serializer_class = HotelSerializer
+class HotelDetailView(APIView):
+    serializer_class = HotelDetailSerializer
     hotel_model = KhachSan
     
     def get(self, request: Request, id_hotel: UUID):

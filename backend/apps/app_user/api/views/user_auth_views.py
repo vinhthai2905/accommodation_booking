@@ -11,34 +11,33 @@ from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from helpers import get_user_name, get_email
-
 from apps.app_user.api.serializers import (
-    UserSerializer,
+    RegisterSerializer,
     LoginSerializer,
     LogoutSerializer,
+    AuthenticatedUserSerializer,
 )
 
 from apps.app_user.models import NguoiDung
+
 
 class UserRegisterView(APIView):
     http_method_names = ["post"]
     permission_classes = [AllowAny]
 
     # renderer_classes = [JSONRenderer]
-    serializer_class = UserSerializer
+    serializer_class = RegisterSerializer
 
     def post(self, request: Request, *args, **kwargs):
-        user_serializer: UserSerializer = self.serializer_class(data=request.data)
+        user_serializer: RegisterSerializer = self.serializer_class(data=request.data)
         user_serializer.peform_validation()
-        
+
         user = user_serializer.create(validated_data=user_serializer.validated_data)
         refresh = RefreshToken.for_user(user=user)
 
         response = Response(
             data={
-                "name": get_user_name(user),
-                "email": user_serializer.data["email"],
+                "user": AuthenticatedUserSerializer(instance=user).data,
                 "access_token": str(refresh.access_token),
             },
             status=status.HTTP_201_CREATED,
@@ -55,6 +54,7 @@ class UserRegisterView(APIView):
 
         return response
 
+
 class LoginView(APIView):
     http_method_names = ["post"]
     permission_classes = [AllowAny]
@@ -63,20 +63,19 @@ class LoginView(APIView):
 
     def post(self, request: Request, *args, **kwargs):
         login_serializer: LoginSerializer = self.serializer_class(data=request.data)
-
         login_serializer.is_valid(raise_exception=True)
 
-        refresh = RefreshToken.for_user(login_serializer.validated_data["user"])
+        user = login_serializer.validated_data["user"]
+        refresh = RefreshToken.for_user(user)
 
         response = Response(
             data={
-                "name": get_user_name(login_serializer.validated_data["user"]),
-                "email": login_serializer.validated_data["email"],
+                "user": AuthenticatedUserSerializer(instance=user).data,
                 "access_token": str(refresh.access_token),
             },
             status=status.HTTP_200_OK,
         )
-        
+
         response.set_cookie(
             key="refresh_token",
             value=str(refresh),
@@ -87,6 +86,7 @@ class LoginView(APIView):
         )
 
         return response
+
 
 class LogoutView(APIView):
     http_method_names = ["post"]
@@ -110,6 +110,7 @@ class LogoutView(APIView):
 
         return response
 
+
 class FetchUserView(APIView):
     http_method_names = ["post"]
 
@@ -117,6 +118,6 @@ class FetchUserView(APIView):
 
     def post(self, request: Request, *args, **kwargs):
         return Response(
-            data={"name": get_user_name(request.user), "email": request.user.email},
+            data={"user": AuthenticatedUserSerializer(instance=request.user).data},
             status=status.HTTP_200_OK,
         )

@@ -1,4 +1,4 @@
-import HotelDetails from "../features/hotels/HotelDetails"
+import HotelDetails from "../features/hotels/pages/HotelDetails"
 
 import HotelDetailsProvider from "../context/HotelDetailsProvider"
 

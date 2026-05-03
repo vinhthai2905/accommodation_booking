@@ -4,9 +4,7 @@ import { useContext } from "react"
 
 import { AuthUserContext } from "../../context/AuthUserContext"
 
-export default function UserProfileButton({ initials, level, setIsOpen }) {
-    const authUserContext = useContext(AuthUserContext)
-
+export default function UserProfileButton({ userName, level, setIsOpen }) {
     return (
         <button
             type="button"
@@ -25,12 +23,11 @@ export default function UserProfileButton({ initials, level, setIsOpen }) {
                     "text-sm font-medium text-white"
                 )}
             >
-                {initials}
             </div>
 
             <div className="leading-tight">
                 <p className="text-sm font-semibold text-white">
-                    {authUserContext.user?.name}
+                    {userName}
                 </p>
                 <p className="text-xs text-yellow-300">{level}</p>
             </div>

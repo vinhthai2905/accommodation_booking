@@ -3,11 +3,13 @@ from rest_framework import exceptions
 
 
 class BookingDateSerializer(serializers.Serializer):
+    """Deserialize requested date range."""
+    
     check_in = serializers.DateField(
-        input_formats=["%d-%m-%Y"], required=True, write_only=True
+        input_formats=["%d-%m-%Y"], required=True
     )
     check_out = serializers.DateField(
-        input_formats=["%d-%m-%Y"], required=True, write_only=True
+        input_formats=["%d-%m-%Y"], required=True
     )
 
     def validate(self, attrs):
