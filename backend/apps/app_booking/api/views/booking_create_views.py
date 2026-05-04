@@ -18,6 +18,7 @@ from apps.app_booking.models import (
 )
 
 from apps.app_booking.model.hoa_don_models import HoaDon
+from apps.app_booking.choices import TrangThaiDatPhong
 from apps.app_hotel.models import PhongKhachSan, KhachSan, ChinhSachTreEm
 from apps.app_user.models import NguoiDung
 
@@ -88,7 +89,7 @@ class CreateBookingView(views.APIView):
             total_adults=validated_data.get("total_adults", 0),
             total_children=validated_data.get("total_children", 0),
             note=validated_data.get("note", ""),
-            status="PENDING",
+            status=TrangThaiDatPhong.PENDING,
             payment_method="ONLINE",
         )
 
@@ -184,8 +185,8 @@ class CreateBookingView(views.APIView):
 
                 return Response(
                     {
-                        "message": "Booking created successfully",
-                        "booking_id": booking.id_booking,
+                        "message": "Booking created successfully.",
+                        "id_booking": booking.id_booking,
                     },
                     status=status.HTTP_201_CREATED,
                 )

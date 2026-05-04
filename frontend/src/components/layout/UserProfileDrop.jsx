@@ -18,7 +18,7 @@ import { AuthUserContext } from "../../context/AuthUserContext"
 
 const menuItems = [
     { title: "My account", icon: CircleUserRound, to: "/profile" },
-    { title: "Bookings & Trips", icon: BriefcaseBusiness },
+    { title: "Bookings & Trips", icon: BriefcaseBusiness, to:"/profile/mytrips.html" },
     { title: "Genius loyalty program", icon: BadgeDollarSign },
     { title: "Rewards & Wallet", icon: Wallet },
     { title: "Reviews", icon: MessageSquareText },
@@ -41,7 +41,7 @@ export default function UserProfileDrop() {
 
                 return (
                     <Link
-                        to={"/index"}
+                        to={item.to}
                         key={item.title}
                         className={clsx(
                             "w-full px-5 py-3 flex items-center gap-2",

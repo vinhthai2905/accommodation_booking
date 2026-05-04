@@ -11,5 +11,5 @@ from .views import (
 )
 
 from .views import (
-    HotelBookingView
+    HotelBookingSummaryView
 )

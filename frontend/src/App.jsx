@@ -16,6 +16,8 @@ import PartnerDashboard from './pages/partner/PartnerDashboard'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 
+import MyBooking from './features/profile/section/MyBooking'
+
 import './features/account/UserProfile'
 
 import './App.css'
@@ -56,15 +58,15 @@ function App() {
           path: "hotel/:slug/:uuid",
           element: <Hotel />,
         },
-        {
-          path: "profile",
-          element: <Profile />,
-          children: [
-            { path: "user", element: <UserProfile /> }
-          ]
-        },
-
       ],
+    },
+    {
+      path: "profile",
+      element: <Profile />,
+      children: [
+        { path: "user", element: <UserProfile /> },
+        { path: "mytrips.html", element: <MyBooking /> }
+      ]
     },
     {
       path: "book.html",

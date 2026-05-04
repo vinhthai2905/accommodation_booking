@@ -1,7 +1,9 @@
 import { clsx } from "clsx"
-import { CreditCard, CheckCircle2, ArrowRight, Loader2 } from "lucide-react"
+import { CheckCircle2, ArrowRight, Loader2 } from "lucide-react"
 import { useState } from "react"
 import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
+import PaymentSteps from "../components/PaymentSteps"
+import PaymentButton from "../components/PaymentButton"
 
 const METHODS = [
     {
@@ -84,48 +86,15 @@ export default function PaymentCard({ bookingFormPayload, createBookingMutation 
 
             {/* Wallet steps */}
             {method.steps && (
-                <ol
-                    className="mt-5 space-y-2 rounded-xl border-2 p-4 text-sm"
-                    style={{ borderColor: method.color + "40", backgroundColor: method.color + "08" }}
-                >
-                    {method.steps.map((step, i) => (
-                        <li key={i} className="flex items-start gap-2 text-slate-700">
-                            <span
-                                className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-white"
-                                style={{ backgroundColor: method.color }}
-                            >
-                                {i + 1}
-                            </span>
-                            {step}
-                        </li>
-                    ))}
-                </ol>
+               <PaymentSteps method={method} />
             )}
 
-            <button
-                type="button"
-                onClick={handleConfirmBooking}
-                disabled={createBookingMutation?.isPending || !bookingFormPayload}
-                style={{ backgroundColor: method.color }}
-                className={clsx(
-                    "mt-6 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3",
-                    "text-sm font-semibold text-white transition-all",
-                    "hover:opacity-90 active:scale-[0.98]",
-                    "disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
-                )}
-            >
-                {createBookingMutation?.isPending 
-                    ? (
-                    <>
-                        <Loader2 className="h-4 w-4 animate-spin" /> Đang xử lý…
-                    </>
-                ) 
-                    : (
-                    <>
-                        Xác nhận thanh toán <ArrowRight className="h-4 w-4" />
-                    </>
-                )}
-            </button>
+            <PaymentButton 
+                method={method}
+                bookingFormPayload={bookingFormPayload}
+                handleConfirmBooking={handleConfirmBooking}
+                createBookingMutation={createBookingMutation}
+            />
         </CheckoutFormBorder>
     )
 }

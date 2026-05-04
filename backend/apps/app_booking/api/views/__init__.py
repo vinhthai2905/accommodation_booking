@@ -1,1 +1,2 @@
 from .booking_create_views import CreateBookingView
+from .bookings_user_views import UserBookingListView

@@ -1,7 +1,17 @@
-import { Outlet } from "react-router"
+import ProfileHeader from "../features/profile/components/ProfileHeader"
 
-export default function Profile () {
+import { Outlet } from "react-router"
+import { useContext } from "react"
+
+import { AuthUserContext } from "../context/AuthUserContext"
+
+export default function Profile() {
+    const { isAuthenticated} = useContext(AuthUserContext)
+
     return (
-        <Outlet />
+        <>
+            <ProfileHeader isAuthenticated={isAuthenticated}/>
+            <Outlet />
+        </>
     )
 }

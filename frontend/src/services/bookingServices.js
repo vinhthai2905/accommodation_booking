@@ -16,3 +16,18 @@ export const createBooking = async (bookingData) => {
   return data
 }
 
+export const fetchUserBookings = async (activeTab) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.get(
+    `${apiUrl}/api/user/bookings`,
+    {
+      headers,
+      params: {
+        tab: activeTab
+      }
+    }
+  )
+
+  return data
+}

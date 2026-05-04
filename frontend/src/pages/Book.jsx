@@ -1,5 +1,6 @@
 import BookHeader from "../features/book/components/BookHeader"
-import LoadingScreen from "../components/ui/LoadingScreen"
+import BookingSummaryLoadingScreen from "../features/profile/components/BookingSummaryLoadingScreen"
+import BookingLoadingScreen from "../components/ui/BookingLoadingScreen"
 
 import CheckoutSteps from "../features/book/section/CheckoutSteps"
 import CheckoutSummary from "../features/book/pages/CheckoutSummary"
@@ -23,15 +24,14 @@ export default function Book() {
     const { isLoading: isFetchingBookingSummary } = useBookingSummary(hasAllBookingParams)
     const { bookingFormPayload, handleBookingPayload, createBookingMutation } = useCreateBooking(setStepCheckout)
 
-
     if (!hasAllBookingParams)
         return <Navigate to="/index" replace />
 
     if (isFetchingUser || isFetchingBookingSummary)
-        return <LoadingScreen />
+        return <BookingSummaryLoadingScreen />
 
     if (createBookingMutation.isPending)
-        return <LoadingScreen />
+        return <BookingLoadingScreen text="Đang tạo đơn đặt phòng..." />
 
     return (
         <>
