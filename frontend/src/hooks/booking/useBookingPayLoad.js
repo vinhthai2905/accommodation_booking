@@ -3,7 +3,7 @@ import { useContext } from "react"
 
 import { BookingContext } from "../../context/BookingContext"
 
-import { buildBookingPayLoad } from "../../helpers/buildBookingPayload"
+import { buildBookingPayLoad } from "../../features/book/helpers/buildBookingPayload"
 import { getCheckoutParams } from "../../helpers/getCheckoutParams"
 
 export default function useBookingPayload() {

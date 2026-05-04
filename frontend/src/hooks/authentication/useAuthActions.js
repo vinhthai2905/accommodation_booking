@@ -46,6 +46,7 @@ export default function useAuthActions(setUserState) {
             if (!response.ok)
                 throw new Error(`Response status: ${response.status}`)
 
+
             const responseData = await response.json()
 
             setCurrentUser(responseData.user.email, responseData.user.personal_info)

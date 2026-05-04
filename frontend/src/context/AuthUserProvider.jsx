@@ -10,6 +10,8 @@ export default function AuthUserProvider({ children }) {
     const { setAuthUserState, fetchAuthUserState, clearAuthUserState } = useAuthActions(setUserState)
     const { isLoading, error, data } = useRefreshUser(fetchAuthUserState)
 
+    console.log(error)
+
     const authUserContext = {
         user,
         isFetchingUser: isLoading,

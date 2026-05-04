@@ -1,5 +1,4 @@
 import GuestDetailsFields from "./GuestDetailsFields"
-import CheckoutRoomCard from "./CheckoutRoomCard"
 import SpecialRequestFields from "./SpecialRequestFields"
 import CheckinInfoFields from "./CheckinInfoFields"
 import CheckoutAction from "./CheckoutAction"
@@ -9,13 +8,11 @@ import { FormProvider } from "react-hook-form"
 
 import useFormBooking from "../../../hooks/booking/useFormBooking"
 import useBookingPayload from "../../../hooks/booking/useBookingPayLoad"
-import useCreateBooking from "../../../hooks/booking/useCreateBooking"
 
-export default function CheckoutGuestForm() {
-    const buildPayload  = useBookingPayload()
-    const createBookingMutation = useCreateBooking()
+export default function CheckoutGuestForm({ handleBookingPayload }) {
+    const buildBookingPayload = useBookingPayload()
     const { methods, onSuccessValidated, onErrorValidated } = (
-        useFormBooking(buildPayload, createBookingMutation)
+        useFormBooking(buildBookingPayload, handleBookingPayload)
     )
 
     return (
@@ -29,7 +26,6 @@ export default function CheckoutGuestForm() {
                         "flex flex-col gap-3"
                     )}>
                         <GuestDetailsFields />
-                        <CheckoutRoomCard />
                         <SpecialRequestFields />
                         <CheckinInfoFields />
                         <CheckoutAction />

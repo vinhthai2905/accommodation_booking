@@ -11,9 +11,7 @@ import { useSearchParams } from "react-router"
 import { AuthUserContext } from "../../../context/AuthUserContext"
 import { BookingContext } from "../../../context/BookingContext"
 
-import useBookingSummary from "../../../hooks/booking/useBookingSummary"
-
-export default function CheckoutSummary() {
+export default function CheckoutSummary({ handleBookingPayload }) {
     const { isAuthenticated } = useContext(AuthUserContext)
     const { selectedRooms, totalPrice } = useContext(BookingContext)
     const [searchParams] = useSearchParams()
@@ -33,7 +31,7 @@ export default function CheckoutSummary() {
             </aside>
             <div className="flex flex-col w-[70%] gap-3">
                 {isAuthenticated ? <AuthenticatedCard /> : undefined}
-                <CheckoutGuestForm />
+                <CheckoutGuestForm handleBookingPayload={handleBookingPayload}/>
             </div>
         </div>
     )

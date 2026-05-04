@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form"
 
-export default function useFormBooking(buildPayload, createBookingMutation) {
+export default function useFormBooking(buildPayload, handleBookingPayload) {
     const methods = useForm()
 
     const onSuccessValidated = (submitData) => {
         const bookingPayload = buildPayload(submitData)
-        createBookingMutation.mutate(bookingPayload)
+        handleBookingPayload(bookingPayload)
     }
 
     const onErrorValidated = () => {
