@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'apps.app_user',
     'apps.app_hotel',
     'apps.app_location',
-    'apps.app_booking'
+    'apps.app_booking',
+    'apps.app_payment'
 ]
 
 MIDDLEWARE = [

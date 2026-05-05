@@ -7,4 +7,6 @@ urlpatterns = [
     
     
     path('api/user/bookings', UserBookingListView.as_view(), name='user-bookings'),
+    
+   
 ]

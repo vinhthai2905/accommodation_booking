@@ -1,1 +1,1 @@
-from .booking_user_permissions import *
+from .user_permissions import *

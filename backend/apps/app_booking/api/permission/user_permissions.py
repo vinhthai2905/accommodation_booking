@@ -1,6 +1,6 @@
 from rest_framework.permissions import BasePermission
 
-class UserBookingsPermission(BasePermission):
+class UserIsCustomer(BasePermission):
     def has_permission(self, request, view):
         user = request.user
         

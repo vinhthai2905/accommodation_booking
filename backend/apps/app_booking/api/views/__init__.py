@@ -1,2 +1,2 @@
-from .booking_create_views import CreateBookingView
-from .bookings_user_views import UserBookingListView
+from . import booking_create_views
+from . import bookings_user_views

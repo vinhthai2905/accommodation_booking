@@ -1,4 +1,6 @@
 import uuid
+import hmac
+import hashlib
 
 from django.db import transaction
 from django.db.models import QuerySet
@@ -8,6 +10,8 @@ from rest_framework import exceptions
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+
+from apps.app_booking.api.permission import UserIsCustomer
 from apps.app_booking.api.serializers import (
     CreateBookingSerializer,
 )
@@ -22,8 +26,8 @@ from apps.app_booking.choices import TrangThaiDatPhong
 from apps.app_hotel.models import PhongKhachSan, KhachSan, ChinhSachTreEm
 from apps.app_user.models import NguoiDung
 
-
 class CreateBookingView(views.APIView):
+    permission_classes=[UserIsCustomer]
     serializer_class = CreateBookingSerializer
     hotel_model = KhachSan
 
@@ -163,6 +167,8 @@ class CreateBookingView(views.APIView):
             room_amount=room_amount,
             total_amount=total_child_surcharge + room_amount,
         )
+        
+    
 
     def post(self, request: Request, *args, **kwargs):
         flatten_data = self._flatten_booking_payload(request.data)
@@ -182,6 +188,8 @@ class CreateBookingView(views.APIView):
                     booking, hotel_child_policy, validated_data
                 )
                 self._create_invoce(booking, total_child_surcharge, room_amount)
+                
+                
 
                 return Response(
                     {
@@ -195,3 +203,7 @@ class CreateBookingView(views.APIView):
 
         except Exception as e:
             raise exceptions.APIException(detail={"error": str(e)})
+        
+
+    
+    
