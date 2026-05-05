@@ -19,6 +19,7 @@ export default function BookingTabs({ isFetchingBookings, activeTab, setActiveTa
                     onClick={() => setActiveTab(tab.id)}
                     className={clsx(
                         "px-4 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200",
+                        "cursor-pointer",
                         activeTab === tab.id
                             ? "bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-200"
                             : "bg-white text-slate-600 border-gray-300 hover:border-blue-400 hover:text-blue-600"

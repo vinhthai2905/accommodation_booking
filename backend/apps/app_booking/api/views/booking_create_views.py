@@ -1,7 +1,3 @@
-import uuid
-import hmac
-import hashlib
-
 from django.db import transaction
 from django.db.models import QuerySet
 
@@ -9,7 +5,6 @@ from rest_framework import views, status
 from rest_framework import exceptions
 from rest_framework.request import Request
 from rest_framework.response import Response
-
 
 from apps.app_booking.api.permission import UserIsCustomer
 from apps.app_booking.api.serializers import (
@@ -20,6 +15,8 @@ from apps.app_booking.models import (
     ChiTietDatPhong,
     ChiTietKhachTreEm,
 )
+
+from apps.app_payment.services import ZaloPayService
 
 from apps.app_booking.model.hoa_don_models import HoaDon
 from apps.app_booking.choices import TrangThaiDatPhong
@@ -160,16 +157,14 @@ class CreateBookingView(views.APIView):
 
     def _create_invoce(
         self, booking: DatPhong, total_child_surcharge, room_amount
-    ):
-        HoaDon.objects.create(
+    )-> HoaDon:
+        return HoaDon.objects.create(
             id_booking=booking,
             total_child_surcharge=total_child_surcharge,
             room_amount=room_amount,
             total_amount=total_child_surcharge + room_amount,
         )
         
-    
-
     def post(self, request: Request, *args, **kwargs):
         flatten_data = self._flatten_booking_payload(request.data)
         validated_data = self._validate_booking_payload(flatten_data)
@@ -187,10 +182,11 @@ class CreateBookingView(views.APIView):
                 total_child_surcharge = self._create_child_booking_details(
                     booking, hotel_child_policy, validated_data
                 )
-                self._create_invoce(booking, total_child_surcharge, room_amount)
+                invoice = self._create_invoce(booking, total_child_surcharge, room_amount)
+                
+                response_zalo_order = ZaloPayService.create_order(booking, invoice, user)
                 
                 
-
                 return Response(
                     {
                         "message": "Booking created successfully.",

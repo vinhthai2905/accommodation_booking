@@ -1,1 +1,1 @@
-from .zalo import create_order_views
+from .zalo import create_zalo_order_views
