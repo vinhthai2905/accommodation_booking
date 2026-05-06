@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
+import { useNavigate } from "react-router"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 
@@ -10,8 +11,12 @@ export default function useCreateBooking(setStepCheckout) {
         mutationKey: ["createBooking"],
         mutationFn: createBooking,
 
-        onSuccess: () => {
-            toast.success("Booking created successfully.")
+        onSuccess: (data) => {
+            const redirectPaymentGateway = (
+                data.payment_gateway_result.order_url
+            )
+            if (redirectPaymentGateway)
+                window.location.href = redirectPaymentGateway
         },
 
         onError: () => {
@@ -25,7 +30,7 @@ export default function useCreateBooking(setStepCheckout) {
     }
 
     return {
-        bookingFormPayload, 
+        bookingFormPayload,
         handleBookingPayload,
         createBookingMutation
     }

@@ -19,7 +19,7 @@ class ZaloPayService:
     @staticmethod
     def _build_embed_data(user: NguoiDung, id_booking: uuid.UUID, id_invoice: int):
         embed_data = {
-            "user_email": get_email(user),
+            "user_email": user.email,
             "id_booking": f"#{str(id_booking)[:8].upper()}",
             "id_invoice": f"#{id_invoice}",
         }
@@ -58,7 +58,7 @@ class ZaloPayService:
         ).hexdigest()
 
     @staticmethod
-    def _create_zalo_pay_order(zalo_order_payload):
+    def _init_zalo_pay_order(zalo_order_payload):
         return requests.post(
             settings.ZALOPAY_CREATE_ORDER_URL, json=zalo_order_payload, timeout=15
         )
@@ -71,19 +71,19 @@ class ZaloPayService:
         app_user = user.email
         app_time = int(time.time() * 1000)
         app_trans_id = f"{trans_id_date}_#{str(booking.id_booking)[:8].upper()}"
-        amount = invoice.total_amount
+        amount = int(invoice.total_amount)
         embed_data = cls._build_embed_data(user, booking.id_booking, invoice.id_invoice)
         item = cls._build_item(booking)
         mac = cls._generate_mac(
             app_trans_id, app_user, amount, app_time, embed_data, item
         )
-
+        
         zalo_order_payload = {
             "app_id": settings.ZALOPAY_APP_ID,
             "app_user": user.email,
             "app_time": app_time,
             "app_trans_id": app_trans_id,
-            "amount": invoice.total_amount,
+            "amount": amount,
             "embed_data": embed_data,
             "item": item,
             "description": f"ZaloPay - Thanh toán cho đơn hàng {app_trans_id}",
@@ -91,4 +91,9 @@ class ZaloPayService:
             "expire_duration_seconds": 900,
         }
 
-        return cls._create_zalo_pay_order(zalo_order_payload)
+        return cls._init_zalo_pay_order(zalo_order_payload)
+
+    @classmethod
+    def get_order_status(cls):
+        
+    
