@@ -1,8 +1,9 @@
-import BookingDetailsCard from "../components/BookingDetailsCard"
-import HotelSummaryCard from "../components/HotelSummaryCard"
-import PriceSummaryCard from "../components/PriceSummaryCard"
-import CheckoutGuestForm from "../components/CheckoutGuestForm"
-import AuthenticatedCard from "../components/AuthenticatedCard"
+import BookingDetailsCard from "../components/CheckoutSummary/BookingDetailsCard"
+import HotelSummaryCard from "../components/CheckoutSummary/HotelSummaryCard"
+import PriceSummaryCard from "../components/CheckoutSummary/PriceSummaryCard"
+import CheckoutGuestForm from "../components/CheckoutSummary/CheckoutGuestForm"
+
+import AuthenticatedCard from "../components/Shared/AuthenticatedCard"
 
 import { clsx } from "clsx"
 import { useContext } from "react"
@@ -31,7 +32,7 @@ export default function CheckoutSummary({ handleBookingPayload }) {
             </aside>
             <div className="flex flex-col w-[70%] gap-3">
                 {isAuthenticated ? <AuthenticatedCard /> : undefined}
-                <CheckoutGuestForm handleBookingPayload={handleBookingPayload}/>
+                <CheckoutGuestForm handleBookingPayload={handleBookingPayload} />
             </div>
         </div>
     )

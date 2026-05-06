@@ -1,6 +1,7 @@
-import clsx from "clsx"
-import ErrorValidation from "../../../components/ui/ErrorValidation"
-import { getFieldBorderClass } from "../../../utils/getFieldErrorBorder"
+import ErrorValidation from "../../../../components/ui/ErrorValidation"
+
+import { getFieldBorderClass } from "../../../../utils/getFieldErrorBorder"
+import { clsx } from "clsx"
 
 export default function CheckoutGuestInput({
     register,

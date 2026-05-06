@@ -39,7 +39,7 @@ class TestMacCancelOrder(views.APIView):
         key1 = "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn"
 
         app_id = 2554
-        app_trans_id = "260506_#2AD973A5"
+        app_trans_id = "260506_#656C21A9"
 
         mac = hmac.new(
             key1.encode("utf-8"),
@@ -53,7 +53,6 @@ class TestMacCancelOrder(views.APIView):
             "mac": mac
         })
         
-
         
 class TestMacBankList(views.APIView):
     def get(self, request: Request, *args, **kwargs):

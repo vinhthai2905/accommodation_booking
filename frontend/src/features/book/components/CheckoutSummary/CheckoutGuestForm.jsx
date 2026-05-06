@@ -6,8 +6,8 @@ import CheckoutAction from "./CheckoutAction"
 import { clsx } from "clsx"
 import { FormProvider } from "react-hook-form"
 
-import useFormBooking from "../../../hooks/booking/useFormBooking"
-import useBookingPayload from "../../../hooks/booking/useBookingPayLoad"
+import useFormBooking from "../../../../hooks/booking/useFormBooking"
+import useBookingPayload from "../../../../hooks/booking/useBookingPayLoad"
 
 export default function CheckoutGuestForm({ handleBookingPayload }) {
     const buildBookingPayload = useBookingPayload()

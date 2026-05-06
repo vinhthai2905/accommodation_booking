@@ -1,9 +1,10 @@
-import { clsx } from "clsx"
-import { CheckCircle2, ArrowRight, Loader2 } from "lucide-react"
-import { useState } from "react"
 import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
-import PaymentSteps from "../components/PaymentSteps"
-import PaymentButton from "../components/PaymentButton"
+import PaymentSteps from "../components/PaymentCard/PaymentSteps"
+import PaymentButton from "../components/PaymentCard/PaymentButton"
+
+import { clsx } from "clsx"
+import { CheckCircle2 } from "lucide-react"
+import { useState } from "react"
 
 const METHODS = [
     {
@@ -41,7 +42,7 @@ const METHODS = [
 
 export default function PaymentCard({ bookingFormPayload, createBookingMutation }) {
     const [cardSelected, setCardSelected] = useState("card")
-    const method = METHODS.find((m) => m.value === cardSelected)
+    const method = METHODS.find((method) => method.value === cardSelected)
 
     const handleConfirmBooking = () => {
         if (!bookingFormPayload) return
@@ -55,36 +56,35 @@ export default function PaymentCard({ bookingFormPayload, createBookingMutation 
             </h2>
 
             <div className="mt-4 flex flex-col gap-2">
-                {METHODS.map((m) => (
+                {METHODS.map((method) => (
                     <button
-                        key={m.value}
+                        key={method.value}
                         type="button"
-                        onClick={() => setCardSelected(m.value)}
+                        onClick={() => setCardSelected(method.value)}
                         className={clsx(
                             "flex items-center gap-3 rounded-xl border-2 px-4 py-3 text-left transition-all",
-                            cardSelected === m.value
+                            cardSelected === method.value
                                 ? "border-blue-500 bg-blue-50"
                                 : "border-slate-200 hover:border-slate-300 hover:bg-slate-50"
                         )}
                     >
                         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100">
-                            <img src={m.img} />
+                            <img src={method.img} />
                         </div>
                         <div className="flex-1">
-                            <p className="text-sm font-semibold text-slate-800">{m.label}</p>
-                            <p className="text-xs text-slate-500">{m.sublabel}</p>
+                            <p className="text-sm font-semibold text-slate-800">{method.label}</p>
+                            <p className="text-xs text-slate-500">{method.sublabel}</p>
                         </div>
                         <CheckCircle2
                             className={clsx(
                                 "h-5 w-5 shrink-0 transition-opacity",
-                                cardSelected === m.value ? "text-blue-500" : "opacity-0"
+                                cardSelected === method.value ? "text-blue-500" : "opacity-0"
                             )}
                         />
                     </button>
                 ))}
             </div>
 
-            {/* Wallet steps */}
             {method.steps && (
                <PaymentSteps method={method} />
             )}

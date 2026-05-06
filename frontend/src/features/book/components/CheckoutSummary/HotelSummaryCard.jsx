@@ -1,4 +1,4 @@
-import useBookingSummary from "../../../hooks/booking/useBookingSummary"
+import useBookingSummary from "../../../../hooks/booking/useBookingSummary"
 
 export default function HotelSummaryCard() {
   const { data: hotel } = useBookingSummary()

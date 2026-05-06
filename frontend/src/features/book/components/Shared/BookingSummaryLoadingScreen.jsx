@@ -1,4 +1,4 @@
-export default function BookingSummaryLoadingScreen({ text = "Loading..." }) {
+export default function LoadingFullScreen({ text = "Loading..." }) {
     return (
         <div className="flex h-screen w-full items-center justify-center">
             <div className="flex flex-col items-center gap-3">

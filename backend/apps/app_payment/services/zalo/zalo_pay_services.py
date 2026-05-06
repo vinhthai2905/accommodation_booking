@@ -20,6 +20,7 @@ class ZaloPayService:
     def _build_embed_data(user: NguoiDung, id_booking: uuid.UUID, id_invoice: int):
         embed_data = {
             "user_email": user.email,
+            "redirecturl": "http://localhost:5173/profile/mytrips.html",
             "id_booking": f"#{str(id_booking)[:8].upper()}",
             "id_invoice": f"#{id_invoice}",
         }
@@ -41,7 +42,9 @@ class ZaloPayService:
         return json.dumps(items, separators=("," ":"))
 
     @staticmethod
-    def _generate_mac(app_trans_id, app_user, amount, app_time, embed_data, item):
+    def _generate_create_order_mac(
+        app_trans_id, app_user, amount, app_time, embed_data, item
+    ):
         encrypted_data = (
             f"{settings.ZALOPAY_APP_ID}|"
             f"{app_trans_id}|"
@@ -58,7 +61,7 @@ class ZaloPayService:
         ).hexdigest()
 
     @staticmethod
-    def _init_zalo_pay_order(zalo_order_payload):
+    def _send_create_order_request(zalo_order_payload):
         return requests.post(
             settings.ZALOPAY_CREATE_ORDER_URL, json=zalo_order_payload, timeout=15
         )
@@ -74,10 +77,10 @@ class ZaloPayService:
         amount = int(invoice.total_amount)
         embed_data = cls._build_embed_data(user, booking.id_booking, invoice.id_invoice)
         item = cls._build_item(booking)
-        mac = cls._generate_mac(
+        mac = cls._generate_create_order_mac(
             app_trans_id, app_user, amount, app_time, embed_data, item
         )
-        
+
         zalo_order_payload = {
             "app_id": settings.ZALOPAY_APP_ID,
             "app_user": user.email,
@@ -91,9 +94,27 @@ class ZaloPayService:
             "expire_duration_seconds": 900,
         }
 
-        return cls._init_zalo_pay_order(zalo_order_payload)
+        return cls._send_create_order_request(zalo_order_payload)
+
+    @staticmethod
+    def _generate_get_order_status_mac(app_id, app_trans_id, secret_key):
+        return hmac.new(
+            str(secret_key).encode("utf-8"),
+            f"{app_id}|{app_trans_id}|{secret_key}".encode("utf-8"),
+            hashlib.sha256,
+        ).hexdigest()
+
+    @staticmethod
+    def _send_get_order_status_request(app_id, app_trans_id, mac):
+        return requests.post(
+            settings.ZALOPAY_GET_ORDER_STATUS_URL,
+            json={"app_id": app_id, "app_trans_id": app_trans_id, "mac": mac},
+        )
 
     @classmethod
-    def get_order_status(cls):
-        
-    
+    def get_order_status(cls, app_trans_id):
+        secret_key = settings.ZALOPAY_SECRET_KEY
+        app_id = settings.ZALOPAY_APP_ID
+        mac = cls._generate_get_order_status_mac(app_id, app_trans_id, secret_key)
+
+        return cls._send_get_order_status_request(app_id, app_trans_id, secret_key)

@@ -1,4 +1,4 @@
-import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
+import CheckoutFormBorder from "../../../../components/ui/CheckoutFormBorder"
 import GuestFormHeader from "./GuestFormHeader"
 import CheckoutGuestInput from "./CheckoutGuestInput"
 import CheckoutGuestSelect from "./CheckoutGuestSelect"
@@ -6,7 +6,7 @@ import CheckoutGuestPhoneInput from "./CheckoutGuestPhoneInput"
 
 
 import { useContext } from "react"
-import { AuthUserContext } from "../../../context/AuthUserContext"
+import { AuthUserContext } from "../../../../context/AuthUserContext"
 import { useFormContext } from "react-hook-form"
 
 export default function GuestDetailsFields() {

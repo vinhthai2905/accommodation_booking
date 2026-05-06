@@ -1,10 +1,10 @@
-import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
+import CheckoutFormBorder from "../../../../components/ui/CheckoutFormBorder"
+import ErrorValidation from "../../../../components/ui/ErrorValidation"
 
 import { CircleCheck } from "lucide-react"
 import { useFormContext } from "react-hook-form"
 import { clsx } from "clsx"
-import ErrorValidation from "../../../components/ui/ErrorValidation"
-import { getFieldBorderClass } from "../../../utils/getFieldErrorBorder"
+import { getFieldBorderClass } from "../../../../utils/getFieldErrorBorder"
 
 const checkInTimeOptions = [
   { label: "14:00 - 15:00", value: "14:00" },

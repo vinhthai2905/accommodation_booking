@@ -1,5 +1,5 @@
-import BookHeader from "../features/book/components/BookHeader"
-import BookingSummaryLoadingScreen from "../features/profile/components/BookingSummaryLoadingScreen"
+import BookHeader from "../features/book/components/Shared/BookHeader"
+import LoadingFullScreen from "../features/book/components/Shared/LoadingFullScreen"
 import BookingLoadingScreen from "../components/ui/BookingLoadingScreen"
 
 import CheckoutSteps from "../features/book/section/CheckoutSteps"
@@ -28,7 +28,7 @@ export default function Book() {
         return <Navigate to="/index" replace />
 
     if (isFetchingUser || isFetchingBookingSummary)
-        return <BookingSummaryLoadingScreen />
+        return <LoadingFullScreen />
 
     if (createBookingMutation.isPending)
         return <BookingLoadingScreen text="Đang tạo đơn đặt phòng..." />

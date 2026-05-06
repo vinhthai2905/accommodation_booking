@@ -10,6 +10,7 @@ import SearchResults from "./pages/SearchResults"
 import CustomerRegister from './pages/CustomerRegister'
 import CustomerSignIn from './pages/CustomerSignIn'
 import Book from './pages/Book'
+import PaymentConfirmation from './pages/PaymentConfirmation'
 
 import PartnerRegister from './pages/PartnerRegister'
 import PartnerDashboard from './pages/partner/PartnerDashboard'
@@ -67,6 +68,10 @@ function App() {
         { path: "user", element: <UserProfile /> },
         { path: "mytrips.html", element: <MyBooking /> }
       ]
+    },
+    {
+      path: "payment/confirmation.html",
+      element: <PaymentConfirmation />,
     },
     {
       path: "book.html",

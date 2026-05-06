@@ -9,6 +9,7 @@ export default function useRefreshUser(fetchAuthUserState) {
                 return fetchAuthUserState()
             }
         },
+        staleTime: 20 * 60 * 1000,
         enabled: !!token
     })
 

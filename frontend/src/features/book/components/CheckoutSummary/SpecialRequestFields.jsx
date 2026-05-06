@@ -1,5 +1,6 @@
+import CheckoutFormBorder from "../../../../components/ui/CheckoutFormBorder"
+
 import { useFormContext } from "react-hook-form"
-import CheckoutFormBorder from "../../../components/ui/CheckoutFormBorder"
 
 export default function SpecialRequestFields() {
     const { register } = useFormContext()

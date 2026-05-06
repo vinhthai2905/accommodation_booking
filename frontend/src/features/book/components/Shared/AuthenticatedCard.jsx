@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 import { useContext } from "react"
-import { AuthUserContext } from "../../../context/AuthUserContext"
+import { AuthUserContext } from "../../../../context/AuthUserContext"
 
 export default function AuthenticatedCard() {
     const { user } = useContext(AuthUserContext)

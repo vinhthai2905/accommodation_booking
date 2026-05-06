@@ -1,8 +1,8 @@
 import { useSearchParams } from "react-router"
 
-import { calculateChildFee } from "../../../helpers/calculateChildFee"
+import { calculateChildFee } from "../../../../helpers/calculateChildFee"
 
-import useBookingSummary from "../../../hooks/booking/useBookingSummary"
+import useBookingSummary from "../../../../hooks/booking/useBookingSummary"
 
 export default function PriceSummaryCard({ totalRoomPrice }) {
     const [searchParams, setSearchParams] = useSearchParams()
