@@ -8,6 +8,14 @@ class ThanhToan(models.Model):
         primary_key=True,
         db_column="id_thanh_toan",
     )
+    
+    id_payment_service = models.CharField(
+        max_length=100,
+        unique=True,
+        null=True,
+        blank=True,
+        db_column="id_giao_dich_online"
+    )
 
     id_invoice = models.OneToOneField(
         HoaDon,
@@ -20,12 +28,14 @@ class ThanhToan(models.Model):
     
     payment_method = models.CharField(
         max_length=10,
+        null=True,
         db_column="phuong_thuc_thanh_toan",
     )
     
     amount = models.DecimalField(
         max_digits=12,
         decimal_places=2,
+        null=True,
         db_column="so_tien_thanh_toan",
     )
 

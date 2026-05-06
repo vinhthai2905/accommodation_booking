@@ -17,10 +17,17 @@ from apps.app_user.models import NguoiDung
 
 class ZaloPayService:
     @staticmethod
+    def get_trans_id(id_booking):
+        vietnam_now = datetime.now(timezone.utc) + timedelta(hours=7)
+        trans_id_date = vietnam_now.strftime("%y%m%d")
+        
+        return f"{trans_id_date}_#{str(id_booking)[:8].upper()}"
+    
+    @staticmethod
     def _build_embed_data(user: NguoiDung, id_booking: uuid.UUID, id_invoice: int):
         embed_data = {
             "user_email": user.email,
-            "redirecturl": "http://localhost:5173/profile/mytrips.html",
+            "redirecturl": f'http://localhost:5173/payment/confirmation.html?id_booking={id_booking}',
             "id_booking": f"#{str(id_booking)[:8].upper()}",
             "id_invoice": f"#{id_invoice}",
         }
@@ -65,15 +72,25 @@ class ZaloPayService:
         return requests.post(
             settings.ZALOPAY_CREATE_ORDER_URL, json=zalo_order_payload, timeout=15
         )
-
+        
+    @staticmethod
+    def _get_create_order_result(zalo_create_order_response: requests.Response, app_trans_id) -> dict:
+        order_result = zalo_create_order_response.json()
+        
+        return {
+            "return_code": order_result["return_code"],
+            "return_message": order_result["return_message"],
+            "sub_return_code": order_result["sub_return_code"],
+            "sub_return_message": order_result["sub_return_message"],
+            "order_url": order_result["order_url"],
+            "id_transaction": app_trans_id
+        }
+        
     @classmethod
     def create_order(cls, booking: DatPhong, invoice: HoaDon, user: NguoiDung):
-        vietnam_now = datetime.now(timezone.utc) + timedelta(hours=7)
-        trans_id_date = vietnam_now.strftime("%y%m%d")
-
         app_user = user.email
         app_time = int(time.time() * 1000)
-        app_trans_id = f"{trans_id_date}_#{str(booking.id_booking)[:8].upper()}"
+        app_trans_id = cls.get_trans_id(booking.id_booking)
         amount = int(invoice.total_amount)
         embed_data = cls._build_embed_data(user, booking.id_booking, invoice.id_invoice)
         item = cls._build_item(booking)
@@ -93,8 +110,10 @@ class ZaloPayService:
             "mac": mac,
             "expire_duration_seconds": 900,
         }
+        
+        zalo_create_order_response = cls._send_create_order_request(zalo_order_payload)
 
-        return cls._send_create_order_request(zalo_order_payload)
+        return cls._get_create_order_result(zalo_create_order_response, app_trans_id)
 
     @staticmethod
     def _generate_get_order_status_mac(app_id, app_trans_id, secret_key):
@@ -110,11 +129,16 @@ class ZaloPayService:
             settings.ZALOPAY_GET_ORDER_STATUS_URL,
             json={"app_id": app_id, "app_trans_id": app_trans_id, "mac": mac},
         )
+        
+    def _get_order_status_result(zalo_order_status_response: requests.Response) -> dict:
+        return zalo_order_status_response.json()
 
     @classmethod
-    def get_order_status(cls, app_trans_id):
+    def get_order_status(cls, app_trans_id) -> requests.Response:
         secret_key = settings.ZALOPAY_SECRET_KEY
         app_id = settings.ZALOPAY_APP_ID
         mac = cls._generate_get_order_status_mac(app_id, app_trans_id, secret_key)
 
-        return cls._send_get_order_status_request(app_id, app_trans_id, secret_key)
+        zalo_order_status_response = cls._send_get_order_status_request(app_id, app_trans_id, mac)
+        
+        return cls._get_order_status_result(zalo_order_status_response)

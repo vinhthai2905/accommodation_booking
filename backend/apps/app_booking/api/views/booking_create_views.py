@@ -21,7 +21,7 @@ from apps.app_booking.models import (
 from apps.app_payment.services import ZaloPayService
 from apps.app_payment.api.exceptions.zalo import ZaloPaymentGatewayException
 
-from apps.app_booking.model.hoa_don_models import HoaDon
+from apps.app_booking.models import HoaDon, ThanhToan
 from apps.app_booking.choices import TrangThaiDatPhong
 from apps.app_hotel.models import PhongKhachSan, KhachSan, ChinhSachTreEm
 from apps.app_user.models import NguoiDung
@@ -168,28 +168,21 @@ class CreateBookingView(views.APIView):
             room_amount=room_amount,
             total_amount=total_child_surcharge + room_amount,
         )
-        
-    @staticmethod
-    def _get_create_order_result(zalo_create_order_response: requests.Response) -> dict:
-        order_result = zalo_create_order_response.json()
-        
-        return {
-            "return_code": order_result["return_code"],
-            "return_message": order_result["return_message"],
-            "sub_return_code": order_result["sub_return_code"],
-            "sub_return_message": order_result["sub_return_message"],
-            "order_url": order_result["order_url"]
-        }
+    
+    def _create_payment_order(self, invoice: HoaDon):
+        ThanhToan.objects.create(
+            id_invoice = invoice,
+            amount = invoice.total_amount
+        )
 
     def _create_zalo_order_service(self, booking: DatPhong, invoice: HoaDon, user: NguoiDung) -> dict:
         try:
-            zalo_create_order_response = ZaloPayService.create_order(booking, invoice, user)
-            zalo_order_result = self._get_create_order_result(zalo_create_order_response)
+            zalo_create_order_result = ZaloPayService.create_order(booking, invoice, user)
         except Exception as e:
             raise ZaloPaymentGatewayException(detail={"error": e})
 
-        return zalo_order_result
-
+        return zalo_create_order_result
+    
     def post(self, request: Request, *args, **kwargs):
         flatten_data = self._flatten_booking_payload(request.data)
         validated_data = self._validate_booking_payload(flatten_data)
@@ -210,7 +203,8 @@ class CreateBookingView(views.APIView):
                 invoice = self._create_invoce(
                     booking, total_child_surcharge, room_amount
                 )
-                
+                self._create_payment_order(invoice)
+                 
                 zalo_order_result = self._create_zalo_order_service(booking, invoice, user)
 
                 return Response(
