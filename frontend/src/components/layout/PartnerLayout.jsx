@@ -1,13 +1,11 @@
-import AnimatedSidebarDashboard from '../ui/AnimatedSidebarDashboard'
+import AnimatedSidebarDashboard from "../ui/AnimatedSidebarDashboard"
 
 import { clsx } from "clsx"
-import { useState } from 'react'
-import { LayoutDashboard, Users, Hotel, Settings, Bell, LogOut } from 'lucide-react'
-import { Outlet, Link, useLocation } from 'react-router'
-import { motion } from 'framer-motion'
+import { LayoutDashboard, Users, Hotel, Settings, Bell, LogOut } from "lucide-react"
+import { Outlet, Link, useLocation } from "react-router"
+import { motion } from "framer-motion"
 
 export default function PartnerLayout() {
-    const [sidebarOpen, setSidebarOpen] = useState(true)
     const location = useLocation()
 
     return (
@@ -29,15 +27,15 @@ export default function PartnerLayout() {
                     </span>
                 </div>
 
-                <nav className={clsx("flex-1 overflow-y-auto py-6 px-4 space-y-2")}>
+                <nav className="flex-1 overflow-y-auto py-6 px-4 space-y-2">
                     {[
-                        { name: 'Dashboard', path: '/partner/', icon: LayoutDashboard },
-                        { name: 'Users', path: '/partner/users', icon: Users },
-                        { name: 'Hotels & Listings', path: '/partner/hotels', icon: Hotel },
-                        { name: 'Settings', path: '/partner/settings', icon: Settings },
+                        { name: "Dashboard", path: "/partner/", icon: LayoutDashboard },
+                        { name: "Users", path: "/partner/users", icon: Users },
+                        { name: "Hotels & Listings", path: "/partner/hotels", icon: Hotel },
+                        { name: "Settings", path: "/partner/settings", icon: Settings },
                     ].map((item) => {
                         const Icon = item.icon
-                        const isActive = location.pathname === item.path || (location.pathname.startsWith(item.path) && item.path !== '/partner/');
+                        const isActive = location.pathname === item.path || (location.pathname.startsWith(item.path) && item.path !== "/partner/");
                         return (
                             <Link
                                 key={item.path}

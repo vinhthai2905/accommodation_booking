@@ -2,7 +2,7 @@ import { useState } from "react"
 import startOfDay from "date-fns/startOfDay"
 import { addDays } from "date-fns"
 
-import useClickOutside from "../useClickOutside"
+import useClickOutside from "../common/useClickOutside"
 
 export default function useBookingDateInput() {
     const today = startOfDay(new Date())

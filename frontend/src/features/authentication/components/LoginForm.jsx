@@ -1,7 +1,7 @@
-import FormInput from "../../components/ui/FormInput"
-import ButtonSpinner from "../../components/ui/ButtonSpinner"
+import FormInput from "../../../components/ui/FormInput"
+import ButtonSpinner from "../../../components/ui/ButtonSpinner"
 
-import useLoginForm from "../../hooks/authentication/useLoginForm"
+import useLoginForm from "../../../hooks/authentication/useLoginForm"
 
 export default function LoginForm({ submitText }) {
     const {

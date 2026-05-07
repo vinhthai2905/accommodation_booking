@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import HotelCardSlider from "../features/hotels/components/HotelCardSlider"
+import HotelCardSlider from "../../features/hotels/components/HotelCardSlider"
 
 import OffersSection from "/src/components/ui/OffersSection"
 

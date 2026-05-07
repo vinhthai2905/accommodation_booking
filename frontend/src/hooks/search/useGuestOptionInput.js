@@ -1,5 +1,5 @@
 import { useState } from "react"
-import useClickOutside from "../useClickOutside"
+import useClickOutside from "../common/useClickOutside"
 
 export default function useGuestOptionInput() {
     const [isGuestOpened, setIsGuestOpened] = useState(false)

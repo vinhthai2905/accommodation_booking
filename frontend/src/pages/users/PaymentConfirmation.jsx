@@ -1,9 +1,9 @@
-import PaymentConfirmationLoadingScreen from "../features/book/components/Shared/LoadingFullScreen"
+import PaymentConfirmationLoadingScreen from "../../features/book/components/Shared/LoadingFullScreen"
 
-import BookHeader from "../features/book/components/Shared/BookHeader"
-import PaymentConfirmationDetails from "../features/book/pages/PaymentConfirmationDetails"
-import usePaymentConfirmation from "../hooks/payment/usePaymentConfirmation"
+import BookHeader from "../../features/book/components/Shared/BookHeader"
+import PaymentConfirmationDetails from "../../features/book/pages/PaymentConfirmationDetails"
 
+import usePaymentConfirmation from "../../hooks/payment/usePaymentConfirmation"
 
 export default function PaymentConfirmation() {
     const {

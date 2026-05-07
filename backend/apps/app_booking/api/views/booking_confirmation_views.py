@@ -53,7 +53,7 @@ class BookingConfirmationView(views.APIView):
     def _update_booking_payment(self, booking: DatPhong, zalo_transaction_status: dict):
         booking_payment: ThanhToan = booking.invoice.payments
         order_code = zalo_transaction_status["return_code"]
-
+        
         match order_code:
             case 1:
                 booking_payment.paid_at = timezone.now()
@@ -61,6 +61,9 @@ class BookingConfirmationView(views.APIView):
                 booking.status = TrangThaiDatPhong.CONFIRMED
             case 3:
                 return booking_payment
+
+        booking_payment.save()
+        booking.save()
 
         return booking_payment
 

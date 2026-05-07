@@ -1,18 +1,17 @@
-import { useContext } from "react"
-import { UserContext } from "../../context/UserContext"
+import { useOutletContext } from "react-router"
 
 export default function AuthTitle({ type }) {
-    const user = useContext(UserContext)
+    const userRole = useOutletContext()
 
     return (
         <>
             <h1 className="text-3xl text-center font-bold leading-tight text-[#1a1a1a]">
                 {
                     type === "signIn"
-                        ? user === "partner"
+                        ? userRole === "partner"
                             ? "Đăng nhập với tư cách đối tác"
                             : "Đăng nhập"
-                        : user === "partner"
+                        : userRole === "partner"
                             ? "Đăng ký với tư cách đối tác"
                             : "Đăng ký"
                 }
@@ -21,9 +20,10 @@ export default function AuthTitle({ type }) {
             {type === "signIn"
                 ||
                 <p className="text-center mt-4 leading-7 text-[#1a1a1a]">
-                    {user === "user"
-                        ? "Tạo tài khoản để sử dụng các dịch vụ của chúng tôi."
-                        : "Tạo tài khoản để đăng ký và quản lý chỗ nghĩ"
+                    {
+                        userRole === "user"
+                            ? "Tạo tài khoản để sử dụng các dịch vụ của chúng tôi."
+                            : "Tạo tài khoản để đăng ký và quản lý chỗ nghĩ"
                     }
                 </p>
             }

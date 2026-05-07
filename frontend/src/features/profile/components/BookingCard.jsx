@@ -11,6 +11,7 @@ import { clsx } from "clsx"
 
 export default function BookingCard({ booking, index, motion }) {
     const { hotel, invoice } = booking
+
     const nights = nightsBetween(booking.check_in_date, booking.check_out_date)
 
     return (

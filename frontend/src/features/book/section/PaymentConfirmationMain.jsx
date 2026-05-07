@@ -10,9 +10,6 @@ import usePaymentConfirmation from "../../../hooks/payment/usePaymentConfirmatio
 export default function ConfirmationMain() {
     const {
         booking,
-        hotel,
-        invoice,
-        payment
     } = usePaymentConfirmation()
 
     return (
@@ -81,7 +78,7 @@ export default function ConfirmationMain() {
                 <SecurityBanner />
             </div>
 
-            <BookingSummaryCard booking={booking} hotel={hotel} invoice={invoice} />
+            <BookingSummaryCard booking={booking} />
             <DirectionCard booking={booking} />
         </div>
     )

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import useClickOutside from "../useClickOutside"
+import useClickOutside from "../common/useClickOutside"
 
 export default function useLocationInput() {
     const [isLocationOpened, setIsLocationOpened] = useState(false)

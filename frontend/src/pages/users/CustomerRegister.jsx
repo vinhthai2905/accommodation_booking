@@ -1,6 +1,6 @@
 import RegisterPage from "../../features/authentication/pages/RegisterPage"
 
-export default function PartnerRegister() {
+export default function CustomerRegister() {
     return (
         <RegisterPage />
     )

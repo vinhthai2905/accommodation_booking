@@ -5,9 +5,7 @@ import {
     Bed,
 } from "lucide-react"
 
-export default function BookingSummaryCard({ booking, hotel, invoice }) {
-
-    console.log(invoice)
+export default function BookingSummaryCard({ booking }) {
     return (
         <div className="mt-6">
             <h2 className="text-lg font-bold text-slate-900 mb-3">Tóm tắt đơn đặt</h2>
@@ -19,8 +17,8 @@ export default function BookingSummaryCard({ booking, hotel, invoice }) {
             )}>
                 <div className="flex gap-4">
                     <img
-                        src={hotel?.primary_image}
-                        alt={hotel?.name}
+                        src={booking?.hotel?.primary_image}
+                        alt={booking?.hotel?.name}
                         className={clsx(
                             "shrink-0",
                             "w-16 h-16",
@@ -30,7 +28,7 @@ export default function BookingSummaryCard({ booking, hotel, invoice }) {
 
                     <div className="flex-1 min-w-0">
                         <h3 className="text-base font-bold text-slate-900">
-                            {hotel?.name}
+                            {booking?.hotel?.name}
                         </h3>
 
                         <div className="mt-2 flex flex-col gap-1.5 text-sm text-slate-600">
@@ -39,7 +37,7 @@ export default function BookingSummaryCard({ booking, hotel, invoice }) {
                                 <span>
                                     Tổng giá:{" "}
                                     <span className="font-semibold text-slate-800">
-                                        VND {Intl.NumberFormat("vi-VN").format(invoice?.total_amount)}
+                                        VND {Intl.NumberFormat("vi-VN").format(booking?.invoice?.total_amount)}
                                     </span>
                                 </span>
                             </div>

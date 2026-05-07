@@ -46,7 +46,7 @@ export default function PaymentCard({ bookingFormPayload, createBookingMutation 
 
     const handleConfirmBooking = () => {
         if (!bookingFormPayload) return
-        createBookingMutation.mutate({ ...bookingFormPayload, payment_method: cardSelected })
+        createBookingMutation.mutate({ ...bookingFormPayload })
     }
 
     return (

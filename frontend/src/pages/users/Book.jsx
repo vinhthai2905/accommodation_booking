@@ -1,20 +1,20 @@
-import BookHeader from "../features/book/components/Shared/BookHeader"
-import BookingSummaryLoadingScreen from "../features/book/components/Shared/LoadingFullScreen"
-import BookingLoadingScreen from "../components/ui/BookingLoadingScreen"
+import BookHeader from "../../features/book/components/Shared/BookHeader"
+import BookingSummaryLoadingScreen from "../../features/book/components/Shared/LoadingFullScreen"
+import BookingLoadingScreen from "../../components/ui/BookingLoadingScreen"
 
-import CheckoutSteps from "../features/book/section/CheckoutSteps"
-import CheckoutSummary from "../features/book/pages/CheckoutSummary"
+import CheckoutSteps from "../../features/book/section/CheckoutSteps"
+import CheckoutSummary from "../../features/book/pages/CheckoutSummary"
+import PaymentCard from "../../features/book/pages/PaymentCard"
 
 import { clsx } from "clsx"
 import { useContext, useState } from "react"
-import { AuthUserContext } from "../context/AuthUserContext"
 import { Navigate } from "react-router"
 import { motion } from "framer-motion"
 
-import useBookingParams from "../hooks/booking/useBookingParams"
-import useBookingSummary from "../hooks/booking/useBookingSummary"
-import useCreateBooking from "../hooks/booking/useCreateBooking"
-import PaymentCard from "../features/book/pages/PaymentCard"
+import { AuthUserContext } from "../../context/AuthUserContext"
+import useBookingParams from "../../hooks/booking/useBookingParams"
+import useBookingSummary from "../../hooks/booking/useBookingSummary"
+import useCreateBooking from "../../hooks/booking/useCreateBooking"
 
 export default function Book() {
     const { isAuthenticated, isFetchingUser } = useContext(AuthUserContext)

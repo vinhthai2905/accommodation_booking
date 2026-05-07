@@ -27,8 +27,5 @@ export const buildBookingPayLoad = (data) => {
     if(data.note) 
         bookingPayload.guestBooking["note"] = data.note
 
-    console.log(bookingPayload)
-    console.log(data)
-
     return bookingPayload
 }

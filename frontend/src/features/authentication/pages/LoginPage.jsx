@@ -1,16 +1,15 @@
-import AuthTitle from "./AuthTitle"
-import AuthSwitchLink from "./AuthSwitchLink"
-
-import LoginForm from "/src/features/authentication/LoginForm"
-import SocialLoginSection from "./SocialLoginSection"
+import AuthTitle from "../components/AuthTitle"
+import LoginForm from "../components/LoginForm"
+import AuthSwitchLink from "../components/AuthSwitchLink"
+import SocialLoginSection from "../components/SocialLoginSection"
 import Policies from "/src/components/ui/Policies"
 
 import { useOutletContext } from "react-router"
 
 
-export default function LoginSection() {
+export default function LoginPage() {
 
-  const user = useOutletContext()
+  const userRole = useOutletContext()
 
   return (
     <>
@@ -23,7 +22,7 @@ export default function LoginSection() {
           />
 
           <AuthSwitchLink to={"/auth/sign-up"} authType={"signUp"} />
-          {user === "user" && <SocialLoginSection />}
+          {userRole === "user" && <SocialLoginSection />}
           <Policies />
         </div>
       </div>

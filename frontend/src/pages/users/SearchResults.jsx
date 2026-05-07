@@ -1,10 +1,10 @@
-import SearchList from "../features/search/pages/SearchList"
-import SearchMap from "../features/search/pages/SearchMap"
+import SearchList from "../../features/search/pages/SearchList"
+import SearchMap from "../../features/search/pages/SearchMap"
 
-import LoadingScreen from "../components/ui/LoadingScreen"
+import LoadingScreen from "../../components/ui/LoadingScreen"
 
-import useSearchHotels from "../hooks/search/useSearchHotels"
-import useOpenMap from "../hooks/search/useOpenMap"
+import useSearchHotels from "../../hooks/search/useSearchHotels"
+import useOpenMap from "../../hooks/search/useOpenMap"
 
 export default function SearchResults() {
     const { isLoading, error, data } = useSearchHotels()

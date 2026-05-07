@@ -14,7 +14,7 @@ class FilterBookingSerializer(serializers.Serializer):
 class UserPaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ThanhToan
-        fields = ["id_transaction_service", "paid_amount", "payment_method"]
+        fields = ["paid_amount", "payment_method"]
 
 
 class UserBookingHotelSerializer(serializers.Serializer):

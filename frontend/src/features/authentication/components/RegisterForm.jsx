@@ -1,5 +1,5 @@
-import FormInput from "../../components/ui/FormInput"
-import ButtonSpinner from "../../components/ui/ButtonSpinner"
+import FormInput from "../../../components/ui/FormInput"
+import ButtonSpinner from "../../../components/ui/ButtonSpinner"
 
 export default function RegisterForm({ submitText, useFormHook }) {
     const {

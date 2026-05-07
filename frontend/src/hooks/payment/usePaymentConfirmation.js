@@ -11,14 +11,12 @@ export default function usePaymentConfirmation() {
     const [searchParams] = useSearchParams()
     const bookingID = searchParams.get("id_booking")
 
-    const { isLoading, data, isError, error } = useQuery({
+    const { isLoading, isSuccess, data, isError, error } = useQuery({
         queryKey: ["fetchBookingConfirmation", user?.email, bookingID],
         queryFn: () => fetchBookingConfirmation(bookingID),
         enabled: !!user && !!bookingID
     })
-
-    const booking = data.booking_details
-    const { hotel, invoice, payment } = booking
+    const booking = isSuccess ? data?.booking_details : {}
 
     return {
         isAuthenticated,
@@ -27,9 +25,6 @@ export default function usePaymentConfirmation() {
         isFetchPaymentError: isError,
         paymentFetchError: error,
         booking,
-        hotel,
-        invoice,
-        payment
     }
 
 }
