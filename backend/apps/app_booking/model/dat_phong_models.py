@@ -6,7 +6,7 @@ from apps.app_user.models import NguoiDung
 from apps.app_hotel.models import KhachSan
 
 from apps.common.models import TimeStampedModel
-from apps.app_booking.choices import TrangThaiDatPhong, PhuongThucThanhToan
+from apps.app_booking.choices import TrangThaiDatPhong
 
 class DatPhong(TimeStampedModel):
     id_booking = models.UUIDField(
@@ -69,14 +69,6 @@ class DatPhong(TimeStampedModel):
         default=TrangThaiDatPhong.PENDING,
         db_column="trang_thai",
     )
-
-    payment_method = models.CharField(
-        max_length=15,
-        choices=PhuongThucThanhToan.choices,
-        default=PhuongThucThanhToan.CASH,
-        db_column="phuong_thuc_thanh_toan",
-    )
-    
 
     class Meta:
         db_table = "dat_phong"

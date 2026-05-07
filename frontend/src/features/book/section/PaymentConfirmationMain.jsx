@@ -5,7 +5,16 @@ import DirectionCard from "../components/PaymentConfirmationDetails/DirectionCar
 import { clsx } from "clsx"
 import { Download, Printer } from "lucide-react"
 
-export default function ConfirmationMain({ booking, email }) {
+import usePaymentConfirmation from "../../../hooks/payment/usePaymentConfirmation"
+
+export default function ConfirmationMain() {
+    const {
+        booking,
+        hotel,
+        invoice,
+        payment
+    } = usePaymentConfirmation()
+
     return (
         <div className="flex-1 min-w-0">
             <div>
@@ -21,7 +30,6 @@ export default function ConfirmationMain({ booking, email }) {
                     <span className="text-green-500">✓</span>
                     <span>
                         Xác nhận đang được gửi tới{" "}
-                        <span className="font-medium">{email || "vinhthai2905@gmail.com"}</span>
                     </span>
 
                     <button
@@ -73,7 +81,7 @@ export default function ConfirmationMain({ booking, email }) {
                 <SecurityBanner />
             </div>
 
-            <BookingSummaryCard booking={booking} />
+            <BookingSummaryCard booking={booking} hotel={hotel} invoice={invoice} />
             <DirectionCard booking={booking} />
         </div>
     )

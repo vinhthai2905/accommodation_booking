@@ -39,7 +39,7 @@ class TestMacCancelOrder(views.APIView):
         key1 = "sdngKKJmqEMzvh5QQcdD2A9XBSKUNaYn"
 
         app_id = 2554
-        app_trans_id = "260506_#656C21A9"
+        app_trans_id = "260507_#52D47BB1"
 
         mac = hmac.new(
             key1.encode("utf-8"),

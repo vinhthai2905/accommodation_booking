@@ -1,11 +1,8 @@
 from django.contrib import admin
 
-from .models import DatPhong, ChiTietDatPhong, ChiTietKhachTreEm, HoaDon
+from .models import DatPhong, ChiTietDatPhong, ChiTietKhachTreEm, HoaDon, ThanhToan
 
 # Register your models here.
-
-admin.site.register(ChiTietKhachTreEm)
-admin.site.register(HoaDon)
 
 @admin.register(DatPhong)
 class DatPhongAdmin(admin.ModelAdmin):
@@ -51,3 +48,9 @@ class ChiTietDatPhongAdmin(admin.ModelAdmin):
     @admin.display(description="Check-out", ordering="id_booking__check_out_date")
     def check_out_date(self, obj):
         return obj.id_booking.check_out_date
+
+admin.site.register(ChiTietKhachTreEm)
+admin.site.register(HoaDon)
+admin.site.register(ThanhToan)
+
+

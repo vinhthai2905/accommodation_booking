@@ -7,11 +7,23 @@ export const fetchBookingSummary = async (hotelID) => {
   const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/booking_summary`)
 
   return data
+
+
+// Authenticated User services
+
 }
 export const createBooking = async (bookingData) => {
   const headers = buildTokenHeader()
 
   const { data } = await axios.post(`${apiUrl}/api/hotel/booking`, bookingData, { headers })
+
+  return data
+}
+
+export const fetchBookingConfirmation = async (bookingID) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.get(`${apiUrl}/api/booking/${bookingID}/confirmation`, { headers })
 
   return data
 }

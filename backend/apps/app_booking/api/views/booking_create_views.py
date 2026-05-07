@@ -1,5 +1,4 @@
-import requests
-
+from django.utils import timezone
 from django.db import transaction
 from django.db.models import QuerySet
 
@@ -22,7 +21,7 @@ from apps.app_payment.services import ZaloPayService
 from apps.app_payment.api.exceptions.zalo import ZaloPaymentGatewayException
 
 from apps.app_booking.models import HoaDon, ThanhToan
-from apps.app_booking.choices import TrangThaiDatPhong
+from apps.app_booking.choices import TrangThaiDatPhong, PhuongThucThanhToan, TrangThaiThanhToan
 from apps.app_hotel.models import PhongKhachSan, KhachSan, ChinhSachTreEm
 from apps.app_user.models import NguoiDung
 
@@ -95,7 +94,6 @@ class CreateBookingView(views.APIView):
             total_children=validated_data.get("total_children", 0),
             note=validated_data.get("note", ""),
             status=TrangThaiDatPhong.PENDING,
-            payment_method="ONLINE",
         )
 
     def _get_selected_rooms_with_room_type(self, selected_rooms: list):
@@ -169,10 +167,13 @@ class CreateBookingView(views.APIView):
             total_amount=total_child_surcharge + room_amount,
         )
     
-    def _create_payment_order(self, invoice: HoaDon):
+    def _create_payment_order_record(self, invoice: HoaDon, id_transaction: str):
         ThanhToan.objects.create(
+            id_transaction_service=id_transaction,
             id_invoice = invoice,
-            amount = invoice.total_amount
+            payment_method=PhuongThucThanhToan.ZALOPAY,
+            status=TrangThaiThanhToan.PENDING,
+            paid_amount = invoice.total_amount
         )
 
     def _create_zalo_order_service(self, booking: DatPhong, invoice: HoaDon, user: NguoiDung) -> dict:
@@ -203,10 +204,11 @@ class CreateBookingView(views.APIView):
                 invoice = self._create_invoce(
                     booking, total_child_surcharge, room_amount
                 )
-                self._create_payment_order(invoice)
-                 
+                
                 zalo_order_result = self._create_zalo_order_service(booking, invoice, user)
-
+                
+                self._create_payment_order_record(invoice, zalo_order_result["id_transaction"])
+                 
                 return Response(
                     {
                         "message": "Booking created successfully.",

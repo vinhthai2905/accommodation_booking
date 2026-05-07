@@ -5,7 +5,9 @@ import {
     Bed,
 } from "lucide-react"
 
-export default function BookingSummaryCard({ booking }) {
+export default function BookingSummaryCard({ booking, hotel, invoice }) {
+
+    console.log(invoice)
     return (
         <div className="mt-6">
             <h2 className="text-lg font-bold text-slate-900 mb-3">Tóm tắt đơn đặt</h2>
@@ -17,8 +19,8 @@ export default function BookingSummaryCard({ booking }) {
             )}>
                 <div className="flex gap-4">
                     <img
-                        src={booking?.hotel_image || "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=80&h=80&fit=crop"}
-                        alt={booking?.hotel_name}
+                        src={hotel?.primary_image}
+                        alt={hotel?.name}
                         className={clsx(
                             "shrink-0",
                             "w-16 h-16",
@@ -28,7 +30,7 @@ export default function BookingSummaryCard({ booking }) {
 
                     <div className="flex-1 min-w-0">
                         <h3 className="text-base font-bold text-slate-900">
-                            {booking?.hotel_name || "Ponte Boutique Da Nang"}
+                            {hotel?.name}
                         </h3>
 
                         <div className="mt-2 flex flex-col gap-1.5 text-sm text-slate-600">
@@ -37,7 +39,7 @@ export default function BookingSummaryCard({ booking }) {
                                 <span>
                                     Tổng giá:{" "}
                                     <span className="font-semibold text-slate-800">
-                                        VND {Intl.NumberFormat("vi-VN").format(booking?.total_price || 7370352)}
+                                        VND {Intl.NumberFormat("vi-VN").format(invoice?.total_amount)}
                                     </span>
                                 </span>
                             </div>
@@ -45,8 +47,7 @@ export default function BookingSummaryCard({ booking }) {
                             <div className="flex items-center gap-2">
                                 <Calendar size={13} className="shrink-0 text-slate-400" />
                                 <span>
-                                    {booking?.date_range || "T7, 16 tháng 5, 2026 – T6, 22 tháng 5, 2026"},{" "}
-                                    {booking?.nights || 6} đêm
+                                    {`${booking?.check_in_date} – ${booking?.check_out_date}`}
                                 </span>
                             </div>
 

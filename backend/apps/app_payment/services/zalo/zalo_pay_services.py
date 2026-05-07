@@ -134,7 +134,7 @@ class ZaloPayService:
         return zalo_order_status_response.json()
 
     @classmethod
-    def get_order_status(cls, app_trans_id) -> requests.Response:
+    def get_order_status(cls, app_trans_id) -> dict:
         secret_key = settings.ZALOPAY_SECRET_KEY
         app_id = settings.ZALOPAY_APP_ID
         mac = cls._generate_get_order_status_mac(app_id, app_trans_id, secret_key)

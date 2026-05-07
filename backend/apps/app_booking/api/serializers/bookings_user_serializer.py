@@ -1,20 +1,24 @@
 from rest_framework import serializers
 
-from apps.app_booking.models import DatPhong, HoaDon
+from apps.app_booking.models import DatPhong, HoaDon, ThanhToan
 from apps.app_hotel.models import KhachSan
 from apps.app_hotel.helpers import get_full_address
 
 
 class FilterBookingSerializer(serializers.Serializer):
     current_tab = serializers.ChoiceField(
-        choices=["upcoming", "past", "cancelled"],
-        default="upcoming"
+        choices=["upcoming", "past", "cancelled"], default="upcoming"
     )
 
+
+class UserPaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ThanhToan
+        fields = ["id_transaction_service", "paid_amount", "payment_method"]
+
+
 class UserBookingHotelSerializer(serializers.Serializer):
-    id_hotel = serializers.UUIDField()
     name = serializers.CharField()
-    slug = serializers.CharField()
     full_address = serializers.SerializerMethodField()
     primary_image = serializers.SerializerMethodField()
 
@@ -29,12 +33,13 @@ class UserBookingHotelSerializer(serializers.Serializer):
 class UserBookingInvoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = HoaDon
-        fields = '__all__'
+        fields = ["total_amount"]
 
 
 class UserBookingListSerializer(serializers.ModelSerializer):
-    hotel = UserBookingHotelSerializer(source="id_hotel")
-    invoice = UserBookingInvoiceSerializer()
+    hotel = UserBookingHotelSerializer(source="id_hotel", read_only=True)
+    invoice = UserBookingInvoiceSerializer(read_only=True)
+    payment = UserPaymentSerializer(source="invoice.payments", read_only=True)
 
     class Meta:
         model = DatPhong
@@ -46,10 +51,9 @@ class UserBookingListSerializer(serializers.ModelSerializer):
             "total_adults",
             "total_children",
             "status",
-            "payment_method",
             "note",
-            "created_at",
             "hotel",
             "invoice",
+            "payment",
         ]
         read_only_fields = fields

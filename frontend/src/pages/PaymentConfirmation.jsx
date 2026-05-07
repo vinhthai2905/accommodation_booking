@@ -1,20 +1,23 @@
-import LoadingFullScreen from "../features/book/components/Shared/BookingSummaryLoadingScreen"
+import PaymentConfirmationLoadingScreen from "../features/book/components/Shared/LoadingFullScreen"
 
 import BookHeader from "../features/book/components/Shared/BookHeader"
 import PaymentConfirmationDetails from "../features/book/pages/PaymentConfirmationDetails"
+import usePaymentConfirmation from "../hooks/payment/usePaymentConfirmation"
 
-import { useContext } from "react"
-import { AuthUserContext } from "../context/AuthUserContext"
 
 export default function PaymentConfirmation() {
-    const {isAuthenticated, isFetchingUser} = useContext(AuthUserContext)
+    const {
+        isAuthenticated,
+        isFetchingUser,
+        isFetchingPayment,
+    } = usePaymentConfirmation()
 
-    if (isFetchingUser) 
-        return <LoadingFullScreen />
+    if (isFetchingUser || isFetchingPayment)
+        return <PaymentConfirmationLoadingScreen />
 
     return (
         <>
-            <BookHeader isAuthenticated={isAuthenticated}/>
+            <BookHeader isAuthenticated={isAuthenticated} />
             <PaymentConfirmationDetails />
         </>
     )
