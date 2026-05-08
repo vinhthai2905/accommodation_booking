@@ -1,76 +1,39 @@
+
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer, Serializer, ValidationError
-from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.validators import UniqueValidator
+from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import AuthenticationFailed, NotFound
+
 
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.contrib.auth import authenticate
 
-from apps.app_user.models import NguoiDung
-
-
-class RegisterSerializer(ModelSerializer):
-    email = serializers.EmailField(
-        validators=[
-            UniqueValidator(
-                queryset=NguoiDung.objects.all(), message="Email này đã được sử dụng."
-            )
-        ]
-    )
-    first_name = serializers.CharField()
-    last_name = serializers.CharField()
-    phone_number = serializers.CharField(write_only=True)
-    confirm_password = serializers.CharField(write_only=True)
-
-    class Meta:
-        model = NguoiDung
-        fields = [
-            "first_name",
-            "last_name",
-            "email",
-            "phone_number",
-            "password",
-            "confirm_password",
-        ]
-        extra_kwargs = {"password": {"write_only": True}}
-
-    def create(self, validated_data):
-        """Create and save the user to database."""
-
-        validated_data.pop("confirm_password", None)
-        validated_data["role_name"] = "Khách hàng"
-
-        user = NguoiDung.objects.create_user(**validated_data)
-
-        return user
-    
-    def check_password_confirmation(self):
-        if self.validated_data["password"] != self.validated_data["confirm_password"]:
-            raise ValidationError("The password confirmation does not match!")
-
-    def peform_validation(self):
-        """Check to see whether the confirmation password is correct and validate data with is_valid()."""
-
-        self.is_valid(raise_exception=True)
-        self.check_password_confirmation()
+from apps.app_user.choices import RoleChoice
+from apps.app_user.models import NguoiDung, ThongTinNguoiDung, VaiTroNguoiDung, VaiTro
 
 
 class LoginSerializer(Serializer):
-    email = serializers.EmailField()
+    email = serializers.EmailField(write_only=True)
     password = serializers.CharField(write_only=True, style={"input_style": "password"})
+    login_as = serializers.ChoiceField(
+        RoleChoice,
+        write_only=True
+    )
 
     def validate(self, attrs: dict):
         """Calling is_valid() would validate the data and authenticate the user."""
 
         attrs["user"] = self.validate_user(credentials=attrs)
+        attrs["role"] = self.validate_user_role(attrs["user"], attrs["login_as"])
+        
         attrs.pop("password")
 
         return attrs
 
-    def validate_user(self, credentials):
-        """Attempt to authenticate using the given credentials."""
+    def validate_user(self, credentials) -> NguoiDung:
+        """Attempt to authenticate using the given credentials and return User Object."""
 
         user = authenticate(
             email=credentials["email"], password=credentials["password"]
@@ -80,6 +43,18 @@ class LoginSerializer(Serializer):
             raise AuthenticationFailed("Invalid credentials.")
 
         return user
+
+    def validate_user_role(self, user: NguoiDung, login_as) -> VaiTroNguoiDung:
+        try:
+            role: VaiTroNguoiDung = (
+                user.role_set
+                .prefetch_related("id_role")
+                .get(id_role__role_name=login_as)
+            )
+        except Exception as e:
+            raise ValidationError(detail={"error": "User doesn't have access to this role."})
+            
+        return role
 
     def validate_email(self, email):
         """Lowercase the email."""
@@ -102,6 +77,38 @@ class LogoutSerializer(Serializer):
         """Attempt to delete the token after being validated."""
 
         RefreshToken.blacklist(self.validated_data["refresh"])
+
+
+class PersonalInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ThongTinNguoiDung
+        fields = [
+            "first_name",
+            "last_name",
+            "phone_number",
+        ]
+
+class AuthenticatedUserSerializer(serializers.ModelSerializer):
+    personal_info = PersonalInfoSerializer()
+    role = serializers.SerializerMethodField()
+
+    class Meta:
+        model = NguoiDung
+        fields = [
+            "email",
+            "personal_info",
+            "role"
+        ]
+        read_only_fields = [
+            "email",
+            "personal_info",
+            "role"
+        ]
         
-    
-    
+    def get_role(self, user: NguoiDung):
+        role: VaiTroNguoiDung = self.context.get("role")
+        
+        if not role:
+            raise NotFound(detail={"error": "Missing role context."})
+        
+        return role.id_role.role_name
