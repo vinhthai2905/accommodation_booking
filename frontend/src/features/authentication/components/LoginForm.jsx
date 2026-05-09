@@ -2,6 +2,7 @@ import FormInput from "../../../components/ui/FormInput"
 import ButtonSpinner from "../../../components/ui/ButtonSpinner"
 
 import useAuthLoginForm from "../../../hooks/authentication/common/useAuthLoginForm"
+import CommonError from "../../../components/ui/CommonError"
 
 export default function LoginForm({ submitText }) {
     const {
@@ -46,6 +47,8 @@ export default function LoginForm({ submitText }) {
                     error={errors.password}
                 />
             </div>
+
+            <CommonError error={errors.root?.server?.message}/>
 
             <ButtonSpinner
                 isLoading={isLoading}

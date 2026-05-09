@@ -1,9 +1,7 @@
 import FormInput from "../../../components/ui/FormInput"
 import ButtonSpinner from "../../../components/ui/ButtonSpinner"
 
-import useRegisterUserForm from "../../../hooks/authentication/users/useRegisterUserForm"
-
-export default function RegisterForm({ submitText }) {
+export default function RegisterForm({ registerFormHook, submitText }) {
     const {
         register,
         handleSubmit,
@@ -12,7 +10,7 @@ export default function RegisterForm({ submitText }) {
         isLoading,
         onValidSubmit,
         onErrorSubmit,
-    } = useRegisterUserForm()
+    } = registerFormHook()
 
     const password = watch("password")
 

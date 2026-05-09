@@ -20,6 +20,7 @@ import PartnerDashboard from './pages/partner/PartnerDashboard'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 
+import AuthRedirectRoute from './pages/protectedroutes/AuthRedirectRoute'
 import UserProtectedRoute from './pages/protectedroutes/UserProtectedRoute'
 import PartnerProtectedRoute from './pages/protectedroutes/PartnerProtectedRoute'
 
@@ -43,12 +44,17 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "auth",
-      element: <AuthLayout />,
+      element: <AuthRedirectRoute />,
       children: [
-        { path: "sign-up", element: <CustomerRegister /> },
-        { path: "sign-in", element: <CustomerSignIn /> },
-        { path: "partner/sign-up", element: <PartnerRegister /> },
-        { path: "partner/sign-in", element: <PartnerLogin /> }
+        {
+          element: <AuthLayout />,
+          children: [
+            { path: "sign-up", element: <CustomerRegister /> },
+            { path: "sign-in", element: <CustomerSignIn /> },
+            { path: "partner/sign-up", element: <PartnerRegister /> },
+            { path: "partner/sign-in", element: <PartnerLogin /> }
+          ]
+        }
       ]
     },
     {
@@ -86,13 +92,14 @@ function App() {
       ]
     },
     {
+      path: "/partner/landing",
+      element: <PartnertLanding />
+    },
+    {
       element: <PartnerProtectedRoute />,
       path: "/partner",
       children: [
-        {
-          path: "landing",
-          element: <PartnertLanding />
-        },
+
         {
           path: "dashboard",
           element: <PartnerLayout />,

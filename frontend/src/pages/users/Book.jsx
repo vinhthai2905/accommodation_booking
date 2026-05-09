@@ -17,7 +17,7 @@ import useBookingSummary from "../../hooks/booking/useBookingSummary"
 import useCreateBooking from "../../hooks/booking/useCreateBooking"
 
 export default function Book() {
-    const { isAuthenticated, isFetchingUser } = useContext(AuthUserContext)
+    const { isAuthenticated } = useContext(AuthUserContext)
     const [stepCheckout, setStepCheckout] = useState(2)
 
     const hasAllBookingParams = useBookingParams()
@@ -27,7 +27,7 @@ export default function Book() {
     if (!hasAllBookingParams)
         return <Navigate to="/index" replace />
 
-    if (isFetchingUser || isFetchingBookingSummary)
+    if (isFetchingBookingSummary)
         return <BookingSummaryLoadingScreen />
 
     if (createBookingMutation.isPending)

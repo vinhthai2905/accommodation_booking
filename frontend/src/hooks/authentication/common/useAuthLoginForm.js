@@ -8,11 +8,12 @@ import { loginAuthUser } from "../../../services/authentication/authServices"
 import { AuthUserContext } from "../../../context/authentication/AuthUserContext"
 import { buildPayLoaderUserType } from "../../../helpers/authentication/buildPayloadUserType"
 import useBuildPayloadAuthType from "./useBuildPayloadAuthType"
+import useAuthNavigation from "./useAuthNavigation"
 
 export default function useAuthLoginForm() {
     const authContext = useContext(AuthUserContext)
     const [isLoading, setIsLoading] = useState(false)
-    const navigate = useNavigate()
+    const navigateAfterAuth = useAuthNavigation()
     const loginAs = useBuildPayloadAuthType()
 
     const {
@@ -36,7 +37,12 @@ export default function useAuthLoginForm() {
             const responseData = await response.json()
 
             if (!response.ok) {
-                toast.error("Đăng nhập không thành công.")
+                const { error } = responseData
+
+                setError("root.server", {
+                    type: "server",
+                    message: JSON.stringify(error[0]),
+                })
             }
             else {
                 const { user, access_token } = responseData
@@ -45,7 +51,7 @@ export default function useAuthLoginForm() {
 
                 toast.success("Đăng nhập thành công")
 
-                navigate("/index")
+                navigateAfterAuth(user.role)
             }
         }
         catch (error) {
@@ -68,6 +74,7 @@ export default function useAuthLoginForm() {
         handleSubmit,
         isLoading,
         errors,
+        setError,
         onValidSubmit,
         onErrorSubmit,
     }

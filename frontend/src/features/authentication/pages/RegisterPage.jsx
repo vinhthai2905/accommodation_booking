@@ -4,8 +4,10 @@ import AuthSwitchLink from "../components/AuthSwitchLink"
 import SocialLoginSection from "../components/SocialLoginSection"
 import Policies from "/src/components/ui/Policies"
 
-import { useOutletContext } from "react-router"
+import useRegisterUserForm from "../../../hooks/authentication/users/useRegisterUserForm"
+import useRegisterPartnerForm from "../../../hooks/authentication/partners/useRegisterPartnerForm"
 
+import { useOutletContext } from "react-router"
 
 export default function RegisterPage() {
   const user = useOutletContext()
@@ -18,6 +20,7 @@ export default function RegisterPage() {
           <AuthTitle type={"signUp"} />
 
           <RegisterForm
+            registerFormHook={user === "partner" ? useRegisterPartnerForm : useRegisterUserForm}
             submitText={"Đăng ký"}
           >
           </RegisterForm>

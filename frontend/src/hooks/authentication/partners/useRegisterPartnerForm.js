@@ -5,13 +5,13 @@ import toaster, { toast } from "react-hot-toast"
 
 import { registerPartner } from "../../../services/authentication/partnerAuthServices"
 
-import { AuthUserContext } from "../../../context/authentication/AuthUserContext"
+import { useAuthUserContext } from "../common/useAuthUserContext"
 
 import { defaultTestValues } from "../../../features/authentication/configs/DefaultValues"
 
 export default function useRegisterPartnerForm() {
   const [isLoading, setLoading] = useState(false)
-  const authContext = useContext(AuthUserContext)
+  const {setAuthUserState} = useAuthUserContext()
 
   const navigate = useNavigate()
 
@@ -50,7 +50,7 @@ export default function useRegisterPartnerForm() {
       else {
         const { user, access_token } = responseData
 
-        authContext.setAuthUserState(access_token, user.email, user.personal_info)
+        setAuthUserState(access_token, user.email, user.personal_info, user.role)
 
         toaster.success("Tạo tài khoản thành công.")
         reset()
