@@ -3,12 +3,13 @@ import { useNavigate } from "react-router"
 import { useForm } from "react-hook-form"
 import toaster, { toast } from "react-hot-toast"
 
-import { registerUser } from "../../services/authServices"
-import { AuthUserContext } from "../../context/AuthUserContext"
+import { registerPartner } from "../../../services/authentication/partnerAuthServices"
 
-import { defaultTestValues } from "../../features/authentication/configs/DefaultValues"
+import { AuthUserContext } from "../../../context/authentication/AuthUserContext"
 
-export default function useRegisterForm() {
+import { defaultTestValues } from "../../../features/authentication/configs/DefaultValues"
+
+export default function useRegisterPartnerForm() {
   const [isLoading, setLoading] = useState(false)
   const authContext = useContext(AuthUserContext)
 
@@ -31,7 +32,7 @@ export default function useRegisterForm() {
     setLoading(true)
 
     try {
-      const response = await registerUser(data)
+      const response = await registerPartner(data)
       const responseData = await response.json()
 
       if (!response.ok) {

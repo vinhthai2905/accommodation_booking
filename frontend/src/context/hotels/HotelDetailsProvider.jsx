@@ -2,11 +2,11 @@ import { HotelDetailsContext } from "./HotelDetailsContext"
 import { useQuery } from "@tanstack/react-query"
 import { useParams, useSearchParams } from "react-router"
 
-import { fetchHotel, fetchHotelRoomTypes } from "../services/hotelServices"
+import { fetchHotel, fetchHotelRoomTypes } from "../../services/hotel/hotelServices"
 
 export default function HotelDetailsProvider({ children }) {
     const { uuid } = useParams()
-    const [ searchParams, setSearchParams ] = useSearchParams()
+    const [ searchParams] = useSearchParams()
 
     const {
         isLoading: isLoadingHotel,

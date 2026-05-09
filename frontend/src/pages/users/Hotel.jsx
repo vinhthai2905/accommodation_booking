@@ -1,6 +1,6 @@
 import HotelDetails from "../../features/hotels/pages/HotelDetails"
 
-import HotelDetailsProvider from "../../context/HotelDetailsProvider"
+import HotelDetailsProvider from "../../context/hotels/HotelDetailsProvider"
 
 export default function Hotel() {
     return (

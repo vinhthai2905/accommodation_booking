@@ -5,13 +5,8 @@ import DirectionCard from "../components/PaymentConfirmationDetails/DirectionCar
 import { clsx } from "clsx"
 import { Download, Printer } from "lucide-react"
 
-import usePaymentConfirmation from "../../../hooks/payment/usePaymentConfirmation"
 
-export default function ConfirmationMain() {
-    const {
-        booking,
-    } = usePaymentConfirmation()
-
+export default function ConfirmationMain({booking}) {
     return (
         <div className="flex-1 min-w-0">
             <div>

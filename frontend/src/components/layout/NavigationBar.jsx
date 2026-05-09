@@ -4,7 +4,7 @@ import HeaderNav from "./HeaderNav"
 import ServiceNav from "./ServiceNav"
 
 import { useContext } from "react"
-import { HeaderContext } from "../../context/HeaderContext"
+import { HeaderContext } from "../../context/common/HeaderContext"
 
 export default function NavigationBar() {
     const currentPage = useContext(HeaderContext)

@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 
-import { createBooking } from "../../services/bookingServices"
+import { createBooking } from "../../services/book/bookingServices"
 
 export default function useCreateBooking(setStepCheckout) {
     const [bookingFormPayload, setBookingFormPayload] = useState(null)

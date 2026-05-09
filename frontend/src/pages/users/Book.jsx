@@ -11,7 +11,7 @@ import { useContext, useState } from "react"
 import { Navigate } from "react-router"
 import { motion } from "framer-motion"
 
-import { AuthUserContext } from "../../context/AuthUserContext"
+import { AuthUserContext } from "../../context/authentication/AuthUserContext"
 import useBookingParams from "../../hooks/booking/useBookingParams"
 import useBookingSummary from "../../hooks/booking/useBookingSummary"
 import useCreateBooking from "../../hooks/booking/useCreateBooking"
@@ -21,7 +21,7 @@ export default function Book() {
     const [stepCheckout, setStepCheckout] = useState(2)
 
     const hasAllBookingParams = useBookingParams()
-    const { isLoading: isFetchingBookingSummary } = useBookingSummary(hasAllBookingParams)
+    const { isPending: isFetchingBookingSummary } = useBookingSummary(hasAllBookingParams)
     const { bookingFormPayload, handleBookingPayload, createBookingMutation } = useCreateBooking(setStepCheckout)
 
     if (!hasAllBookingParams)

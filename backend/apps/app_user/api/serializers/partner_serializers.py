@@ -1,8 +1,7 @@
-from rest_framework import serializers
+from rest_framework import serializers, exceptions, status
 from rest_framework.validators import UniqueValidator, ValidationError
 
 from apps.app_user.models import NguoiDung
-
 
 class PartnerRegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -32,10 +31,18 @@ class PartnerRegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Create and save the user to database."""
 
-        validated_data.pop("confirm_password", None)
-        validated_data["role_name"] = "Đối tác"
+        try:
+            validated_data.pop("confirm_password", None)
 
-        user = NguoiDung.objects.create_user(**validated_data)
+            user = NguoiDung.objects.create_user(**validated_data, role_name="Đối tác")
+            self.role_assignment = (
+                user.role_set.select_related("id_role").get(id_role__role_name="Đối tác")
+            )
+        except Exception as e:
+            raise exceptions.APIException(
+                detail={"Error": "The role wasn't assigned for the user during the progression."},
+                code=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         return user
     

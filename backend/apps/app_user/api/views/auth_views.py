@@ -5,12 +5,14 @@ from rest_framework import status
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from apps.app_user.helpers import create_auth_tokens
 from apps.app_user.models import NguoiDung, VaiTroNguoiDung
 
 from apps.app_user.api.serializers import (
     LoginSerializer,
     LogoutSerializer,
     AuthenticatedUserSerializer,
+    FetchAuthUserSerializer,
 )
 
 
@@ -27,7 +29,7 @@ class AuthLoginView(APIView):
         user: NguoiDung = login_serializer.validated_data["user"]
         role: VaiTroNguoiDung = login_serializer.validated_data["role"]
 
-        refresh = RefreshToken.for_user(user)
+        refresh = create_auth_tokens(user, role)
 
         response = Response(
             data={
@@ -76,11 +78,24 @@ class AuthLogoutView(APIView):
 
 class FetchAuthUserView(APIView):
     http_method_names = ["post"]
-
     permission_classes = [IsAuthenticated]
+    serializer_class = FetchAuthUserSerializer
 
     def post(self, request: Request, *args, **kwargs):
+        fetch_user_serializer = FetchAuthUserSerializer(
+            data={
+                "id_auth_user": request.user.id_user,
+                "role": request.auth.get("active_role"),
+            }
+        )
+        fetch_user_serializer.is_valid(raise_exception=True)
+
         return Response(
-            data={"user": AuthenticatedUserSerializer(instance=request.user).data},
+            data={
+                "user": AuthenticatedUserSerializer(
+                    instance=request.user,
+                    context={"role": fetch_user_serializer.validated_data["auth_user_role"]},
+                ).data
+            },
             status=status.HTTP_200_OK,
         )

@@ -6,10 +6,10 @@ from . import UserRegisterView, PartnerRegisterView, AuthLoginView, AuthLogoutVi
 urlpatterns = [
     path('api/users', UserRegisterView.as_view()),
     path('api/partners', PartnerRegisterView.as_view()),
-    path('api/user/login', AuthLoginView.as_view()),
-    path('api/user/logout', AuthLogoutView.as_view()),
     
-    path('api/user', FetchAuthUserView.as_view()),
+    path('api/auth/user/login', AuthLoginView.as_view()),
+    path('api/auth/user/logout', AuthLogoutView.as_view()),
+    path('api/auth/user/refresh', FetchAuthUserView.as_view()),
     
     path('api/token', TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path('api/token/refresh', TokenRefreshView.as_view(), name="token_refresh")

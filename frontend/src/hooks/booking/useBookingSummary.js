@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchBookingSummary } from "../../services/bookingServices"
+import { fetchBookingSummary } from "../../services/book/bookingServices"
 import { useSearchParams } from "react-router"
 
 export default function useBookingSummary(hasAllBookingParams) {
     const [searchParams] = useSearchParams()
 
-    const { isLoading, data, error } = useQuery({
+    const { isPending, data, error } = useQuery({
         queryKey: ["fetchBookingSummary"],
         queryFn: () => {
             return fetchBookingSummary(searchParams.get("hotel_id"))
@@ -15,7 +15,7 @@ export default function useBookingSummary(hasAllBookingParams) {
     })
 
     return {
-        isLoading,
+        isPending,
         data,
         error
     }

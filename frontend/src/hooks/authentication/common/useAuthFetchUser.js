@@ -1,20 +1,21 @@
 import { useQuery } from "@tanstack/react-query"
 
-export default function useRefreshUser(fetchAuthUserState) {
+export default function useAuthFetchUser(fetchAuthUserState) {
     const token = localStorage.getItem("access_token")
-    const { isLoading, error, data } = useQuery({
-        queryKey: ["fetchUser"],
+    
+    const { isPending, error, data } = useQuery({
+        queryKey: ["fetchAuthUser"],
         queryFn: () => {
-            if (token) {
-                return fetchAuthUserState()
-            }
+            return fetchAuthUserState()
         },
         staleTime: 20 * 60 * 1000,
         enabled: !!token
     })
 
+    console.log(error)
+
     return {
-        isLoading,
+        isPending,
         error,
         data
     }

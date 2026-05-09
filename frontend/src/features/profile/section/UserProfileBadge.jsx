@@ -4,7 +4,7 @@ import UserProfileButton from "../../../components/layout/UserProfileButton"
 import { clsx } from "clsx"
 import { useContext, useState } from "react"
 
-import { AuthUserContext } from "../../../context/AuthUserContext"
+import { AuthUserContext } from "../../../context/authentication/AuthUserContext"
 
 import useClickOutside from "../../../hooks/common/useClickOutside"
 

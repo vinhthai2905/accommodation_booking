@@ -8,7 +8,6 @@ import { useOutletContext } from "react-router"
 
 
 export default function LoginPage() {
-
   const userRole = useOutletContext()
 
   return (

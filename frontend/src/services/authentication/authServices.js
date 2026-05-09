@@ -1,19 +1,8 @@
-import { parsedData } from "../helpers/parseInput"
+import { parsedData } from "../../helpers/parseInput"
 
 const apiURL = import.meta.env.VITE_API_URL
 
-export const registerUser = async (data) => {
-    const response = await fetch(`${apiURL}/api/users`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(parsedData(data))
-    })
 
-    return response
-}
 
 // export const registerUser = (data) => {
 //     return fetch("http://localhost:8000/api/users", {
@@ -28,8 +17,8 @@ export const registerUser = async (data) => {
 //     )
 // }
 
-export const fetchUser = async () => {
-    const response = await fetch(`${apiURL}/api/user`, {
+export const fetchAuthUser = async () => {
+    const response = await fetch(`${apiURL}/api/auth/user/refresh`, {
         method: "POST",
         // credentials: "include",
         headers: {
@@ -41,8 +30,8 @@ export const fetchUser = async () => {
     return response
 }
 
-export const loginUser = async (data) => {
-    const response = await fetch("http://localhost:8000/api/user/login", {
+export const loginAuthUser = async (data) => {
+    const response = await fetch("http://localhost:8000/api/auth/user/login", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -54,8 +43,8 @@ export const loginUser = async (data) => {
     return response
 }
 
-export const logoutUser = async () => {
-    const response = await fetch("http://localhost:8000/api/user/logout", {
+export const logoutAuthUser = async () => {
+    const response = await fetch("http://localhost:8000/api/auth/user/logout", {
         method: "POST",
         credentials: "include",
         headers: {

@@ -9,8 +9,8 @@ import { clsx } from "clsx"
 import { useContext } from "react"
 import { useSearchParams } from "react-router"
 
-import { AuthUserContext } from "../../../context/AuthUserContext"
-import { BookingContext } from "../../../context/BookingContext"
+import { AuthUserContext } from "../../../context/authentication/AuthUserContext"
+import { BookingContext } from "../../../context/booking/BookingContext"
 
 export default function CheckoutSummary({ handleBookingPayload }) {
     const { isAuthenticated } = useContext(AuthUserContext)

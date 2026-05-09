@@ -1,7 +1,7 @@
 import FormInput from "../../../components/ui/FormInput"
 import ButtonSpinner from "../../../components/ui/ButtonSpinner"
 
-import useLoginForm from "../../../hooks/authentication/useLoginForm"
+import useAuthLoginForm from "../../../hooks/authentication/common/useAuthLoginForm"
 
 export default function LoginForm({ submitText }) {
     const {
@@ -11,7 +11,7 @@ export default function LoginForm({ submitText }) {
         isLoading,
         onValidSubmit,
         onErrorSubmit,
-    } = useLoginForm()
+    } = useAuthLoginForm()
 
     return (
         <form

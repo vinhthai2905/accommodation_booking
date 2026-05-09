@@ -2,9 +2,9 @@ import { useSearchParams } from "react-router"
 import { useQuery } from "@tanstack/react-query"
 import { useContext } from "react"
 
-import { AuthUserContext } from "../../context/AuthUserContext"
+import { AuthUserContext } from "../../context/authentication/AuthUserContext"
 
-import { fetchBookingConfirmation } from "../../services/bookingServices"
+import { fetchBookingConfirmation } from "../../services/book/bookingServices"
 
 export default function usePaymentConfirmation() {
     const { isAuthenticated, isFetchingUser, user } = useContext(AuthUserContext)
@@ -16,7 +16,8 @@ export default function usePaymentConfirmation() {
         queryFn: () => fetchBookingConfirmation(bookingID),
         enabled: !!user && !!bookingID
     })
-    const booking = isSuccess ? data?.booking_details : {}
+    
+    const booking = isSuccess ? data?.booking_details : null
 
     return {
         isAuthenticated,

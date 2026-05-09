@@ -6,7 +6,6 @@ import Policies from "/src/components/ui/Policies"
 
 import { useOutletContext } from "react-router"
 
-import useRegisterForm from "../../../hooks/authentication/useRegisterForm"
 
 export default function RegisterPage() {
   const user = useOutletContext()
@@ -20,7 +19,6 @@ export default function RegisterPage() {
 
           <RegisterForm
             submitText={"Đăng ký"}
-            useFormHook={useRegisterForm}
           >
           </RegisterForm>
 

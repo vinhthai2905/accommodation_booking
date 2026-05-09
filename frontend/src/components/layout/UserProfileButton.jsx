@@ -2,7 +2,7 @@ import { clsx } from "clsx"
 
 import { useContext } from "react"
 
-import { AuthUserContext } from "../../context/AuthUserContext"
+import { AuthUserContext } from "../../context/authentication/AuthUserContext"
 
 export default function UserProfileButton({ userName, level, setIsOpen }) {
     return (

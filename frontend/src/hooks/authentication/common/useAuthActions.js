@@ -1,6 +1,6 @@
 import toast from "react-hot-toast"
 
-import { logoutUser, fetchUser } from "../../services/authServices"
+import { logoutAuthUser, fetchAuthUser } from "../../../services/authentication/authServices"
 
 
 export default function useAuthActions(setUserState) {
@@ -11,24 +11,25 @@ export default function useAuthActions(setUserState) {
         localStorage.setItem("access_token", token)
     }
 
-    const setCurrentUser = (email, personal_info) => {
-        if (!personal_info || !email)
+    const setCurrentUser = (email, personal_info, role) => {
+        if (!personal_info || !email || !role)
             throw new Error("Thông tin không tồn tại")
 
         setUserState({
             email,
-            personal_info
+            personal_info,
+            role
         })
     }
 
-    const setAuthUserState = (access_token, email, personal_info) => {
+    const setAuthUserState = (access_token, email, personal_info, role) => {
         setAccessToken(access_token),
-        setCurrentUser(email, personal_info)
+        setCurrentUser(email, personal_info, role)
     }
 
     const clearAuthUserState = async () => {
         try {
-            await logoutUser()
+            await logoutAuthUser()
 
             localStorage.removeItem("access_token")
 
@@ -41,15 +42,19 @@ export default function useAuthActions(setUserState) {
 
     const fetchAuthUserState = async () => {
         try {
-            const response = await fetchUser()
+            const response = await fetchAuthUser()
 
             if (!response.ok)
-                throw new Error(`Response status: ${response.status}`)
+                throw new Error(`Response status: ${response}`)
 
 
             const responseData = await response.json()
-
-            setCurrentUser(responseData.user.email, responseData.user.personal_info)
+            
+            setCurrentUser(
+                responseData.user.email, 
+                responseData.user.personal_info, 
+                responseData.user.role
+            )
 
             return responseData
 

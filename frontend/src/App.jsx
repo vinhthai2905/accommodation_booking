@@ -29,8 +29,8 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-import AuthUserProvider from './context/AuthUserProvider'
-import BookingProvider from './context/BookingProvider'
+import AuthUserProvider from './context/authentication/AuthUserProvider'
+import BookingProvider from './context/booking/BookingProvider'
 
 import ToasterUI from './components/ui/ToasterUI'
 
@@ -87,13 +87,14 @@ function App() {
     },
     {
       element: <PartnerProtectedRoute />,
+      path: "/partner",
       children: [
         {
-          path: "partner/landing",
+          path: "landing",
           element: <PartnertLanding />
         },
         {
-          path: "partner/dashboard",
+          path: "dashboard",
           element: <PartnerLayout />,
           children: [
             { path: "", element: <PartnerDashboard /> },

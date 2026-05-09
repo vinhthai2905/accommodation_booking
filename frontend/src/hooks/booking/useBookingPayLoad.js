@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router"
 import { useContext } from "react"
 
-import { BookingContext } from "../../context/BookingContext"
+import { BookingContext } from "../../context/booking/BookingContext"
 
 import { buildBookingPayLoad } from "../../features/book/helpers/buildBookingPayload"
 import { getCheckoutParams } from "../../helpers/getCheckoutParams"

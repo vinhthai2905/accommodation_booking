@@ -6,7 +6,7 @@ import CheckoutGuestPhoneInput from "./CheckoutGuestPhoneInput"
 
 
 import { useContext } from "react"
-import { AuthUserContext } from "../../../../context/AuthUserContext"
+import { AuthUserContext } from "../../../../context/authentication/AuthUserContext"
 import { useFormContext } from "react-hook-form"
 
 export default function GuestDetailsFields() {

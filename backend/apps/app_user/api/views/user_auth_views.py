@@ -6,7 +6,12 @@ from rest_framework import status
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from apps.app_user.api.serializers import UserRegisterSerializer, AuthenticatedUserSerializer
+
+from apps.app_user.helpers import create_auth_tokens
+from apps.app_user.api.serializers import (
+    UserRegisterSerializer,
+    AuthenticatedUserSerializer,
+)
 
 
 class UserRegisterView(APIView):
@@ -17,15 +22,24 @@ class UserRegisterView(APIView):
     serializer_class = UserRegisterSerializer
 
     def post(self, request: Request, *args, **kwargs):
-        user_serializer: UserRegisterSerializer = self.serializer_class(data=request.data)
-        user_serializer.peform_validation()
+        user_register_serializer: UserRegisterSerializer = self.serializer_class(
+            data=request.data
+        )
+        user_register_serializer.peform_validation()
 
-        user = user_serializer.create(validated_data=user_serializer.validated_data)
-        refresh = RefreshToken.for_user(user=user)
+
+        user = user_register_serializer.create(
+            validated_data=user_register_serializer.validated_data
+        )
+        
+        refresh = create_auth_tokens(user, user_register_serializer.role_assignment)
 
         response = Response(
             data={
-                "user": AuthenticatedUserSerializer(instance=user).data,
+                "user": AuthenticatedUserSerializer(
+                    instance=user,
+                    context={"role": user_register_serializer.role_assignment},
+                ).data,
                 "access_token": str(refresh.access_token),
             },
             status=status.HTTP_201_CREATED,

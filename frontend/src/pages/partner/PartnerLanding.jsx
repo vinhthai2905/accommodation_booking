@@ -1,13 +1,13 @@
-import clsx from "clsx"
+import { clsx } from "clsx"
 
-import PartnerTopHeader from "/src/features/partner/PartnerTopHeader";
-import HeroContent from "/src/features/partner/HeroContent";
-import PartnerRegisterCard from "/src/features/partner/PartnerRegisterCard";
+import PartnerLandingHeader from "../../features/partner/components/PartnerLandingHeader"
+import HeroContent from "../../features/partner/components/HeroContent"
+import PartnerRegisterCard from "../../features/partner/components/PartnerRegisterCard"
 
 export default function PartnerLanding() {
     return (
         <>
-            <PartnerTopHeader />
+            <PartnerLandingHeader />
             <div className={clsx(
                 "w-full min-h-[calc(100vh-80px)]",
                 "bg-[#003b95]",

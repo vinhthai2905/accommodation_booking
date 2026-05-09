@@ -5,7 +5,7 @@ import HomeIcon from "/src/components/ui/HomeIcon"
 import Flag from "/src/components/ui/Flag"
 import ButtonLink from "/src/components/ui/ButtonLink"
 
-export default function PartnerTopHeader() {
+export default function PartnerLandingHeader() {
     return (
         <div className={clsx(
             "w-full h-20",
@@ -25,7 +25,7 @@ export default function PartnerTopHeader() {
                 )}>
                     <Flag />
 
-                    <Link to="/partner/auth/sign-up">
+                    <Link to="/auth/partner/sign-in">
                         <span className={clsx(
                             "text-white",
                             "hover:underline hover:cursor-pointer"
@@ -35,8 +35,8 @@ export default function PartnerTopHeader() {
                     </Link>
 
                     <ButtonLink
-                        title="Đăng nhập"
-                        to="/auth/partner/sign-in"
+                        title="Đăng ký"
+                        to="/auth/partner/sign-up"
                     />
 
                     <ButtonLink

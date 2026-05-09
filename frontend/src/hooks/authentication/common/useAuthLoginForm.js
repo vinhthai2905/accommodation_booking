@@ -1,16 +1,19 @@
 import { useState, useContext } from "react"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router"
+import { useLocation, useNavigate } from "react-router"
 import toast from "react-hot-toast"
 
-import { loginUser } from "../../services/authServices"
+import { loginAuthUser } from "../../../services/authentication/authServices"
 
-import { AuthUserContext } from "../../context/AuthUserContext"
+import { AuthUserContext } from "../../../context/authentication/AuthUserContext"
+import { buildPayLoaderUserType } from "../../../helpers/authentication/buildPayloadUserType"
+import useBuildPayloadAuthType from "./useBuildPayloadAuthType"
 
-export default function useLoginForm() {
-    const [isLoading, setIsLoading] = useState(false)
+export default function useAuthLoginForm() {
     const authContext = useContext(AuthUserContext)
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
+    const loginAs = useBuildPayloadAuthType()
 
     const {
         register,
@@ -24,14 +27,13 @@ export default function useLoginForm() {
         mode: "onChange",
     })
 
-    const onValidSubmit = async (data) => {
+    const onValidSubmit = async (credentials) => {
+        credentials = buildPayLoaderUserType(credentials, loginAs)
         setIsLoading(true)
 
         try {
-            const response = await loginUser(data)
+            const response = await loginAuthUser(credentials)
             const responseData = await response.json()
-
-            console.log(responseData)
 
             if (!response.ok) {
                 toast.error("Đăng nhập không thành công.")
@@ -39,7 +41,7 @@ export default function useLoginForm() {
             else {
                 const { user, access_token } = responseData
 
-                authContext.setAuthUserState(access_token, user.email, user.personal_info)
+                authContext.setAuthUserState(access_token, user.email, user.personal_info, user.role)
 
                 toast.success("Đăng nhập thành công")
 

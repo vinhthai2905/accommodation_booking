@@ -1,9 +1,11 @@
 from django.shortcuts import get_object_or_404
 
-from rest_framework import serializers
+from rest_framework import serializers, exceptions, status
 from rest_framework.validators import UniqueValidator, ValidationError
 
-from apps.app_user.models import NguoiDung, ThongTinNguoiDung
+from apps.app_user.models import NguoiDung, ThongTinNguoiDung, VaiTro
+from apps.app_user.choices import RoleChoice
+
 
 class UserRegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -21,9 +23,9 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = NguoiDung
         fields = [
+            "email",
             "first_name",
             "last_name",
-            "email",
             "phone_number",
             "password",
             "confirm_password",
@@ -33,13 +35,21 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Create and save the user to database."""
 
-        validated_data.pop("confirm_password", None)
-        validated_data["role_name"] = "Khách hàng"
+        try:
+            validated_data.pop("confirm_password", None)
 
-        user = NguoiDung.objects.create_user(**validated_data)
+            user = NguoiDung.objects.create_user(**validated_data, role_name="Khách hàng")
+            self.role_assignment = (
+                user.role_set.select_related("id_role").get(id_role__role_name="Khách hàng")
+            )
+        except Exception as e:
+            raise exceptions.APIException(
+                detail={"Error": "The role wasn't assigned for the user during the progression."},
+                code=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         return user
-    
+
     def check_password_confirmation(self):
         if self.validated_data["password"] != self.validated_data["confirm_password"]:
             raise ValidationError("The password confirmation does not match!")
@@ -49,5 +59,3 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
         self.is_valid(raise_exception=True)
         self.check_password_confirmation()
-
-
