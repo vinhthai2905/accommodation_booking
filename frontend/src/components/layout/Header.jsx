@@ -4,7 +4,7 @@ import { useLocation } from "react-router"
 import NavigationBar from "./NavigationBar"
 import BookingSearchMenu from "../../features/search/section/BookingSearchMenu"
 
-import { HeaderContext } from "../../context/HeaderContext"
+import { HeaderContext } from "../../context/common/HeaderContext"
 
 export default function Header() {
     const url = useLocation()

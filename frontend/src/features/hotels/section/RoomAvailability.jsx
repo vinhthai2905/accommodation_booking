@@ -5,7 +5,7 @@ import { clsx } from "clsx"
 import { Link } from "react-router"
 import { useContext } from "react"
 
-import { BookingContext } from "../../../context/BookingContext"
+import { BookingContext } from "../../../context/booking/BookingContext"
 import useHotelDetailsContext from "../../../hooks/hotel/useHotelDetailsContext"
 import useBookingNavigation from "../../../hooks/hotel/useBookingNavigation"
 

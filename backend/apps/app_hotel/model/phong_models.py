@@ -106,7 +106,7 @@ class PhongKhachSan(models.Model):
         verbose_name_plural = "Phòng khách sạn"
 
     def __str__(self):
-        return f'{self.room_name} - {self.get_hotel_name()}'
+        return f'{self.room_name}'
     
     def get_hotel_name(self):
         return self.id_room_type.id_hotel

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework import exceptions
 
+from helpers.validate_booking_date import validate_booking_date
 
 class BookingDateSerializer(serializers.Serializer):
     """Deserialize requested date range."""
@@ -13,8 +14,5 @@ class BookingDateSerializer(serializers.Serializer):
     )
 
     def validate(self, attrs):
-        if attrs["check_out"] <= attrs["check_in"]:
-            raise exceptions.ValidationError(
-                {"check_out": "Check_out date must be after check_in date"}
-            )
+        validate_booking_date(attrs)
         return attrs

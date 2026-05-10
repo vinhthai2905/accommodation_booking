@@ -6,6 +6,7 @@ from apps.app_user.models import NguoiDung
 from apps.app_hotel.models import KhachSan
 
 from apps.common.models import TimeStampedModel
+from apps.app_booking.choices import TrangThaiDatPhong
 
 class DatPhong(TimeStampedModel):
     id_booking = models.UUIDField(
@@ -36,6 +37,11 @@ class DatPhong(TimeStampedModel):
     check_out_date = models.DateField(
         db_column="ngay_tra_phong",
     )
+    
+    check_in_time = models.TimeField(
+        null=True,
+        db_column="thoi_gian_check_in"
+    )
 
     total_room_quantity = models.PositiveSmallIntegerField(
         db_column="tong_so_phong",
@@ -59,12 +65,9 @@ class DatPhong(TimeStampedModel):
 
     status = models.CharField(
         max_length=10,
+        choices=TrangThaiDatPhong.choices,
+        default=TrangThaiDatPhong.PENDING,
         db_column="trang_thai",
-    )
-
-    payment_method = models.CharField(
-        max_length=10,
-        db_column="phuong_thuc_thanh_toan",
     )
 
     class Meta:
@@ -73,7 +76,7 @@ class DatPhong(TimeStampedModel):
         verbose_name_plural = "Đặt phòng"
 
     def __str__(self):
-        return str(f'{self.id_hotel.name} - Checkin: {self.check_in_date} Checkout: {self.check_out_date} {self.id_booking}')
+        return str(f'{self.id_hotel.name} {self.id_booking}')
 
 
 

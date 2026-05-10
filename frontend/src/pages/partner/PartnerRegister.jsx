@@ -1,7 +1,7 @@
-import RegisterSection from "../../features/authentication/RegisterSection"
+import RegisterPage from "../../features/authentication/pages/RegisterPage"
 
 export default function PartnerRegister() {
     return (
-        <RegisterSection />
+        <RegisterPage />
     )
 }

@@ -3,7 +3,7 @@ from . import (
     HotelImageView,
     HotelRoomView,
     ChildPolicyView,
-    HotelBookingView,
+    HotelBookingSummaryView,
 )
 
 from . import (
@@ -26,5 +26,5 @@ urlpatterns = [
     path("api/hotel/<uuid:id_hotel>/child_policy", ChildPolicyView.as_view(), name="hotel-child-policy"),
     path("api/hotel/<uuid:id_hotel>/images", HotelImageView.as_view(), name="hotel-images"),
     
-    path("api/hotel/<uuid:id_hotel>/booking_summary", HotelBookingView.as_view(), name="hotel-booking"),
+    path("api/hotel/<uuid:id_hotel>/booking_summary", HotelBookingSummaryView.as_view(), name="hotel-booking"),
 ]

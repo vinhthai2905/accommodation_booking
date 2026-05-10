@@ -7,14 +7,13 @@ from uuid import UUID
 
 from apps.app_hotel.models import KhachSan
 from apps.app_hotel.api.serializers.hotel_booking_serializers import (
-    HotelBookingSerializer,
+    HotelBookingSummarySerializer,
 )
 
-
-class HotelBookingView(APIView):
+class HotelBookingSummaryView(APIView):
     """View to retrieve hotel data and its child policy for booking processes."""
 
-    serializer_class = HotelBookingSerializer
+    serializer_class = HotelBookingSummarySerializer
     hotel_model = KhachSan
 
     def get(self, request: Request, id_hotel: UUID):

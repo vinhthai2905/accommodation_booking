@@ -1,0 +1,72 @@
+import toast from "react-hot-toast"
+
+import { logoutAuthUser, fetchAuthUser } from "../../../services/authentication/authServices"
+
+
+export default function useAuthActions(setUserState) {
+    const setAccessToken = (token) => {
+        if (!token)
+            throw new Error("Token không được cấp.")
+
+        localStorage.setItem("access_token", token)
+    }
+
+    const setCurrentUser = (email, personal_info, role) => {
+        if (!personal_info || !email || !role)
+            throw new Error("Thông tin không tồn tại")
+
+        setUserState({
+            email,
+            personal_info,
+            role
+        })
+    }
+
+    const setAuthUserState = (access_token, email, personal_info, role) => {
+        setAccessToken(access_token),
+        setCurrentUser(email, personal_info, role)
+    }
+
+    const clearAuthUserState = async () => {
+        try {
+            await logoutAuthUser()
+
+            localStorage.removeItem("access_token")
+
+            setUserState(null)
+        }
+        catch (error) {
+            toast.error(`Hệ thống xảy ra lỗi. ${error}`)
+        }
+    }
+
+    const fetchAuthUserState = async () => {
+        try {
+            const response = await fetchAuthUser()
+
+            if (!response.ok)
+                throw new Error(`Response status: ${response}`)
+
+
+            const responseData = await response.json()
+            
+            setCurrentUser(
+                responseData.user.email, 
+                responseData.user.personal_info, 
+                responseData.user.role
+            )
+
+            return responseData
+
+        }
+        catch (error) {
+            toast.error(`Hệ thống xảy ra lỗi. ${error}`)
+        }
+    }
+
+    return {
+        setAuthUserState,
+        fetchAuthUserState,
+        clearAuthUserState,
+    }
+}

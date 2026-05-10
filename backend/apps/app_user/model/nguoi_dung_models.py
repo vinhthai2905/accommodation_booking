@@ -36,8 +36,6 @@ class NguoiDungManager(BaseUserManager):
             id_user=user
         ).save()
         
-        print(role)
-
     def create_user(self, email, password, **extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
