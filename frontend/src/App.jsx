@@ -1,6 +1,6 @@
 import AppLayout from './components/layout/AppLayout'
 import AuthLayout from './components/layout/AuthLayout'
-import PartnerLayout from './components/layout/PartnerLayout'
+import PartnerDashboard from './pages/partner/PartnerDashboard'
 import AdminLayout from "./components/layout/AdminLayout"
 
 import CustomerRegister from './pages/users/CustomerRegister'
@@ -16,7 +16,8 @@ import MyBooking from './features/profile/section/MyBooking'
 
 import PartnertLanding from './pages/partner/PartnerLanding'
 import PartnerRegister from './pages/partner/PartnerRegister'
-import PartnerDashboard from './pages/partner/PartnerDashboard'
+import DashboardMain from './features/partner/pages/DashboardMain'
+import DashboardHotel from './features/partner/pages/DashboardHotel'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 
@@ -37,6 +38,7 @@ import ToasterUI from './components/ui/ToasterUI'
 
 import ChildAgeInput from './features/search/components/ChildAgeInput'
 import PartnerLogin from './pages/partner/PartnerLogin'
+import DashboardRoomType from './features/partner/pages/DashboardRoomType'
 
 const queryClient = new QueryClient()
 
@@ -99,12 +101,18 @@ function App() {
       element: <PartnerProtectedRoute />,
       path: "/partner",
       children: [
-
         {
           path: "dashboard",
-          element: <PartnerLayout />,
+          element: <PartnerDashboard />,
           children: [
-            { path: "", element: <PartnerDashboard /> },
+            { path: "", element: <DashboardMain /> },
+            {
+              path: "hotel",
+              element: <DashboardHotel />,
+              children: [
+                { path: "room-type", element: <DashboardRoomType /> }
+              ]
+            }
           ]
         },
       ]
