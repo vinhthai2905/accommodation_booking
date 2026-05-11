@@ -1,8 +1,7 @@
-import DashboardNavLink from "../ui/DashboardNavLink"
+import DashboardNavLink from "../../ui/DashboardNavLink"
 
 import { clsx } from "clsx"
 import { ChevronDown, ChevronRight, CalendarCheck, History, XCircle } from "lucide-react"
-import { Link } from "react-router"
 
 export default function HotelBookingNavGroup({ navStates, toggleBookingNav, closeAllNav, motion }) {
     return (

@@ -18,4 +18,6 @@ from .public.booking_preview import (
     ChildPolicyPreviewView
 )
 
-
+from .private.partner_hotel_detail.views.room_type_views import (
+    PartnerRoomTypeListView
+)

@@ -1,11 +1,11 @@
 import { useSearchParams } from "react-router"
 
-import { calculateChildFee } from "../../../../helpers/calculateChildFee"
+import { calculateChildFee } from "../../../../helpers/booking/calculateChildFee"
 
 import useBookingSummary from "../../../../hooks/booking/useBookingSummary"
 
 export default function PriceSummaryCard({ totalRoomPrice }) {
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const { data: hotel } = useBookingSummary()
 
     const childFees = calculateChildFee(

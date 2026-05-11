@@ -10,6 +10,10 @@ from . import (
     HotelBookingPreviewView,
 )
 
+from . import (
+    PartnerRoomTypeListView
+)
+
 from django.urls import path
 
 urlpatterns = [
@@ -22,5 +26,9 @@ urlpatterns = [
     path("api/hotel/<uuid:id_hotel>/child_policy", ChildPolicyPreviewView.as_view(), name="hotel-child-policy"),
     
     
-    path("api/hotel/<uuid:id_hotel>/images",HotelImageView.as_view(),name="hotel-images")
+    path("api/hotel/<uuid:id_hotel>/images",HotelImageView.as_view(),name="hotel-images"),
+    
+    
+    # PRIVATE SESSION
+    path("api/partner/hotel/room_types", PartnerRoomTypeListView.as_view(), name="partner-hotel-room-types")
 ]

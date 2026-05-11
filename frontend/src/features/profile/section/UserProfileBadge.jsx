@@ -8,7 +8,7 @@ import { AuthUserContext } from "../../../context/authentication/AuthUserContext
 
 import useClickOutside from "../../../hooks/common/useClickOutside"
 
-import { parseFullName } from "../../../helpers/parseFullName"
+import { parseFullName } from "../../../helpers/common/parseFullName"
 
 export default function UserProfileBadge() {
   const [isOpen, setIsOpen] = useState(false)

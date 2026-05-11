@@ -13,5 +13,4 @@ class RoomTypeSerializer(serializers.ModelSerializer):
             "max_capacity",
             "total_rooms",
             "price",
-            "available_rooms",
         ]

@@ -10,7 +10,7 @@ export default function PartnerDashboard() {
     return (
         <div className={clsx(
             "flex h-screen w-full overflow-hidden",
-            "font-sans text-gray-900 bg-gray-50"
+            "font-sans text-gray-900 bg-white"
         )}>
 
             <DashboardNavigation motion={motion} />
@@ -45,10 +45,8 @@ export default function PartnerDashboard() {
                     </div>
                 </header>
 
-                <div className="flex-1 overflow-y-auto p-4 lg:p-8">
-                    <div className="max-w-7xl mx-auto">
-                        <Outlet />
-                    </div>
+                <div className="flex-1 overflow-y-auto bg-white p-4 lg:p-8 flex flex-col">
+                    <Outlet />
                 </div>
             </main>
         </div>

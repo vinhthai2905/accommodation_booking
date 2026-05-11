@@ -1,4 +1,4 @@
-export const parsedData = (data) => ({
+export const parsePythonData = (data) => ({
     email: data.email,
     first_name: data.firstName,
     last_name: data.lastName,

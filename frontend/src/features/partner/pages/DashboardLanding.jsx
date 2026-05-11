@@ -1,10 +1,10 @@
-import StatCard from "../components/StatCard";
+import StatCard from "../components/authentication/StatCard"
 
 import { motion } from "framer-motion"
 import { clsx } from "clsx"
 import { Users, DollarSign, Hotel, TrendingUp, ArrowUpRight, ArrowDownRight, MoreHorizontal } from "lucide-react"
 
-export default function DashboardMain() {
+export default function DashboardLanding() {
     const stats = [
         { title: "Total Revenue", value: "$45,231", change: "+20.1%", isPositive: true, icon: DollarSign },
         { title: "Active Users", value: "2,405", change: "+15.2%", isPositive: true, icon: Users },

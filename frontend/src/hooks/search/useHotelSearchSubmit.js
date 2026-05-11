@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router"
-import { parseHotelSearchParams } from "../../helpers/parseHotelSearchParams"
+import { parseHotelSearchParams } from "../../helpers/search/parseHotelSearchParams"
 
 export default function useHotelSearchSubmit({ selectedPlace, isPlaceSelected, setShowLocationError, ranges, guestOptions }) {
     const navigate = useNavigate()

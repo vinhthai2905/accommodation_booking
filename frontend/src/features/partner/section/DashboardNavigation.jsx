@@ -1,14 +1,14 @@
 import AnimatedSidebarDashboard from "../../../components/ui/AnimatedSidebarDashboard"
-import HotelNavGroup from "../components/HotelNavGroup"
-import HotelImgNavGroup from "../components/HotelImgNavGroup"
+import HotelNavGroup from "../components/dashboard-navigation/HotelNavGroup"
+import HotelRoomTypeNavGroup from "../components/dashboard-navigation/HotelRoomTypeNavGroup"
+import HotelImgNavGroup from "../components/dashboard-navigation/HotelImgNavGroup"
+import HotelBookingNavGroup from "../components/dashboard-navigation/HotelBookingNavGroup"
 
 import { clsx } from "clsx"
 import { Link } from "react-router"
 import { LogOut } from "lucide-react"
 
 import useToggleNavSection from "../../../hooks/dashboard/partner/useToggleNavSection"
-import HotelBookingNavGroup from "../components/HotelBookingNavGroup"
-import HotelRoomTypeNavGroup from "../components/HotelRoomTypeNavGroup"
 
 export default function DashboardNavigation({ motion }) {
     const {

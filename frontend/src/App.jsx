@@ -16,7 +16,7 @@ import MyBooking from './features/profile/section/MyBooking'
 
 import PartnertLanding from './pages/partner/PartnerLanding'
 import PartnerRegister from './pages/partner/PartnerRegister'
-import DashboardMain from './features/partner/pages/DashboardMain'
+import DashboardLanding from './features/partner/pages/DashboardLanding'
 import DashboardHotel from './features/partner/pages/DashboardHotel'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -106,7 +106,7 @@ function App() {
           path: "dashboard",
           element: <PartnerDashboard />,
           children: [
-            { path: "", element: <DashboardMain /> },
+            { path: "", element: <DashboardLanding /> },
             {
               path: "hotel",
               element: <DashboardHotel />,

@@ -50,7 +50,7 @@ class KhachSan(models.Model):
         NguoiDung,
         on_delete=models.CASCADE,
         db_column="id_doi_tac",
-        related_name="hotels",
+        related_name="hotel",
     )
 
     id_ward = models.ForeignKey(

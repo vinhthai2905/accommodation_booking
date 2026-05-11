@@ -1,8 +1,4 @@
-import { parsedData } from "../../helpers/parseInput"
-
 const apiURL = import.meta.env.VITE_API_URL
-
-
 
 // export const registerUser = (data) => {
 //     return fetch("http://localhost:8000/api/users", {
@@ -11,7 +7,7 @@ const apiURL = import.meta.env.VITE_API_URL
 //         headers: {
 //             "Content-Type": "application/json"
 //         },
-//         body: JSON.stringify(parsedData(data))
+//         body: JSON.stringify(parsedPythonData(data))
 //     }).then(
 //         response => response
 //     )

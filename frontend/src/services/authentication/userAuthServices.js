@@ -1,4 +1,4 @@
-import { parsedData } from "../../helpers/parseInput"
+import { parsePythonData } from "../../helpers/common/parsePythonData"
 
 const apiURL = import.meta.env.VITE_API_URL
 
@@ -9,7 +9,7 @@ export const registerUser = async (data) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(parsedData(data))
+        body: JSON.stringify(parsePythonData(data))
     })
 
     return response

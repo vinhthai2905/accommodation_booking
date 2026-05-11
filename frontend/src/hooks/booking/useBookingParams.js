@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router"
 
-import { getBookingParams } from "../../helpers/getBookingParams"
+import { getBookingParams } from "../../helpers/booking/getBookingParams"
 
 export default function useBookingParams() {
     const [searchParams] = useSearchParams()
