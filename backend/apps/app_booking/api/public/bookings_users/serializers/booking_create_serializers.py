@@ -1,19 +1,12 @@
 from rest_framework import serializers
 from rest_framework import exceptions
 
-from apps.app_booking.models import DatPhong
-from apps.app_booking.models import (
-    ChiTietDatPhong,
-    ChiTietKhachTreEm,
-)
-from apps.app_booking.models import HoaDon
-
 from apps.app_hotel.models import PhongKhachSan
 
 from helpers import validate_booking_date
 
 
-class CreateBookingSerializer(serializers.Serializer):
+class BookingCreateSerializer(serializers.Serializer):
     """Serialize input data for creating a booking.
 
     Fields are required by default unless marked with required=False

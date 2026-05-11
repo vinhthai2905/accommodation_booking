@@ -8,27 +8,26 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from apps.app_booking.api.permission import UserIsCustomer
-from apps.app_booking.api.serializers import (
-    CreateBookingSerializer,
-)
-from apps.app_booking.models import DatPhong
+from apps.app_booking.choices import TrangThaiDatPhong, PhuongThucThanhToan, TrangThaiThanhToan
+from apps.app_booking.models import DatPhong, HoaDon, ThanhToan
 from apps.app_booking.models import (
     ChiTietDatPhong,
     ChiTietKhachTreEm,
+)
+from apps.app_booking.api.public.bookings_users.serializers import (
+    BookingCreateSerializer
 )
 
 from apps.app_payment.services import ZaloPayService
 from apps.app_payment.api.exceptions.zalo import ZaloPaymentGatewayException
 
-from apps.app_booking.models import HoaDon, ThanhToan
-from apps.app_booking.choices import TrangThaiDatPhong, PhuongThucThanhToan, TrangThaiThanhToan
 from apps.app_hotel.models import PhongKhachSan, KhachSan, ChinhSachTreEm
 from apps.app_user.models import NguoiDung
 
 
-class CreateBookingView(views.APIView):
+class BookingCreateView(views.APIView):
     permission_classes = [UserIsCustomer]
-    serializer_class = CreateBookingSerializer
+    serializer_class = BookingCreateSerializer
     hotel_model = KhachSan
 
     def _flatten_booking_payload(self, incoming_data):

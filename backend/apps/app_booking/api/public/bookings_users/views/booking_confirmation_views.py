@@ -8,11 +8,11 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from apps.app_booking.api.permission import UserIsCustomer
-from apps.app_booking.api.serializers import (
+from apps.app_booking.api.public.bookings_users.serializers import (
     IDBookingConfirmationSerializer,
     BookingConfirmationDetailSerializer,
 )
-from apps.app_booking.models import DatPhong, HoaDon, ThanhToan
+from apps.app_booking.models import DatPhong, ThanhToan
 from apps.app_booking.choices import TrangThaiDatPhong, TrangThaiThanhToan
 
 from apps.app_payment.services.zalo import ZaloPayService
@@ -53,7 +53,7 @@ class BookingConfirmationView(views.APIView):
     def _update_booking_payment(self, booking: DatPhong, zalo_transaction_status: dict):
         booking_payment: ThanhToan = booking.invoice.payments
         order_code = zalo_transaction_status["return_code"]
-        
+
         match order_code:
             case 1:
                 booking_payment.paid_at = timezone.now()

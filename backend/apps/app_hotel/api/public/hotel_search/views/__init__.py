@@ -1,0 +1,1 @@
+from .hotel_search_views import HotelSearchResultView

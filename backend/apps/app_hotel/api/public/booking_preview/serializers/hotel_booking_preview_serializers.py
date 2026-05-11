@@ -1,18 +1,26 @@
 from rest_framework import serializers
 
-from apps.app_hotel.models import KhachSan
+from apps.app_hotel.models import KhachSan, ChinhSachTreEm
 from apps.app_hotel.helpers import get_full_address
-from apps.app_hotel.api.serializers.child_policy_serializers import (
-    ChildPolicySummarySerializer,
-)
 
+class ChildPolicyPreviewSerializer(serializers.ModelSerializer):
+    """Serialize the child policy belongs to a hotel, then expose to public API."""
 
-class HotelBookingSummarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChinhSachTreEm
+        fields = [
+            "max_free_age",
+            "max_surcharge_age",
+            "adult_age_from",
+            "surcharge_amount",
+        ]
+
+class HotelBookingPreviewSerializer(serializers.ModelSerializer):
     """Serialize hotel data for booking purposes, then expose it to public API."""
 
     primary_image = serializers.SerializerMethodField()
     full_address = serializers.SerializerMethodField()
-    child_policy = ChildPolicySummarySerializer(read_only=True)
+    child_policy = ChildPolicyPreviewSerializer(read_only=True)
 
     class Meta:
         model = KhachSan

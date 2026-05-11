@@ -1,0 +1,2 @@
+from .hotel_overview_views import HotelDetailView
+from .room_type_availability_views import RoomTypeAvailabilityView

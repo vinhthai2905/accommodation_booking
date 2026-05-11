@@ -2,12 +2,14 @@ from rest_framework import serializers
 
 from apps.app_hotel.models import KhachSan
 from apps.app_hotel.helpers import get_full_address
-from apps.app_hotel.api.serializers.booking_date_serializers import BookingDateSerializer
+from apps.app_hotel.api.public.hotel_detail.serializers import (
+    BookingDateSerializer
+)
 
 
 class HotelSearchParamsSerializer(BookingDateSerializer):
     """Deserialize hotel search query params."""
-    
+
     location = serializers.CharField(required=True)
     requested_rooms = serializers.IntegerField(min_value=1, required=True)
     adults = serializers.IntegerField(min_value=1, required=True)
@@ -20,9 +22,9 @@ class HotelSearchParamsSerializer(BookingDateSerializer):
 
 
 class HotelSearchResultSerializer(serializers.ModelSerializer):
-    """Serialize each hotel which met the search requirements, 
+    """Serialize each hotel which met the search requirements,
     then expose to public API Search Hotels."""
-    
+
     primary_image = serializers.SerializerMethodField()
     full_address = serializers.SerializerMethodField()
 

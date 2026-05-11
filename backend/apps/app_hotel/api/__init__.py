@@ -1,15 +1,21 @@
 from .views import (
-    HotelDetailView,
     HotelImageView,
     HotelRoomView, 
-    RoomTypeAvailabilityView,
-    ChildPolicyView
 )
 
-from .views import (
-    HotelSearchView
+
+from .public.hotel_search.views import (
+    HotelSearchResultView
 )
 
-from .views import (
-    HotelBookingSummaryView
+from .public.hotel_detail.views import (
+    HotelDetailView,
+    RoomTypeAvailabilityView
 )
+
+from .public.booking_preview import (
+    HotelBookingPreviewView,
+    ChildPolicyPreviewView
+)
+
+

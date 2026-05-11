@@ -19,17 +19,4 @@ class RoomBookingSerializer(serializers.ModelSerializer):
         fields = ["id_room", "room_name"]
 
 
-class RoomAvailabilitySerializer(serializers.ModelSerializer):
-    """Serialize each available room belongs to a specific room type for the request date range, 
-    then expose to public API."""
-    
-    room_type = serializers.CharField(source="id_room_type.type_name", read_only=True)
 
-    class Meta:
-        model = PhongKhachSan
-        fields = ["id_room", "id_room_type", "room_type", "room_name"]
-        read_only_fields = [
-            "id_room",
-            "id_room_type",
-            "room_name",
-        ]
