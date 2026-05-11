@@ -28,7 +28,6 @@ class AuthLoginView(APIView):
 
         user: NguoiDung = login_serializer.validated_data["user"]
         role: VaiTroNguoiDung = login_serializer.validated_data["role"]
-
         refresh = create_auth_tokens(user, role)
 
         response = Response(

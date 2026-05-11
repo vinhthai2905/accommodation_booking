@@ -12,11 +12,10 @@ export default function useAuthFetchUser(fetchAuthUserState) {
         enabled: !!token
     })
 
-    console.log(error)
-
     return {
         isPending,
         error,
-        data
+        data,
+        accessToken: token
     }
 }

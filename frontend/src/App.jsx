@@ -45,11 +45,16 @@ const queryClient = new QueryClient()
 function App() {
   const router = createBrowserRouter([
     {
-      path: "auth",
+      path: "",
       element: <AuthRedirectRoute />,
       children: [
         {
+          path: "partner/landing",
+          element: <PartnertLanding />
+        },
+        {
           element: <AuthLayout />,
+          path: "auth",
           children: [
             { path: "sign-up", element: <CustomerRegister /> },
             { path: "sign-in", element: <CustomerSignIn /> },
@@ -92,10 +97,6 @@ function App() {
           element: <PaymentConfirmation />,
         },
       ]
-    },
-    {
-      path: "/partner/landing",
-      element: <PartnertLanding />
     },
     {
       element: <PartnerProtectedRoute />,

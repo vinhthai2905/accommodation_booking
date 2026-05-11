@@ -10,7 +10,9 @@ import useRegisterPartnerForm from "../../../hooks/authentication/partners/useRe
 import { useOutletContext } from "react-router"
 
 export default function RegisterPage() {
-  const user = useOutletContext()
+  const isPartner = useOutletContext()
+  const switchLink = isPartner ? "/auth/partner/sign-in" : "/auth/sign-in"
+
 
   return (
     <>
@@ -20,13 +22,13 @@ export default function RegisterPage() {
           <AuthTitle type={"signUp"} />
 
           <RegisterForm
-            registerFormHook={user === "partner" ? useRegisterPartnerForm : useRegisterUserForm}
+            registerFormHook={isPartner ? useRegisterPartnerForm : useRegisterUserForm}
             submitText={"Đăng ký"}
           >
           </RegisterForm>
 
-          <AuthSwitchLink to={"auth/sign-in"} authType={"logIn"} />
-          {user === "user" && <SocialLoginSection />}
+          <AuthSwitchLink to={switchLink} authType={"logIn"} />
+          {!isPartner && <SocialLoginSection />}
           <Policies />
         </div>
       </div>

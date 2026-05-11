@@ -44,7 +44,7 @@ export default function DashboardMain() {
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stats.map((stat, i) => (
-                    <StatCard key={i} {...stat} delay={i * 0.1}  motion={motion}/>
+                    <StatCard key={i} {...stat} delay={i * 0.1} motion={motion} />
                 ))}
             </div>
 

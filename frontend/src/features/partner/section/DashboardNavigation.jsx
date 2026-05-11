@@ -1,16 +1,24 @@
 import AnimatedSidebarDashboard from "../../../components/ui/AnimatedSidebarDashboard"
+import HotelNavGroup from "../components/HotelNavGroup"
+import HotelImgNavGroup from "../components/HotelImgNavGroup"
 
 import { clsx } from "clsx"
 import { Link } from "react-router"
-import { LayoutDashboard, Users, Hotel, Settings, LogOut, ChevronDown, ChevronRight } from "lucide-react"
+import { LogOut } from "lucide-react"
 
-import useToggleHotelSection from "../../../hooks/dashboard/partner/useToggleHotelSection"
-import HotelNavGroup from "../components/HotelNavGroup"
+import useToggleNavSection from "../../../hooks/dashboard/partner/useToggleNavSection"
+import HotelBookingNavGroup from "../components/HotelBookingNavGroup"
+import HotelRoomTypeNavGroup from "../components/HotelRoomTypeNavGroup"
 
 export default function DashboardNavigation({ motion }) {
-    const { isHotelOpen, setIsHotelOpen } = useToggleHotelSection()
-
-    const isRoomTypeActive = location.pathname === "/partner/dashboard/hotel/room-type"
+    const {
+        navStates,
+        toggleHotelNav,
+        toggleImgNav,
+        toggleBookingNav,
+        toggleRoomTypeNav,
+        closeAllNav
+    } = useToggleNavSection()
 
     return (
         <AnimatedSidebarDashboard
@@ -34,12 +42,35 @@ export default function DashboardNavigation({ motion }) {
             </div>
 
             <nav className="flex-1 overflow-y-auto py-6 px-4 space-y-2">
-               <HotelNavGroup 
-                    isHotelOpen={isHotelOpen} 
-                    setIsHotelOpen={setIsHotelOpen} 
-                    isRoomTypeActive={isRoomTypeActive}
+                <HotelNavGroup
+                    navStates={navStates}
+                    toggleHotelNav={toggleHotelNav}
+                    closeAllNav={closeAllNav}
                     motion={motion}
-               />
+                />
+                
+                <HotelRoomTypeNavGroup
+                    navStates={navStates}
+                    toggleRoomTypeNav={toggleRoomTypeNav}
+                    closeAllNav={closeAllNav}
+                    motion={motion}
+                />
+
+                <HotelImgNavGroup
+                    navStates={navStates}
+                    toggleImgNav={toggleImgNav}
+                    closeAllNav={closeAllNav}
+                    motion={motion}
+                />
+
+                <HotelBookingNavGroup
+                    navStates={navStates}
+                    toggleBookingNav={toggleBookingNav}
+                    closeAllNav={closeAllNav}
+                    motion={motion}
+                />
+
+
             </nav>
 
             <div className="p-4 border-t border-gray-200">

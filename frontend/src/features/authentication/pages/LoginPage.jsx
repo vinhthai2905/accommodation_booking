@@ -8,7 +8,8 @@ import { useOutletContext } from "react-router"
 
 
 export default function LoginPage() {
-  const userRole = useOutletContext()
+  const isPartner = useOutletContext()
+  const switchLink = isPartner ? "/auth/partner/sign-up" : "/auth/sign-up"
 
   return (
     <>
@@ -20,8 +21,8 @@ export default function LoginPage() {
             submitText={"Đăng nhập"}
           />
 
-          <AuthSwitchLink to={"/auth/sign-up"} authType={"signUp"} />
-          {userRole === "user" && <SocialLoginSection />}
+          <AuthSwitchLink to={switchLink} authType={"signUp"} />
+          {/* {!isPartner && <SocialLoginSection />} */}
           <Policies />
         </div>
       </div>
