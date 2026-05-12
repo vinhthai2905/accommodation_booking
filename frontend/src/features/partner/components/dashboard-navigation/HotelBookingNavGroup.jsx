@@ -1,4 +1,4 @@
-import DashboardNavLink from "../../ui/DashboardNavLink"
+import DashboardNavLink from "../../ui/dashboard-nav/DashboardNavLink"
 
 import { clsx } from "clsx"
 import { ChevronDown, ChevronRight, CalendarCheck, History, XCircle } from "lucide-react"

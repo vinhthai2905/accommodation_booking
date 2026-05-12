@@ -14,3 +14,4 @@ class RoomTypeSerializer(serializers.ModelSerializer):
             "total_rooms",
             "price",
         ]
+

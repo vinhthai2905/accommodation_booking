@@ -1,1 +1,2 @@
 from .room_type_views import PartnerRoomTypeListView
+from .room_views import PartnerRoomView

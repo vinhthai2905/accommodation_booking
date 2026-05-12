@@ -80,7 +80,7 @@ export default function DashboardNavigation({ motion }) {
                     "transition-colors font-medium"
                 )}>
                     <LogOut size={20} />
-                    Logout
+                    Đăng xuất
                 </button>
             </div>
 

@@ -1,6 +1,5 @@
 from .views import (
     HotelImageView,
-    HotelRoomView, 
 )
 
 
@@ -20,4 +19,8 @@ from .public.booking_preview import (
 
 from .private.partner_hotel_detail.views.room_type_views import (
     PartnerRoomTypeListView
+)
+
+from .private.partner_hotel_detail.views.room_views import (
+    PartnerRoomView
 )

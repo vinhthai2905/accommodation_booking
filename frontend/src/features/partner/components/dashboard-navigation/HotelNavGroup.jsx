@@ -1,4 +1,4 @@
-import DashboardNavLink from "../../ui/DashboardNavLink"
+import DashboardNavLink from "../../ui/dashboard-nav/DashboardNavLink"
 
 import { clsx } from "clsx"
 import { Hotel, ChevronDown, ChevronRight } from "lucide-react"

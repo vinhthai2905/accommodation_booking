@@ -4,9 +4,9 @@ import { useAuthUserContext } from "../../hooks/authentication/common/useAuthUse
 import LoadingFullScreen from "../../features/book/components/Shared/LoadingFullScreen"
 
 export default function PartnerProtectedRoute() {
-    const { user, isFetchingUser, isAuthenticated } = useAuthUserContext()
+    const { user, accessToken: hasSession, isFetchingUser, isAuthenticated } = useAuthUserContext()
     
-    if (isFetchingUser)
+    if (hasSession && isFetchingUser)
         return <LoadingFullScreen />
 
     if (!isAuthenticated || user.role !== "Đối tác")
