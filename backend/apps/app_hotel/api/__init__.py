@@ -22,5 +22,11 @@ from .private.partner_hotel_detail.views.room_type_views import (
 )
 
 from .private.partner_hotel_detail.views.room_views import (
-    PartnerRoomView
+    PartnerRoomTypeRoomsView
+)
+
+from .private.partner_hotel_detail.views.room_type_detail_views import (
+    PartnerBedListView,
+    PartnerRoomTypeDetailView,
+    PartnerRoomTypeDetailItemView,
 )

@@ -1,4 +1,4 @@
-import DBRoomTypeToolBarButton from "../../../ui/dashboard-main/dashboard-room-type/DBRoomTypeToolBarButton"
+import DBRoomTypeToolBarButton from "../../../../ui/dashboard-main/dashboard-room-type/DBRoomTypeToolBarButton"
 
 import { clsx } from "clsx"
 import { Filter, Plus, Search } from "lucide-react"
@@ -40,16 +40,16 @@ export default function DBRoomTypeToolBar({ searchTerm, setSearchTerm }) {
             <div className="flex w-full items-center gap-3 md:w-auto">
                 <DBRoomTypeToolBarButton>
                     <Filter size={16} />
-                    Category
+                    Danh mục
                 </DBRoomTypeToolBarButton>
 
                 <DBRoomTypeToolBarButton>
-                    Status
+                    Trạng thái
                 </DBRoomTypeToolBarButton>
 
                 <DBRoomTypeToolBarButton>
                     <Plus size={16} />
-                    Add New
+                    Thêm loại phòng mới
                 </DBRoomTypeToolBarButton>
             </div>
         </div>

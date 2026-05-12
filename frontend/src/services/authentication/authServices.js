@@ -27,7 +27,7 @@ export const fetchAuthUser = async () => {
 }
 
 export const loginAuthUser = async (data) => {
-    const response = await fetch("http://localhost:8000/api/auth/user/login", {
+    const response = await fetch(`${apiURL}/api/auth/user/login`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -40,7 +40,7 @@ export const loginAuthUser = async (data) => {
 }
 
 export const logoutAuthUser = async () => {
-    const response = await fetch("http://localhost:8000/api/auth/user/logout", {
+    const response = await fetch(`${apiURL}/api/auth/user/logout`, {
         method: "POST",
         credentials: "include",
         headers: {

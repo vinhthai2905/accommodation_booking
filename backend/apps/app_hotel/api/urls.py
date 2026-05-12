@@ -11,7 +11,10 @@ from . import (
 
 from . import (
     PartnerRoomTypeListView,
-    PartnerRoomView
+    PartnerRoomTypeRoomsView,
+    PartnerRoomTypeDetailView,
+    PartnerRoomTypeDetailItemView,
+    PartnerBedListView,
 )
 
 from django.urls import path
@@ -29,5 +32,13 @@ urlpatterns = [
     
     # PRIVATE SESSION
     path("api/partner/hotel/room_types", PartnerRoomTypeListView.as_view(), name="partner-hotel-room-types"),
-    path("api/partner/hotel/room_type/<int:id_room_type>/rooms", PartnerRoomView.as_view(), name="partner-hotel-rooms")
+    path("api/partner/hotel/room_type/<int:id_room_type>/rooms", PartnerRoomTypeRoomsView.as_view(), name="partner-hotel-rooms"),
+    path("api/partner/hotel/room_type/<int:id_room_type>/bed_details", PartnerRoomTypeDetailView.as_view(), name="partner-hotel-room-type-bed-details"),
+    path(
+        "api/partner/hotel/room_type/<int:id_room_type>/bed_details/<int:id_room_type_detail>", 
+        PartnerRoomTypeDetailItemView.as_view(), 
+        name="partner-hotel-room-type-bed-detail-item"
+    ),
+    path("api/partner/hotel/beds", PartnerBedListView.as_view(), name="partner-hotel-beds"),
 ]
+

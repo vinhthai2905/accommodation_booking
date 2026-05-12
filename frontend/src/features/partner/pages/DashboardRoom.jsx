@@ -1,3 +1,4 @@
+import LoadingHotelDatas from "../ui/dashboard-main/common/LoadingHotelDatas"
 import ErrorLoadingHotelDatas from "../ui/dashboard-main/common/ErrorLoadingHotelDatas"
 
 import DBRoomHeader from "../components/dashboard-main/dashboard-room/DBRoomHeader"
@@ -10,8 +11,8 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { useParams } from "react-router"
 
-import usePartnerRooms from "../../../hooks/dashboard/partner/usePartnerRooms"
-import LoadingHotelDatas from "../ui/dashboard-main/common/LoadingHotelDatas"
+import usePartnerRooms from "../../../hooks/dashboard/partner/room-type-hooks/usePartnerRooms"
+
 
 export default function DashboardRoom() {
     const { room_type_id } = useParams()
@@ -24,7 +25,6 @@ export default function DashboardRoom() {
     if (isError)
         return (
             <ErrorLoadingHotelDatas
-                labelError={"Đã xảy ra lỗi."}
                 errorMessage={error?.message}
                 alterMessageError={"Không thể tải danh sách phòng vật lý. Vui lòng thử lại sau."}
             />
@@ -41,7 +41,7 @@ export default function DashboardRoom() {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={clsx(
+            className={clsx(
                     "flex flex-1 min-h-0 w-full flex-col",
                     "overflow-hidden",
                     "rounded-xl border border-gray-200 bg-white shadow-sm"

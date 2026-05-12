@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-export default function ErrorLoadingHotelDatas({labelError, errorMessage, alterMessageError}) {
+export default function ErrorLoadingHotelDatas({errorMessage, alterMessageError}) {
     return (
         <div
             className={clsx(
@@ -8,7 +8,7 @@ export default function ErrorLoadingHotelDatas({labelError, errorMessage, alterM
                 "rounded-xl border border-red-200 bg-red-50 shadow-sm",
                 "text-red-600"
             )}>
-            <h3 className="text-xl font-bold mb-2">{labelError}</h3>
+            <h3 className="text-xl font-bold mb-2">Đã xảy ra lỗi.</h3>
             <p>{errorMessage || alterMessageError}</p>
         </div>
     )

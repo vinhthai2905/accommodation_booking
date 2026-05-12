@@ -31,7 +31,6 @@ class UserRegisterView(APIView):
         user = user_register_serializer.create(
             validated_data=user_register_serializer.validated_data
         )
-        
         refresh = create_auth_tokens(user, user_register_serializer.role_assignment)
 
         response = Response(

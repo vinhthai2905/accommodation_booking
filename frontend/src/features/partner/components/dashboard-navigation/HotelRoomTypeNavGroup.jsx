@@ -36,7 +36,7 @@ export default function HotelRoomTypeNavGroup({navStates, toggleRoomTypeNav, clo
                     <DashboardNavLink
                         to={"/partner/dashboard/hotel/room-type"}
                         closeAllNav={closeAllNav}
-                        label={"Thông tin"}
+                        label={"Danh sách loại phòng"}
                     />
                 </div>
             )}

@@ -7,12 +7,11 @@ from rest_framework import status, exceptions
 
 from apps.app_user.models import NguoiDung
 
-from apps.app_hotel.models import LoaiPhong, KhachSan
+from apps.app_hotel.models import LoaiPhong, KhachSan, PhongKhachSan
 from apps.app_hotel.api.private.partner_hotel_detail.serializers import (
     RoomTypeSerializer,
 )
 from apps.app_hotel.api.permissions import IsAuthenticatedPartner, IsAuthenticatedPartnerActive
-
 
 class PartnerRoomTypeListView(APIView):
     permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
@@ -27,7 +26,6 @@ class PartnerRoomTypeListView(APIView):
         try:
             return (
                 KhachSan.objects
-                .prefetch_related("room_types")
                 .get(id_user=partner)
             )
         except KhachSan.DoesNotExist as e:
@@ -45,4 +43,6 @@ class PartnerRoomTypeListView(APIView):
         room_type_serializer = self.serializer_class(room_types, many=True)
         
         return Response(room_type_serializer.data, status=status.HTTP_200_OK)
+    
+
      

@@ -1,2 +1,3 @@
 from .room_type_serializers import RoomTypeSerializer
-from .room_serializers import RoomSerializer, RoomBookingSerializer
+from .room_serializers import RoomTypeRoomsSerializer, RoomBookingSerializer
+from .room_type_detail_serializers import BedSerializer, RoomTypeDetailSerializer

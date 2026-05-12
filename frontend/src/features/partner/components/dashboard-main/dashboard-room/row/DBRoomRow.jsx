@@ -6,7 +6,7 @@ import EditRoomModal from "../modal/EditRoomModal"
 
 import { useState } from "react"
 
-import useRoomCRUD from "../../../../../../hooks/dashboard/partner/useRoomCRUD"
+import useRoomCRUD from "../../../../../../hooks/dashboard/partner/room-type-hooks/useRoomCRUD"
 
 export default function RoomTableRow({ initialRoom }) {
     const [room, setRoom] = useState(initialRoom)
@@ -20,7 +20,6 @@ export default function RoomTableRow({ initialRoom }) {
         setIsDeleteModalOpen
     } = useRoomCRUD()
 
-    // Form state for editing
     const [editForm, setEditForm] = useState({
         room_name: initialRoom.room_name || "",
     })

@@ -8,7 +8,7 @@ from django.db.models import QuerySet
 from apps.app_user.models import NguoiDung
 from apps.app_hotel.models import LoaiPhong, KhachSan, PhongKhachSan
 from apps.app_hotel.api.private.partner_hotel_detail.serializers import (
-    RoomSerializer,
+    RoomTypeRoomsSerializer,
 )
 from apps.app_hotel.api.permissions import (
     IsAuthenticatedPartner,
@@ -16,9 +16,9 @@ from apps.app_hotel.api.permissions import (
 )
 
 
-class PartnerRoomView(APIView):
+class PartnerRoomTypeRoomsView(APIView):
     permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
-    serializer_class = RoomSerializer
+    serializer_class = RoomTypeRoomsSerializer
 
     def _get_partner_hotel(self, partner: NguoiDung) -> KhachSan:
         try:

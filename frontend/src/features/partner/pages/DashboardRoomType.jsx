@@ -1,16 +1,16 @@
 import LoadingHotelDatas from "../ui/dashboard-main/common/LoadingHotelDatas"
 import ErrorLoadingHotelDatas from "../ui/dashboard-main/common/ErrorLoadingHotelDatas"
 
-import DBRoomTypeHeader from "../components/dashboard-main/dashboard-room-type/DBRoomTypeHeader"
-import DBRoomTypePagination from "../components/dashboard-main/dashboard-room-type/DBRoomTypePagination"
-import DBRoomTypeTable from "../components/dashboard-main/dashboard-room-type/DBRoomTypeTable"
-import DBRoomTypeToolBar from "../components/dashboard-main/dashboard-room-type/DBroomTypeToolBar"
+import DBRoomTypeHeader from "../components/dashboard-main/dashboard-room-type/section/DBRoomTypeHeader"
+import DBRoomTypePagination from "../components/dashboard-main/dashboard-room-type/section/DBRoomTypePagination"
+import DBRoomTypeTable from "../components/dashboard-main/dashboard-room-type/section/DBRoomTypeTable"
+import DBRoomTypeToolBar from "../components/dashboard-main/dashboard-room-type/section/DBroomTypeToolBar"
 
 import { clsx } from "clsx"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
-import usePartnerRoomTypes from "../../../hooks/dashboard/partner/usePartnerRoomTypes"
+import usePartnerRoomTypes from "../../../hooks/dashboard/partner/room-type-hooks/usePartnerRoomTypes"
 
 export default function DashboardRoomType() {
     const { data: roomTypes, isPending, isError, error } = usePartnerRoomTypes()
@@ -23,7 +23,6 @@ export default function DashboardRoomType() {
     if (isError) {
         return (
             <ErrorLoadingHotelDatas
-                labelError={"Đã xảy ra lỗi."}
                 errorMessage={error.message}
                 alterMessageError={"Không thể tải danh sách loại phòng. Vui lòng thử lại sau."}
             />

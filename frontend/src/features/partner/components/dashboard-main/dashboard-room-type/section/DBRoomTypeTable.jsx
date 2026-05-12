@@ -1,7 +1,6 @@
 import DBRoomTypeTableColumn from "./DBRoomTypeTableColumn"
+import DBRoomTypeRow from "../row/DBRoomTypeRow"
 
-import { clsx } from "clsx"
-import DBRoomTypeTableRows from "./DBRoomTypeTableRows"
 
 export default function DBRoomTypeTable({ filteredRooms }) {
     return (
@@ -17,9 +16,11 @@ export default function DBRoomTypeTable({ filteredRooms }) {
                                     Không có phòng nào phù hợp với yêu cầu tìm kiếm.
                                 </td>
                             </tr>
-                        ) 
+                        )
                         : (
-                            <DBRoomTypeTableRows filteredRooms={filteredRooms} />
+                            filteredRooms.map((room) => (
+                                <DBRoomTypeRow key={room.id_room_type} initialRoom={room} />
+                            ))
                         )}
                 </tbody>
             </table>

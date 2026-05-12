@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework import exceptions
 
-from apps.app_hotel.models import LoaiPhong
+from apps.app_hotel.models import LoaiPhong, PhongKhachSan
 
 class RoomTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,4 +14,5 @@ class RoomTypeSerializer(serializers.ModelSerializer):
             "total_rooms",
             "price",
         ]
+
 

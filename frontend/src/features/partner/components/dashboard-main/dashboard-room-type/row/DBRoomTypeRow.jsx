@@ -1,14 +1,14 @@
 import DBRoomTypeRowDatas from "./DBRoomTypeRowDatas"
 import DBRoomTypeRowActions from "./DBRoomTypeRowActions"
 import DBRoomTypeActionsButton from "../../../../ui/dashboard-main/dashboard-room-type/DBRoomTypeActionsButton"
-import DeleteRoomTypeModal from "../modal/DeleteRoomTypeModal"
-import EditRoomTypeModal from "../modal/EditRoomTypeModal"
+import DeleteRoomTypeModal from "../modal/section/DeleteRoomTypeModal"
+import EditRoomTypeModal from "../modal/section/EditRoomTypeModal"
 
 import { useState } from "react"
 
-import useRoomTypeCRUD from "../../../../../../hooks/dashboard/partner/useRoomTypeCRUD"
+import useRoomTypeCRUD from "/src/hooks/dashboard/partner/room-type-hooks/useRoomTypeCRUD"
 
-export default function RoomTableRow({ initialRoom }) {
+export default function DBRoomTypeRow({ initialRoom }) {
     const [room, setRoom] = useState(initialRoom)
     const {
         menuRef,
@@ -20,7 +20,6 @@ export default function RoomTableRow({ initialRoom }) {
         setIsDeleteModalOpen
     } = useRoomTypeCRUD()
 
-    
     // Form state for editing
     const [editForm, setEditForm] = useState({
         type_name: initialRoom.type_name || "",
@@ -60,6 +59,7 @@ export default function RoomTableRow({ initialRoom }) {
                         setIsMenuOpen={setIsMenuOpen}
                         setIsEditModalOpen={setIsEditModalOpen}
                         setIsDeleteModalOpen={setIsDeleteModalOpen}
+                        room={room}
                     />
                 )}
 
@@ -79,6 +79,7 @@ export default function RoomTableRow({ initialRoom }) {
                         handleDeleteRoomType={handleDeleteRoomType}
                     />
                 )}
+
             </td>
         </tr>
     )

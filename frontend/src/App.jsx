@@ -19,6 +19,7 @@ import PartnerRegister from './pages/partner/PartnerRegister'
 import DashboardLanding from './features/partner/pages/DashboardLanding'
 import DashboardHotel from './features/partner/pages/DashboardHotel'
 import DashboardRoom from './features/partner/pages/DashboardRoom'
+import DashboardRoomTypeDetail from './features/partner/pages/DashboardRoomTypeDetail'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 
@@ -113,7 +114,8 @@ function App() {
               element: <DashboardHotel />,
               children: [
                 { path: "room-type", element: <DashboardRoomType /> },
-                { path: "room-type/:slug/:room_type_id/rooms", element: <DashboardRoom /> }
+                { path: "room-type/:slug/:room_type_id/rooms", element: <DashboardRoom /> },
+                { path: "room-type/:slug/:room_type_id/detail", element: <DashboardRoomTypeDetail /> }
               ]
             }
           ]
