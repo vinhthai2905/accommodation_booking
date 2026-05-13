@@ -6,7 +6,7 @@ import EditRoomTypeModal from "../modal/section/EditRoomTypeModal"
 
 import { useState } from "react"
 
-import useRoomTypeCRUD from "/src/hooks/dashboard/partner/room-type-hooks/useRoomTypeCRUD"
+import useRoomTypeModal from "/src/hooks/dashboard/partner/room-type-hooks/useRoomTypeModal"
 
 export default function DBRoomTypeRow({ initialRoom }) {
     const [room, setRoom] = useState(initialRoom)
@@ -18,7 +18,7 @@ export default function DBRoomTypeRow({ initialRoom }) {
         setIsEditModalOpen,
         isDeleteModalOpen,
         setIsDeleteModalOpen
-    } = useRoomTypeCRUD()
+    } = useRoomTypeModal()
 
     // Form state for editing
     const [editForm, setEditForm] = useState({

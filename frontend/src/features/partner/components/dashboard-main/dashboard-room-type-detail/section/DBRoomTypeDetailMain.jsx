@@ -1,41 +1,36 @@
 import LoadingRoomTypeDetail from "../../../../ui/dashboard-main/common/LoadingHotelDatas"
+import ErrorLoadingHotelDatas from "../../../../ui/dashboard-main/common/ErrorLoadingHotelDatas"
 import DBExistingBedDetail from "../components/DBExistingBedDetail"
 import DBAddBedForm from "../components/DBAddBedForm"
 
-import { useState } from "react"
+import { FormProvider } from "react-hook-form"
 
 import {
     usePartnerBeds,
     usePartnerRoomTypeBedDetails,
-    useCreateRoomTypeBedDetail,
-    useDeleteRoomTypeBedDetail,
 } from "../../../../../../hooks/dashboard/partner/room-type-hooks/usePartnerRoomTypeBedDetails"
-import ErrorLoadingHotelDatas from "../../../../ui/dashboard-main/common/ErrorLoadingHotelDatas"
-import LoadingHotelDatas from "../../../../ui/dashboard-main/common/LoadingHotelDatas"
+
+import usePartnerRoomTypeDetailsForm from "../../../../../../hooks/dashboard/partner/room-type-hooks/usePartnerRoomTypeDetailsForm"
 
 
 export default function DBRoomTypeDetailMain({ id_room_type }) {
-    const { 
-        data: bedDetails, 
-        isPending: loadingRoomTypeDetails, 
-        isError: isLoadingRoomTypeError, 
-        error: loadingRoomTypeError
+    const {
+        data: bedDetails,
+        isPending: loadingRoomTypeDetails,
+        isError: isLoadingRoomTypeError,
+        error: loadingRoomTypeError,
+        isSuccess: successLoadedRoomTypeDetails,
     } = usePartnerRoomTypeBedDetails(id_room_type)
-    const { data: availableBeds, isPending: loadingBeds } = usePartnerBeds(id_room_type)
 
-    const addRoomTypeDetailMutation = useCreateRoomTypeBedDetail(id_room_type)
-    const delRoolTypeDetailMutation = useDeleteRoomTypeBedDetail(id_room_type)
+    const { data: availableBeds, isPending: loadingBeds } = usePartnerBeds(successLoadedRoomTypeDetails)
 
-    const [form, setForm] = useState({ id_bed: "", bed_quantity: 1 })
-
-    const handleAdd = (e) => {
-        e.preventDefault()
-        if (!form.id_bed) return
-        addRoomTypeDetailMutation.mutate(
-            { id_bed: Number(form.id_bed), bed_quantity: Number(form.bed_quantity) },
-            { onSuccess: () => setForm({ id_bed: "", bed_quantity: 1 }) }
-        )
-    }
+    const {
+        formHookMethods,
+        addRoomTypeDetailMutation,
+        delRoolTypeDetailMutation,
+        onSuccessValidatedForm,
+        onErrorValidatedForm,
+    } = usePartnerRoomTypeDetailsForm(id_room_type)
 
     if (loadingRoomTypeDetails || loadingBeds)
         return <LoadingRoomTypeDetail labelLoading={"Đang tải chi tiết cho loại phòng...."} />
@@ -55,13 +50,14 @@ export default function DBRoomTypeDetailMain({ id_room_type }) {
                 delRoolTypeDetailMutation={delRoolTypeDetailMutation}
             />
 
-            <DBAddBedForm
-                handleAdd={handleAdd}
-                form={form}
-                availableBeds={availableBeds}
-                setForm={setForm}
-                addRoomTypeDetailMutation={addRoomTypeDetailMutation}
-            />
+            <FormProvider {...formHookMethods}>
+                <DBAddBedForm
+                    addRoomTypeDetailMutation={addRoomTypeDetailMutation}
+                    availableBeds={availableBeds}
+                    onSuccessValidatedForm={onSuccessValidatedForm}
+                    onErrorValidatedForm={onErrorValidatedForm}        
+                />
+            </FormProvider>
         </div>
     )
 }

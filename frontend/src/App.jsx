@@ -115,7 +115,7 @@ function App() {
               children: [
                 { path: "room-type", element: <DashboardRoomType /> },
                 { path: "room-type/:slug/:room_type_id/rooms", element: <DashboardRoom /> },
-                { path: "room-type/:slug/:room_type_id/detail", element: <DashboardRoomTypeDetail /> }
+                { path: "room-type/:slug/:room_type_id/details", element: <DashboardRoomTypeDetail /> }
               ]
             }
           ]

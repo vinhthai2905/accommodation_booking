@@ -23,9 +23,9 @@ export default function DBExistingBedDetail({ bedDetails, delRoolTypeDetailMutat
             )   
                 : (
                 <div className="space-y-3">
-                    {bedDetails?.map((detail) => (
+                    {bedDetails?.map((roomTypeDetail) => (
                         <div
-                            key={detail.id_room_type_detail}
+                            key={roomTypeDetail.id_room_type_detail}
                             className={clsx(
                                 "flex items-center justify-between px-4 py-3.5",
                                 "rounded-xl border border-gray-100 bg-gray-50/60",
@@ -37,14 +37,14 @@ export default function DBExistingBedDetail({ bedDetails, delRoolTypeDetailMutat
                                     <BedDouble size={17} />
                                 </div>
                                 <div>
-                                    <p className="text-sm font-semibold text-gray-800">{detail.bed_name}</p>
+                                    <p className="text-sm font-semibold text-gray-800">{roomTypeDetail.bed_name}</p>
                                     <div className="flex items-center gap-2 mt-0.5">
-                                        {detail.bed_size && (
-                                            <span className="text-[11px] text-gray-400">{detail.bed_size}</span>
+                                        {roomTypeDetail.bed_size && (
+                                            <span className="text-[11px] text-gray-400">{roomTypeDetail.bed_size}</span>
                                         )}
-                                        {detail.bed_max_capacity && (
+                                        {roomTypeDetail.bed_max_capacity && (
                                             <span className="text-[11px] text-gray-400">
-                                                · Tối đa {detail.bed_max_capacity} khách
+                                                · Tối đa {roomTypeDetail.bed_max_capacity} khách
                                             </span>
                                         )}
                                     </div>
@@ -56,12 +56,12 @@ export default function DBExistingBedDetail({ bedDetails, delRoolTypeDetailMutat
                                     "inline-flex items-center px-2.5 py-1 rounded-lg",
                                     "text-xs font-bold text-violet-700 bg-violet-100 border border-violet-200/80"
                                 )}>
-                                    × {detail.bed_quantity}
+                                    × {roomTypeDetail.bed_quantity}
                                 </span>
                                 <button
                                     type="button"
                                     disabled={delRoolTypeDetailMutation.isPending}
-                                    onClick={() => delRoolTypeDetailMutation.mutate(detail.id_room_type_detail)}
+                                    onClick={() => delRoolTypeDetailMutation.mutate(roomTypeDetail.id_room_type_detail)}
                                     className={clsx(
                                         "p-1.5 rounded-lg text-gray-300",
                                         "hover:text-rose-500 hover:bg-rose-50 transition-all duration-150 cursor-pointer",

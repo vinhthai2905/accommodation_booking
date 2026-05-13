@@ -16,7 +16,7 @@ from apps.app_hotel.api.permissions import (
 )
 
 
-class PartnerRoomTypeRoomsView(APIView):
+class PartnerRoomTypeRoomsListView(APIView):
     permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
     serializer_class = RoomTypeRoomsSerializer
 

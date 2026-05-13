@@ -4,9 +4,9 @@ import { useAuthUserContext } from "../../hooks/authentication/common/useAuthUse
 import LoadingFullScreen from "../../features/book/components/Shared/LoadingFullScreen"
 
 export default function UserProtectedRoute() {
-    const { user, isFetchingUser, accessToken } = useAuthUserContext()
+    const { user, isFetchingUser, accessToken: hasSession } = useAuthUserContext()
     
-    if (!!accessToken && isFetchingUser)
+    if (hasSession && isFetchingUser)
         return <LoadingFullScreen />
 
     // if (user.role !== "Khách hàng")

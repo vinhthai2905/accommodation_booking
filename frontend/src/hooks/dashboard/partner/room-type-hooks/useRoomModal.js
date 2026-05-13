@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import useClickOutside from "../../../common/useClickOutside"
 
-export default function useRoomCRUD() {
+export default function useRoomModal() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
