@@ -18,8 +18,12 @@ import PartnertLanding from './pages/partner/PartnerLanding'
 import PartnerRegister from './pages/partner/PartnerRegister'
 import DashboardLanding from './features/partner/pages/DashboardLanding'
 import DashboardHotel from './features/partner/pages/DashboardHotel'
-import DashboardRoom from './features/partner/pages/DashboardRoom'
+import DashboardRoomType from './features/partner/pages/DashboardRoomType'
 import DashboardRoomTypeDetail from './features/partner/pages/DashboardRoomTypeDetail'
+import DashboardRoom from './features/partner/pages/DashboardRoom'
+
+import DBCreateRoomType from './features/partner/components/dashboard-main/dashboard-room-type/crud/create/DBCreateRoomType'
+import DBEditRoomType from './features/partner/components/dashboard-main/dashboard-room-type/crud/edit/DBEditRoomType'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 
@@ -40,7 +44,6 @@ import ToasterUI from './components/ui/ToasterUI'
 
 import ChildAgeInput from './features/search/components/ChildAgeInput'
 import PartnerLogin from './pages/partner/PartnerLogin'
-import DashboardRoomType from './features/partner/pages/DashboardRoomType'
 
 const queryClient = new QueryClient()
 
@@ -114,8 +117,11 @@ function App() {
               element: <DashboardHotel />,
               children: [
                 { path: "room-type", element: <DashboardRoomType /> },
-                { path: "room-type/:slug/:room_type_id/rooms", element: <DashboardRoom /> },
-                { path: "room-type/:slug/:room_type_id/details", element: <DashboardRoomTypeDetail /> }
+                { path: "room-type/new", element: <DBCreateRoomType/> },
+                
+                { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRoom /> },
+                { path: "room-type/:slug/:id_room_type/details", element: <DashboardRoomTypeDetail /> },
+                { path: "room-type/:slug/:id_room_type/edit", element: <DBEditRoomType /> }
               ]
             }
           ]

@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form"
 
-import { useCreateRoomTypeBedDetail, useDeleteRoomTypeBedDetail } from "./usePartnerRoomTypeBedDetails"
-import parseRoomTypeDetailPayload from "../../../../helpers/dashboard/partner/parseRoomTypeDetailPayload"
+import { useCreateRoomTypeBedDetail, useDeleteRoomTypeBedDetail } from "../services/usePartnerRoomTypeBedDetailsMutations"
+
+import parseRoomTypeDetailPayload from "../../../../../helpers/dashboard/partner/parseRoomTypeDetailPayload"
 
 export default function usePartnerRoomTypeDetailsForm(id_room_type) {
     const formHookMethods = useForm({

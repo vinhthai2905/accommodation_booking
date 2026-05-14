@@ -47,7 +47,7 @@ export default function DBRoomTypeToolBar({ searchTerm, setSearchTerm }) {
                     Trạng thái
                 </DBRoomTypeToolBarButton>
 
-                <DBRoomTypeToolBarButton>
+                <DBRoomTypeToolBarButton variant="primary" to={"new"}>
                     <Plus size={16} />
                     Thêm loại phòng mới
                 </DBRoomTypeToolBarButton>

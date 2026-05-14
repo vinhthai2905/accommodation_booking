@@ -1,16 +1,16 @@
 import LoadingHotelDatas from "../ui/dashboard-main/common/LoadingHotelDatas"
 import ErrorLoadingHotelDatas from "../ui/dashboard-main/common/ErrorLoadingHotelDatas"
 
-import DBRoomTypeHeader from "../components/dashboard-main/dashboard-room-type/section/DBRoomTypeHeader"
-import DBRoomTypePagination from "../components/dashboard-main/dashboard-room-type/section/DBRoomTypePagination"
-import DBRoomTypeTable from "../components/dashboard-main/dashboard-room-type/section/DBRoomTypeTable"
-import DBRoomTypeToolBar from "../components/dashboard-main/dashboard-room-type/section/DBroomTypeToolBar"
+import DBRoomTypeHeader from "../components/dashboard-main/dashboard-room-type/list/DBRoomTypeHeader"
+import DBRoomTypePagination from "../components/dashboard-main/dashboard-room-type/list/DBRoomTypePagination"
+import DBRoomTypeTable from "../components/dashboard-main/dashboard-room-type/list/DBRoomTypeTable"
+import DBRoomTypeToolBar from "../components/dashboard-main/dashboard-room-type/list/DBroomTypeToolBar"
 
 import { clsx } from "clsx"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
-import usePartnerRoomTypes from "../../../hooks/dashboard/partner/room-type-hooks/usePartnerRoomTypes"
+import usePartnerRoomTypes from "../../../hooks/dashboard/partner/room-type-hooks/services/usePartnerRoomTypes"
 
 export default function DashboardRoomType() {
     const { data: roomTypes, isPending, isError, error } = usePartnerRoomTypes()

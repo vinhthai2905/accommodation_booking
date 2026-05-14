@@ -11,12 +11,11 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { useParams } from "react-router"
 
-import usePartnerRooms from "../../../hooks/dashboard/partner/room-type-hooks/usePartnerRooms"
-
+import usePartnerRooms from "../../../hooks/dashboard/partner/room-type-hooks/services/usePartnerRooms"
 
 export default function DashboardRoom() {
-    const { room_type_id } = useParams()
-    const { data: rooms, isPending, isError, error } = usePartnerRooms(room_type_id, true)
+    const { id_room_type } = useParams()
+    const { data: rooms, isPending, isError, error } = usePartnerRooms(id_room_type, true)
     const [searchTerm, setSearchTerm] = useState("")
 
     if (isPending)

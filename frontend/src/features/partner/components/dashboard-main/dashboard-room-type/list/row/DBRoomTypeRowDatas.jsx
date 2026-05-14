@@ -2,7 +2,7 @@ import { clsx } from "clsx"
 import { BedDouble, Eye } from "lucide-react"
 import { useNavigate } from "react-router"
 
-import { createSlug } from "../../../../../../helpers/dashboard/partner/createSlug"
+import { createSlug } from "../../../../../../../helpers/dashboard/partner/createSlug"
 
 export default function DBRoomTypeRowDatas({ room }) {
     const navigate = useNavigate()

@@ -18,7 +18,8 @@ from .public.booking_preview import (
 )
 
 from .private.partner_hotel_detail.views.room_type_views import (
-    PartnerRoomTypeListView
+    PartnerRoomTypeListView,
+    PartnerRoomTypeView,
 )
 
 from .private.partner_hotel_detail.views.room_views import (

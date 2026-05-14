@@ -14,10 +14,21 @@ export const fetchPartnerRoomTypes = async () => {
   return data
 }
 
-export const fetchPartnerPhysicalRooms = async (room_type_id) => {
+export const fetchPartnerRoomTypeDetail = async (id_room_type) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(`${apiUrl}/api/partner/hotel/room_type/${room_type_id}/rooms`, {
+  const { data } = await axios.get(
+    `${apiUrl}/api/partner/hotel/room_type/${id_room_type}`,
+    { headers }
+  )
+
+  return data
+}
+
+export const fetchPartnerPhysicalRooms = async (id_room_type) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.get(`${apiUrl}/api/partner/hotel/room_type/${id_room_type}/rooms`, {
     headers,
   })
 

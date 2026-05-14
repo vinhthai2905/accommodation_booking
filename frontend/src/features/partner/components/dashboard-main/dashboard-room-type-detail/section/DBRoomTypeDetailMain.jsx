@@ -5,12 +5,9 @@ import DBAddBedForm from "../components/DBAddBedForm"
 
 import { FormProvider } from "react-hook-form"
 
-import {
-    usePartnerBeds,
-    usePartnerRoomTypeBedDetails,
-} from "../../../../../../hooks/dashboard/partner/room-type-hooks/usePartnerRoomTypeBedDetails"
+import { usePartnerRoomTypeBedDetails, usePartnerBeds } from "../../../../../../hooks/dashboard/partner/room-type-hooks/services/usePartnerRoomTypeBedDetails"
 
-import usePartnerRoomTypeDetailsForm from "../../../../../../hooks/dashboard/partner/room-type-hooks/usePartnerRoomTypeDetailsForm"
+import usePartnerRoomTypeDetailsForm from "../../../../../../hooks/dashboard/partner/room-type-hooks/form/usePartnerRoomTypeDetailsForm"
 
 
 export default function DBRoomTypeDetailMain({ id_room_type }) {
@@ -55,7 +52,7 @@ export default function DBRoomTypeDetailMain({ id_room_type }) {
                     addRoomTypeDetailMutation={addRoomTypeDetailMutation}
                     availableBeds={availableBeds}
                     onSuccessValidatedForm={onSuccessValidatedForm}
-                    onErrorValidatedForm={onErrorValidatedForm}        
+                    onErrorValidatedForm={onErrorValidatedForm}
                 />
             </FormProvider>
         </div>

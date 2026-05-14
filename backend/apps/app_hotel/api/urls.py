@@ -11,6 +11,7 @@ from . import (
 
 from . import (
     PartnerRoomTypeListView,
+    PartnerRoomTypeView,
     PartnerRoomTypeRoomsListView,
     PartnerRoomTypeDetailsListView,
     PartnerRoomTypeDetailView,
@@ -32,6 +33,7 @@ urlpatterns = [
     
     # PRIVATE SESSION
     path("api/partner/hotel/room_types", PartnerRoomTypeListView.as_view(), name="partner-hotel-room-types"),
+    path("api/partner/hotel/room_type/<int:id_room_type>", PartnerRoomTypeView.as_view(), name="partner-hotel-room-type-manage"),
     path("api/partner/hotel/room_type/<int:id_room_type>/rooms", PartnerRoomTypeRoomsListView.as_view(), name="partner-hotel-rooms"),
     
     

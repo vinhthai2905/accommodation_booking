@@ -2,7 +2,7 @@ import { clsx } from "clsx"
 import { ClipboardList, Pencil, Trash2 } from "lucide-react"
 import { useNavigate } from "react-router"
 
-import { createSlug } from "../../../../../../helpers/dashboard/partner/createSlug"
+import { createSlug } from "../../../../../../../helpers/dashboard/partner/createSlug"
 
 export default function DBRoomTypeRowActions({ setIsMenuOpen, setIsEditModalOpen, setIsDeleteModalOpen, room }) {
     const navigate = useNavigate()
@@ -16,7 +16,7 @@ export default function DBRoomTypeRowActions({ setIsMenuOpen, setIsEditModalOpen
             <button
                 onClick={() => {
                     setIsMenuOpen(false)
-                    navigate(`/partner/dashboard/hotel/room-type/${createSlug(room.type_name)}/${room.id_room_type}/detail`)
+                    navigate(`/partner/dashboard/hotel/room-type/${createSlug(room.type_name)}/${room.id_room_type}/details`)
                 }}
                 className={clsx(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-semibold text-gray-700",
@@ -32,7 +32,7 @@ export default function DBRoomTypeRowActions({ setIsMenuOpen, setIsEditModalOpen
             <button
                 onClick={() => {
                     setIsMenuOpen(false)
-                    setIsEditModalOpen(true)
+                    navigate(`/partner/dashboard/hotel/room-type/${createSlug(room.type_name)}/${room.id_room_type}/edit`)
                 }}
                 className={clsx(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-semibold text-gray-700",

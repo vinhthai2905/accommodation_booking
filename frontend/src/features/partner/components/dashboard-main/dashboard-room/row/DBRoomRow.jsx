@@ -6,7 +6,7 @@ import EditRoomModal from "../modal/EditRoomModal"
 
 import { useState } from "react"
 
-import useRoomModal from "../../../../../../hooks/dashboard/partner/room-type-hooks/useRoomModal"
+import usePartnerRoomModals from "../../../../../../hooks/dashboard/partner/room-type-hooks/modals/usePartnerRoomModals"
 
 export default function RoomTableRow({ initialRoom }) {
     const [room, setRoom] = useState(initialRoom)
@@ -18,7 +18,7 @@ export default function RoomTableRow({ initialRoom }) {
         setIsEditModalOpen,
         isDeleteModalOpen,
         setIsDeleteModalOpen
-    } = useRoomModal()
+    } = usePartnerRoomModals()
 
     const [editForm, setEditForm] = useState({
         room_name: initialRoom.room_name || "",

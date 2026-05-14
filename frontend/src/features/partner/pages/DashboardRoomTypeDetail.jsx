@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import { useParams } from "react-router"
 
 export default function DashboardRoomTypeDetail() {
-    const { room_type_id, slug } = useParams()
+    const { id_room_type, slug } = useParams()
 
     // Derive a readable name from the slug (replace hyphens with spaces, title-case)
     const roomTypeName = slug
@@ -29,7 +29,7 @@ export default function DashboardRoomTypeDetail() {
                     "rounded-xl border border-gray-200 bg-white shadow-sm"
                 )}
             >
-                <DBRoomTypeDetailMain id_room_type={Number(room_type_id)} />
+                <DBRoomTypeDetailMain id_room_type={Number(id_room_type)} />
             </motion.div>
         </div>
     )

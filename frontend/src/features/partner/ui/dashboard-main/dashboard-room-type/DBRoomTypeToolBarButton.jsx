@@ -1,17 +1,19 @@
 import { clsx } from "clsx"
+import { Link } from "react-router"
 
-export default function DBRoomTypeToolBarButton({ children }) {
+export default function DBRoomTypeToolBarButton({ children, to}) {
     return (
-        <button
+        <Link
+            to={to}
             className={clsx(
                 "flex w-full items-center justify-center gap-2 px-4 py-2.5",
-                "rounded-lg border border-gray-300 bg-white",
-                "text-sm font-medium text-gray-700",
-                "transition-colors hover:bg-gray-50",
-                "md:w-auto"
+                "rounded-lg border",
+                "text-sm font-medium",
+                "transition-colors",
+                "md:w-auto",
             )}
         >
             {children}
-        </button>
+        </Link>
     )
 }
