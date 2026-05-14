@@ -165,6 +165,14 @@ class BookingCreateView(views.APIView):
             room_amount=room_amount,
             total_amount=total_child_surcharge + room_amount,
         )
+        
+    def _create_zalo_order_service(self, booking: DatPhong, invoice: HoaDon, user: NguoiDung) -> dict:
+        try:
+            zalo_create_order_result = ZaloPayService.create_order(booking, invoice, user)
+        except Exception as e:
+            raise ZaloPaymentGatewayException(detail={"error": e})
+
+        return zalo_create_order_result
     
     def _create_payment_order_record(self, invoice: HoaDon, id_transaction: str):
         ThanhToan.objects.create(
@@ -175,14 +183,6 @@ class BookingCreateView(views.APIView):
             paid_amount = invoice.total_amount
         )
 
-    def _create_zalo_order_service(self, booking: DatPhong, invoice: HoaDon, user: NguoiDung) -> dict:
-        try:
-            zalo_create_order_result = ZaloPayService.create_order(booking, invoice, user)
-        except Exception as e:
-            raise ZaloPaymentGatewayException(detail={"error": e})
-
-        return zalo_create_order_result
-    
     def post(self, request: Request, *args, **kwargs):
         flatten_data = self._flatten_booking_payload(request.data)
         validated_data = self._validate_booking_payload(flatten_data)

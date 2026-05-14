@@ -1,8 +1,8 @@
 from django.db import models
 
 class TrangThaiDatPhong(models.TextChoices):
-    PENDING   = "PENDING",   "Chờ thanh toán"
-    CONFIRMED      = "CONFIRMED", "Đã xác nhận"
+    PENDING   = "PENDING",   "Chờ nhận phòng"
+    CONFIRMED      = "CONFIRMED", "Đã nhận phòng"
     CANCELLED = "CANCELLED", "Đã hủy"
 
 

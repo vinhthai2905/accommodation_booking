@@ -21,9 +21,10 @@ import DashboardHotel from './features/partner/pages/DashboardHotel'
 import DashboardRoomType from './features/partner/pages/DashboardRoomType'
 import DashboardRoomTypeDetail from './features/partner/pages/DashboardRoomTypeDetail'
 import DashboardRoom from './features/partner/pages/DashboardRoom'
+import DashboardBookings from './features/partner/pages/DashboardBookings'
 
-import DBCreateRoomType from './features/partner/components/dashboard-main/dashboard-room-type/crud/create/DBCreateRoomType'
-import DBEditRoomType from './features/partner/components/dashboard-main/dashboard-room-type/crud/edit/DBEditRoomType'
+import DBCreateRoomType from './features/partner/components/dashboard-main/dashboard-room-type/crud-page/create/DBCreateRoomType'
+import DBEditRoomType from './features/partner/components/dashboard-main/dashboard-room-type/crud-page/edit/DBEditRoomType'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 
@@ -117,11 +118,14 @@ function App() {
               element: <DashboardHotel />,
               children: [
                 { path: "room-type", element: <DashboardRoomType /> },
-                { path: "room-type/new", element: <DBCreateRoomType/> },
-                
+                { path: "bookings", element: <DashboardBookings /> },
                 { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRoom /> },
+
+                { path: "room-type/new", element: <DBCreateRoomType /> },
+                { path: "room-type/:slug/:id_room_type/edit", element: <DBEditRoomType /> },
+
                 { path: "room-type/:slug/:id_room_type/details", element: <DashboardRoomTypeDetail /> },
-                { path: "room-type/:slug/:id_room_type/edit", element: <DBEditRoomType /> }
+
               ]
             }
           ]

@@ -1,10 +1,10 @@
 import LoadingHotelDatas from "../ui/dashboard-main/common/LoadingHotelDatas"
 import ErrorLoadingHotelDatas from "../ui/dashboard-main/common/ErrorLoadingHotelDatas"
 
-import DBRoomTypeHeader from "../components/dashboard-main/dashboard-room-type/list/DBRoomTypeHeader"
-import DBRoomTypePagination from "../components/dashboard-main/dashboard-room-type/list/DBRoomTypePagination"
-import DBRoomTypeTable from "../components/dashboard-main/dashboard-room-type/list/DBRoomTypeTable"
-import DBRoomTypeToolBar from "../components/dashboard-main/dashboard-room-type/list/DBroomTypeToolBar"
+import DBRoomTypeHeader from "../components/dashboard-main/dashboard-room-type/list-page/section/DBRoomTypeHeader"
+import DBRoomTypePagination from "../components/dashboard-main/dashboard-room-type/list-page/section/DBRoomTypePagination"
+import DBRoomTypeTable from "../components/dashboard-main/dashboard-room-type/list-page/section/DBRoomTypeTable"
+import DBRoomTypeToolBar from "../components/dashboard-main/dashboard-room-type/list-page/section/DBroomTypeToolBar"
 
 import { clsx } from "clsx"
 import { useState } from "react"

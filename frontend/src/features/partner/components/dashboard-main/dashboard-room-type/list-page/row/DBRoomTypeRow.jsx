@@ -1,7 +1,7 @@
 import DBRoomTypeRowDatas from "./DBRoomTypeRowDatas"
 import DBRoomTypeRowActions from "./DBRoomTypeRowActions"
 import DBRoomTypeActionsButton from "../../../../../ui/dashboard-main/dashboard-room-type/DBRoomTypeActionsButton"
-import DeleteRoomTypeModal from "../../crud/delete/DeleteRoomTypeModal"
+import DeleteRoomTypeModal from "../../crud-page/delete/DeleteRoomTypeModal"
 
 import { useState } from "react"
 

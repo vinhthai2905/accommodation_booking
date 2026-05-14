@@ -4,3 +4,7 @@ from .public.bookings_users.views import (
     UserBookingListView
 )
 
+from .private.bookings_partners.views import (
+    PartnerBookingListView
+)
+

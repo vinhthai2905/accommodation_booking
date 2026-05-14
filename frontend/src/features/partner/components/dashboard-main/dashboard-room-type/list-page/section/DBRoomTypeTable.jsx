@@ -1,5 +1,5 @@
 import DBRoomTypeTableColumn from "./DBRoomTypeTableColumn"
-import DBRoomTypeRow from "./row/DBRoomTypeRow"
+import DBRoomTypeRow from "../row/DBRoomTypeRow"
 
 
 export default function DBRoomTypeTable({ filteredRooms }) {

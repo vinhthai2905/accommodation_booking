@@ -33,17 +33,17 @@ export default function HotelBookingNavGroup({ navStates, toggleBookingNav, clos
             {navStates.booking && (
                 <div className="pl-4 mt-1 space-y-1">
                     <DashboardNavLink
-                        to="/partner/dashboard/bookings/upcoming"
+                        to="/partner/dashboard/hotel/bookings?tab=upcoming"
                         closeAllNav={closeAllNav}
                         label="Sắp tới"
                     />
                     <DashboardNavLink
-                        to="/partner/dashboard/bookings/past"
+                        to="/partner/dashboard/hotel/bookings?tab=past"
                         closeAllNav={closeAllNav}
                         label="Đã qua"
                     />
                     <DashboardNavLink
-                        to="/partner/dashboard/bookings/cancelled"
+                        to="/partner/dashboard/hotel/bookings?tab=cancelled"
                         closeAllNav={closeAllNav}
                         label="Đã hủy"
                     />

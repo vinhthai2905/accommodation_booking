@@ -1,4 +1,4 @@
-import DBRoomTypeToolBarButton from "../../../../ui/dashboard-main/dashboard-room-type/DBRoomTypeToolBarButton"
+import DBRoomTypeToolBarButton from "../../../../../ui/dashboard-main/dashboard-room-type/DBRoomTypeToolBarButton"
 
 import { clsx } from "clsx"
 import { Filter, Plus, Search } from "lucide-react"
