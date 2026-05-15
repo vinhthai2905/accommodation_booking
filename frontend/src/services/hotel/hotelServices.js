@@ -15,7 +15,7 @@ export const fetchHotel = async (hotelID) => {
   return data
 }
 
-export const fetchHotelRoomTypes = async (hotelID, check_in, check_out) => {
+export const fetchHotelRoomTypesAvailability = async (hotelID, check_in, check_out) => {
   const { data } = await axios.get(
     `${apiUrl}/api/hotel/${hotelID}/room_types`,
     {
@@ -34,7 +34,7 @@ export const fetchHotelImages = async (hotelID) => {
   return data
 }
 
-export const fetchHotelPolicy = async (hotelID) => {
+export const fetchHotelChildPolicy = async (hotelID) => {
   const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/child_policy`)
 
   return data

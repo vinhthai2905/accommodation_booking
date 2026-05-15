@@ -3,21 +3,20 @@ import RoomAvailabilityHeaderRow from "../components/RoomAvailabilityHeaderRow"
 
 import { clsx } from "clsx"
 import { Link } from "react-router"
-import { useContext } from "react"
 
-import { BookingContext } from "../../../context/booking/BookingContext"
 import useHotelDetailsContext from "../../../hooks/hotel/useHotelDetailsContext"
 import useBookingNavigation from "../../../hooks/hotel/useBookingNavigation"
+import useBookingContext from "../../../hooks/common/useBookingContext"
 
 export default function RoomAvailability() {
-    const { roomTypesQuery } = useHotelDetailsContext()
+    const { roomTypesQuery, childPolicyQuery } = useHotelDetailsContext()
     const { data: roomTypes } = roomTypesQuery
 
     const {
         handleRoomSelection,
         selectedRoomIds,
         totalPrice,
-    } = useContext(BookingContext)
+    } = useBookingContext()
 
     const {
         bookingSearchParams

@@ -1,12 +1,13 @@
 import DBRoomRowDatas from "./DBRoomRowDatas"
 import DBRoomRowActions from "./DBRoomRowActions"
-import DBRoomActionsButton from "../../../../ui/dashboard-main/dashboard-room/DBRoomActionsButton"
-import DeleteRoomModal from "../modal/DeleteRoomModal"
-import EditRoomModal from "../modal/EditRoomModal"
+import DBRoomActionsButton from "../../../../../ui/dashboard-main/dashboard-room-type/DBRoomTypeActionsButton"
+
+import DeleteRoomModal from "../../modal/DeleteRoomModal"
+import EditRoomModal from "../../modal/EditRoomModal"
 
 import { useState } from "react"
 
-import usePartnerRoomModals from "../../../../../../hooks/dashboard/partner/room-type-hooks/modals/usePartnerRoomModals"
+import usePartnerRoomModals from "../../../../../../../hooks/dashboard/partner/room-type-hooks/modals/usePartnerRoomModals"
 
 export default function RoomTableRow({ initialRoom }) {
     const [room, setRoom] = useState(initialRoom)

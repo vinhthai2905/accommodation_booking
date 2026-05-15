@@ -1,4 +1,4 @@
-import RoomTableRow from "./row/DBRoomRow"
+import RoomTableRow from "../row/DBRoomRow"
 
 export default function DBRoomTableRows({ filteredRooms }) {
     return (

@@ -9,9 +9,9 @@ import useHotelDetailsContext from "../../../hooks/hotel/useHotelDetailsContext"
 import { clsx } from "clsx"
 
 export default function HotelDetails() {
-    const { hotelQuery, roomTypesQuery } = useHotelDetailsContext()
+    const { hotelQuery, roomTypesQuery, childPolicyQuery, isFetchingHotelData } = useHotelDetailsContext()
 
-    if (hotelQuery.isLoading || roomTypesQuery.isLoading)
+    if (isFetchingHotelData)
         return <LoadingScreen />
 
     return (

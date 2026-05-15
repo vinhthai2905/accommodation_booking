@@ -4,6 +4,7 @@ import { Outlet } from "react-router"
 import { motion } from "framer-motion"
 
 import DashboardNavigation from "../../features/partner/section/DashboardNavigation"
+import DashboardProfile from "../../features/partner/section/DashboardProfile"
 
 export default function PartnerDashboard() {
 
@@ -31,17 +32,8 @@ export default function PartnerDashboard() {
                             <Bell size={20} />
                             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#003b95] rounded-full"></span>
                         </button>
-                        <div className={clsx(
-                            "h-8 w-8 p-0.5 rounded-full",
-                            "bg-linear-to-tr from-[#003b95] to-blue-400"
-                        )}>
-                            <div className={clsx(
-                                "flex items-center justify-center w-full h-full",
-                                "bg-white rounded-full text-sm font-bold text-[#003b95]"
-                            )}>
-                                P
-                            </div>
-                        </div>
+                        
+                        <DashboardProfile />
                     </div>
                 </header>
 

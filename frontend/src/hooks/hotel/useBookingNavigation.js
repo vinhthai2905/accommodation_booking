@@ -2,7 +2,7 @@ import { useParams, useSearchParams } from "react-router"
 
 export default function useBookingNavigation() {
     const { slug, uuid: hotelID } = useParams()
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
 
     const bookingSearchParams = new URLSearchParams({
         slug: slug || "",

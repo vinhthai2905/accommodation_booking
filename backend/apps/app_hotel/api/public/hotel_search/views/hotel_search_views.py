@@ -65,6 +65,7 @@ class HotelSearchResultView(APIView):
         }
 
         return hotel_filters
+    
 
     def _get_destination_hotels(self, location) -> QuerySet[KhachSan]:
         try:
@@ -97,6 +98,7 @@ class HotelSearchResultView(APIView):
         destination_hotels_list: QuerySet[KhachSan],
         overlap_bookings: QuerySet[DatPhong],
         requested_rooms: int,
+        requested_total_guests: int
     ) -> QuerySet[KhachSan]:
         """Return list of hotels in which each has enough rooms for incoming requested booking."""
 
@@ -116,6 +118,7 @@ class HotelSearchResultView(APIView):
 
         for hotel in destination_hotels_list:
             total_available_rooms = 0
+            total_capacity = 0
 
             for room_type in hotel.room_types.all():
                 key = (
@@ -124,11 +127,21 @@ class HotelSearchResultView(APIView):
                 )
 
                 booked_rooms = booked_rooms_by_hotel_room.get(key, 0)
-                available_rooms_left = room_type.total_rooms - booked_rooms
+
+                available_rooms_left = (
+                    room_type.total_rooms - booked_rooms
+                )
 
                 total_available_rooms += available_rooms_left
 
-            if total_available_rooms >= requested_rooms:
+                total_capacity += (
+                    available_rooms_left * room_type.max_capacity
+                )
+
+            if (
+                total_available_rooms >= requested_rooms
+                and total_capacity >= requested_total_guests
+            ):
                 available_hotels.append(hotel)
 
         return available_hotels
@@ -147,7 +160,10 @@ class HotelSearchResultView(APIView):
         )
 
         available_hotels_list = self._get_available_hotels_for_requested_date(
-            destination_hotels_list, overlap_bookings, hotel_filters["requested_rooms"]
+            destination_hotels_list, 
+            overlap_bookings,
+            hotel_filters["requested_rooms"],
+            hotel_filters["requested_total_guests"]
         )
 
         serializer = self.serializer_class(instance=available_hotels_list, many=True)

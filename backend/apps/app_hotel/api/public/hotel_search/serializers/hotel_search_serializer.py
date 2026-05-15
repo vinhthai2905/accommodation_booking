@@ -2,9 +2,7 @@ from rest_framework import serializers
 
 from apps.app_hotel.models import KhachSan
 from apps.app_hotel.helpers import get_full_address
-from apps.app_hotel.api.public.hotel_detail.serializers import (
-    BookingDateSerializer
-)
+from apps.app_hotel.api.public.hotel_detail.serializers import BookingDateSerializer
 
 
 class HotelSearchParamsSerializer(BookingDateSerializer):
@@ -19,6 +17,17 @@ class HotelSearchParamsSerializer(BookingDateSerializer):
         required=False,
         default=list,
     )
+
+    def _get_effective_total_guests(self, attrs):
+        if attrs["children"] > 0:
+            attrs["requested_total_guests"] = attrs["adults"] + attrs["children"]
+        else:
+            attrs["request_total_guests"] = attrs["adults"]
+
+    def validate(self, attrs):
+        self._get_effective_total_guests(attrs)
+
+        return attrs
 
 
 class HotelSearchResultSerializer(serializers.ModelSerializer):
