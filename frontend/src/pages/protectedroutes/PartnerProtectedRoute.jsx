@@ -13,5 +13,7 @@ export default function PartnerProtectedRoute() {
         return <Navigate to="/index" replace />
 
 
+
+
     return <Outlet />
 }

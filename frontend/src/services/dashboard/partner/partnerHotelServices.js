@@ -35,4 +35,25 @@ export const fetchPartnerPhysicalRooms = async (id_room_type) => {
   return data
 }
 
+export const fetchPartnerHotelDetail = async () => {
+  const headers = buildTokenHeader()
 
+  const { data } = await axios.get(
+    `${apiUrl}/api/partner/hotel`,
+    { headers }
+  )
+
+  return data
+}
+
+export const updatePartnerHotel = async (payload) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.put(
+    `${apiUrl}/api/partner/hotel`,
+    payload,
+    { headers }
+  )
+
+  return data
+}

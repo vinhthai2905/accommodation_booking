@@ -35,11 +35,18 @@ export default function HotelNavGroup({navStates, toggleHotelNav, closeAllNav, m
             {navStates.hotel && (
                 <div className="w-full pl-4 mt-1 space-y-1">
                     <DashboardNavLink
-                        to={"/partner/dashboard/hotel/room-type"}
+                        to={"/partner/dashboard/hotel/info"}
                         closeAllNav={closeAllNav}
                         label={"Thông tin"}
                     />
+                    <DashboardNavLink
+                        to={"/partner/dashboard/hotel/images"}
+                        closeAllNav={closeAllNav}
+                        label={"Hình ảnh"}
+                    />
                 </div>
+
+                
             )}
         </div>
     )
