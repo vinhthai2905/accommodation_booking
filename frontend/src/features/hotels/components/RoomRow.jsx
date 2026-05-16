@@ -5,7 +5,7 @@ import RoomPriceColumn from "./RoomPriceColumn"
 
 export default function RoomRow({ roomType, handleRoomSelection }) {
     return (
-        <div className="grid grid-cols-[0.28fr_0.22fr_0.28fr_0.32fr] border-t border-gray-300">
+        <div className="grid grid-cols-[1.2fr_0.4fr_0.7fr_1fr] border-t border-slate-200 divide-x divide-slate-200">
             <RoomBedsColumn roomType={roomType} />
             <RoomGuestsColumn roomType={roomType} />
             <RoomPriceColumn roomType={roomType}/>

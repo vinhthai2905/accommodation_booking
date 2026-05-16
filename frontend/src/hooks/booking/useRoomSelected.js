@@ -5,11 +5,11 @@ import { useState } from "react"
 export default function useRoomSelected() {
     const [selectedRooms, setSelectedRooms] = useState({})
 
-    const handleRoomSelection = (roomTypeId, roomPrice, roomName, roomId, isSelected) => {
+    const handleRoomSelection = (roomTypeId, roomPrice, roomCapacity, roomName, roomId, isSelected) => {
         setSelectedRooms(prev => {
             const next = { ...prev }
             isSelected
-                ? next[roomId] = { roomTypeId, price: roomPrice, roomName }
+                ? next[roomId] = { roomTypeId, price: roomPrice, roomName, roomCapacity: roomCapacity }
                 : delete next[roomId]
 
             return next
@@ -17,6 +17,13 @@ export default function useRoomSelected() {
     }
 
     const selectedRoomIds = Object.keys(selectedRooms)
+
+    const maxCapacitySelected = (
+        Object
+        .values(selectedRooms)
+        .reduce((sumCapacity, room) => sumCapacity + room.roomCapacity, 0)
+    )
+
     const totalPrice = (
         Object
             .values(selectedRooms)
@@ -29,5 +36,6 @@ export default function useRoomSelected() {
         handleRoomSelection,
         selectedRoomIds,
         totalPrice,
+        maxCapacitySelected
     }
 }

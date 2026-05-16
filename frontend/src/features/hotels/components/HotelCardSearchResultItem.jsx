@@ -15,7 +15,7 @@ export default function HotelCardSearchResultItem({ hotel }) {
             )}>
 
             {/* Image */}
-            <div className="relative flex-1">
+            <div className="relative">
                 <Link to="/hotel">
                     <img
                         src={hotel.primary_image}

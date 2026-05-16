@@ -9,14 +9,14 @@ import useHotelDetailsContext from "../../../hooks/hotel/useHotelDetailsContext"
 import { clsx } from "clsx"
 
 export default function HotelDetails() {
-    const { hotelQuery, roomTypesQuery, childPolicyQuery, isFetchingHotelData } = useHotelDetailsContext()
+    const { isFetchingHotelData } = useHotelDetailsContext()
 
     if (isFetchingHotelData)
         return <LoadingScreen />
 
     return (
         <div className={clsx(
-            "mt-10 mx-[20%]"
+            "mt-8 max-w-7xl mx-auto px-4 md:px-6 lg:px-8"
         )}>
             <Breadcrumbs usedFor={"hotelDetails"} />
             <div className={clsx(

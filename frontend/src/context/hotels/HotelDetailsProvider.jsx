@@ -1,6 +1,6 @@
 import { HotelDetailsContext } from "./HotelDetailsContext"
 import { useQuery } from "@tanstack/react-query"
-import { useParams, useSearchParams } from "react-router"
+import { data, useParams, useSearchParams } from "react-router"
 
 import { fetchHotel, fetchHotelRoomTypesAvailability, fetchHotelChildPolicy } from "../../services/hotel/hotelServices"
 
@@ -58,8 +58,8 @@ export default function HotelDetailsProvider({ children }) {
 
         childPolicyQuery: {
             isLoading: isLoadingChildPolicy,
-            error: childPolicyError,
-            data: childPolicy
+            childPolicyError,
+            childPolicy
         }
     }
 

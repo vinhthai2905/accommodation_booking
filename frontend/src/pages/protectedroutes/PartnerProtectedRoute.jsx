@@ -10,7 +10,7 @@ export default function PartnerProtectedRoute() {
         return <LoadingFullScreen />
 
     if (!isAuthenticated || user.role !== "Đối tác")
-        return <Navigate to="/index" replace />
+        return <Navigate to="/auth/partner/sign-in" replace />
 
 
 

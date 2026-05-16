@@ -11,25 +11,17 @@ function getDetailIcon(detail) {
 
 export default function RoomBedsColumn({ roomType }) {
     return (
-        <div className="p-4">
-            <div className="flex items-start gap-2">
-                <FaChevronRight className="mt-1 text-sm text-orange-500" />
-                <div>
-                    <a
-                        href="#"
-                        className="font-bold text-blue-700 underline hover:text-blue-900"
-                    >
-                        {roomType.type_name}
-                    </a>
-
-                    {/* <div className="mt-2 space-y-1 text-sm text-gray-800">
-                        {room.details.map((detail, index) => (
-                            <div key={index}>
-                                {detail}
-                                {getDetailIcon(detail)}
-                            </div>
-                        ))}
-                    </div> */}
+        <div className="px-4 py-3">
+            <div className="flex flex-col gap-1">
+                <a
+                    href="#"
+                    className="text-sm font-bold text-blue-600 hover:text-blue-800 hover:underline transition-colors leading-tight"
+                >
+                    {roomType.type_name}
+                </a>
+                <div className="flex items-center gap-1.5 text-slate-500 text-[10px] font-medium">
+                    <FaBed className="text-slate-400" size={14} />
+                    <span>Sẵn có trong phòng</span>
                 </div>
             </div>
         </div>

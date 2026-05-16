@@ -22,7 +22,7 @@ class HotelSearchParamsSerializer(BookingDateSerializer):
         if attrs["children"] > 0:
             attrs["requested_total_guests"] = attrs["adults"] + attrs["children"]
         else:
-            attrs["request_total_guests"] = attrs["adults"]
+            attrs["requested_total_guests"] = attrs["adults"]
 
     def validate(self, attrs):
         self._get_effective_total_guests(attrs)

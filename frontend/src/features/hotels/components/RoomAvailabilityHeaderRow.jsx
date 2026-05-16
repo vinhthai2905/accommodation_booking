@@ -3,35 +3,21 @@ import { clsx } from "clsx"
 export default function RoomAvailabilityHeaderRow() {
     return (
         <>
-            <div className={clsx(
-                "px-4 py-2 font-bold"
-            )}>
+            <div className="px-4 py-3 font-bold text-white text-[11px] uppercase tracking-wider">
                 Loại chỗ ở
             </div>
 
-            <div className={clsx(
-                "border-l border-blue-300",
-                "px-4 py-2 font-bold"
-            )}>
-                Số lượng khách
+            <div className="px-4 py-3 font-bold text-white text-[11px] uppercase tracking-wider border-l border-blue-400/50">
+                Sức chứa
             </div>
             
-            <div className={clsx(
-                "border-l border-blue-300",
-                "px-4 py-2 font-bold"
-            )}
-            >
+            <div className="px-4 py-3 font-bold text-white text-[11px] uppercase tracking-wider border-l border-blue-400/50">
                 Giá phòng
             </div>
 
-            <div className={clsx(
-                "border-l border-blue-300",
-                "px-4 py-2 font-bold"
-            )}
-            >
+            <div className="px-4 py-3 font-bold text-white text-[11px] uppercase tracking-wider border-l border-blue-400/50">
                 Chọn phòng
             </div>
-
         </>
     )
 }
