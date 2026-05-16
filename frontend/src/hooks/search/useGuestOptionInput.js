@@ -11,7 +11,7 @@ export default function useGuestOptionInput() {
         childrenAge: []
     })
 
-    const [showAgeError, setShowAgeError] = useState(false)
+    const [isAgeInputError, setIsAgeInputError] = useState(false)
 
     return {
         isGuestOpened,
@@ -19,7 +19,7 @@ export default function useGuestOptionInput() {
         guestOptions,
         setGuestOptions,
         guestRef,
-        showAgeError,
-        setShowAgeError
+        isAgeInputError,
+        setIsAgeInputError
     }
 }

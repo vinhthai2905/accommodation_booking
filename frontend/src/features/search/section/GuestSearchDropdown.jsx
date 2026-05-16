@@ -3,22 +3,10 @@ import { clsx } from "clsx"
 import GuestCounterInput from "../components/GuestCounterInput"
 import ChildrenAgeSearch from "../components/ChildrenAgeSearch"
 
-export default function GuestSearchDropdown({ guestOptions, setGuestOptions, onDone }) {
+export default function GuestSearchDropdown({ guestOptions, setGuestOptions, onDone, setIsAgeInputError, isAgeInputError }) {
     const handleGuestOptions = (optionKey, operation) => {
         setGuestOptions((prevGuestOptions) => {
             let newValue = operation === "increase" ? prevGuestOptions[optionKey] + 1 : prevGuestOptions[optionKey] - 1
-
-            // if (optionKey === "children" && operation === "increase") {
-            //     // let childrenLength = prevGuestOptions.childrenAge.length
-            //     return {
-            //         ...prevGuestOptions,
-            //         [optionKey]: newValue,
-            //         childrenAge: {
-            //             ...prevGuestOptions.childrenAge,
-            //             [prevGuestOptions.children + 1]: null,
-            //         },
-            //     }
-            // }
 
             return {
                 ...prevGuestOptions,
@@ -43,7 +31,13 @@ export default function GuestSearchDropdown({ guestOptions, setGuestOptions, onD
                 <GuestCounterInput label="Trẻ em" optionKey="children" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />
 
                 {/* Children Age Inputs */}
-                <ChildrenAgeSearch childrenCount={guestOptions.children} setGuestOptions={setGuestOptions} guestOptions={guestOptions} />
+                <ChildrenAgeSearch
+                    childrenCount={guestOptions.children}
+                    setGuestOptions={setGuestOptions}
+                    guestOptions={guestOptions}
+                    setIsAgeInputError={setIsAgeInputError}
+                    isAgeInputError={isAgeInputError}
+                />
 
                 {/* Rooms Row */}
                 <GuestCounterInput label="Phòng" optionKey="rooms" handleGuestOptions={handleGuestOptions} guestOptions={guestOptions} />

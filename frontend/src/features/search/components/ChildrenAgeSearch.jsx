@@ -1,6 +1,6 @@
 import ChildAgeInput from "./ChildAgeInput"
 
-export default function ChildrenAgeSearch({ childrenCount, setGuestOptions, guestOptions }) {
+export default function ChildrenAgeSearch({ childrenCount, setGuestOptions, guestOptions, setIsAgeInputError, isAgeInputError }) {
     if (!childrenCount || childrenCount <= 0) return null
 
     return (
@@ -12,6 +12,8 @@ export default function ChildrenAgeSearch({ childrenCount, setGuestOptions, gues
                         index={index + 1}
                         setGuestOptions={setGuestOptions}
                         guestOptions={guestOptions}
+                        setIsAgeInputError={setIsAgeInputError}
+                        isAgeInputError={isAgeInputError}
                     />
                 ))}
             </div>

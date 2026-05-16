@@ -41,8 +41,8 @@ export default function BookingSearchBar() {
         guestOptions,
         setGuestOptions,
         guestRef,
-        showAgeError,
-        setShowAgeError
+        isAgeInputError,
+        setIsAgeInputError,
     } = useGuestOptionInput()
 
     const { handleSearchSubmit } = useHotelSearchSubmit({ 
@@ -50,7 +50,9 @@ export default function BookingSearchBar() {
         isPlaceSelected, 
         ranges, 
         guestOptions,
-        setShowLocationError, 
+        setIsGuestOpened,
+        setShowLocationError,
+        setIsAgeInputError
     })
 
     return (
@@ -124,6 +126,8 @@ export default function BookingSearchBar() {
                             guestOptions={guestOptions}
                             setGuestOptions={setGuestOptions}
                             onDone={() => setIsGuestOpened(false)}
+                            setIsAgeInputError={setIsAgeInputError}
+                            isAgeInputError={isAgeInputError}
                         />
                     )}
                 </BookingSearchInput>

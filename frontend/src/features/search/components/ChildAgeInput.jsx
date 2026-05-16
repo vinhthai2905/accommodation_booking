@@ -1,19 +1,28 @@
 import { clsx } from "clsx"
 import { ChevronDown } from "lucide-react"
 
-export default function ChildAgeInput({ index, setGuestOptions, guestOptions }) {
+export default function ChildAgeInput({ index, setGuestOptions, guestOptions, setIsAgeInputError, isAgeInputError }) {
     const handleAddChildAge = (age) => {
         setGuestOptions((prevOption) => {
             const newChildrenAge = [...(prevOption.childrenAge || null)]
             newChildrenAge[index] = age
-            
-            return {
+
+            const newGuestOptions = {
                 ...prevOption,
                 childrenAge: newChildrenAge
             }
+
+            if (newGuestOptions.children === newGuestOptions.childrenAge) {
+                setIsAgeInputError(false)
+            }
+
+            return newGuestOptions
         }
         )
     }
+
+    const selectedAge = guestOptions.childrenAge[index] ?? -1
+    const hasAgeError = selectedAge === -1
 
     return (
         <div className="relative inline-block w-32.5"
@@ -26,16 +35,20 @@ export default function ChildAgeInput({ index, setGuestOptions, guestOptions }) 
                     "py-2 pl-3 pr-8",
                     "appearance-none bg-white",
                     "focus:outline-none focus:ring-1 focus:ring-blue-500",
-                    "cursor-pointer"
+                    "cursor-pointer",
+                    hasAgeError && isAgeInputError
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-400 focus:ring-blue-500"
                 )}
                 name="childAge"
                 id="childAge"
-                value={guestOptions.childrenAge[index] ? guestOptions.childrenAge[index] : -1}
+                value={guestOptions.childrenAge[index] >= 0 ? guestOptions.childrenAge[index] : -1}
                 onChange={() => { }}
             >
                 <option key={-1} value={-1}>Chọn tuổi</option>
                 {
                     Array.from({ length: 18 }, (_, i) => i).map((age) => {
+                        console.log(age)
                         return (
                             <option
                                 key={age}
