@@ -2,7 +2,7 @@ import { Plus, ArrowLeft } from "lucide-react"
 import { motion } from "framer-motion"
 import { useNavigate } from "react-router"
 
-export default function DBHotelImageHeader() {
+export default function DBHotelImageHeader({ setIsUploadModalOpen }) {
     const navigate = useNavigate()
 
     return (
@@ -24,6 +24,7 @@ export default function DBHotelImageHeader() {
             </div>
             
             <button
+                onClick={() => setIsUploadModalOpen(true)}
                 className="group relative inline-flex items-center justify-center gap-2 px-6 py-2.5 font-medium text-white bg-[#003b95] rounded-xl overflow-hidden transition-all hover:bg-[#002b70] hover:shadow-lg hover:shadow-blue-900/20 active:scale-95 sm:w-auto w-full cursor-pointer"
             >
                 <Plus size={20} className="transition-transform group-hover:rotate-90" />

@@ -1,8 +1,10 @@
 import { clsx } from "clsx"
 
-export default function DBRoomToolBarButton({ children }) {
+export default function DBRoomToolBarButton({ children, onClick, ...props }) {
     return (
         <button
+            onClick={onClick}
+            {...props}
             className={clsx(
                 "flex w-full items-center justify-center gap-2 px-4 py-2.5",
                 "rounded-lg border border-gray-300 bg-white",

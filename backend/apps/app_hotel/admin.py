@@ -29,3 +29,6 @@ admin.site.register(ChiTietLoaiPhong)
 admin.site.register(Giuong)
 admin.site.register(HinhAnhKhachSan)
 
+admin.site.register(DanhMucTienNghi)
+admin.site.register(LoaiTienNghi)
+admin.site.register(TienNghiKhachSan)

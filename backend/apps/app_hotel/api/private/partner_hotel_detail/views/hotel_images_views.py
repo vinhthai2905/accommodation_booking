@@ -4,6 +4,10 @@ from rest_framework.request import Request
 from rest_framework import status, exceptions
 
 from django.utils.text import slugify
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+import uuid
+import os
 
 from apps.app_user.models import NguoiDung
 from apps.app_hotel.models import KhachSan
@@ -38,18 +42,34 @@ class PartnerHotelImageListView(BasePartnerHotelImageView):
     def post(self, request: Request, *args, **kwargs):
         hotel = self._get_partner_hotel(request.user)
         
+        # Handle file upload if present
+        request_data = request.data.copy() if hasattr(request.data, 'copy') else request.data
+        if 'file' in request.FILES:
+            file = request.FILES['file']
+            fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'hotel_images'))
+            
+            # Generate a unique filename to prevent overwriting
+            ext = file.name.split('.')[-1]
+            unique_filename = f"{uuid.uuid4().hex}.{ext}"
+            filename = fs.save(unique_filename, file)
+            
+            # Generate the URL
+            request_data['url'] = f"{settings.MEDIA_URL}hotel_images/{filename}"
+
         # Determine slug from name
-        image_name = request.data.get('image_name', 'hotel_image')
+        image_name = request_data.get('image_name', 'hotel_image')
         slug = slugify(image_name)
         
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.serializer_class(data=request_data)
         if serializer.is_valid():
             # If this is set as primary, unset other primary images
-            is_primary = serializer.validated_data.get('is_primary', False)
+            # QueryDict returns strings, so we must parse boolean
+            is_primary = request_data.get('is_primary', 'false').lower() == 'true' if isinstance(request_data.get('is_primary'), str) else request_data.get('is_primary', False)
+            
             if is_primary:
                 HinhAnhKhachSan.objects.filter(id_hotel=hotel, is_primary=True).update(is_primary=False)
                 
-            serializer.save(id_hotel=hotel, slug=slug)
+            serializer.save(id_hotel=hotel, slug=slug, is_primary=is_primary)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
             
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

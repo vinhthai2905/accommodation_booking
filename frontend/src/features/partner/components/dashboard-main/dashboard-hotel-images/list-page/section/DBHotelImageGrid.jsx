@@ -1,6 +1,8 @@
 import { Image as ImageIcon, Star, Trash2, Edit2 } from "lucide-react"
 import { clsx } from "clsx"
 
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000"
+
 export default function DBHotelImageGrid({ images = [], onSetPrimary, onDelete, onEdit }) {
     if (!images || images.length === 0) {
         return (
@@ -25,7 +27,7 @@ export default function DBHotelImageGrid({ images = [], onSetPrimary, onDelete, 
                     )}
                 >
                     <img
-                        src={img.url}
+                        src={img.url?.startsWith('/media/') ? `${apiUrl}${img.url}` : img.url}
                         alt={img.image_name}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />

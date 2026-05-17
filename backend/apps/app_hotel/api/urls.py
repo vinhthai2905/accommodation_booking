@@ -21,6 +21,18 @@ from . import (
     PartnerHotelImageDetailView,
 )
 
+from .private.partner_hotel_detail.views.hotel_amenities_views import (
+    PartnerHotelAmenityListView,
+    PartnerHotelAmenityDetailView,
+    AvailableAmenityTypeListView,
+)
+
+from .private.partner_hotel_detail.views.hotel_category_amenities_views import (
+    PartnerHotelCategoryAmenitiesListView,
+    PartnerHotelCategoryListView,
+    PartnerHotelCategoryDetailView,
+)
+
 from django.urls import path
 
 urlpatterns = [
@@ -38,6 +50,15 @@ urlpatterns = [
     path("api/partner/hotel", PartnerHotelView.as_view(), name="partner-hotel-info"),
     path("api/partner/hotel/images", PartnerHotelImageListView.as_view(), name="partner-hotel-images"),
     path("api/partner/hotel/images/<int:id_hotel_image>", PartnerHotelImageDetailView.as_view(), name="partner-hotel-image-detail"),
+    
+    path("api/partner/hotel/amenities", PartnerHotelAmenityListView.as_view(), name="partner-hotel-amenities"),
+    path("api/partner/hotel/amenities/<int:id_hotel_amenity>", PartnerHotelAmenityDetailView.as_view(), name="partner-hotel-amenity-detail"),
+    path("api/partner/hotel/available-amenities", AvailableAmenityTypeListView.as_view(), name="partner-hotel-available-amenities"),
+    
+    path("api/partner/hotel/category-amenities", PartnerHotelCategoryListView.as_view(), name="partner-hotel-category-list"),
+    path("api/partner/hotel/category-amenities/<int:id_amenity_category>", PartnerHotelCategoryDetailView.as_view(), name="partner-hotel-category-detail"),
+    path("api/partner/hotel/category-amenities/<int:id_amenity_category>/amenities", PartnerHotelCategoryAmenitiesListView.as_view(), name="partner-hotel-category-amenities"),
+    
     path("api/partner/hotel/room_types", PartnerRoomTypeListView.as_view(), name="partner-hotel-room-types"),
     path("api/partner/hotel/room_type/<int:id_room_type>", PartnerRoomTypeView.as_view(), name="partner-hotel-room-type-manage"),
     path("api/partner/hotel/room_type/<int:id_room_type>/rooms", PartnerRoomTypeRoomsListView.as_view(), name="partner-hotel-rooms"),

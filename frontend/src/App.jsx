@@ -23,11 +23,17 @@ import DashboardRoomTypeDetail from './features/partner/pages/DashboardRoomTypeD
 import DashboardRoom from './features/partner/pages/DashboardRoom'
 import DashboardBookings from './features/partner/pages/DashboardBookings'
 import DashboardHotelImages from './features/partner/pages/DashboardHotelImages'
+import DashboardHotelAmenities from './features/partner/pages/DashboardHotelAmenities'
+import DashboardHotelCategoryList from './features/partner/pages/DashboardHotelCategoryList'
+import DashboardHotelCategoryAmenities from './features/partner/pages/DashboardHotelCategoryAmenities'
 
 import DBCreateRoomType from './features/partner/components/dashboard-main/dashboard-room-type/crud-page/create/DBCreateRoomType'
 import DBEditRoomType from './features/partner/components/dashboard-main/dashboard-room-type/crud-page/edit/DBEditRoomType'
 
 import DBEditHotel from './features/partner/components/dashboard-main/dashboard-hotel/crud-page/edit/DBEditHotel'
+import DBCreateHotelCategory from './features/partner/components/dashboard-main/dashboard-hotel-category-amenities/crud-page/create/DBCreateHotelCategory'
+import DBEditHotelCategory from './features/partner/components/dashboard-main/dashboard-hotel-category-amenities/crud-page/edit/DBEditHotelCategory'
+import DBCreateHotelAmenity from './features/partner/components/dashboard-main/dashboard-hotel-amenities/crud-page/create/DBCreateHotelAmenity'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 
@@ -129,6 +135,12 @@ function App() {
 
                 { path: "info", element: <DBEditHotel /> },
                 { path: "images", element: <DashboardHotelImages /> },
+                { path: "amenities", element: <DashboardHotelAmenities /> },
+                { path: "amenities/new", element: <DBCreateHotelAmenity /> },
+                { path: "category-amenities", element: <DashboardHotelCategoryList /> },
+                { path: "category-amenities/new", element: <DBCreateHotelCategory /> },
+                { path: "category-amenities/:id_amenity_category", element: <DashboardHotelCategoryAmenities /> },
+                { path: "category-amenities/:id_amenity_category/edit", element: <DBEditHotelCategory /> },
 
                 { path: "room-type/:slug/:id_room_type/details", element: <DashboardRoomTypeDetail /> },
 
