@@ -1,4 +1,4 @@
-import MapCard from "../components/MapCard";
+import MapCard from "../../components/search-map/MapCard";
 
 export default function FilterPanel() {
     return (

@@ -1,14 +1,14 @@
-import BookingSearchInput from "../components/BookingSearchInput"
-import ErrorLocationInput from "../components/ErrorLocationInput"
+import BookingSearchInput from "../../components/search-bar/input/BookingSearchInput"
+import ErrorLocationInput from "../../components/search-bar/input/ErrorLocationInput"
 
-import PlaceSearchDropdown from "./PlaceSearchDropdown"
-import DateSearchDropdown from "./DateSearchDropdown"
-import GuestSearchDropdown from "./GuestSearchDropdown"
+import PlaceSearchDropdown from "../search-bar/PlaceSearchDropdown"
+import DateSearchDropdown from "../search-bar/DateSearchDropdown"
+import GuestSearchDropdown from "../search-bar/GuestSearchDropdown"
 
-import useLocationInput from "../../../hooks/search/useLocationInput"
-import useBookingDateInput from "../../../hooks/search/useBookingDateInput"
-import useGuestOptionInput from "../../../hooks/search/useGuestOptionInput"
-import useHotelSearchSubmit from "../../../hooks/search/useHotelSearchSubmit"
+import useLocationInput from "../../../../hooks/search/useLocationInput"
+import useBookingDateInput from "../../../../hooks/search/useBookingDateInput"
+import useGuestOptionInput from "../../../../hooks/search/useGuestOptionInput"
+import useHotelSearchSubmit from "../../../../hooks/search/useHotelSearchSubmit"
 
 import { clsx } from "clsx"
 import { MapPin, Calendar, Users } from "lucide-react"

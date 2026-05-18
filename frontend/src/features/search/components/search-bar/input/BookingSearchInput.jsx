@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import DropdownIcon from "../../../components/ui/DropdownIcon"
+import DropdownIcon from "../../../../../components/ui/DropdownIcon"
 
 export default function BookingSearchInput({ name, inputFor, ref, icon: Icon, onClick, onChange, value, children }) {
     return (

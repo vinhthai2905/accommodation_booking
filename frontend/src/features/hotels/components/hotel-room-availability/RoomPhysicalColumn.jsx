@@ -1,5 +1,6 @@
 import { clsx } from "clsx"
-import useBookingContext from "../../../hooks/common/useBookingContext"
+
+import useBookingContext from "../../../../hooks/common/useBookingContext";
 
 export default function RoomPhysicalColumn({ roomType, handleRoomSelection }) {
     const { selectedRoomIds } = useBookingContext()

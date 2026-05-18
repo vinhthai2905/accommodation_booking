@@ -1,11 +1,11 @@
-import HotelHeader from "../components/HotelHeader"
+import HotelHeader from "../components/hotel-overview/HotelHeader"
 import HotelImageGallery from "./HotelImageGallery"
-import HotelMapCard from "../components/HotelMapCard"
-import HotelReview from "../components/HotelReview"
+import HotelMapCard from "../components/hotel-map-card/HotelMapCard"
+import HotelReview from "../components/hotel-review/HotelReview"
 import Amenities from "./Amenities"
 import RoomAvailability from "./RoomAvailability"
 
-export default function HotelInformation() {
+export default function HotelOverview() {
     return (
         <>
             <HotelHeader />

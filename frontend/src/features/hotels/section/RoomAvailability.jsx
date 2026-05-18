@@ -1,5 +1,5 @@
-import RoomRow from "../components/RoomRow"
-import RoomAvailabilityHeaderRow from "../components/RoomAvailabilityHeaderRow"
+import RoomRow from "../components/hotel-room-availability/RoomRow"
+import RoomAvailabilityHeaderRow from "../components/hotel-room-availability/RoomAvailabilityHeaderRow"
 
 import { clsx } from "clsx"
 import { Link } from "react-router"

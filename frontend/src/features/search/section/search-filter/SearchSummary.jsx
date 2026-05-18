@@ -1,5 +1,5 @@
-import ViewToggle from "../components/ViewToggle"
-import SortDropdown from "../section/SortDropdown"
+import ViewToggle from "../../components/search-filter/ViewToggle"
+import SortDropdown from "./SortDropdown"
 
 export default function SearchSummary({ hotelList }) {
     return (

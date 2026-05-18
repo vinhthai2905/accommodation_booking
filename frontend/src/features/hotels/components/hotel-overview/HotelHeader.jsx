@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 import { Link } from "react-router"
 
-import useHotelDetailsContext from "../../../hooks/hotel/useHotelDetailsContext"
+import useHotelDetailsContext from "../../../../hooks/hotel/useHotelDetailsContext"
 
 export default function HotelHeader() {
     const { hotelQuery } = useHotelDetailsContext()
@@ -14,14 +14,11 @@ export default function HotelHeader() {
                 "gap-4"
             )}
         >
-            {/* Left side */}
             <div className="flex flex-col gap-2">
-                {/* Title */}
                 <h1 className="text-2xl font-bold text-black">
                     {hotel.name}
                 </h1>
 
-                {/* Address */}
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                     <span>📍</span>
                     <span>
@@ -30,9 +27,7 @@ export default function HotelHeader() {
                 </div>
             </div>
 
-            {/* Right side */}
             <div className="flex flex-col items-end gap-2">
-                {/* Top actions */}
                 <div className="flex items-center gap-3">
                     <button className="text-gray-500 hover:text-black">♡</button>
                     <button className="text-gray-500 hover:text-black">🔗</button>

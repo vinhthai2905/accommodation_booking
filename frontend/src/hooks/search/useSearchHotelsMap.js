@@ -1,17 +1,17 @@
 import { useSearchParams, useLocation } from "react-router"
 import { useQuery } from "@tanstack/react-query"
 
-import { fetchHotelResult } from "../../services/search/hotelSearchServices"
+import { fetchHotelResultMap } from "../../services/search/hotelSearchServices"
 
-export default function useSearchHotels(isMapOpened) {
+export default function useSearchHotelsMap(isMapOpened) {
     const [hotelSearchParams] = useSearchParams()
 
     const location = useLocation()
 
     const { isLoading, error, data } = useQuery({
-        queryKey: ["fetchHotelsResultList", hotelSearchParams.toString(), location.key],
-        queryFn: (() => fetchHotelResult(hotelSearchParams)),
-        enabled: !isMapOpened
+        queryKey: ["fetchHotelsResultMap", hotelSearchParams.toString(), location.key],
+        queryFn: (() => fetchHotelResultMap(hotelSearchParams)),
+        enabled: !!isMapOpened
     })
 
     return {

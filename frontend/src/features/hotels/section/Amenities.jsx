@@ -1,4 +1,4 @@
-import { AmenityItem } from "../components/AmenityItem";
+import { AmenityItem } from "../components/hotel-amenity/AmenityItem";
 
 export default function Amenities() {
   return (

@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import BreadcrumItem from "../components/BreadcrumItem"
+import BreadcrumItem from "../../components/search-filter/BreadcrumItem"
 
 const searchNav = [
     { label: "Home page", to: "/" },
@@ -25,7 +25,7 @@ export default function Breadcrumbs({ usedFor }) {
                 "flex gap-2"
             )}>
                 {
-                    usedFor === "searchResults"
+                    usedFor === "HotelsSearchResult"
                         ? (
                             searchNav.map(item => {
                                 return <BreadcrumItem key={item.label} item={item} />
@@ -39,7 +39,7 @@ export default function Breadcrumbs({ usedFor }) {
                 }
                 <li className="text-black">
                     {
-                        usedFor === "searchResults"
+                        usedFor === "HotelsSearchResult"
                             ? " Search result"
                             : "Ưu đãi cho Diny ApartHotel - Rooftop Pool - The Manor 2 (Căn hộ) (Việt Nam)"
                     }

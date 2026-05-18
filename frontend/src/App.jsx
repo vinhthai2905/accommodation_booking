@@ -7,7 +7,7 @@ import CustomerRegister from './pages/users/CustomerRegister'
 import CustomerSignIn from './pages/users/CustomerSignIn'
 import Home from './pages/users/Home'
 import Hotel from './pages/users/Hotel'
-import SearchResults from "./pages/users/SearchResults"
+import HotelsSearchResult from "./pages/users/HotelsSearchResult"
 import Book from './pages/users/Book'
 import PaymentConfirmation from './pages/users/PaymentConfirmation'
 import Profile from './pages/users/Profile'
@@ -52,7 +52,7 @@ import BookingProvider from './context/booking/BookingProvider'
 
 import ToasterUI from './components/ui/ToasterUI'
 
-import ChildAgeInput from './features/search/components/ChildAgeInput'
+import ChildAgeInput from './features/search/components/search-bar/input/ChildAgeInput'
 import PartnerLogin from './pages/partner/PartnerLogin'
 
 const queryClient = new QueryClient()
@@ -88,7 +88,7 @@ function App() {
           children: [
             { index: true, element: <Navigate to="/index" replace /> },
             { path: "index", element: <Home /> },
-            { path: "searchresults", element: <SearchResults /> },
+            { path: "searchresults", element: <HotelsSearchResult /> },
             {
               path: "hotel/:slug/:uuid",
               element: <Hotel />,

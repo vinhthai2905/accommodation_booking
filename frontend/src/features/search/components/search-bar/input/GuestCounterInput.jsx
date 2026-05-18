@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import { isForChildren } from "../../../utils/validateDisabled"
+import { isForChildren } from "../../../../../utils/validateDisabled"
 
 export default function GuestCounterInput({ label, optionKey, handleGuestOptions, guestOptions }) {
     return (

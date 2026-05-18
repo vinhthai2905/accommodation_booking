@@ -3,7 +3,7 @@ import { useContext } from "react"
 
 import BookingSearchBar from "./BookingSearchBar"
 
-import { HeaderContext } from "../../../context/common/HeaderContext"
+import { HeaderContext } from "../../../../context/common/HeaderContext"
 
 export default function BookingSearchMenu() {
     const currentPage = useContext(HeaderContext)

@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 
-import SortOptionItem from "../components/SortOptionItem"
+import SortOptionItem from "../../components/search-filter/SortOptionItem"
 
 export default function SortDropdown({ hotelList }) {
     return (

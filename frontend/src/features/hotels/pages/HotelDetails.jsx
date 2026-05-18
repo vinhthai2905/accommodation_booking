@@ -1,6 +1,6 @@
-import Breadcrumbs from "../../search/section/Breadcrumbs"
+import Breadcrumbs from "../../search/section/search-filter/Breadcrumbs"
 import PropertyTabs from "../section/PropertyTabs"
-import HotelInformation from "../section/HotelInformation"
+import HotelOverview from "../section/HotelOverview"
 
 import LoadingScreen from "../../../components/ui/LoadingScreen"
 
@@ -23,7 +23,7 @@ export default function HotelDetails() {
                 "flex flex-col gap-2"
             )}>
                 <PropertyTabs />
-                <HotelInformation />
+                <HotelOverview />
             </div>
         </div>
     )

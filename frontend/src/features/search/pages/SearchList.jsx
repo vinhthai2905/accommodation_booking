@@ -1,17 +1,18 @@
-import Breadcrumbs from "../section/Breadcrumbs"
-import FilterPanel from "../filter/FilterPanel"
-import HotelCardSearchGrid from "/src/features/hotels/section/HotelCardSearchGrid"
-import SearchSummary from "../filter/SearchSummary"
+import Breadcrumbs from "../section/search-filter/Breadcrumbs"
+import FilterPanel from "../section/search-filter/FilterPanel"
+import HotelCardSearchGrid from "../section/search-result/HotelCardSearchGrid"
+import SearchSummary from "../section/search-filter/SearchSummary"
 
 import { clsx } from "clsx"
 
 export default function SearchList({ onOpenMap, hotelList }) {
+
     return (
         <div className={clsx(
             "mx-[20%] mt-10",
             "flex flex-col"
         )}>
-            <Breadcrumbs usedFor={"searchResults"} />
+            <Breadcrumbs usedFor={"HotelsSearchResult"} />
             <div className={clsx(
                 "mt-2 my-6 grid grid-cols-[auto_1fr] gap-5",
                 "text-black",

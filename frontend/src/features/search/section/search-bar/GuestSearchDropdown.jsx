@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 
-import GuestCounterInput from "../components/GuestCounterInput"
-import ChildrenAgeSearch from "../components/ChildrenAgeSearch"
+import GuestCounterInput from "../../components/search-bar/input/GuestCounterInput"
+import ChildrenAgeSearch from "../../components/search-bar/input/ChildrenAgeSearch"
 
 export default function GuestSearchDropdown({ guestOptions, setGuestOptions, onDone, setIsAgeInputError, isAgeInputError }) {
     const handleGuestOptions = (optionKey, operation) => {
@@ -14,7 +14,7 @@ export default function GuestSearchDropdown({ guestOptions, setGuestOptions, onD
             }
         })
     }
-
+    
     return (
         <div className={clsx(
             "absolute top-full left-0 mt-3 text-black",
