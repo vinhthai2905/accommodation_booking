@@ -36,24 +36,23 @@ class HotelSearchResultSerializer(serializers.ModelSerializer):
 
     primary_image = serializers.SerializerMethodField()
     full_address = serializers.SerializerMethodField()
+    appealing_price = serializers.SerializerMethodField()
 
     class Meta:
         model = KhachSan
         fields = [
             "id_hotel",
-            "id_hotel_type",
-            "id_ward",
             "name",
-            "slug",
             "full_address",
             "primary_image",
+            "appealing_price",
         ]
         read_only_fields = [
             "id_hotel",
-            "id_hotel_type",
-            "id_ward",
             "name",
-            "slug",
+            "full_address",
+            "primary_image",
+            "appealing_price",
         ]
 
     def get_primary_image(self, obj: KhachSan):
@@ -62,3 +61,71 @@ class HotelSearchResultSerializer(serializers.ModelSerializer):
 
     def get_full_address(self, obj: KhachSan):
         return get_full_address(obj)
+        
+    def get_appealing_price(self, hotel: KhachSan):
+        all_room_type_prices = hotel.room_types.values_list(
+            "price",
+            flat=True
+        )
+        
+        if not all_room_type_prices:
+            return 0
+            
+        return min(all_room_type_prices)
+    
+    
+class HotelSearchResultMapSerializer(serializers.ModelSerializer):
+    """Serialize each hotel which met the search requirements,
+    then expose to public API Search Hotels."""
+    
+    primary_image = serializers.SerializerMethodField()
+    full_address = serializers.SerializerMethodField()
+    appealing_price = serializers.SerializerMethodField()
+    latitude = serializers.SerializerMethodField()
+    longitude = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = KhachSan
+        fields = [
+            "id_hotel",
+            "name",
+            "full_address",
+            "primary_image",
+            "appealing_price",
+            "latitude",
+            "longitude",
+            
+        ]
+        read_only_fields = [
+            "id_hotel",
+            "name",
+            "full_adress",
+            "primary_image",
+            "appealing_price",
+            "latitude",
+            "longitude",
+        ]
+    
+    def get_appealing_price(self, hotel: KhachSan):
+        all_room_type_prices = hotel.room_types.values_list(
+            "price",
+            flat=True
+        )
+        
+        if not all_room_type_prices:
+            return 0
+            
+        return min(all_room_type_prices)
+
+    def get_full_address(self, obj: KhachSan):
+        return get_full_address(obj)
+    
+    def get_primary_image(self, obj: KhachSan):
+        primary_image = obj.hotel_images.filter(is_primary=True).first()
+        return primary_image.url if primary_image else None
+    
+    def get_latitude(self, obj: KhachSan):
+        return obj.location.y
+
+    def get_longitude(self, obj: KhachSan):
+        return obj.location.x

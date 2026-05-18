@@ -5,7 +5,8 @@ from .views import (
 
 
 from .public.hotel_search.views import (
-    HotelSearchResultView
+    HotelSearchResultView,
+    HotelSearchResultMapView
 )
 
 from .public.hotel_detail.views import (

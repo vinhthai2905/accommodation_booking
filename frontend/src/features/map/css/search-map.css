@@ -1,0 +1,9 @@
+.hotel-hover-popup {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.hotel-hover-popup::before {
+    display: none !important;
+}

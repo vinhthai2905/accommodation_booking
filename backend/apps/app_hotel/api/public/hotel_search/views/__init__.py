@@ -1,1 +1,1 @@
-from .hotel_search_views import HotelSearchResultView
+from .hotel_search_views import HotelSearchResultView, HotelSearchResultMapView
