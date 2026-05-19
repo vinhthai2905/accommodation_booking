@@ -44,6 +44,7 @@ class HotelSearchResultSerializer(serializers.ModelSerializer):
             "id_hotel",
             "name",
             "full_address",
+            "slug",
             "primary_image",
             "appealing_price",
         ]
@@ -51,6 +52,7 @@ class HotelSearchResultSerializer(serializers.ModelSerializer):
             "id_hotel",
             "name",
             "full_address",
+            "slug",
             "primary_image",
             "appealing_price",
         ]
@@ -91,6 +93,7 @@ class HotelSearchResultMapSerializer(serializers.ModelSerializer):
             "name",
             "full_address",
             "primary_image",
+            "slug",
             "appealing_price",
             "latitude",
             "longitude",
@@ -101,6 +104,7 @@ class HotelSearchResultMapSerializer(serializers.ModelSerializer):
             "name",
             "full_adress",
             "primary_image",
+            "slug",
             "appealing_price",
             "latitude",
             "longitude",

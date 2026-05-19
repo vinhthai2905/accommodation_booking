@@ -1,13 +1,12 @@
-import { clsx } from "clsx"
 
-import HotelCardSearchResultItem from "../../components/search-result/HotelCardSearchResultItem"
+import HotelCardSearchResult from "../../components/search-result/HotelCardSearchResult"
 
 export default function HotelCardSearchGrid({ hotelList }) {
     return (
         <div className="flex flex-col gap-4 w-full">
             {hotelList.map(hotel => {
                 return (
-                    <HotelCardSearchResultItem 
+                    <HotelCardSearchResult 
                         key={hotel.id_hotel} 
                         hotel={hotel}
                     />

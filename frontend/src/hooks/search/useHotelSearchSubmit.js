@@ -30,7 +30,7 @@ export default function useHotelSearchSubmit({
 
         const params = parseHotelSearchParams(selectedPlace, ranges, guestOptions)
 
-        navigate(`/HotelsSearchResult?${params.toString()}`)
+        navigate(`/searchresults?${params.toString()}`)
     }
 
     return {

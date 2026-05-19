@@ -1,23 +1,16 @@
-import HotelCardMapSummary from "../../search/components/search-result/HotelCardMapSummary"
-import HotelCardMapPriceSummary from "../../search/components/search-result/HotelCardMapPriceSummary"
+import HotelCardMapSummary from "./HotelCardMapSummary"
+import HotelCardMapPriceSummary from "./HotelCardMapPriceSummary"
 
 import { clsx } from "clsx"
 import { Building } from "lucide-react"
 import { Link, useLocation } from "react-router"
 import { useEffect, useRef } from "react"
-import { useMap } from "react-leaflet"
 
-import useAnalyzeGuestParams from "../../../hooks/search/useAnalyzeGuestParams"
-import useAdjustHotelAppealingPrice from "../../../hooks/search/useAdjustHotelAppealingPrice"
-import useAnalyzeHotelRatings from "../../../hooks/search/useAnalyzeHotelRatings"
+import useAnalyzeGuestParams from "../../../../hooks/search/useAnalyzeGuestParams"
+import useAdjustHotelAppealingPrice from "../../../../hooks/search/useAdjustHotelAppealingPrice"
+import useAnalyzeHotelRatings from "../../../../hooks/search/useAnalyzeHotelRatings"
 
-export default function HotelDisplayMapCardMarker({ hotel, isSelectedHotel, onClose, onClick }) {
-    const map = useMap()
-
-    const handleClose = () => {
-        if (onClose) onClose()
-        map.closePopup()
-    }
+export default function HotelCardMap({ hotel, onClose, isSelectedHotel, onMouseEnter, onMouseLeave }) {
     const { nights, children, adults } = useAnalyzeGuestParams()
     const { totalCurrentPrice, totalOriginalPrice } = useAdjustHotelAppealingPrice(hotel, nights)
     const { ratingLabel, ratingScore, reviewsCount } = useAnalyzeHotelRatings(hotel)
@@ -31,18 +24,20 @@ export default function HotelDisplayMapCardMarker({ hotel, isSelectedHotel, onCl
         }
     }, [isSelectedHotel])
 
+
     return (
         <div
             ref={cardRef}
-            onClick={onClick}
+            onMouseEnter={() => onMouseEnter()}
+            onMouseLeave={() => onMouseLeave()}
             className={clsx(
-                "absolute flex w-95 h-55 overflow-hidden cursor-pointer shrink-0 top-2",
+                "relative flex w-full h-60 overflow-hidden  cursor-pointer shrink-0",
                 "bg-white shadow-sm hover:shadow-md rounded-lg border",
                 "transition-all duration-300",
                 isSelectedHotel ? "border-blue-500 ring-2 ring-blue-500/20 bg-blue-50/3" : "border-slate-200"
             )}
         >
-            <div className="relative w-32 shrink-0 bg-slate-50 overflow-hidden">
+            <div className="relative w-36 shrink-0 bg-slate-50 overflow-hidden">
                 <Link to={`/hotel/${hotel.slug}/${hotel.id_hotel}${location.search}`} className="block h-full w-full">
                     {hotel.primary_image ? (
                         <img
@@ -58,10 +53,10 @@ export default function HotelDisplayMapCardMarker({ hotel, isSelectedHotel, onCl
                 </Link>
             </div>
 
-            <div className="flex-1 p-3 flex flex-col justify-between min-w-0">
+            <div className="flex-1 p-3.5 flex flex-col justify-between min-w-0">
                 <HotelCardMapSummary
                     hotel={hotel}
-                    onClose={handleClose}
+                    onClose={onClose}
                     ratingLabel={ratingLabel}
                     reviewsCount={reviewsCount}
                     ratingScore={ratingScore}
