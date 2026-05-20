@@ -22,7 +22,7 @@ export default function DBHotelImageGrid({ images = [], onSetPrimary, onDelete, 
                 <div 
                     key={img.id_hotel_image} 
                     className={clsx(
-                        "relative group aspect-[4/3] rounded-2xl overflow-hidden border-[3px] transition-all bg-gray-100",
+                        "relative group aspect-4/3 rounded-2xl overflow-hidden border-[3px] transition-all bg-gray-100",
                         img.is_primary ? "border-blue-500 shadow-md shadow-blue-500/20" : "border-transparent shadow-sm hover:shadow-md"
                     )}
                 >
@@ -71,7 +71,7 @@ export default function DBHotelImageGrid({ images = [], onSetPrimary, onDelete, 
                     </div>
                     
                     {/* Bottom gradient and Image Name */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 pt-12 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                    <div className="absolute bottom-0 left-0 right-0 p-4 pt-12 bg-linear-to-t from-black/80 via-black/40 to-transparent">
                         <p className="text-white text-sm font-medium truncate drop-shadow-md">
                             {img.image_name || "Chưa có tên"}
                         </p>
