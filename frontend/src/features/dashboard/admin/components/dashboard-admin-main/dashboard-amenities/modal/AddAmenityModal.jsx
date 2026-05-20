@@ -7,7 +7,7 @@ import { useState } from "react"
 import { useAvailableAmenityTypes } from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
 import { useCreatePartnerHotelAmenity } from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenityMutations"
 
-export default function AddAmenityModal({ setIsAddModalOpen, id_amenity_category }) {
+export default function AddHotelAmenityModal({ setIsAddModalOpen, id_amenity_category }) {
     const { data: availableTypes, isPending: isLoadingTypes } = useAvailableAmenityTypes()
     const { mutate: createAmenity, isPending: isCreating } = useCreatePartnerHotelAmenity()
     

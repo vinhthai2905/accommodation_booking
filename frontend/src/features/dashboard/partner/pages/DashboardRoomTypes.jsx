@@ -1,5 +1,5 @@
-import LoadingHotelDatas from "../ui/dashboard-main/common/LoadingHotelDatas"
-import ErrorLoadingHotelDatas from "../ui/dashboard-main/common/ErrorLoadingHotelDatas"
+import LoadingRoomTypes from "../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingRoomTypes from "../../ui/loading/ErrorLoadingHotelDatas"
 
 import DBRoomTypeHeader from "../components/dashboard-main/dashboard-room-type/list-page/section/DBRoomTypeHeader"
 import DBRoomTypePagination from "../components/dashboard-main/dashboard-room-type/list-page/section/DBRoomTypePagination"
@@ -12,17 +12,17 @@ import { motion } from "framer-motion"
 
 import usePartnerRoomTypes from "../../../../hooks/dashboard/partner/room-type-hooks/services/usePartnerRoomTypes"
 
-export default function DashboardRoomType() {
+export default function DashboardRoomTypes() {
     const { data: roomTypes, isPending, isError, error } = usePartnerRoomTypes()
     const [searchTerm, setSearchTerm] = useState("")
 
     if (isPending)
-        return <LoadingHotelDatas labelLoading={"Đang tải dữ liệu loại phòng..."} />
+        return <LoadingRoomTypes labelLoading={"Đang tải dữ liệu loại phòng..."} />
 
 
     if (isError) {
         return (
-            <ErrorLoadingHotelDatas
+            <ErrorLoadingRoomTypes
                 errorMessage={error.message}
                 alterMessageError={"Không thể tải danh sách loại phòng. Vui lòng thử lại sau."}
             />

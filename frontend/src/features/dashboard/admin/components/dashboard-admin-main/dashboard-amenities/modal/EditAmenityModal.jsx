@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 import { Pencil, Save, X } from "lucide-react"
 
-export default function EditAmenitiesModal({
+export default function EditAmenityModal({
     setIsEditModalOpen,
     handleSaveAmenityEdit,
     editForm,

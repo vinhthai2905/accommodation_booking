@@ -1,5 +1,5 @@
-import LoadingHotelDatas from "../ui/dashboard-main/common/LoadingHotelDatas"
-import ErrorLoadingHotelDatas from "../ui/dashboard-main/common/ErrorLoadingHotelDatas"
+import LoadingHotelImages from "../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingHotelImages from "../../ui/loading/ErrorLoadingHotelDatas"
 
 import DBHotelImageHeader from "../components/dashboard-main/dashboard-hotel-images/list-page/section/DBHotelImageHeader"
 import DBHotelImageGrid from "../components/dashboard-main/dashboard-hotel-images/list-page/section/DBHotelImageGrid"
@@ -40,11 +40,11 @@ export default function DashboardHotelImages() {
     const [previewUrl, setPreviewUrl] = useState("")
 
     if (isPending)
-        return <LoadingHotelDatas labelLoading={"Đang tải danh sách hình ảnh..."} />
+        return <LoadingHotelImages labelLoading={"Đang tải danh sách hình ảnh..."} />
 
     if (isError)
         return (
-            <ErrorLoadingHotelDatas
+            <ErrorLoadingHotelImages
                 errorMessage={error?.message}
                 alterMessageError={"Không thể tải danh sách hình ảnh. Vui lòng thử lại sau."}
             />

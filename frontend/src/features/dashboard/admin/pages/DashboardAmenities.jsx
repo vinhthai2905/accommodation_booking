@@ -1,5 +1,5 @@
-import ErrorLoadingAmenities from "../../partner/ui/dashboard-main/common/ErrorLoadingHotelDatas"
-import LoadingAmenities from "../../partner/ui/dashboard-main/common/LoadingHotelDatas"
+import LoadingAmenities from "../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingAmenities from "../../ui/loading/ErrorLoadingHotelDatas"
 
 import DBAmenitiesHeader from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesHeader"
 import DBAmenitiesPagination from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesPagination"
@@ -60,7 +60,7 @@ export default function DashboardAmenities() {
                     setSelectedCategoryId={setSelectedCategoryId}
                 />
                 
-                <div className="flex-1 overflow-auto min-h-[320px] bg-gray-50/30">
+                <div className="flex-1 overflow-auto min-h-80 bg-gray-50/30">
                     <DBAmenitiesTable 
                         filteredAmenities={filteredAmenities} 
                     />

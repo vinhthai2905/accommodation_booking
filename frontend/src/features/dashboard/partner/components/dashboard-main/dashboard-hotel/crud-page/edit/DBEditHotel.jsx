@@ -1,7 +1,8 @@
-import DBEditHotelForm from "../components/DBEditHotelForm"
+import LoadingHotelDatas from "../../../../../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingHotelDatas from "../../../../../../ui/loading/ErrorLoadingHotelDatas"
+
 import DBHotelEditHeader from "./DBHotelEditHeader"
-import LoadingHotelDatas from "../../../../../ui/dashboard-main/common/LoadingHotelDatas"
-import ErrorLoadingHotelDatas from "../../../../../ui/dashboard-main/common/ErrorLoadingHotelDatas"
+import DBEditHotelForm from "../components/DBEditHotelForm"
 
 import { clsx } from "clsx"
 import { motion, AnimatePresence } from "framer-motion"

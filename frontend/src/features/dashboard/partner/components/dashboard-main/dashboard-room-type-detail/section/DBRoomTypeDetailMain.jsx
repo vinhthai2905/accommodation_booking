@@ -1,5 +1,6 @@
-import LoadingRoomTypeDetail from "../../../../ui/dashboard-main/common/LoadingHotelDatas"
-import ErrorLoadingHotelDatas from "../../../../ui/dashboard-main/common/ErrorLoadingHotelDatas"
+import LoadingRoomTypeDetail from "../../../../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingHotelDatas from "../../../../../ui/loading/ErrorLoadingHotelDatas"
+
 import DBExistingBedDetail from "../components/DBExistingBedDetail"
 import DBAddBedForm from "../components/DBAddBedForm"
 

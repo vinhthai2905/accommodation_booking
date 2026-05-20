@@ -1,4 +1,4 @@
-import LoadingHotelAmenities from "@/features/dashboard/partner/ui/dashboard-main/common/LoadingHotelDatas"
+import LoadingHotelAmenities from "../../ui/loading/LoadingHotelDatas"
 
 import { useState, useEffect, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"

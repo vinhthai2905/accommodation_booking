@@ -22,8 +22,8 @@ import DashboardBookings from './features/dashboard/partner/pages/DashboardBooki
 import DashboardHotel from './features/dashboard/partner/pages/DashboardHotel'
 import DashboardHotelImages from './features/dashboard/partner/pages/DashboardHotelImages'
 import DashboardHotelAmenities from './features/dashboard/partner/pages/DashboardHotelAmenities'
-import DashboardRoom from './features/dashboard/partner/pages/DashboardRoom'
-import DashboardRoomType from './features/dashboard/partner/pages/DashboardRoomType'
+import DashboardRooms from './features/dashboard/partner/pages/DashboardRooms'
+import DashboardRoomTypes from './features/dashboard/partner/pages/DashboardRoomTypes'
 import DashboardRoomTypeDetail from './features/dashboard/partner/pages/DashboardRoomTypeDetail'
 
 import DBEditHotel from './features/dashboard/partner/components/dashboard-main/dashboard-hotel/crud-page/edit/DBEditHotel'
@@ -36,7 +36,7 @@ import DashboardAmenities from './features/dashboard/admin/pages/DashboardAmenit
 
 import DBCreateAmenity from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-amenities/crud-page/create/DBCreateAmenity"
 import DBCreateCategoryAmenity from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-category-amenities/crud-page/create/DBCreateCategoryAmenity"
-import DBEditCategory from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-category-amenities/crud-page/edit/DBEditCategory"
+import DBEditCategoryAmenity from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-category-amenities/crud-page/edit/DBEditCategoryAmenity"
 
 import AuthRedirectRoute from './pages/protectedroutes/AuthRedirectRoute'
 import PartnerProtectedRoute from './pages/protectedroutes/PartnerProtectedRoute'
@@ -127,9 +127,9 @@ function App() {
               path: "hotel",
               element: <DashboardHotel />,
               children: [
-                { path: "room-type", element: <DashboardRoomType /> },
+                { path: "room-type", element: <DashboardRoomTypes /> },
                 { path: "bookings", element: <DashboardBookings /> },
-                { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRoom /> },
+                { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRooms /> },
 
                 { path: "room-type/new", element: <DBCreateRoomType /> },
                 { path: "room-type/:slug/:id_room_type/edit", element: <DBEditRoomType /> },
@@ -141,7 +141,7 @@ function App() {
                 { path: "admin-amenities/new", element: <DBCreateAmenity /> },
                 { path: "category-amenities", element: <DashboardCategoryAmenities /> },
                 { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
-                { path: "category-amenities/:id/edit", element: <DBEditCategory /> },
+                { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> },
 
                 { path: "room-type/:slug/:id_room_type/details", element: <DashboardRoomTypeDetail /> },
 

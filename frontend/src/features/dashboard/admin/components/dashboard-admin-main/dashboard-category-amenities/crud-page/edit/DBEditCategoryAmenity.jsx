@@ -1,7 +1,8 @@
-import ErrorLoadingHotelDatas from "../../../../../../partner/ui/dashboard-main/common/ErrorLoadingHotelDatas"
-import LoadingHotelDatas from "../../../../../../partner/ui/dashboard-main/common/LoadingHotelDatas"
+import LoadingEditCategoryAmenity from "../../../../../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingEditCategoryAmenity from "../../../../../../ui/loading/LoadingHotelDatas"
+
 import DBCreateCategoryForm from "../components/DBCreateCategoryForm"
-import DBCategoryEditHeader from "./DBCategoryEditHeader"
+import DBEditCategoryAmenityHeader from "./DBEditCategoryAmenityHeader"
 
 import { clsx } from "clsx"
 import { motion } from "framer-motion"
@@ -13,7 +14,7 @@ import usePartnerEditHotelCategoryForm from "../../../../../../../../hooks/dashb
 import { usePartnerHotelCategoryDetail } from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
 import useSuccessRedirect from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/form/useSuccessRedirect"
 
-export default function DBEditCategory() {
+export default function DBEditCategoryAmenity() {
     const { id_amenity_category } = useParams()
     const navigate = useNavigate()
 
@@ -34,11 +35,11 @@ export default function DBEditCategory() {
     useSuccessRedirect(updateCategoryMutation, navigate, "/partner/dashboard/hotel/category-amenities")
 
     if (isPendingCategory)
-        return <LoadingHotelDatas labelLoading="Đang tải dữ liệu danh mục tiện nghi..." />
+        return <LoadingEditCategoryAmenity labelLoading="Đang tải dữ liệu danh mục tiện nghi..." />
 
     if (isError)
         return (
-            <ErrorLoadingHotelDatas
+            <ErrorLoadingEditCategoryAmenity
                 errorMessage={error?.message}
                 alterMessageError="Không thể tải dữ liệu danh mục tiện nghi. Vui lòng thử lại sau."
             />
@@ -46,7 +47,7 @@ export default function DBEditCategory() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBCategoryEditHeader motion={motion} categoryName={category?.name} />
+            <DBEditCategoryAmenityHeader motion={motion} categoryName={category?.name} />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

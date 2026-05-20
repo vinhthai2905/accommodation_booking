@@ -1,5 +1,5 @@
-import LoadingHotelDatas from "../ui/dashboard-main/common/LoadingHotelDatas"
-import ErrorLoadingHotelDatas from "../ui/dashboard-main/common/ErrorLoadingHotelDatas"
+import LoadingHotelRooms from "../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingHotelRooms from "../../ui/loading/ErrorLoadingHotelDatas"
 
 import DBRoomHeader from "../components/dashboard-main/dashboard-room/list-page/section/DBRoomHeader"
 import DBRoomPagination from "../components/dashboard-main/dashboard-room/list-page/section/DBRoomPagination"
@@ -13,17 +13,17 @@ import { useParams } from "react-router"
 
 import usePartnerRooms from "../../../../hooks/dashboard/partner/room-type-hooks/services/usePartnerRooms"
 
-export default function DashboardRoom() {
+export default function DashboardRooms() {
     const { id_room_type } = useParams()
     const { data: rooms, isPending, isError, error } = usePartnerRooms(id_room_type, true)
     const [searchTerm, setSearchTerm] = useState("")
 
     if (isPending)
-        return <LoadingHotelDatas labelLoading={"Đang tải dữ liệu phòng vật lý..."} />
+        return <LoadingHotelRooms labelLoading={"Đang tải dữ liệu phòng vật lý..."} />
 
     if (isError)
         return (
-            <ErrorLoadingHotelDatas
+            <ErrorLoadingHotelRooms
                 errorMessage={error?.message}
                 alterMessageError={"Không thể tải danh sách phòng vật lý. Vui lòng thử lại sau."}
             />

@@ -1,7 +1,8 @@
+import LoadingEditRoomType from "../../../../../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingEditRoomType from "../../../../../../ui/loading/ErrorLoadingHotelDatas"
+
 import DBEditRoomTypeForm from "../components/DBEditRoomTypeForm"
 import DBRoomTypeEditHeader from "./DBRoomTypeEditHeader"
-import LoadingHotelDatas from "../../../../../ui/dashboard-main/common/LoadingHotelDatas"
-import ErrorLoadingHotelDatas from "../../../../../ui/dashboard-main/common/ErrorLoadingHotelDatas"
 
 import { clsx } from "clsx"
 import { motion } from "framer-motion"
@@ -33,11 +34,11 @@ export default function DBEditRoomType() {
     useSuccessRedirect(updateRoomTypeMutation, navigate, "/partner/dashboard/hotel/room-type")
 
     if (isPendingRoomType)
-        return <LoadingHotelDatas labelLoading="Đang tải dữ liệu loại phòng..." />
+        return <LoadingEditRoomType labelLoading="Đang tải dữ liệu loại phòng..." />
 
     if (isError)
         return (
-            <ErrorLoadingHotelDatas
+            <ErrorLoadingEditRoomType
                 errorMessage={error.message}
                 alterMessageError="Không thể tải dữ liệu loại phòng. Vui lòng thử lại sau."
             />

@@ -1,5 +1,5 @@
-import ErrorLoadingHotelDatas from "../../partner/ui/dashboard-main/common/ErrorLoadingHotelDatas"
-import LoadingHotelDatas from "../../partner/ui/dashboard-main/common/LoadingHotelDatas"
+import LoadingCategoryAmenities from "../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingCategoryAmenities from "../../ui/loading/LoadingHotelDatas"
 
 import DBCategoryAmenityRow from "../components/dashboard-admin-main/dashboard-category-amenities/list-page/row/DBCategoryAmenityRow"
 import DBCategoryAmenitiesToolBar from "../components/dashboard-admin-main/dashboard-category-amenities/list-page/section/DBCategoryAmenitiesToolBar"
@@ -18,11 +18,11 @@ export default function DashboardCategoryAmenities() {
     const itemsPerPage = 5
 
     if (isPending)
-        return <LoadingHotelDatas labelLoading={"Đang tải danh sách danh mục tiện nghi..."} />
+        return <LoadingCategoryAmenities labelLoading={"Đang tải danh sách danh mục tiện nghi..."} />
 
     if (isError)
         return (
-            <ErrorLoadingHotelDatas
+            <ErrorLoadingCategoryAmenities
                 errorMessage={error?.message}
                 alterMessageError={"Không thể tải danh sách danh mục. Vui lòng thử lại sau."}
             />

@@ -1,4 +1,4 @@
-import LoadingCreateAmenity from "../../../../../../partner/ui/dashboard-main/common/LoadingHotelDatas"
+import LoadingCreateAmenity from "../../../../../../ui/loading/LoadingHotelDatas"
 
 import { clsx } from "clsx"
 import { useState, useEffect } from "react"
@@ -77,7 +77,7 @@ export default function DBCreateAmenity() {
     }
 
     if (isLoadingCategories) {
-        return <LoadingHotelDatas labelLoading="Đang tải danh mục tiện nghi..." />
+        return <LoadingCreateAmenity labelLoading="Đang tải danh mục tiện nghi..." />
     }
 
     return (

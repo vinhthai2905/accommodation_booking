@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 import { AlertTriangle } from "lucide-react"
 
-export default function DeleteAmenitiesModal({
+export default function DeleteAmenityModal({
     amenity,
     setIsDeleteModalOpen,
     handleDeleteAmenity,

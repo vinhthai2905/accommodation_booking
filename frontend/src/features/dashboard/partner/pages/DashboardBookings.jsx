@@ -1,5 +1,5 @@
-import LoadingBookings from "../ui/dashboard-main/common/LoadingHotelDatas"
-import ErrorLoadingBookings from "../ui/dashboard-main/common/ErrorLoadingHotelDatas"
+import LoadingBookings from "../../ui/loading/LoadingHotelDatas"
+import ErrorLoadingBookings from "../../ui/loading/ErrorLoadingHotelDatas"
 
 import DBBookingHeader from "../components/dashboard-main/dashboard-booking/list-page/section/DBBookingHeader"
 import DBBookingToolBar from "../components/dashboard-main/dashboard-booking/list-page/section/DBBookingToolBar"

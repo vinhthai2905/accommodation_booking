@@ -2,15 +2,15 @@ import DBRoomActionsButton from "../../../../../ui/dashboard-main/dashboard-room
 import DBAmenitiesRowActions from "./DBHotelAmenitiesRowActions"
 import DBAmenitiesRowDatas from "./DBHotelAmenitiesRowDatas"
 
-import DeleteAmenitiesModal from "../../modal/DeleteHotelAmenitiesModal"
-import EditAmenitiesModal from "../../modal/EditHotelAmenitiesModal"
+import DeleteAmenityModal from "../../modal/DeleteAmenityModal"
+import EditAmenityModal from "../../modal/EditAmenityModal"
 
 import { useState } from "react"
 
 import { useDeletePartnerHotelAmenity } from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenityMutations"
 import usePartnerRoomModals from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/modals/usePartnerRoomModals"
 
-export default function HotelAmenityTableRow({ initialAmenity }) {
+export default function DBAmenityRow({ initialAmenity }) {
     const [amenity, setAmenity] = useState(initialAmenity)
     const {
         menuRef,
@@ -61,7 +61,7 @@ export default function HotelAmenityTableRow({ initialAmenity }) {
                 )}
 
                 {isEditModalOpen && (
-                    <EditAmenitiesModal
+                    <EditAmenityModal
                         setIsEditModalOpen={setIsEditModalOpen}
                         handleSaveAmenityEdit={handleSaveAmenityEdit}
                         editForm={editForm}
@@ -70,7 +70,7 @@ export default function HotelAmenityTableRow({ initialAmenity }) {
                 )}
 
                 {isDeleteModalOpen && (
-                    <DeleteAmenitiesModal
+                    <DeleteAmenityModal
                         amenity={amenity}
                         setIsDeleteModalOpen={setIsDeleteModalOpen}
                         handleDeleteAmenity={handleDeleteAmenity}
