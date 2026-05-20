@@ -4,7 +4,7 @@ import { clsx } from "clsx"
 import { Plus, Search } from "lucide-react"
 import { useNavigate } from "react-router"
 
-export default function DBCategoryToolBar({ searchTerm, setSearchTerm }) {
+export default function DBCategoryAmenitiesToolBar({ searchTerm, setSearchTerm }) {
     const navigate = useNavigate()
 
     return (

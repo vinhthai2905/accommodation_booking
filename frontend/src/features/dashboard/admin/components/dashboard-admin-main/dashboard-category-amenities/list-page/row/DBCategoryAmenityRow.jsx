@@ -1,12 +1,12 @@
 import DBCategoryAmenitiesActionsButton from "../../../../../ui/dashboard-main/dashboard-category-amenities/DBCategoryAmenitiesActionsButton"
-import DBCategoryRowActions from "./DBCategoryRowActions"
+import DBCategoryAmenityRowActions from "./DBCategoryAmenityRowActions"
 
-import DeleteCategoryModal from "../../crud-page/delete/DeleteCategoryModal"
+import DeleteCategoryAmenityModal from "../../modal/DeleteCategoryAmenityModal"
 
 import usePartnerHotelCategoryModals from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/modals/usePartnerHotelCategoryModals"
 import { useDeletePartnerHotelCategory } from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenityMutations"
 
-export default function DBCategoryRow({ category }) {
+export default function DBCategoryAmenityRow({ category }) {
     const {
         menuRef,
         isMenuOpen,
@@ -45,7 +45,7 @@ export default function DBCategoryRow({ category }) {
                 </div>
 
                 {isMenuOpen && (
-                    <DBCategoryRowActions
+                    <DBCategoryAmenityRowActions
                         setIsMenuOpen={setIsMenuOpen}
                         setIsDeleteModalOpen={setIsDeleteModalOpen}
                         category={category}
@@ -53,7 +53,7 @@ export default function DBCategoryRow({ category }) {
                 )}
 
                 {isDeleteModalOpen && (
-                    <DeleteCategoryModal
+                    <DeleteCategoryAmenityModal
                         category={category}
                         setIsDeleteModalOpen={setIsDeleteModalOpen}
                         handleDeleteCategory={handleDeleteCategory}

@@ -1,8 +1,8 @@
 import ErrorLoadingHotelDatas from "../../partner/ui/dashboard-main/common/ErrorLoadingHotelDatas"
 import LoadingHotelDatas from "../../partner/ui/dashboard-main/common/LoadingHotelDatas"
 
-import DBCategoryRow from "../components/dashboard-main/dashboard-category-amenities/list-page/row/DBCategoryRow"
-import DBCategoryToolBar from "../components/dashboard-main/dashboard-category-amenities/list-page/section/DBCategoryToolBar"
+import DBCategoryAmenityRow from "../components/dashboard-admin-main/dashboard-category-amenities/list-page/row/DBCategoryAmenityRow"
+import DBCategoryAmenitiesToolBar from "../components/dashboard-admin-main/dashboard-category-amenities/list-page/section/DBCategoryAmenitiesToolBar"
 
 import { clsx } from "clsx"
 import { motion } from "framer-motion"
@@ -68,7 +68,7 @@ export default function DashboardCategoryAmenities() {
                     "rounded-xl border border-gray-200 bg-white shadow-sm"
                 )}
             >
-                <DBCategoryToolBar 
+                <DBCategoryAmenitiesToolBar 
                     searchTerm={searchTerm} 
                     setSearchTerm={setSearchTerm} 
                 />
@@ -106,7 +106,7 @@ export default function DashboardCategoryAmenities() {
                         <tbody className="divide-y divide-gray-100 bg-white">
                             {paginatedCategories.length > 0 ? (
                                 paginatedCategories.map(category => (
-                                    <DBCategoryRow 
+                                    <DBCategoryAmenityRow 
                                         key={category.id_amenity_category} 
                                         category={category} 
                                     />

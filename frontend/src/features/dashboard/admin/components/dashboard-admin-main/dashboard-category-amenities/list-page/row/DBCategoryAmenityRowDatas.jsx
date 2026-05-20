@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 import { ShieldCheck } from "lucide-react"
 
-export default function DBCategoryAmenitiesRowDatas({ amenity }) {
+export default function DBCategoryAmenityRowDatas({ amenity }) {
     return (
         <>
             <td className="p-4 text-center w-12 whitespace-nowrap">

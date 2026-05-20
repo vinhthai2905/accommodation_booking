@@ -2,7 +2,7 @@ import LoadingHotelAmenities from "@/features/dashboard/partner/ui/dashboard-mai
 
 import { useState, useEffect, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Check, Loader2, Search, X, Sparkles } from "lucide-react"
+import { Check, Loader2, Search, X, Sparkles, HelpCircle } from "lucide-react"
 
 import { getAmenityIcon } from "../components/dashboard-main/dashboard-hotel-amenities/helpers/getAmenityIcon"
 

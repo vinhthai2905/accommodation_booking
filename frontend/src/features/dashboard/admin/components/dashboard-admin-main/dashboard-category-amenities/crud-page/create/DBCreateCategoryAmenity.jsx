@@ -1,5 +1,5 @@
 import DBCreateCategoryForm from "../components/DBCreateCategoryForm"
-import DBCategoryCreateHeader from "./DBCategoryCreateHeader"
+import DBCreateCategoryAmenityHeader from "./DBCreateCategoryAmenityHeader"
 
 import { clsx } from "clsx"
 import { motion } from "framer-motion"
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router"
 import usePartnerCreateHotelCategoryForm from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/form/usePartnerCreateHotelCategoryForm"
 import useSuccessRedirect from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/form/useSuccessRedirect"
 
-export default function DBCreateCategory() {
+export default function DBCreateCategoryAmenity() {
     const navigate = useNavigate()
 
     const {
@@ -24,7 +24,7 @@ export default function DBCreateCategory() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBCategoryCreateHeader motion={motion} />
+            <DBCreateCategoryAmenityHeader motion={motion} />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 import { Pencil, Trash2 } from "lucide-react"
 
-export default function DBCategoryAmenitiesRowActions({setIsMenuOpen, setIsEditModalOpen, setIsDeleteModalOpen}) {
+export default function DBCategoryAmenityRowActions({setIsMenuOpen, setIsEditModalOpen, setIsDeleteModalOpen}) {
     return (
         <div className={clsx(
             "absolute right-12 top-4 z-50 w-40 rounded-xl bg-white p-1.5",

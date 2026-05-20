@@ -1,10 +1,10 @@
 import ErrorLoadingAmenities from "../../partner/ui/dashboard-main/common/ErrorLoadingHotelDatas"
 import LoadingAmenities from "../../partner/ui/dashboard-main/common/LoadingHotelDatas"
 
-import DBAmenitiesHeader from "../components/dashboard-main/dashboard-amenities/list-page/section/DBAmenitiesHeader"
-import DBAmenitiesPagination from "../components/dashboard-main/dashboard-amenities/list-page/section/DBAmenitiesPagination"
-import DBAmenitiesTable from "../components/dashboard-main/dashboard-amenities/list-page/section/DBAmenitiesTable"
-import DBAmenitiesToolBar from "../components/dashboard-main/dashboard-amenities/list-page/section/DBAmenitiesToolBar"
+import DBAmenitiesHeader from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesHeader"
+import DBAmenitiesPagination from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesPagination"
+import DBAmenitiesTable from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesTable"
+import DBAmenitiesToolBar from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesToolBar"
 
 import { clsx } from "clsx"
 import { motion } from "framer-motion"

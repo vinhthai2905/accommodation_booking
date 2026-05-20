@@ -27,16 +27,16 @@ import DashboardRoomType from './features/dashboard/partner/pages/DashboardRoomT
 import DashboardRoomTypeDetail from './features/dashboard/partner/pages/DashboardRoomTypeDetail'
 
 import DBEditHotel from './features/dashboard/partner/components/dashboard-main/dashboard-hotel/crud-page/edit/DBEditHotel'
-
-import DBCreateAmenity from "./features/dashboard/admin/components/dashboard-main/dashboard-amenities/crud-page/create/DBCreateAmenity"
 import DBCreateRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/create/DBCreateRoomType'
 import DBEditRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/edit/DBEditRoomType'
-import DBCreateCategory from "./features/dashboard/admin/components/dashboard-main/dashboard-category-amenities/crud-page/create/DBCreateCategory"
-import DBEditCategory from "./features/dashboard/admin/components/dashboard-main/dashboard-category-amenities/crud-page/edit/DBEditCategory"
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 import DashboardCategoryAmenities from './features/dashboard/admin/pages/DashboardCategoryAmenities'
 import DashboardAmenities from './features/dashboard/admin/pages/DashboardAmenities'
+
+import DBCreateAmenity from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-amenities/crud-page/create/DBCreateAmenity"
+import DBCreateCategoryAmenity from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-category-amenities/crud-page/create/DBCreateCategoryAmenity"
+import DBEditCategory from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-category-amenities/crud-page/edit/DBEditCategory"
 
 import AuthRedirectRoute from './pages/protectedroutes/AuthRedirectRoute'
 import PartnerProtectedRoute from './pages/protectedroutes/PartnerProtectedRoute'
@@ -140,7 +140,7 @@ function App() {
                 { path: "admin-amenities", element: <DashboardAmenities /> },
                 { path: "admin-amenities/new", element: <DBCreateAmenity /> },
                 { path: "category-amenities", element: <DashboardCategoryAmenities /> },
-                { path: "category-amenities/new", element: <DBCreateCategory /> },
+                { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
                 { path: "category-amenities/:id/edit", element: <DBEditCategory /> },
 
                 { path: "room-type/:slug/:id_room_type/details", element: <DashboardRoomTypeDetail /> },
