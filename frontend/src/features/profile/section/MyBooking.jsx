@@ -40,20 +40,20 @@ export default function MyBooking() {
                 {/* Content */}
                 <AnimatePresence mode="wait">
                     {isFetchingBookings
-                        ? <BookingCardSkeleton motion={motion} />
+                        ? <BookingCardSkeleton  />
                         : isError
-                            ? <BookingErrorState motion={motion} />
+                            ? <BookingErrorState  />
                             : (
                                 bookings.length === 0
                                 ? <BookingEmptyList
-                                    motion={motion}
+                                    
                                     activeTab={activeTab}
                                     emptyContentCurrentTab={emptyContentCurrentTab}
                                 />
                                 : (
                                     <BookingList
                                         filteredBooking={bookings}
-                                        motion={motion}
+                                        
                                     />
                                 )
                             )

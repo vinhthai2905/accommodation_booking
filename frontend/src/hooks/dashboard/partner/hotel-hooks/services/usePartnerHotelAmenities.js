@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import { 
     fetchPartnerHotelAmenities, 
-    fetchPartnerHotelAmenityCategories,
     fetchPartnerHotelAmenitiesByCategory,
-    fetchAvailableAmenityTypes,
+    fetchAvailableAmenities,
     fetchPartnerHotelCategoryDetail
 } from "../../../../../services/dashboard/partner/get-methods/partnerHotelGetServices"
 
@@ -11,13 +10,6 @@ export function usePartnerHotelAmenities() {
     return useQuery({
         queryKey: ["partnerHotelAmenities"],
         queryFn: fetchPartnerHotelAmenities,
-    })
-}
-
-export function usePartnerHotelAmenityCategories() {
-    return useQuery({
-        queryKey: ["partnerHotelAmenityCategories"],
-        queryFn: fetchPartnerHotelAmenityCategories,
     })
 }
 
@@ -29,10 +21,10 @@ export function usePartnerHotelAmenitiesByCategory(id_amenity_category) {
     })
 }
 
-export function useAvailableAmenityTypes() {
+export function useAvailableAmenities() {
     return useQuery({
-        queryKey: ["availableAmenityTypes"],
-        queryFn: fetchAvailableAmenityTypes,
+        queryKey: ["availableAmenities"],
+        queryFn: fetchAvailableAmenities,
     })
 }
 

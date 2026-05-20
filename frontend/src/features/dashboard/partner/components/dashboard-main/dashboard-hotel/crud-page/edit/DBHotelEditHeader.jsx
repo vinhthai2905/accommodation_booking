@@ -1,7 +1,8 @@
 import { ArrowLeft } from "lucide-react"
 import { useNavigate } from "react-router"
+import { motion } from "framer-motion"
 
-export default function DBHotelEditHeader({ motion, hotelName, isEditing }) {
+export default function DBHotelEditHeader({ hotelName, isEditing }) {
     const navigate = useNavigate()
 
     return (

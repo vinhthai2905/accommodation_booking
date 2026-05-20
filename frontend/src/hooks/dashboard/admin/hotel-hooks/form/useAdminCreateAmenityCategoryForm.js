@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form"
 import { useEffect } from "react"
-import { useCreatePartnerHotelCategory } from "../services/usePartnerHotelAmenityMutations"
 
-export default function usePartnerCreateHotelCategoryForm() {
+import { useCreateAdminAmenityCategory } from "../services/useAdminHotelAmenityCategoriesMutations"
+
+export default function useAdminCreateAmenityCategoryForm() {
     const formHookMethods = useForm({
         mode: "onChange",
         defaultValues: {
@@ -10,6 +11,16 @@ export default function usePartnerCreateHotelCategoryForm() {
             slug: "",
         }
     })
+
+    const createCategoryMutation = useCreateAdminAmenityCategory()
+
+    const onSuccessValidatedForm = (formData) => {
+        createCategoryMutation.mutate(formData)
+    }
+
+    const onErrorValidatedForm = (errors) => {
+        console.log("Validation errors:", errors)
+    }
 
     const { watch, setValue } = formHookMethods
     const name = watch("name")
@@ -30,16 +41,6 @@ export default function usePartnerCreateHotelCategoryForm() {
             setValue("slug", slug)
         }
     }, [name, setValue])
-
-    const createCategoryMutation = useCreatePartnerHotelCategory()
-
-    const onSuccessValidatedForm = (formData) => {
-        createCategoryMutation.mutate(formData)
-    }
-
-    const onErrorValidatedForm = (errors) => {
-        console.log("Validation errors:", errors)
-    }
 
     return {
         formHookMethods,

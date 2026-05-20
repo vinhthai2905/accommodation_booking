@@ -1,10 +1,10 @@
 import { clsx } from "clsx"
-import { motion as motionImport } from "framer-motion"
+import { motion } from "framer-motion"
 
-export default function AnimatedSidebarDashboard({ children, className, motion }) {
-    const activeMotion = motion || motionImport
+export default function AnimatedSidebarDashboard({ children, className}) {
+    
     return (
-        <activeMotion.aside
+        <motion.aside
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ type: "spring", bounce: 0, duration: 0.6 }}
@@ -14,6 +14,6 @@ export default function AnimatedSidebarDashboard({ children, className, motion }
             )}
         >
             {children}
-        </activeMotion.aside>
+        </motion.aside>
     )
 }

@@ -1,7 +1,8 @@
 import { clsx } from "clsx"
 import { Icon, ArrowUpRight, ArrowDownRight } from "lucide-react"
+import { motion } from "framer-motion"
 
-export default function StatCard({ title, value, change, isPositive, delay, motion }) {
+export default function StatCard({ title, value, change, isPositive, delay }) {
     <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

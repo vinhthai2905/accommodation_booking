@@ -1,48 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { 
     deletePartnerHotelAmenity,
-    deletePartnerHotelCategory
 } from "../../../../../services/dashboard/partner/delete-methods/partnerHotelDeleteServices"
 
 
 import { 
     createPartnerHotelAmenity, 
-    createPartnerHotelCategory, 
-    updatePartnerHotelCategory 
 } from "../../../../../services/dashboard/partner/post-methods/partnerHotelPostServices"
 
-export function useCreatePartnerHotelCategory() {
-    const queryClient = useQueryClient()
-
-    return useMutation({
-        mutationFn: (payload) => createPartnerHotelCategory(payload),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["partnerHotelAmenityCategories"] })
-        },
-    })
-}
-
-export function useUpdatePartnerHotelCategory() {
-    const queryClient = useQueryClient()
-
-    return useMutation({
-        mutationFn: ({ id_amenity_category, payload }) => updatePartnerHotelCategory(id_amenity_category, payload),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["partnerHotelAmenityCategories"] })
-        },
-    })
-}
-
-export function useDeletePartnerHotelCategory() {
-    const queryClient = useQueryClient()
-
-    return useMutation({
-        mutationFn: (id_amenity_category) => deletePartnerHotelCategory(id_amenity_category),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["partnerHotelAmenityCategories"] })
-        },
-    })
-}
 
 export function useCreatePartnerHotelAmenity() {
     const queryClient = useQueryClient()

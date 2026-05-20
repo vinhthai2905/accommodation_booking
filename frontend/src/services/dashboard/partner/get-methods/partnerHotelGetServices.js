@@ -56,17 +56,6 @@ export const fetchPartnerHotelAmenities = async () => {
   return data
 }
 
-
-export const fetchPartnerHotelAmenityCategories = async () => {
-  const headers = buildTokenHeader()
-
-  const { data } = await axios.get(`${apiUrl}/api/partner/hotel/category-amenities`, {
-    headers,
-  })
-
-  return data
-}
-
 export const fetchPartnerHotelAmenitiesByCategory = async (id_amenity_category) => {
   const headers = buildTokenHeader()
 
@@ -78,7 +67,7 @@ export const fetchPartnerHotelAmenitiesByCategory = async (id_amenity_category) 
   return data
 }
 
-export const fetchAvailableAmenityTypes = async () => {
+export const fetchAvailableAmenities = async () => {
   const headers = buildTokenHeader()
 
   const { data } = await axios.get(`${apiUrl}/api/partner/hotel/available-amenities`, {

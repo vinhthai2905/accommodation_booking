@@ -5,7 +5,7 @@ import DBHotelEditHeader from "./DBHotelEditHeader"
 import DBEditHotelForm from "../components/DBEditHotelForm"
 
 import { clsx } from "clsx"
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
 import { FormProvider } from "react-hook-form"
 import { Edit3, MapPin, Building, Globe, Copy, Check, Eye } from "lucide-react"
 import { useState, useEffect } from "react"
@@ -66,7 +66,7 @@ export default function DBEditHotel() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBHotelEditHeader motion={motion} hotelName={hotel?.name} isEditing={isEditing} />
+            <DBHotelEditHeader hotelName={hotel?.name} isEditing={isEditing} />
 
             <AnimatePresence mode="wait">
                 {!isEditing ? (

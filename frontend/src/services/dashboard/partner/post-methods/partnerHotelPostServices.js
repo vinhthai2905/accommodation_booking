@@ -56,27 +56,4 @@ export const createPartnerHotelAmenity = async (payload) => {
   return data
 }
 
-export const createPartnerHotelCategory = async (payload) => {
-  const headers = buildTokenHeader()
-
-  const { data } = await axios.post(
-    `${apiUrl}/api/partner/hotel/category-amenities`,
-    payload,
-    { headers }
-  )
-
-  return data
-}
-
-export const updatePartnerHotelCategory = async (id_amenity_category, payload) => {
-  const headers = buildTokenHeader()
-
-  const { data } = await axios.put(
-    `${apiUrl}/api/partner/hotel/category-amenities/${id_amenity_category}`,
-    payload,
-    { headers }
-  )
-
-  return data
-}
 

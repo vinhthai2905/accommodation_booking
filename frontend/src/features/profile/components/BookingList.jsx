@@ -9,7 +9,7 @@ export default function BookingList({ filteredBooking, motion }) {
                         key={booking.id_booking}
                         booking={booking}
                         index={i}
-                        motion={motion}
+                        
                     />
                 ))
             }

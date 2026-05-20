@@ -36,7 +36,7 @@ export default function DashboardRooms() {
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
             <DBRoomHeader 
-                motion={motion} 
+                 
                 listLabel={"Danh sách phòng vật lý"}
                 instructionLabel={"Quản lý các phòng thực tế của loại phòng này tại đây."}
             />

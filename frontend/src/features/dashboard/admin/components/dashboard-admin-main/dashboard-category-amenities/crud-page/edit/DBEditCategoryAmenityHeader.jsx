@@ -1,7 +1,8 @@
 import { ArrowLeft } from "lucide-react"
 import { useNavigate } from "react-router"
+import { motion } from "framer-motion"
 
-export default function DBEditCategoryAmenityHeader({ motion, categoryName }) {
+export default function DBEditCategoryAmenityHeader({ categoryName }) {
     const navigate = useNavigate()
 
     return (

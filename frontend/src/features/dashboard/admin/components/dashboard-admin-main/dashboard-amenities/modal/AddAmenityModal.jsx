@@ -4,11 +4,11 @@ import { clsx } from "clsx"
 import { Search, X } from "lucide-react"
 import { useState } from "react"
 
-import { useAvailableAmenityTypes } from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
+import { useAvailableAmenities } from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
 import { useCreatePartnerHotelAmenity } from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenityMutations"
 
 export default function AddHotelAmenityModal({ setIsAddModalOpen, id_amenity_category }) {
-    const { data: availableTypes, isPending: isLoadingTypes } = useAvailableAmenityTypes()
+    const { data: availableTypes, isPending: isLoadingTypes } = useAvailableAmenities()
     const { mutate: createAmenity, isPending: isCreating } = useCreatePartnerHotelAmenity()
     
     const [searchTerm, setSearchTerm] = useState("")

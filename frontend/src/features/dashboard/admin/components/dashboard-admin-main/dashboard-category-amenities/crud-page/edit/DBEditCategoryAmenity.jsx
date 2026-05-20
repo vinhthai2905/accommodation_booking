@@ -10,7 +10,7 @@ import { Edit3 } from "lucide-react"
 import { FormProvider } from "react-hook-form"
 import { useNavigate, useParams } from "react-router"
 
-import usePartnerEditHotelCategoryForm from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/form/usePartnerEditHotelCategoryForm"
+import useAdminEditAmenityCategoryForm from "../../../../../../../../hooks/dashboard/admin/hotel-hooks/form/useAdminEditAmenityCategoryForm"
 import { usePartnerHotelCategoryDetail } from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
 import useSuccessRedirect from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/form/useSuccessRedirect"
 
@@ -30,7 +30,7 @@ export default function DBEditCategoryAmenity() {
         updateCategoryMutation,
         onSuccessValidatedForm,
         onErrorValidatedForm,
-    } = usePartnerEditHotelCategoryForm(category)
+    } = useAdminEditAmenityCategoryForm(category)
 
     useSuccessRedirect(updateCategoryMutation, navigate, "/partner/dashboard/hotel/category-amenities")
 
@@ -47,7 +47,7 @@ export default function DBEditCategoryAmenity() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBEditCategoryAmenityHeader motion={motion} categoryName={category?.name} />
+            <DBEditCategoryAmenityHeader categoryName={category?.name} />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

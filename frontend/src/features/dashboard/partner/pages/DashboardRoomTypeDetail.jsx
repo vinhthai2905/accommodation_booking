@@ -16,7 +16,7 @@ export default function DashboardRoomTypeDetail() {
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
             <DBRoomTypeDetailHeader
-                motion={motion}
+                
                 roomTypeName={roomTypeName}
             />
 

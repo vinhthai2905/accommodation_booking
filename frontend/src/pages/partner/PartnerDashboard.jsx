@@ -14,7 +14,7 @@ export default function PartnerDashboard() {
             "font-sans text-gray-900 bg-white"
         )}>
 
-            <DashboardNavigation motion={motion} />
+            <DashboardNavigation  />
 
             <main className="relative flex flex-col flex-1 h-screen overflow-hidden">
                 <header className={clsx(

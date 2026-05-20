@@ -38,7 +38,7 @@ export default function DashboardBookings() {
     return (
         <main className="flex h-full flex-col gap-6 p-6 bg-gray-50/50">
             <DBBookingHeader
-                motion={motion}
+                
                 listLabel={"Danh sách đặt phòng"}
                 instructionLabel={"Quản lý các đơn đặt phòng của khách hàng tại đây."}
             />

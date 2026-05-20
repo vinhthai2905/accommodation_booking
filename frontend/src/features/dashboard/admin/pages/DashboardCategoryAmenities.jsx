@@ -10,10 +10,10 @@ import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, Hash, Tag } from "lucide-react"
 import { useState } from "react"
 
-import { usePartnerHotelAmenityCategories } from "../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
+import { useAdminHotelAmenityCategories } from "../../../../hooks/dashboard/admin/hotel-hooks/services/useAdminHotelAmenityCategories"
 
 export default function DashboardCategoryAmenities() {
-    const { data: categories, isPending, isError, error } = usePartnerHotelAmenityCategories()
+    const { data: categories, isPending, isError, error } = useAdminHotelAmenityCategories()
     const [searchTerm, setSearchTerm] = useState("")
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 5
@@ -33,7 +33,6 @@ export default function DashboardCategoryAmenities() {
         (category.name || "").toLowerCase().includes(searchTerm.toLowerCase())
     )
 
-    // Pagination logic
     const totalPages = Math.ceil(filteredCategories.length / itemsPerPage)
     const startIndex = (currentPage - 1) * itemsPerPage
     const paginatedCategories = filteredCategories.slice(startIndex, startIndex + itemsPerPage)
@@ -49,7 +48,6 @@ export default function DashboardCategoryAmenities() {
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
             <DBCategoryAmenitiesHeader
-                motion={motion}
                 listLabel={"Danh mục tiện nghi"}
                 instructionLabel={"Quản lý các nhóm/danh mục tiện nghi cho phòng và khách sạn của bạn."}
             />

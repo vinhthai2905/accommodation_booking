@@ -1,6 +1,6 @@
-import { Users, DollarSign, Hotel, TrendingUp, ArrowUpRight, ArrowDownRight, MoreHorizontal } from 'lucide-react';
-import { motion } from 'framer-motion';
-import clsx from 'clsx';
+import { Users, DollarSign, Hotel, TrendingUp, ArrowUpRight, ArrowDownRight, MoreHorizontal } from "lucide-react"
+import { motion } from "framer-motion"
+import { clsx } from "clsx"
 
 const StatCard = ({ title, value, change, isPositive, icon: Icon, delay }) => (
   <motion.div

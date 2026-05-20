@@ -11,7 +11,7 @@ import { LogOut } from "lucide-react"
 
 import useToggleNavSection from "../../../../hooks/dashboard/partner/useToggleNavSection"
 
-export default function DashboardNavigation({ motion }) {
+export default function DashboardNavigation() {
     const {
         navStates,
         toggleHotelNav,
@@ -24,7 +24,6 @@ export default function DashboardNavigation({ motion }) {
     return (
         <AnimatedSidebarDashboard
             className="bg-white border-r border-gray-200 text-gray-900"
-            motion={motion}
         >
             <div className="flex items-center gap-3 px-6 py-8">
                 <Link
@@ -47,28 +46,28 @@ export default function DashboardNavigation({ motion }) {
                     navStates={navStates}
                     toggleHotelNav={toggleHotelNav}
                     closeAllNav={closeAllNav}
-                    motion={motion}
+                    
                 />
                 
                 <HotelRoomTypeNavGroup
                     navStates={navStates}
                     toggleRoomTypeNav={toggleRoomTypeNav}
                     closeAllNav={closeAllNav}
-                    motion={motion}
+                    
                 />
 
                 <HotelImgNavGroup
                     navStates={navStates}
                     toggleImgNav={toggleImgNav}
                     closeAllNav={closeAllNav}
-                    motion={motion}
+                    
                 />
 
                 <HotelBookingNavGroup
                     navStates={navStates}
                     toggleBookingNav={toggleBookingNav}
                     closeAllNav={closeAllNav}
-                    motion={motion}
+                    
                 />
 
 

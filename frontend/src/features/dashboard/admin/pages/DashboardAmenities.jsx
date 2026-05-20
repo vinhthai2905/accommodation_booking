@@ -10,11 +10,18 @@ import { clsx } from "clsx"
 import { motion } from "framer-motion"
 import { useState } from "react"
 
-import { usePartnerHotelAmenities, usePartnerHotelAmenityCategories } from "../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
+import { 
+    useAdminHotelAmenityCategories 
+} from "../../../../hooks/dashboard/admin/hotel-hooks/services/useAdminHotelAmenityCategories"
+
+import {
+    usePartnerHotelAmenities
+} from "../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
+
 
 export default function DashboardAmenities() {
     const { data: amenities, isPending, isError, error } = usePartnerHotelAmenities()
-    const { data: categories } = usePartnerHotelAmenityCategories()
+    const { data: categories } = useAdminHotelAmenityCategories()
     const [searchTerm, setSearchTerm] = useState("")
     const [selectedCategoryId, setSelectedCategoryId] = useState("all")
 
@@ -30,19 +37,18 @@ export default function DashboardAmenities() {
         )
 
     const filteredAmenities = (amenities || [])
-        .filter(amenity => 
-            selectedCategoryId === "all" || 
+        .filter(amenity =>
+            selectedCategoryId === "all" ||
             String(amenity.id_amenity_category) === String(selectedCategoryId)
         )
-        .filter(amenity => 
+        .filter(amenity =>
             (amenity.amenity_name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
             (amenity.category_name || "").toLowerCase().includes(searchTerm.toLowerCase())
         )
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBAmenitiesHeader 
-                motion={motion} 
+            <DBAmenitiesHeader
                 listLabel={"Danh sách tiện nghi"}
                 instructionLabel={"Quản lý các tiện nghi hiện có của khách sạn tại đây."}
             />
@@ -56,21 +62,21 @@ export default function DashboardAmenities() {
                     "rounded-xl border border-gray-200 bg-white shadow-sm"
                 )}
             >
-                <DBAmenitiesToolBar 
-                    searchTerm={searchTerm} 
-                    setSearchTerm={setSearchTerm} 
+                <DBAmenitiesToolBar
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
                     categories={categories}
                     selectedCategoryId={selectedCategoryId}
                     setSelectedCategoryId={setSelectedCategoryId}
                 />
-                
+
                 <div className="flex-1 overflow-auto min-h-80 bg-gray-50/30">
-                    <DBAmenitiesTable 
-                        filteredAmenities={filteredAmenities} 
+                    <DBAmenitiesTable
+                        filteredAmenities={filteredAmenities}
                     />
                 </div>
 
-                <DBAmenitiesPagination 
+                <DBAmenitiesPagination
                     filteredAmenities={filteredAmenities}
                 />
             </motion.div>

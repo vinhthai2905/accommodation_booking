@@ -3,8 +3,9 @@ import DBCategoryAmenityRowActions from "./DBCategoryAmenityRowActions"
 
 import DeleteCategoryAmenityModal from "../../modal/DeleteCategoryAmenityModal"
 
-import usePartnerHotelCategoryModals from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/modals/usePartnerHotelCategoryModals"
-import { useDeletePartnerHotelCategory } from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenityMutations"
+import useAdminAmenityCategoryModals from "../../../../../../../../hooks/dashboard/admin/hotel-hooks/modal/useAdminAmenityCategoryModals"
+
+import { useDeleteAdminAmenityCategory } from "../../../../../../../../hooks/dashboard/admin/hotel-hooks/services/useAdminHotelAmenityCategoriesMutations"
 
 export default function DBCategoryAmenityRow({ category }) {
     const {
@@ -13,12 +14,12 @@ export default function DBCategoryAmenityRow({ category }) {
         setIsMenuOpen,
         isDeleteModalOpen,
         setIsDeleteModalOpen
-    } = usePartnerHotelCategoryModals()
+    } = useAdminAmenityCategoryModals()
 
-    const deleteCategoryMutation = useDeletePartnerHotelCategory()
+    const deleteAmenityCategoryMutation = useDeleteAdminAmenityCategory()
 
     const handleDeleteCategory = () => {
-        deleteCategoryMutation.mutate(category.id_amenity_category, {
+        deleteAmenityCategoryMutation.mutate(category.id_amenity_category, {
             onSuccess: () => {
                 setIsDeleteModalOpen(false)
             }

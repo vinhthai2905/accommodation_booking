@@ -26,7 +26,7 @@ export const deletePartnerHotelAmenity = async (id_hotel_amenity) => {
   return data
 }
 
-export const deletePartnerHotelCategory = async (id_amenity_category) => {
+export const deleteAdminAmenityCategory = async (id_amenity_category) => {
   const headers = buildTokenHeader()
 
   const { data } = await axios.delete(

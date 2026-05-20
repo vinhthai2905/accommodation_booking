@@ -127,16 +127,16 @@ function App() {
               path: "hotel",
               element: <DashboardHotel />,
               children: [
+                { path: "info", element: <DBEditHotel /> },
+                { path: "images", element: <DashboardHotelImages /> },
+                { path: "amenities", element: <DashboardHotelAmenities /> },
                 { path: "room-type", element: <DashboardRoomTypes /> },
-                { path: "bookings", element: <DashboardBookings /> },
                 { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRooms /> },
+                { path: "bookings", element: <DashboardBookings /> },
 
                 { path: "room-type/new", element: <DBCreateRoomType /> },
                 { path: "room-type/:slug/:id_room_type/edit", element: <DBEditRoomType /> },
 
-                { path: "info", element: <DBEditHotel /> },
-                { path: "images", element: <DashboardHotelImages /> },
-                { path: "amenities", element: <DashboardHotelAmenities /> },
                 { path: "admin-amenities", element: <DashboardAmenities /> },
                 { path: "admin-amenities/new", element: <DBCreateAmenity /> },
                 { path: "category-amenities", element: <DashboardCategoryAmenities /> },

@@ -1,7 +1,8 @@
 import { ArrowLeft, Sparkles, Search, X } from "lucide-react"
 import { useNavigate } from "react-router"
+import { motion } from "framer-motion"
 
-export default function DBHotelAmenitiesHeader({ motion, categorySearchTerm, setCategorySearchTerm, amenitySearchTerm, setAmenitySearchTerm }) {
+export default function DBHotelAmenitiesHeader({ categorySearchTerm, setCategorySearchTerm, amenitySearchTerm, setAmenitiesSearchTerm }) {
     const navigate = useNavigate()
 
     return (
@@ -62,11 +63,11 @@ export default function DBHotelAmenitiesHeader({ motion, categorySearchTerm, set
                         placeholder="Tìm kiếm tiện ích..."
                         className="w-full rounded-xl px-4 py-2.5 pl-10 pr-10 outline-none border border-gray-200 focus:border-[#003b95] focus:ring-2 focus:ring-blue-100 text-sm text-gray-900 transition-all duration-250 bg-gray-50/20"
                         value={amenitySearchTerm}
-                        onChange={(e) => setAmenitySearchTerm(e.target.value)}
+                        onChange={(e) => setAmenitiesSearchTerm(e.target.value)}
                     />
                     {amenitySearchTerm && (
                         <button
-                            onClick={() => setAmenitySearchTerm("")}
+                            onClick={() => setAmenitiesSearchTerm("")}
                             className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
                         >
                             <X size={16} />

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import useClickOutside from "../../../../common/useClickOutside"
 
-export default function usePartnerHotelCategoryModals() {
+export default function useAdminAmenityCategoryModals() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     

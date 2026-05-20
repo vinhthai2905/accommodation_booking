@@ -2,12 +2,11 @@ import DBCreateCategoryForm from "../components/DBCreateCategoryForm"
 import DBCreateCategoryAmenityHeader from "./DBCreateCategoryAmenityHeader"
 
 import { clsx } from "clsx"
-import { motion } from "framer-motion"
 import { Layout } from "lucide-react"
 import { FormProvider } from "react-hook-form"
 import { useNavigate } from "react-router"
 
-import usePartnerCreateHotelCategoryForm from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/form/usePartnerCreateHotelCategoryForm"
+import useAdminCreateAmenityCategoryForm from "../../../../../../../../hooks/dashboard/admin/hotel-hooks/form/useAdminCreateAmenityCategoryForm"
 import useSuccessRedirect from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/form/useSuccessRedirect"
 
 export default function DBCreateCategoryAmenity() {
@@ -18,13 +17,13 @@ export default function DBCreateCategoryAmenity() {
         createCategoryMutation,
         onSuccessValidatedForm,
         onErrorValidatedForm,
-    } = usePartnerCreateHotelCategoryForm()
+    } = useAdminCreateAmenityCategoryForm()
 
     useSuccessRedirect(createCategoryMutation, navigate, "/partner/dashboard/hotel/category-amenities")
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBCreateCategoryAmenityHeader motion={motion} />
+            <DBCreateCategoryAmenityHeader />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

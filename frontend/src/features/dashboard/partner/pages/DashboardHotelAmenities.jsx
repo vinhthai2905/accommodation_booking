@@ -4,172 +4,78 @@ import DBHotelAmenitiesHeader from "../components/dashboard-main/dashboard-hotel
 import DBHotelAmenitiesCategoryBar from "../components/dashboard-main/dashboard-hotel-amenities/list-page/section/DBHotelAmenitiesCategoryBar"
 import DBHotelAmenitiesTable from "../components/dashboard-main/dashboard-hotel-amenities/list-page/section/DBHotelAmenitiesTable"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useMemo } from "react"
 import { motion } from "framer-motion"
 
 import {
-    usePartnerHotelAmenities,
-    usePartnerHotelAmenityCategories,
-    useAvailableAmenityTypes
-} from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
+    useAdminHotelAmenityCategories
+} from "../../../../hooks/dashboard/admin/hotel-hooks/services/useAdminHotelAmenityCategories"
 
 import {
-    useCreatePartnerHotelAmenity,
-    useDeletePartnerHotelAmenity
-} from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenityMutations"
+    usePartnerHotelAmenities,
+    useAvailableAmenities
+} from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
 
 import { getAmenityIcon } from "../components/dashboard-main/dashboard-hotel-amenities/helpers/getAmenityIcon"
+import { useSearchAmenityCategories } from "../../../../hooks/dashboard/partner/search-hooks/others/useSearchAmenityCategories"
+import { useSearchAmenities } from "../../../../hooks/dashboard/partner/search-hooks/others/useSearchAmenities"
+import { useCRUDMutation } from "../../../../hooks/dashboard/partner/search-hooks/others/useCRUDMutation"
+import { useAnalyzeSelectedAmenities } from "../../../../hooks/dashboard/partner/search-hooks/others/useAnalyzeSelectedAmenities"
 
 
 export default function DashboardHotelAmenities() {
-    const { data: categories, isPending: isLoadingCategories } = usePartnerHotelAmenityCategories()
-    const { data: availableAmenityTypes, isPending: isLoadingAvailable } = useAvailableAmenityTypes()
-    const { data: currentAmenities, isPending: isLoadingCurrent } = usePartnerHotelAmenities()
+    const { data: amenityCategories, isPending: isLoadingAmenityCategories } = useAdminHotelAmenityCategories()
+    const { data: availableAmenities, isPending: isLoadingAvailableAmenities } = useAvailableAmenities()
+    const { data: selectedHotelAmenities, isPending: isLoadingCurrentHotelAmenities } = usePartnerHotelAmenities()
 
-    const { mutate: addAmenity } = useCreatePartnerHotelAmenity()
-    const { mutate: removeAmenity } = useDeletePartnerHotelAmenity()
+    const {
+        filteredAmenityCategories,
+        categorySearchTerm,
+        setCategorySearchTerm,
+        activeAmenityCategoryID, 
+        setActiveAmenityCategoryID
+    } = useSearchAmenityCategories(amenityCategories)
+    const { amenitiesSearchTerm, setAmenitiesSearchTerm } = useSearchAmenities()
 
-    const [activeCategoryId, setActiveCategoryId] = useState(null)
-    const [mutatingIds, setMutatingIds] = useState(new Set())
-    const [categorySearchTerm, setCategorySearchTerm] = useState("")
-    const [amenitySearchTerm, setAmenitySearchTerm] = useState("")
+    const { selectedAmenitiesMap, amenityCategoryStats, activeAmenities } = useAnalyzeSelectedAmenities(
+        selectedHotelAmenities,
+        amenityCategories,
+        availableAmenities,
+        activeAmenityCategoryID,
+        amenitiesSearchTerm
+    )
 
-    // Filter categories based on categorySearchTerm
-    const filteredCategories = useMemo(() => {
-        if (!categories) return []
-        return categories.filter(cat =>
-            cat.name.toLowerCase().includes(categorySearchTerm.toLowerCase())
-        )
-    }, [categories, categorySearchTerm])
+    const { handleToggleAmenityMutation, mutatingAmenityID } = useCRUDMutation(selectedAmenitiesMap)
 
-    // Select the first category by default or update it if currently active category is filtered out
-    useEffect(() => {
-        if (filteredCategories.length > 0) {
-            const exists = filteredCategories.some(c => c.id_amenity_category === activeCategoryId)
-            if (!exists) {
-                setActiveCategoryId(filteredCategories[0].id_amenity_category)
-            }
-        } else {
-            setActiveCategoryId(null)
-        }
-    }, [filteredCategories, activeCategoryId])
 
-    // Construct a quick-lookup map of hotel's current amenities: amenity_type_id -> hotel_amenity_id
-    const currentAmenitiesMap = useMemo(() => {
-        if (!currentAmenities) return new Map()
-        return new Map(currentAmenities.map(item => [item.id_amenity_type, item.id_hotel_amenity]))
-    }, [currentAmenities])
-
-    // Calculate selected vs total count for each category
-    const categoryStats = useMemo(() => {
-        if (!categories || !availableAmenityTypes) return {}
-        const stats = {}
-        categories.forEach(cat => {
-            const typesInCat = availableAmenityTypes.filter(t => t.id_amenity_category === cat.id_amenity_category)
-            const selectedInCat = typesInCat.filter(t => currentAmenitiesMap.has(t.id_amenity_type))
-            stats[cat.id_amenity_category] = {
-                total: typesInCat.length,
-                selected: selectedInCat.length
-            }
-        })
-        return stats
-    }, [categories, availableAmenityTypes, currentAmenitiesMap])
-
-    // Filter available amenities belonging to the selected category & matching search term
-    const activeAmenities = useMemo(() => {
-        if (!availableAmenityTypes || !activeCategoryId) return []
-        let list = availableAmenityTypes.filter(t => t.id_amenity_category === Number(activeCategoryId))
-        if (amenitySearchTerm.trim() !== "") {
-            list = list.filter(t =>
-                t.name.toLowerCase().includes(amenitySearchTerm.toLowerCase())
-            )
-        }
-        return list
-    }, [availableAmenityTypes, activeCategoryId, amenitySearchTerm])
-
-    const handleToggleAmenity = (amenityType) => {
-        const typeId = amenityType.id_amenity_type
-        if (mutatingIds.has(typeId)) return // Prevent duplicate clicks during request
-
-        // Add to local mutating state
-        setMutatingIds(prev => {
-            const next = new Set(prev)
-            next.add(typeId)
-            return next
-        })
-
-        const hotelAmenityId = currentAmenitiesMap.get(typeId)
-
-        if (hotelAmenityId) {
-            // If already exists, we remove it
-            removeAmenity(hotelAmenityId, {
-                onSuccess: () => {
-                    setMutatingIds(prev => {
-                        const next = new Set(prev)
-                        next.delete(typeId)
-                        return next
-                    })
-                },
-                onError: () => {
-                    setMutatingIds(prev => {
-                        const next = new Set(prev)
-                        next.delete(typeId)
-                        return next
-                    })
-                }
-            })
-        } else {
-            // Otherwise, we add it
-            addAmenity({ id_amenity_type: typeId }, {
-                onSuccess: () => {
-                    setMutatingIds(prev => {
-                        const next = new Set(prev)
-                        next.delete(typeId)
-                        return next
-                    })
-                },
-                onError: () => {
-                    setMutatingIds(prev => {
-                        const next = new Set(prev)
-                        next.delete(typeId)
-                        return next
-                    })
-                }
-            })
-        }
-    }
-
-    if (isLoadingCategories || isLoadingAvailable || isLoadingCurrent) {
+    if (isLoadingAmenityCategories || isLoadingAvailableAmenities || isLoadingCurrentHotelAmenities) {
         return <LoadingHotelAmenities labelLoading="Đang tải thông tin tiện nghi khách sạn..." />
     }
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBHotelAmenitiesHeader 
-                motion={motion}
+            <DBHotelAmenitiesHeader
                 categorySearchTerm={categorySearchTerm}
                 setCategorySearchTerm={setCategorySearchTerm}
-                amenitySearchTerm={amenitySearchTerm}
-                setAmenitySearchTerm={setAmenitySearchTerm}
+                amenitiesSearchTerm={amenitiesSearchTerm}
+                setAmenitiesSearchTerm={setAmenitiesSearchTerm}
             />
 
-            <DBHotelAmenitiesCategoryBar 
-                motion={motion}
-                filteredCategories={filteredCategories}
+            <DBHotelAmenitiesCategoryBar
+                filteredAmenityCategories={filteredAmenityCategories}
                 categorySearchTerm={categorySearchTerm}
-                activeCategoryId={activeCategoryId}
-                setActiveCategoryId={setActiveCategoryId}
-                categoryStats={categoryStats}
+                activeAmenityCategoryID={activeAmenityCategoryID}
+                setActiveAmenityCategoryID={setActiveAmenityCategoryID}
+                amenityCategoryStats={amenityCategoryStats}
                 getAmenityIcon={getAmenityIcon}
             />
-          
-            <DBHotelAmenitiesTable 
-                motion={motion}
+
+            <DBHotelAmenitiesTable
                 activeAmenities={activeAmenities}
-                amenitySearchTerm={amenitySearchTerm}
-                currentAmenitiesMap={currentAmenitiesMap}
-                mutatingIds={mutatingIds}
-                handleToggleAmenity={handleToggleAmenity}
+                amenitiesSearchTerm={amenitiesSearchTerm}
+                selectedAmenitiesMap={selectedAmenitiesMap}
+                mutatingAmenityID={mutatingAmenityID}
+                handleToggleAmenityMutation={handleToggleAmenityMutation}
                 getAmenityIcon={getAmenityIcon}
             />
         </div>

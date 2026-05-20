@@ -46,7 +46,7 @@ export default function DBEditRoomType() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBRoomTypeEditHeader motion={motion} roomTypeName={roomType?.type_name} />
+            <DBRoomTypeEditHeader  roomTypeName={roomType?.type_name} />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

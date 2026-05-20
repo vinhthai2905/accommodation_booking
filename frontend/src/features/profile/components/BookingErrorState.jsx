@@ -1,6 +1,7 @@
 import { AlertCircle } from "lucide-react"
+import { motion } from "framer-motion"
 
-export default function BookingErrorState({ motion }) {
+export default function BookingErrorState() {
     return (
         <motion.div 
             key="error" 

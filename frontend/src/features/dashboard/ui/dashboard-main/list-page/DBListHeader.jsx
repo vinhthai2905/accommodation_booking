@@ -1,7 +1,9 @@
 import { ArrowLeft } from "lucide-react"
 import { useNavigate } from "react-router"
 
-export default function DBListHeader({ motion, listLabel, instructionLabel }) {
+import { motion } from "framer-motion"
+
+export default function DBListHeader({ listLabel, instructionLabel }) {
     const navigate = useNavigate()
 
     return (

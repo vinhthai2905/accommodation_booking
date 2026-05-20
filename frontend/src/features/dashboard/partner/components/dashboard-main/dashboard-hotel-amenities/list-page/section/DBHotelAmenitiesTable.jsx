@@ -1,13 +1,13 @@
 import { AnimatePresence } from "framer-motion"
-import { Loader2, Check } from "lucide-react"
+import { Loader2, Check, HelpCircle } from "lucide-react"
+import { motion } from "framer-motion"
 
 export default function DBHotelAmenitiesTable({ 
-    motion,
     activeAmenities, 
     amenitySearchTerm, 
-    currentAmenitiesMap, 
-    mutatingIds, 
-    handleToggleAmenity,
+    selectedAmenitiesMap, 
+    mutatingAmenityID, 
+    handleToggleAmenityMutation,
     getAmenityIcon
 }) {
     return (
@@ -38,8 +38,8 @@ export default function DBHotelAmenitiesTable({
                 >
                     <AnimatePresence mode="popLayout">
                         {activeAmenities.map((amenity) => {
-                            const isChecked = currentAmenitiesMap.has(amenity.id_amenity_type)
-                            const isMutating = mutatingIds.has(amenity.id_amenity_type)
+                            const isChecked = selectedAmenitiesMap.has(amenity.id_amenity_type)
+                            const isMutating = mutatingAmenityID.has(amenity.id_amenity_type)
                             const IconComponent = getAmenityIcon(amenity.slug, amenity.name)
 
                             return (
@@ -50,7 +50,7 @@ export default function DBHotelAmenitiesTable({
                                     exit={{ opacity: 0, scale: 0.95 }}
                                     transition={{ duration: 0.2 }}
                                     key={amenity.id_amenity_type}
-                                    onClick={() => handleToggleAmenity(amenity)}
+                                    onClick={() => handleToggleAmenityMutation(amenity)}
                                     className={`flex items-center justify-between p-4 rounded-2xl border cursor-pointer select-none transition-all duration-300 ${isChecked
                                         ? "border-blue-200 bg-blue-50/40 hover:bg-blue-50/70"
                                         : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-sm"

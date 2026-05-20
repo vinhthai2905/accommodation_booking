@@ -1,8 +1,9 @@
 import { clsx } from "clsx"
 import { Link } from "lucide-react"
 import { Plane } from "lucide-react"
+import { motion } from "framer-motion"
 
-export default function BookingEmptyList({ motion, activeTab, emptyContentCurrentTab }) {
+export default function BookingEmptyList({ activeTab, emptyContentCurrentTab }) {
     return (
         <motion.div key={activeTab + "-empty"} initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center text-center py-20 gap-4">
             <h3 className="text-lg font-bold text-slate-800">{emptyContentCurrentTab.title}</h3>

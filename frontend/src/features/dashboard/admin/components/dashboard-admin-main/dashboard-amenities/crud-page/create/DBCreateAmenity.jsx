@@ -6,7 +6,10 @@ import { useNavigate, useSearchParams } from "react-router"
 import { motion } from "framer-motion"
 import { ArrowLeft, Layout } from "lucide-react"
 
-import { usePartnerHotelAmenityCategories } from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
+import { 
+    useAdminHotelAmenityCategories 
+} from "../../../../../../../../hooks/dashboard/admin/hotel-hooks/services/useAdminHotelAmenityCategories"
+
 import { useCreatePartnerHotelAmenity } from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenityMutations"
 
 export default function DBCreateAmenity() {
@@ -14,7 +17,7 @@ export default function DBCreateAmenity() {
     const [searchParams] = useSearchParams()
     const categoryIdParam = searchParams.get("id_amenity_category")
 
-    const { data: categories, isPending: isLoadingCategories } = usePartnerHotelAmenityCategories()
+    const { data: categories, isPending: isLoadingCategories } = useAdminHotelAmenityCategories()
     const { mutate: createAmenity, isPending: isCreating } = useCreatePartnerHotelAmenity()
 
     const [form, setForm] = useState({

@@ -1,5 +1,6 @@
+import { motion } from "framer-motion"
 
-export default function BookingCardSkeleton({ motion }) {
+export default function BookingCardSkeleton() {
     return (
         <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col gap-4">
             {[...Array(3)].map((_, i) => (

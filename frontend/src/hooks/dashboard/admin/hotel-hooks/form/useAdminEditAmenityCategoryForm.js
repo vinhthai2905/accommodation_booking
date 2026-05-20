@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form"
 import { useEffect } from "react"
-import { useUpdatePartnerHotelCategory } from "../services/usePartnerHotelAmenityMutations"
 
-export default function usePartnerEditHotelCategoryForm(category) {
+import { useUpdateAdminAmenityCategory } from "../services/useAdminHotelAmenityCategoriesMutations"
+
+export default function useAdminEditAmenityCategoryForm(category) {
     const formHookMethods = useForm({
         mode: "onChange",
         defaultValues: {
@@ -14,7 +15,6 @@ export default function usePartnerEditHotelCategoryForm(category) {
     const { watch, setValue, reset } = formHookMethods
     const name = watch("name")
 
-    // Populate form values when category data is loaded
     useEffect(() => {
         if (category) {
             reset({
@@ -41,7 +41,7 @@ export default function usePartnerEditHotelCategoryForm(category) {
         }
     }, [name, setValue])
 
-    const updateCategoryMutation = useUpdatePartnerHotelCategory()
+    const updateCategoryMutation = useUpdateAdminAmenityCategory()
 
     const onSuccessValidatedForm = (formData) => {
         updateCategoryMutation.mutate({

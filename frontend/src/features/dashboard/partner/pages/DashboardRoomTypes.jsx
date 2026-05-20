@@ -36,7 +36,7 @@ export default function DashboardRoomTypes() {
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
             <DBRoomTypeHeader 
-                motion={motion}
+                
                 listLabel={"Danh sách loại phòng"}
                 instructionLabel={"Quản lý các loại phòng của bạn tại đây."}
             />

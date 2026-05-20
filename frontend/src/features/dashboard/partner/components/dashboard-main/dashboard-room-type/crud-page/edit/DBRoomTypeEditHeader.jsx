@@ -1,7 +1,8 @@
 import { ArrowLeft } from "lucide-react"
 import { useNavigate } from "react-router"
+import { motion } from "framer-motion"
 
-export default function DBRoomTypeEditHeader({ motion, roomTypeName }) {
+export default function DBRoomTypeEditHeader({ roomTypeName }) {
     const navigate = useNavigate()
 
     return (

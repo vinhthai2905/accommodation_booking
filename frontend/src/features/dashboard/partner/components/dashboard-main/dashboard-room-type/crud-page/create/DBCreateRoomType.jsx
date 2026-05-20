@@ -25,7 +25,7 @@ export default function DBCreateRoomType() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBRoomTypeCreateHeader motion={motion} />
+            <DBRoomTypeCreateHeader  />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
