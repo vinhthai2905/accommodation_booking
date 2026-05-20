@@ -1,7 +1,7 @@
 import LoadingBookings from "../../ui/loading/LoadingHotelDatas"
 import ErrorLoadingBookings from "../../ui/loading/ErrorLoadingHotelDatas"
 
-import DBBookingHeader from "../components/dashboard-main/dashboard-booking/list-page/section/DBBookingHeader"
+import DBBookingHeader from "../../ui/dashboard-main/list-page/DBListHeader"
 import DBBookingToolBar from "../components/dashboard-main/dashboard-booking/list-page/section/DBBookingToolBar"
 import DBBookingTable from "../components/dashboard-main/dashboard-booking/list-page/section/DBBookingTable"
 import DBBookingPagination from "../components/dashboard-main/dashboard-booking/list-page/section/DBBookingPagination"
@@ -37,7 +37,11 @@ export default function DashboardBookings() {
 
     return (
         <main className="flex h-full flex-col gap-6 p-6 bg-gray-50/50">
-            <DBBookingHeader motion={motion} />
+            <DBBookingHeader
+                motion={motion}
+                listLabel={"Danh sách đặt phòng"}
+                instructionLabel={"Quản lý các đơn đặt phòng của khách hàng tại đây."}
+            />
 
             <motion.section
                 initial={{ opacity: 0, y: 20 }}
@@ -50,9 +54,9 @@ export default function DashboardBookings() {
                     setSearchTerm={setSearchTerm}
                 />
 
-                <DBBookingTable bookings={bookings}/>
+                <DBBookingTable bookings={bookings} />
 
-                <DBBookingPagination bookings={bookings}/>
+                <DBBookingPagination bookings={bookings} />
             </motion.section>
         </main>
     )

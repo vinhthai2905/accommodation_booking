@@ -1,6 +1,7 @@
 import LoadingCategoryAmenities from "../../ui/loading/LoadingHotelDatas"
 import ErrorLoadingCategoryAmenities from "../../ui/loading/LoadingHotelDatas"
 
+import DBCategoryAmenitiesHeader from "../../ui/dashboard-main/list-page/DBListHeader"
 import DBCategoryAmenityRow from "../components/dashboard-admin-main/dashboard-category-amenities/list-page/row/DBCategoryAmenityRow"
 import DBCategoryAmenitiesToolBar from "../components/dashboard-admin-main/dashboard-category-amenities/list-page/section/DBCategoryAmenitiesToolBar"
 
@@ -47,17 +48,11 @@ export default function DashboardCategoryAmenities() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            {/* Header */}
-            <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-            >
-                <div>
-                    <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Danh mục tiện nghi</h1>
-                    <p className="text-gray-500 text-sm mt-1">Quản lý các nhóm/danh mục tiện nghi cho phòng và khách sạn của bạn.</p>
-                </div>
-            </motion.div>
+            <DBCategoryAmenitiesHeader
+                motion={motion}
+                listLabel={"Danh mục tiện nghi"}
+                instructionLabel={"Quản lý các nhóm/danh mục tiện nghi cho phòng và khách sạn của bạn."}
+            />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -74,7 +69,7 @@ export default function DashboardCategoryAmenities() {
                 />
                 
                 {/* Table */}
-                <div className="flex-1 overflow-auto min-h-[320px] bg-gray-50/30">
+                <div className="flex-1 overflow-auto min-h-80 bg-gray-50/30">
                     <table className="w-full border-collapse text-left text-sm text-gray-500">
                         <thead className="bg-gray-50/80 text-xs font-semibold uppercase tracking-wider text-gray-600 border-b border-gray-200/80">
                             <tr>

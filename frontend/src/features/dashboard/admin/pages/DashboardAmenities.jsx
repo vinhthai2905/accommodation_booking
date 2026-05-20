@@ -1,7 +1,7 @@
 import LoadingAmenities from "../../ui/loading/LoadingHotelDatas"
 import ErrorLoadingAmenities from "../../ui/loading/ErrorLoadingHotelDatas"
 
-import DBAmenitiesHeader from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesHeader"
+import DBAmenitiesHeader from "../../ui/dashboard-main/list-page/DBListHeader"
 import DBAmenitiesPagination from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesPagination"
 import DBAmenitiesTable from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesTable"
 import DBAmenitiesToolBar from "../components/dashboard-admin-main/dashboard-amenities/list-page/section/DBAmenitiesToolBar"
@@ -41,7 +41,11 @@ export default function DashboardAmenities() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBAmenitiesHeader motion={motion} />
+            <DBAmenitiesHeader 
+                motion={motion} 
+                listLabel={"Danh sách tiện nghi"}
+                instructionLabel={"Quản lý các tiện nghi hiện có của khách sạn tại đây."}
+            />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

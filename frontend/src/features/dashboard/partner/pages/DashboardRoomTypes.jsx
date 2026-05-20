@@ -1,7 +1,7 @@
 import LoadingRoomTypes from "../../ui/loading/LoadingHotelDatas"
 import ErrorLoadingRoomTypes from "../../ui/loading/ErrorLoadingHotelDatas"
 
-import DBRoomTypeHeader from "../components/dashboard-main/dashboard-room-type/list-page/section/DBRoomTypeHeader"
+import DBRoomTypeHeader from "../../ui/dashboard-main/list-page/DBListHeader"
 import DBRoomTypePagination from "../components/dashboard-main/dashboard-room-type/list-page/section/DBRoomTypePagination"
 import DBRoomTypeTable from "../components/dashboard-main/dashboard-room-type/list-page/section/DBRoomTypeTable"
 import DBRoomTypeToolBar from "../components/dashboard-main/dashboard-room-type/list-page/section/DBroomTypeToolBar"
@@ -35,7 +35,11 @@ export default function DashboardRoomTypes() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBRoomTypeHeader motion={motion} />
+            <DBRoomTypeHeader 
+                motion={motion}
+                listLabel={"Danh sách loại phòng"}
+                instructionLabel={"Quản lý các loại phòng của bạn tại đây."}
+            />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}

@@ -1,7 +1,7 @@
 import LoadingHotelRooms from "../../ui/loading/LoadingHotelDatas"
 import ErrorLoadingHotelRooms from "../../ui/loading/ErrorLoadingHotelDatas"
 
-import DBRoomHeader from "../components/dashboard-main/dashboard-room/list-page/section/DBRoomHeader"
+import DBRoomHeader from "../../ui/dashboard-main/list-page/DBListHeader"
 import DBRoomPagination from "../components/dashboard-main/dashboard-room/list-page/section/DBRoomPagination"
 import DBRoomTable from "../components/dashboard-main/dashboard-room/list-page/section/DBRoomTable"
 import DBRoomToolBar from "../components/dashboard-main/dashboard-room/list-page/section/DBRoomToolBar"
@@ -35,7 +35,11 @@ export default function DashboardRooms() {
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
-            <DBRoomHeader motion={motion} />
+            <DBRoomHeader 
+                motion={motion} 
+                listLabel={"Danh sách phòng vật lý"}
+                instructionLabel={"Quản lý các phòng thực tế của loại phòng này tại đây."}
+            />
 
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
