@@ -1,8 +1,8 @@
 import { clsx } from "clsx"
 
-import PartnerLandingHeader from "../../features/partner/components/authentication/PartnerLandingHeader"
-import HeroContent from "../../features/partner/components/authentication/HeroContent"
-import PartnerRegisterCard from "../../features/partner/components/authentication/PartnerRegisterCard"
+import PartnerLandingHeader from "../../features/dashboard/partner/components/authentication/PartnerLandingHeader"
+import HeroContent from "../../features/dashboard/partner/components/authentication/HeroContent"
+import PartnerRegisterCard from "../../features/dashboard/partner/components/authentication/PartnerRegisterCard"
 
 export default function PartnerLanding() {
     return (

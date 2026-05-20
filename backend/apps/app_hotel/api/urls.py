@@ -22,15 +22,9 @@ from . import (
     PartnerHotelView,
     PartnerHotelImageListView,
     PartnerHotelImageDetailView,
-)
-
-from .private.partner_hotel_detail.views.hotel_amenities_views import (
     PartnerHotelAmenityListView,
     PartnerHotelAmenityDetailView,
     AvailableAmenityTypeListView,
-)
-
-from .private.partner_hotel_detail.views.hotel_category_amenities_views import (
     PartnerHotelCategoryAmenitiesListView,
     PartnerHotelCategoryListView,
     PartnerHotelCategoryDetailView,

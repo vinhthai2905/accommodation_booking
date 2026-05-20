@@ -25,16 +25,16 @@ export default function DashboardNav({ location }) {
                             "relative flex items-center gap-3 px-4 py-3 rounded-xl",
                             "transition-all duration-200",
                             isActive
-                                ? "bg-blue-600/10 text-blue-400"
-                                : "text-gray-400 hover:bg-gray-700/50 hover:text-gray-200"
+                                ? "bg-[#003b95]/10 text-[#003b95]"
+                                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                         )}
                     >
-                        <Icon size={20} className={isActive ? "text-blue-400" : ""} />
+                        <Icon size={20} className={isActive ? "text-[#003b95]" : "text-gray-500"} />
                         <span className={clsx("font-medium")}>{item.name}</span>
                         {isActive && (
                             <motion.div
                                 layoutId="activeIndicator"
-                                className={clsx("absolute left-0 w-1 h-8 bg-blue-500 rounded-r-full")}
+                                className={clsx("absolute left-0 w-1 h-8 bg-[#003b95] rounded-r-full")}
                             />
                         )}
                     </Link>

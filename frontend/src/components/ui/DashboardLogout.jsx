@@ -3,10 +3,10 @@ import { LogOut } from "lucide-react"
 
 export default function DashboardLogout() {
     return (
-        <div className={clsx("p-4 border-t border-gray-700")}>
+        <div className={clsx("p-4 border-t border-gray-200")}>
             <button className={clsx(
                 "flex items-center gap-3 w-full px-4 py-3 rounded-xl",
-                "text-red-400 hover:bg-red-500/10",
+                "text-red-600 hover:bg-red-50",
                 "transition-colors"
             )}>
                 <LogOut size={20} />
