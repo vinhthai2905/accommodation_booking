@@ -13,7 +13,6 @@ import Hotel from './pages/users/Hotel'
 import HotelsSearchResult from "./pages/users/HotelsSearchResult"
 import PaymentConfirmation from './pages/users/PaymentConfirmation'
 import Profile from './pages/users/Profile'
-import SearchResults from "./pages/users/SearchResults"
 
 import DashboardLanding from './features/dashboard/partner/pages/DashboardLanding'
 import PartnertLanding from './pages/partner/PartnerLanding'
@@ -29,18 +28,15 @@ import DashboardRoomTypeDetail from './features/dashboard/partner/pages/Dashboar
 
 import DBEditHotel from './features/dashboard/partner/components/dashboard-main/dashboard-hotel/crud-page/edit/DBEditHotel'
 
+import DBCreateAmenity from "./features/dashboard/admin/components/dashboard-main/dashboard-amenities/crud-page/create/DBCreateAmenity"
 import DBCreateRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/create/DBCreateRoomType'
 import DBEditRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/edit/DBEditRoomType'
-
 import DBCreateCategory from "./features/dashboard/admin/components/dashboard-main/dashboard-category-amenities/crud-page/create/DBCreateCategory"
 import DBEditCategory from "./features/dashboard/admin/components/dashboard-main/dashboard-category-amenities/crud-page/edit/DBEditCategory"
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 import DashboardCategoryAmenities from './features/dashboard/admin/pages/DashboardCategoryAmenities'
 import DashboardAmenities from './features/dashboard/admin/pages/DashboardAmenities'
-
-import DBCreateAmenity from "./features/dashboard/admin/components/dashboard-main/dashboard-amenities/crud-page/create/DBCreateAmenity"
-
 
 import AuthRedirectRoute from './pages/protectedroutes/AuthRedirectRoute'
 import PartnerProtectedRoute from './pages/protectedroutes/PartnerProtectedRoute'

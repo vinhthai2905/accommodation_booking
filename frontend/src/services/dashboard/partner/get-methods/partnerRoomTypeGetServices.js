@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { buildTokenHeader } from "../../../helpers/authentication/buildTokenHeader"
+import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
 
 const apiUrl = import.meta.env.VITE_API_URL
 

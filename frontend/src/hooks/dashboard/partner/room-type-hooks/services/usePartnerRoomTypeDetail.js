@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchPartnerRoomTypeDetail } from "../../../../../services/dashboard/partner/partnerHotelServices"
+import { fetchPartnerRoomTypeDetail } from "../../../../../services/dashboard/partner/get-methods/partnerHotelGetServices"
 
 export default function usePartnerRoomTypeDetail(id_room_type) {
     return useQuery({

@@ -1,11 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { 
-    createPartnerHotelAmenity, 
     deletePartnerHotelAmenity,
-    createPartnerHotelCategory,
-    updatePartnerHotelCategory,
     deletePartnerHotelCategory
-} from "../../../../../services/dashboard/partner/partnerHotelServices"
+} from "../../../../../services/dashboard/partner/delete-methods/partnerHotelDeleteServices"
+
+
+import { 
+    createPartnerHotelAmenity, 
+    createPartnerHotelCategory, 
+    updatePartnerHotelCategory 
+} from "../../../../../services/dashboard/partner/post-methods/partnerHotelPostServices"
 
 export function useCreatePartnerHotelCategory() {
     const queryClient = useQueryClient()

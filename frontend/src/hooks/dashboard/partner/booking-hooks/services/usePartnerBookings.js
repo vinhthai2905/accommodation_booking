@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query"
 
-import { getPartnerBookings } from "../../../../../services/dashboard/partner/partnerBookingServices"
+import { fetchPartnerBookings } from "../../../../../services/dashboard/partner/get-methods/partnerBookingGetServices"
 
 export function usePartnerBookings(currentTab) {
     return useQuery({
         queryKey: ["partnerBookings", currentTab],
-        queryFn: () => getPartnerBookings(currentTab),
+        queryFn: () => fetchPartnerBookings(currentTab),
         enabled: !!currentTab,
     })
 }

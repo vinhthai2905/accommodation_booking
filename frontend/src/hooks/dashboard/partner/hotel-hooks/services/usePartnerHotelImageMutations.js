@@ -2,9 +2,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "react-hot-toast"
 import {
     updatePartnerHotelImage,
-    deletePartnerHotelImage,
     createPartnerHotelImage,
-} from "../../../../../services/dashboard/partner/partnerHotelServices"
+} from "../../../../../services/dashboard/partner/post-methods/partnerHotelPostServices"
+
+import { deletePartnerHotelImage } from "../../../../../services/dashboard/partner/delete-methods/partnerHotelDeleteServices"
 
 export function useEditHotelImage() {
     const queryClient = useQueryClient()

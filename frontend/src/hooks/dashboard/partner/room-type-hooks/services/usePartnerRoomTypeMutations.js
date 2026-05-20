@@ -4,7 +4,7 @@ import {
   createPartnerRoomType,
   updatePartnerRoomType,
   deletePartnerRoomType
-} from "../../../../../services/dashboard/partner/partnerRoomTypeServices"
+} from "../../../../../services/dashboard/partner/get-methods/partnerRoomTypeGetServices"
 
 export function useCreateRoomTypeMutation() {
   const queryClient = useQueryClient()

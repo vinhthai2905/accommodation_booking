@@ -1,10 +1,10 @@
 import axios from "axios"
 
-import { buildTokenHeader } from "../../../helpers/authentication/buildTokenHeader"
+import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
 
 const apiUrl = import.meta.env.VITE_API_URL
 
-export const getPartnerBookings = async (tab = "upcoming") => {
+export const fetchPartnerBookings = async (tab = "upcoming") => {
     const headers = buildTokenHeader()
 
     const { data } = await axios.get(

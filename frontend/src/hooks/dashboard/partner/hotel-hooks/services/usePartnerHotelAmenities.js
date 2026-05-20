@@ -5,7 +5,7 @@ import {
     fetchPartnerHotelAmenitiesByCategory,
     fetchAvailableAmenityTypes,
     fetchPartnerHotelCategoryDetail
-} from "../../../../../services/dashboard/partner/partnerHotelServices"
+} from "../../../../../services/dashboard/partner/get-methods/partnerHotelGetServices"
 
 export function usePartnerHotelAmenities() {
     return useQuery({

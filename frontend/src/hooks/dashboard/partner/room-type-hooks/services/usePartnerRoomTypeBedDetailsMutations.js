@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import {
   createPartnerRoomTypeBedDetail,
   deletePartnerRoomTypeBedDetail,
-} from "../../../../../services/dashboard/partner/partnerRoomTypeDetailServices"
+} from "../../../../../services/dashboard/partner/get-methods/partnerRoomTypeDetailGetServices"
 
 
 export function useCreateRoomTypeBedDetail(id_room_type) {
