@@ -92,9 +92,9 @@ class HotelSearchViewMixin:
 
         return hotel_filters
 
-    def _get_destination_hotels(self, location) -> QuerySet[KhachSan]:
+    def _get_destination_hotels(self, hotel_filters: dict) -> QuerySet[KhachSan]:
         try:
-            destination_ward = self.ward_model.objects.get(ward_name=f"{location}")
+            destination_ward = self.ward_model.objects.get(ward_name=f"{hotel_filters.get("location")}")
             destination_hotels: QuerySet[KhachSan] = destination_ward.hotels.all()
         except Exception as e:
             raise exceptions.NotFound("Location does not matched.")
@@ -173,7 +173,7 @@ class HotelSearchViewMixin:
         hotel_filters = self._validate_hotel_search_params(request)
 
         destination_hotels_list: QuerySet[KhachSan] = self._get_destination_hotels(
-            hotel_filters.get("location")
+            hotel_filters
         )
 
         overlap_bookings: QuerySet[DatPhong] = self._get_overlapping_bookings(

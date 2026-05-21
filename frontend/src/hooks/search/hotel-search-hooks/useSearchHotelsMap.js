@@ -10,7 +10,7 @@ export default function useSearchHotelsMap(isMapOpened, mapBounds) {
     const location = useLocation()
 
     const { isPending, error, data } = useQuery({
-        queryKey: ["fetchHotelsResultMap", searchHotelsParamsMap, location.key],
+        queryKey: ["fetchHotelsResultMap", searchHotelsParamsMap.toString(), location.key],
         queryFn: (() => fetchHotelResultMap(searchHotelsParamsMap)),
         enabled: !!isMapOpened && !!mapBounds
     })

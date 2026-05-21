@@ -13,7 +13,7 @@ export default function MapBoundsWatcher({ handleMapViewPortChange }) {
         }
     })
 
-    // useEffect(() =>{
-    //     handleMapViewPortChange(getMapBounds(map))
-    // }, [handleMapViewPortChange, map])
+    useEffect(() =>{
+        handleMapViewPortChange(getMapBounds(map))
+    }, [handleMapViewPortChange, map])
 }
