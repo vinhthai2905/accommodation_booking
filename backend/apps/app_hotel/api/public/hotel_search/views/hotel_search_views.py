@@ -71,20 +71,20 @@ class HotelSearchResultMapView(HotelSearchViewMixin, APIView):
     
     def _get_destination_hotels(self, hotel_filters: dict) -> QuerySet[KhachSan]:
         try:
-            destination_ward = self.ward_model.objects.get(ward_name=f"{hotel_filters["location"]}")
-            destination_hotels: QuerySet[KhachSan] = destination_ward.hotels.all()
+            # destination_ward = self.ward_model.objects.get(ward_name=f"{hotel_filters["location"]}")
+            # destination_hotels: QuerySet[KhachSan] = destination_ward.hotels.all()
             map_bounds = hotel_filters["map_bounds"]
             
             bounds_polygon = Polygon.from_bbox((
-                map_bounds["north"],  
+                map_bounds["west"],   
                 map_bounds["south"],  
                 map_bounds["east"],  
-                map_bounds["west"],   
+                map_bounds["north"],  
             ))
 
             bounds_polygon.srid = 4326
 
-            destination_hotels_by_bounds = destination_hotels.filter(
+            destination_hotels_by_bounds = KhachSan.objects.filter(
                 location__intersects=bounds_polygon
             )
             
