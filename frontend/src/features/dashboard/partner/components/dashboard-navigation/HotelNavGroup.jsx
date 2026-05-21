@@ -45,16 +45,6 @@ export default function HotelNavGroup({navStates, toggleHotelNav, closeAllNav })
                         label={"Hình ảnh"}
                     />
                     
-                    <DashboardNavLink
-                        to={"/partner/dashboard/hotel/category-amenities"}
-                        closeAllNav={closeAllNav}
-                        label={"Danh mục tiện nghi (admin)"}
-                    />
-                    <DashboardNavLink
-                        to={"/partner/dashboard/hotel/admin-amenities"}
-                        closeAllNav={closeAllNav}
-                        label={"Tiện nghi (admin)"}
-                    />
                      <DashboardNavLink
                         to={"/partner/dashboard/hotel/amenities"}
                         closeAllNav={closeAllNav}

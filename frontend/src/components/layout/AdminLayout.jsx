@@ -18,7 +18,7 @@ export default function AdminLayout() {
       "font-sans text-gray-900 bg-white"
     )}>
 
-      <AnimatedSidebarDashboard lassName="bg-white border-r border-gray-200 text-gray-900">
+      <AnimatedSidebarDashboard className="bg-white border-r border-gray-200 text-gray-900">
         <DashboardPanel
           to={location.pathname}
           panel={"Admin Panel"}

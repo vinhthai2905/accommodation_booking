@@ -7,7 +7,10 @@ import DeleteAmenityModal from "../../modal/DeleteAmenityModal"
 
 import { useState } from "react"
 
-import { useDeletePartnerHotelAmenity } from "../../../../../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenityMutations"
+import { 
+    useUpdateAdminAmenity,
+    useDeleteAdminAmenity 
+} from "../../../../../../../../hooks/dashboard/admin/hotel-hooks/services/useAdminHotelAmenitiesMutations"
 import usePartnerRoomModals from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/modals/usePartnerRoomModals"
 
 export default function DBAmenityRow({ initialAmenity }) {
@@ -21,23 +24,31 @@ export default function DBAmenityRow({ initialAmenity }) {
         isDeleteModalOpen,
         setIsDeleteModalOpen
     } = usePartnerRoomModals()
-    const { mutate: deleteAmenity } = useDeletePartnerHotelAmenity()
+    const { mutate: updateAmenity } = useUpdateAdminAmenity()
+    const { mutate: deleteAmenity } = useDeleteAdminAmenity()
 
     const [editForm, setEditForm] = useState({
-        amenity_name: initialAmenity.amenity_name || "",
+        name: initialAmenity.name || "",
     })
 
     const handleSaveAmenityEdit = (e) => {
         e.preventDefault()
-        setAmenity(prev => ({
-            ...prev,
-            amenity_name: editForm.amenity_name,
-        }))
-        setIsEditModalOpen(false)
+        updateAmenity({
+            id_amenity_type: amenity.id_amenity_type,
+            payload: { name: editForm.name }
+        }, {
+            onSuccess: () => {
+                setAmenity(prev => ({
+                    ...prev,
+                    name: editForm.name,
+                }))
+                setIsEditModalOpen(false)
+            }
+        })
     }
 
     const handleDeleteAmenity = () => {
-        deleteAmenity(amenity.id_hotel_amenity, {
+        deleteAmenity(amenity.id_amenity_type, {
             onSuccess: () => setIsDeleteModalOpen(false)
         })
     }

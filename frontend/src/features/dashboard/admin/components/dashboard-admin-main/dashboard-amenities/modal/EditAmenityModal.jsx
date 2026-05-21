@@ -85,11 +85,11 @@ export default function EditAmenityModal({
                                     "transition-all",
                                     "focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                                 )}
-                                value={editForm.amenity_name}
+                                value={editForm.name}
                                 onChange={(e) =>
                                     setEditForm({
                                         ...editForm,
-                                        amenity_name: e.target.value,
+                                        name: e.target.value,
                                     })
                                 }
                             />

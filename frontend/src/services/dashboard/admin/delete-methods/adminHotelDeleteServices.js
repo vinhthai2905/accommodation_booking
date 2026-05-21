@@ -14,3 +14,14 @@ export const deleteAdminAmenityCategory = async (id_amenity_category) => {
 
   return data
 }
+
+export const deleteAdminAmenity = async (id_amenity_type) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.delete(
+    `${apiUrl}/api/partner/hotel/available-amenities/${id_amenity_type}`,
+    { headers }
+  )
+
+  return data
+}

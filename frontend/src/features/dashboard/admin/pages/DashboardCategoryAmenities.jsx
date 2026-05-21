@@ -29,9 +29,9 @@ export default function DashboardCategoryAmenities() {
             />
         )
 
-    const filteredCategories = (categories || []).filter(category => 
-        (category.name || "").toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    const filteredCategories = (categories || [])
+        .filter(category => (category.name || "").toLowerCase().includes(searchTerm.toLowerCase()))
+        .sort((a, b) => b.id_amenity_category - a.id_amenity_category)
 
     const totalPages = Math.ceil(filteredCategories.length / itemsPerPage)
     const startIndex = (currentPage - 1) * itemsPerPage

@@ -10,7 +10,7 @@ import {
     useAdminHotelAmenityCategories 
 } from "../../../../../../../../hooks/dashboard/admin/hotel-hooks/services/useAdminHotelAmenityCategories"
 
-import { useCreatePartnerHotelAmenity } from "@/hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenityMutations"
+import { useCreateAdminAmenity } from "../../../../../../../../hooks/dashboard/admin/hotel-hooks/services/useAdminHotelAmenitiesMutations"
 
 export default function DBCreateAmenity() {
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ export default function DBCreateAmenity() {
     const categoryIdParam = searchParams.get("id_amenity_category")
 
     const { data: categories, isPending: isLoadingCategories } = useAdminHotelAmenityCategories()
-    const { mutate: createAmenity, isPending: isCreating } = useCreatePartnerHotelAmenity()
+    const { mutate: createAmenity, isPending: isCreating } = useCreateAdminAmenity()
 
     const [form, setForm] = useState({
         name: "",
@@ -71,9 +71,9 @@ export default function DBCreateAmenity() {
         createAmenity(payload, {
             onSuccess: () => {
                 if (categoryIdParam) {
-                    navigate(`/partner/dashboard/hotel/category-amenities/${categoryIdParam}`)
+                    navigate(`/admin/category-amenities/${categoryIdParam}`)
                 } else {
-                    navigate("/partner/dashboard/hotel/admin-amenities")
+                    navigate("/admin/amenities")
                 }
             }
         })

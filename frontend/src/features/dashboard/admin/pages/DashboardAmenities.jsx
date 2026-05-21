@@ -15,12 +15,12 @@ import {
 } from "../../../../hooks/dashboard/admin/hotel-hooks/services/useAdminHotelAmenityCategories"
 
 import {
-    usePartnerHotelAmenities
+    useAvailableAmenities
 } from "../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotelAmenities"
 
 
 export default function DashboardAmenities() {
-    const { data: amenities, isPending, isError, error } = usePartnerHotelAmenities()
+    const { data: amenities, isPending, isError, error } = useAvailableAmenities()
     const { data: categories } = useAdminHotelAmenityCategories()
     const [searchTerm, setSearchTerm] = useState("")
     const [selectedCategoryId, setSelectedCategoryId] = useState("all")
@@ -42,9 +42,10 @@ export default function DashboardAmenities() {
             String(amenity.id_amenity_category) === String(selectedCategoryId)
         )
         .filter(amenity =>
-            (amenity.amenity_name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (amenity.name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
             (amenity.category_name || "").toLowerCase().includes(searchTerm.toLowerCase())
         )
+        .sort((a, b) => b.id_amenity_type - a.id_amenity_type)
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">

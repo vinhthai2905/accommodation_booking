@@ -1,7 +1,9 @@
 import { clsx } from "clsx"
 import { Pencil, Trash2 } from "lucide-react"
+import { useNavigate } from "react-router"
 
-export default function DBCategoryAmenityRowActions({setIsMenuOpen, setIsEditModalOpen, setIsDeleteModalOpen}) {
+export default function DBCategoryAmenityRowActions({setIsMenuOpen, setIsDeleteModalOpen, category}) {
+    const navigate = useNavigate()
     return (
         <div className={clsx(
             "absolute right-12 top-4 z-50 w-40 rounded-xl bg-white p-1.5",
@@ -12,7 +14,7 @@ export default function DBCategoryAmenityRowActions({setIsMenuOpen, setIsEditMod
                 type="button"
                 onClick={() => {
                     setIsMenuOpen(false)
-                    setIsEditModalOpen(true)
+                    navigate(`/admin/category-amenities/${category.id_amenity_category}/edit`)
                 }}
                 className={clsx(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-semibold text-gray-700",

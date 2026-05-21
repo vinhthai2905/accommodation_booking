@@ -5,10 +5,11 @@ import { Link } from 'react-router';
 import { clsx } from "clsx"
 
 const navItems = [
-    { name: 'Dashboard', path: '/partner/', icon: LayoutDashboard },
-    { name: 'Users', path: '/partner/users', icon: Users },
-    { name: 'Hotels & Listings', path: '/partner/hotels', icon: Hotel },
-    { name: 'Settings', path: '/partner/settings', icon: Settings },
+    
+    { name: 'Người dùng', path: '/admin/users', icon: Users },
+    { name: 'Phường', path: '/admin/wards', icon: Hotel },
+    { name: 'Danh mục tiện ích', path: '/admin/category-amenities', icon: LayoutDashboard },
+    { name: 'Tiện ích', path: '/admin/amenities', icon: Settings },
 ];
 
 export default function DashboardNav({ location }) {

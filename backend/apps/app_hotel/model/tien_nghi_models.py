@@ -40,6 +40,7 @@ class LoaiTienNghi(models.Model):
         db_table = "loai_tien_nghi"
         verbose_name = "Loại tiện nghi"
         verbose_name_plural = "Loại tiện nghi"
+        ordering = ['-id_amenity_type']
 
     def __str__(self):
         return self.name
@@ -69,6 +70,7 @@ class TienNghiKhachSan(models.Model):
         db_table = "tien_nghi_khach_san"
         verbose_name = "Tiện nghi khách sạn"
         verbose_name_plural = "Tiện nghi khách sạn"
+        ordering = ['-id_hotel_amenity']
 
     def __str__(self):
         return f"{self.id_hotel} - {self.id_amenity_type}"

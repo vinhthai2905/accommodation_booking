@@ -5,6 +5,7 @@ import { clsx } from "clsx"
 import { Layout } from "lucide-react"
 import { FormProvider } from "react-hook-form"
 import { useNavigate } from "react-router"
+import { motion } from "framer-motion"
 
 import useAdminCreateAmenityCategoryForm from "../../../../../../../../hooks/dashboard/admin/hotel-hooks/form/useAdminCreateAmenityCategoryForm"
 import useSuccessRedirect from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/form/useSuccessRedirect"
@@ -19,7 +20,7 @@ export default function DBCreateCategoryAmenity() {
         onErrorValidatedForm,
     } = useAdminCreateAmenityCategoryForm()
 
-    useSuccessRedirect(createCategoryMutation, navigate, "/partner/dashboard/hotel/category-amenities")
+    useSuccessRedirect(createCategoryMutation, navigate, "/admin/category-amenities")
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">

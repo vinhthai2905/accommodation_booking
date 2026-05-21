@@ -15,7 +15,7 @@ import { usePartnerHotelCategoryDetail } from "../../../../../../../../hooks/das
 import useSuccessRedirect from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/form/useSuccessRedirect"
 
 export default function DBEditCategoryAmenity() {
-    const { id_amenity_category } = useParams()
+    const { id } = useParams()
     const navigate = useNavigate()
 
     const {
@@ -23,7 +23,7 @@ export default function DBEditCategoryAmenity() {
         isPending: isPendingCategory,
         isError,
         error
-    } = usePartnerHotelCategoryDetail(id_amenity_category)
+    } = usePartnerHotelCategoryDetail(id)
 
     const {
         formHookMethods,
@@ -32,7 +32,7 @@ export default function DBEditCategoryAmenity() {
         onErrorValidatedForm,
     } = useAdminEditAmenityCategoryForm(category)
 
-    useSuccessRedirect(updateCategoryMutation, navigate, "/partner/dashboard/hotel/category-amenities")
+    useSuccessRedirect(updateCategoryMutation, navigate, "/admin/category-amenities")
 
     if (isPendingCategory)
         return <LoadingEditCategoryAmenity labelLoading="Đang tải dữ liệu danh mục tiện nghi..." />

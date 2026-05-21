@@ -2,9 +2,9 @@ import { clsx } from "clsx"
 import { AlertTriangle } from "lucide-react"
 
 export default function DeleteCategoryAmenityModal({
-    amenity,
+    category,
     setIsDeleteModalOpen,
-    handleDeleteAmenity,
+    handleDeleteCategory,
 }) {
     return (
         <div
@@ -40,7 +40,7 @@ export default function DeleteCategoryAmenityModal({
                     <p className="mb-6 text-sm leading-relaxed text-gray-500">
                         Bạn có chắc chắn muốn xóa tiện nghi{" "}
                         <strong className="font-semibold text-gray-900">
-                            {amenity.amenity_name}
+                            {category.name}
                         </strong>
                         ? Thao tác này không thể hoàn tác và tiện nghi sẽ bị gỡ khỏi hệ thống.
                     </p>
@@ -60,7 +60,7 @@ export default function DeleteCategoryAmenityModal({
 
                         <button
                             type="button"
-                            onClick={handleDeleteAmenity}
+                            onClick={handleDeleteCategory}
                             className={clsx(
                                 "rounded-xl flex-1 py-2.5",
                                 "bg-rose-600 text-white",

@@ -25,6 +25,7 @@ class DanhMucTienNghi(models.Model):
         db_table = "danh_muc_tien_nghi"
         verbose_name = "Danh mục tiện nghi"
         verbose_name_plural = "Danh mục tiện nghi"
+        ordering = ['-id_amenity_category']
 
     def __str__(self):
         return self.name

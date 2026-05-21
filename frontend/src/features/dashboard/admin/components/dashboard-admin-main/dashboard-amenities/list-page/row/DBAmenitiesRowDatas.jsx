@@ -13,7 +13,7 @@ export default function DBAmenitiesRowDatas({ amenity }) {
 
             <td className="p-4 text-gray-600 font-medium">
                 <span className="bg-gray-100 text-gray-700 px-2.5 py-1 rounded-lg text-xs font-semibold font-mono">
-                    #{amenity.id_hotel_amenity}
+                    #{amenity.id_amenity_type}
                 </span>
             </td>
 
@@ -24,7 +24,7 @@ export default function DBAmenitiesRowDatas({ amenity }) {
                     </div>
                     <div>
                         <p className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
-                            {amenity.amenity_name}
+                            {amenity.name}
                         </p>
                     </div>
                 </div>

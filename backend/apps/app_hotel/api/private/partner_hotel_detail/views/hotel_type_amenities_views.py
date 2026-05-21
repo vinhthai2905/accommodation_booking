@@ -81,9 +81,39 @@ class PartnerHotelAmenityDetailView(BasePartnerHotelAmenityView):
         except TienNghiKhachSan.DoesNotExist:
             raise exceptions.NotFound(detail={"error": "Amenity not found or does not belong to your hotel."})
 
-class AvailableAmenityTypeListView(BasePartnerHotelAmenityView):
+class AvailableAmenityTypeListView(APIView):
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+
     def get(self, request: Request, *args, **kwargs):
-        # Return all amenity types so partner can select them
         amenities = LoaiTienNghi.objects.all().select_related('id_amenity_category')
         serializer = LoaiTienNghiSerializer(amenities, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request: Request, *args, **kwargs):
+        serializer = LoaiTienNghiSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class AvailableAmenityTypeDetailView(APIView):
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+
+    def _get_amenity(self, id_amenity_type: int) -> LoaiTienNghi:
+        try:
+            return LoaiTienNghi.objects.get(id_amenity_type=id_amenity_type)
+        except LoaiTienNghi.DoesNotExist:
+            raise exceptions.NotFound(detail={"error": "Amenity type not found."})
+
+    def put(self, request: Request, id_amenity_type: int, *args, **kwargs):
+        amenity = self._get_amenity(id_amenity_type)
+        serializer = LoaiTienNghiSerializer(amenity, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request: Request, id_amenity_type: int, *args, **kwargs):
+        amenity = self._get_amenity(id_amenity_type)
+        amenity.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

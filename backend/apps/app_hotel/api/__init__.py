@@ -48,6 +48,7 @@ from .private.partner_hotel_detail.views.hotel_type_amenities_views import (
     PartnerHotelAmenityListView,
     PartnerHotelAmenityDetailView,
     AvailableAmenityTypeListView,
+    AvailableAmenityTypeDetailView,
 )
 
 from .private.partner_hotel_detail.views.hotel_category_amenities_views import (

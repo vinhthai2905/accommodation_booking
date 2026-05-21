@@ -25,6 +25,7 @@ from . import (
     PartnerHotelAmenityListView,
     PartnerHotelAmenityDetailView,
     AvailableAmenityTypeListView,
+    AvailableAmenityTypeDetailView,
     PartnerHotelCategoryAmenitiesListView,
     PartnerHotelCategoryListView,
     PartnerHotelCategoryDetailView,
@@ -57,6 +58,7 @@ urlpatterns = [
     path("api/partner/hotel/amenities", PartnerHotelAmenityListView.as_view(), name="partner-hotel-amenities"),
     path("api/partner/hotel/amenities/<int:id_hotel_amenity>", PartnerHotelAmenityDetailView.as_view(), name="partner-hotel-amenity-detail"),
     path("api/partner/hotel/available-amenities", AvailableAmenityTypeListView.as_view(), name="partner-hotel-available-amenities"),
+    path("api/partner/hotel/available-amenities/<int:id_amenity_type>", AvailableAmenityTypeDetailView.as_view(), name="partner-hotel-available-amenity-detail"),
     
     
     # Hotel's amenities category

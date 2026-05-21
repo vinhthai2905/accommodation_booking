@@ -40,7 +40,7 @@ export default function DeleteAmenityModal({
                     <p className="mb-6 text-sm leading-relaxed text-gray-500">
                         Bạn có chắc chắn muốn xóa tiện nghi{" "}
                         <strong className="font-semibold text-gray-900">
-                            {amenity.amenity_name}
+                            {amenity.name}
                         </strong>
                         ? Thao tác này không thể hoàn tác và tiện nghi sẽ bị gỡ khỏi hệ thống.
                     </p>

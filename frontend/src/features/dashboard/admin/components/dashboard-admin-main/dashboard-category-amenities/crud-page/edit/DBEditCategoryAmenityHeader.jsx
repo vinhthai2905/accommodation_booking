@@ -13,7 +13,7 @@ export default function DBEditCategoryAmenityHeader({ categoryName }) {
         >
             <div>
                 <button
-                    onClick={() => navigate("/partner/dashboard/hotel/category-amenities")}
+                    onClick={() => navigate("/admin/category-amenities")}
                     className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium text-sm mb-2 transition-colors cursor-pointer group"
                 >
                     <ArrowLeft size={16} className="group-hover:-translate-x-0.5 transition-transform" />

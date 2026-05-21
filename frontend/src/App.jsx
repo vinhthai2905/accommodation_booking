@@ -137,11 +137,7 @@ function App() {
                 { path: "room-type/new", element: <DBCreateRoomType /> },
                 { path: "room-type/:slug/:id_room_type/edit", element: <DBEditRoomType /> },
 
-                { path: "admin-amenities", element: <DashboardAmenities /> },
-                { path: "admin-amenities/new", element: <DBCreateAmenity /> },
-                { path: "category-amenities", element: <DashboardCategoryAmenities /> },
-                { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
-                { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> },
+
 
                 { path: "room-type/:slug/:id_room_type/details", element: <DashboardRoomTypeDetail /> },
 
@@ -155,7 +151,12 @@ function App() {
       path: "admin",
       element: <AdminLayout />,
       children: [
-        { path: "dashboard", element: <AdminDashboard /> }
+        { path: "dashboard", element: <AdminDashboard /> },
+        { path: "amenities", element: <DashboardAmenities /> },
+        { path: "amenities/new", element: <DBCreateAmenity /> },
+        { path: "category-amenities", element: <DashboardCategoryAmenities /> },
+        { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
+        { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> }
       ]
     }
     ,

@@ -27,3 +27,27 @@ export const updateAdminAmenityCategory = async (id_amenity_category, payload) =
 
   return data
 }
+
+export const createAdminAmenity = async (payload) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.post(
+    `${apiUrl}/api/partner/hotel/available-amenities`,
+    payload,
+    { headers }
+  )
+
+  return data
+}
+
+export const updateAdminAmenity = async (id_amenity_type, payload) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.put(
+    `${apiUrl}/api/partner/hotel/available-amenities/${id_amenity_type}`,
+    payload,
+    { headers }
+  )
+
+  return data
+}
