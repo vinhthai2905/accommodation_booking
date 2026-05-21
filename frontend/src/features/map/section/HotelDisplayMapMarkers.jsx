@@ -7,12 +7,14 @@ import { Hotel, List as ListIcon } from "lucide-react"
 
 import "leaflet/dist/leaflet.css"
 import "../css/search-map.css"
+import MapBoundsWatcher from "../components/MapBoundsWatcher"
 
-export default function HotelsDisplayMap({
-    onClose,
-    hotelListMap,
+export default function HotelDisplayMapMarkers({
+    hotelListMap = [],
     selectedHotel,
-    setSelectedHotel
+    setSelectedHotel,
+    handleMapViewPortChange,
+    onClose,
 }) {
     const DA_NANG_CENTER = [16.0544, 108.2022]
     const DA_NANG_ZOOM = 13
@@ -73,6 +75,7 @@ export default function HotelsDisplayMap({
                         </Marker>
                     )
                 })}
+                <MapBoundsWatcher handleMapViewPortChange={handleMapViewPortChange}/>
             </MapContainer>
         </div>
     )

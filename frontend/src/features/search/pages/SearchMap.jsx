@@ -1,10 +1,16 @@
-import HotelCardMap from "../components/search-result/HotelCardMap"
-import HotelsDisplayMap from "../../map/section/HotelsDisplayMap"
+import HotelDisplayMapMarkers from "../../map/section/HotelDisplayMapMarkers"
 
 import { clsx } from "clsx"
 import { useState } from "react"
+import HotelDisplayMapList from "../../map/section/HotelDisplayMapList"
 
-export default function SearchMap({ onClose, hotelListMap }) {
+export default function SearchMap({ 
+    onClose, 
+    hotelListMap, 
+    handleMapViewPortChange,
+    isLoadingHotelsMap,
+    errorLoadingHotelsMap
+}) {
     const [selectedHotel, setSelectedHotel] = useState(null)
 
     return (
@@ -21,34 +27,31 @@ export default function SearchMap({ onClose, hotelListMap }) {
                 "flex flex-col"
             )}>
                 <div className="p-4 md:p-5 border-b border-slate-100 flex items-center shrink-0">
-                    <h2 className="text-sm md:text-base lg:text-lg font-extrabold text-slate-800">
-                        Đà Nẵng: {hotelListMap?.length || 0} chỗ nghỉ
+                    <h2 className="text-sm md:text-base lg:text-lg font-extrabold text-slate-800 h-7 flex items-center">
+                        {isLoadingHotelsMap ? (
+                            <span className="inline-block h-5 bg-slate-200 rounded w-40 animate-pulse" />
+                        ) : (
+                            `Đà Nẵng: ${hotelListMap?.length || 0} chỗ nghỉ`
+                        )}
                     </h2>
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-4 md:p-5 flex flex-col gap-4">
-                    {hotelListMap && hotelListMap.length > 0 ? (
-                        hotelListMap.map(hotel => (
-                            <HotelCardMap 
-                                key={hotel.id_hotel}
-                                hotel={hotel} 
-                                isSelectedHotel={selectedHotel?.id_hotel === hotel.id_hotel}
-                                onMouseEnter={() => setSelectedHotel(hotel.id_hotel)}
-                                onMouseLeave={() => setSelectedHotel(null)}
-                            />
-                        ))
-                    ) : (
-                        <div className="text-center py-10 text-slate-500 text-sm">
-                            Không tìm thấy chỗ nghỉ nào.
-                        </div>
-                    )}
+                   <HotelDisplayMapList 
+                        hotelListMap={hotelListMap}
+                        selectedHotel={selectedHotel}
+                        setSelectedHotel={setSelectedHotel}
+                        isLoadingHotelsMap={isLoadingHotelsMap}
+                        errorLoadingHotelsMap={errorLoadingHotelsMap}
+                   />
                 </div>
             </aside>
 
-            <HotelsDisplayMap
+            <HotelDisplayMapMarkers
                 hotelListMap={hotelListMap}
                 selectedHotel={selectedHotel}
                 setSelectedHotel={setSelectedHotel}
+                handleMapViewPortChange={handleMapViewPortChange}
                 onClose={onClose}
             />
         </div>

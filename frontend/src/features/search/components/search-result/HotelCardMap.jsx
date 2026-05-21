@@ -6,9 +6,9 @@ import { Building } from "lucide-react"
 import { Link, useLocation } from "react-router"
 import { useEffect, useRef } from "react"
 
-import useAnalyzeGuestParams from "../../../../hooks/search/useAnalyzeGuestParams"
-import useAdjustHotelAppealingPrice from "../../../../hooks/search/useAdjustHotelAppealingPrice"
-import useAnalyzeHotelRatings from "../../../../hooks/search/useAnalyzeHotelRatings"
+import useAnalyzeGuestParams from "../../../../hooks/search/hotel-detail-search-hooks/useAnalyzeGuestParams"
+import useAdjustHotelAppealingPrice from "../../../../hooks/search/hotel-detail-search-hooks/useAdjustHotelAppealingPrice"
+import useAnalyzeHotelRatings from "../../../../hooks/search/hotel-detail-search-hooks/useAnalyzeHotelRatings"
 
 export default function HotelCardMap({ hotel, onClose, isSelectedHotel, onMouseEnter, onMouseLeave }) {
     const { nights, children, adults } = useAnalyzeGuestParams()

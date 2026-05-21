@@ -23,7 +23,7 @@ export default function DBHotelAmenitiesCategoryBar({
                 <div className="flex gap-2.5 overflow-x-auto pb-3 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
                     {filteredAmenityCategories.map((category) => {
                         const isActive = activeAmenityCategoryID === category.id_amenity_category
-                        const stats = amenityCategoryStats[category.id_amenity_category] || { selected: 0, total: 0 }
+                        const stats = amenityCategoryStats[category.id_amenity_category] || { hotelSelectedAmenities: 0, totalAmenities: 0 }
                         const IconComponent = getAmenityIcon(category.slug, category.name)
 
                         return (
@@ -39,7 +39,7 @@ export default function DBHotelAmenitiesCategoryBar({
                                 <span>{category.name}</span>
                                 <span className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold ${isActive ? "bg-white/20 text-white" : "bg-gray-100 text-gray-500"
                                     }`}>
-                                    {stats.selected}/{stats.total}
+                                    {stats.hotelSelectedAmenities}/{stats.totalAmenities}
                                 </span>
                                 {isActive && (
                                     <motion.div

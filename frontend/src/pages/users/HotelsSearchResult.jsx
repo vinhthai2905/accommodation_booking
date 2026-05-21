@@ -3,31 +3,40 @@ import SearchMap from "../../features/search/pages/SearchMap"
 
 import LoadingFullScreen from "../../features/book/components/Shared/LoadingFullScreen"
 
-import useSearchHotels from "../../hooks/search/useSearchHotels"
-import useOpenMap from "../../hooks/search/useOpenMap"
-import useSearchHotelsMap from "../../hooks/search/useSearchHotelsMap"
+import useSearchHotels from "../../hooks/search/hotel-search-hooks/useSearchHotels"
+import useSearchHotelsMap from "../../hooks/search/hotel-search-hooks/useSearchHotelsMap"
+import useOpenMap from "../../hooks/search/map-search-hooks/useOpenMap"
+import { useMapBounds } from "../../hooks/map/useMapBounds"
 
 export default function HotelsSearchResult() {
     const { isMapOpened, openMap, closeMap } = useOpenMap()
+    const { mapBounds, setMapBounds, handleMapViewPortChange } = useMapBounds()
+
     const {
-        isLoading: isLoadingHotelsList,
+        isPending: isLoadingHotelsList,
         error: errorLoadingHotelsList,
         data: hotelsList
     } = useSearchHotels(isMapOpened)
 
     const {
-        isLoading: isLoadingHotelsMap,
+        isPending: isLoadingHotelsMap,
         error: errorLoadingHotelsMap,
-        data: hotelsMap 
-    } = useSearchHotelsMap(isMapOpened)
+        data: hotelsMap
+    } = useSearchHotelsMap(isMapOpened, mapBounds)
 
-    if (isLoadingHotelsList || isLoadingHotelsMap) return <LoadingFullScreen />
+    if (!isMapOpened && isLoadingHotelsList) return <LoadingFullScreen />
 
-    if (errorLoadingHotelsList || errorLoadingHotelsMap) return <p>Something went wrong</p>
+    if (!isMapOpened && errorLoadingHotelsList) return <p>Something went wrong.</p>
 
     return isMapOpened
         ? (
-            <SearchMap onClose={closeMap} hotelListMap={hotelsMap} />
+            <SearchMap
+                onClose={closeMap}
+                hotelListMap={hotelsMap}
+                handleMapViewPortChange={handleMapViewPortChange} 
+                isLoadingHotelsMap={isLoadingHotelsMap}
+                errorLoadingHotelsMap={errorLoadingHotelsMap}
+            />
         )
         : (
             <SearchList onOpenMap={openMap} hotelList={hotelsList} />

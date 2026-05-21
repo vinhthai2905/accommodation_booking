@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router"
-import { parseHotelSearchParams } from "../../helpers/search/parseHotelSearchParams"
+import { parseHotelSearchParams } from "../../../helpers/search/parseHotelSearchParams"
 
 
 export default function useHotelSearchSubmit({

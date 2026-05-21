@@ -5,7 +5,7 @@ import {
     useDeletePartnerHotelAmenity
 } from "../../hotel-hooks/services/usePartnerHotelAmenityMutations"
 
-export function useCRUDMutation(currentAmenitiesMap) {
+export function useHotelAmenitiesCRUDMutation(currentAmenitiesMap) {
     const [mutatingAmenityID, setMutatingAmenityID] = useState(new Set())
 
     const { mutate: createHotelAmenityMutation } = useCreatePartnerHotelAmenity()

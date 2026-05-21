@@ -19,7 +19,7 @@ import {
 import { getAmenityIcon } from "../components/dashboard-main/dashboard-hotel-amenities/helpers/getAmenityIcon"
 import { useSearchAmenityCategories } from "../../../../hooks/dashboard/partner/search-hooks/others/useSearchAmenityCategories"
 import { useSearchAmenities } from "../../../../hooks/dashboard/partner/search-hooks/others/useSearchAmenities"
-import { useCRUDMutation } from "../../../../hooks/dashboard/partner/search-hooks/others/useCRUDMutation"
+import { useHotelAmenitiesCRUDMutation } from "../../../../hooks/dashboard/partner/search-hooks/others/useHotelAmenitiesCRUDMutation"
 import { useAnalyzeSelectedAmenities } from "../../../../hooks/dashboard/partner/search-hooks/others/useAnalyzeSelectedAmenities"
 
 
@@ -45,7 +45,7 @@ export default function DashboardHotelAmenities() {
         amenitiesSearchTerm
     )
 
-    const { handleToggleAmenityMutation, mutatingAmenityID } = useCRUDMutation(selectedAmenitiesMap)
+    const { handleToggleAmenityMutation, mutatingAmenityID } = useHotelAmenitiesCRUDMutation(selectedAmenitiesMap)
 
 
     if (isLoadingAmenityCategories || isLoadingAvailableAmenities || isLoadingCurrentHotelAmenities) {

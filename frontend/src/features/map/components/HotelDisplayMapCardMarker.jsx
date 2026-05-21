@@ -7,9 +7,9 @@ import { Link, useLocation } from "react-router"
 import { useEffect, useRef } from "react"
 import { useMap } from "react-leaflet"
 
-import useAnalyzeGuestParams from "../../../hooks/search/useAnalyzeGuestParams"
-import useAdjustHotelAppealingPrice from "../../../hooks/search/useAdjustHotelAppealingPrice"
-import useAnalyzeHotelRatings from "../../../hooks/search/useAnalyzeHotelRatings"
+import useAnalyzeGuestParams from "../../../hooks/search/hotel-detail-search-hooks/useAnalyzeGuestParams"
+import useAdjustHotelAppealingPrice from "../../../hooks/search/hotel-detail-search-hooks/useAdjustHotelAppealingPrice"
+import useAnalyzeHotelRatings from "../../../hooks/search/hotel-detail-search-hooks/useAnalyzeHotelRatings"
 
 export default function HotelDisplayMapCardMarker({ hotel, isSelectedHotel, onClose, onClick }) {
     const map = useMap()

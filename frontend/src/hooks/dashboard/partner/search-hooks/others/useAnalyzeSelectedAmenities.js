@@ -43,6 +43,8 @@ export function useAnalyzeSelectedAmenities(
         return list
     }, [availableAmenities, activeAmenityCategoryID, amenitiesSearchTerm])
 
+    console.log(amenityCategoryStats)
+
     return {
         selectedAmenitiesMap,
         amenityCategoryStats,
