@@ -33,6 +33,8 @@ import DBEditRoomType from './features/dashboard/partner/components/dashboard-ma
 import AdminDashboard from './pages/admin/AdminDashboard'
 import DashboardCategoryAmenities from './features/dashboard/admin/pages/DashboardCategoryAmenities'
 import DashboardAmenities from './features/dashboard/admin/pages/DashboardAmenities'
+import DashboardWards from './features/dashboard/admin/pages/DashboardWards'
+import DBCreateWard from './features/dashboard/admin/components/dashboard-admin-main/dashboard-ward/crud-page/create/DBCreateWard'
 
 import DBCreateAmenity from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-amenities/crud-page/create/DBCreateAmenity"
 import DBCreateCategoryAmenity from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-category-amenities/crud-page/create/DBCreateCategoryAmenity"
@@ -156,7 +158,9 @@ function App() {
         { path: "amenities/new", element: <DBCreateAmenity /> },
         { path: "category-amenities", element: <DashboardCategoryAmenities /> },
         { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
-        { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> }
+        { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> },
+        { path: "wards", element: <DashboardWards /> },
+        { path: "wards/new", element: <DBCreateWard /> }
       ]
     }
     ,
