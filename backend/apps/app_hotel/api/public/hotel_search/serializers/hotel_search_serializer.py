@@ -28,6 +28,33 @@ class HotelSearchParamsSerializer(BookingDateSerializer):
         self._get_effective_total_guests(attrs)
 
         return attrs
+    
+
+class SearchParamsMapBoundsSerializer(serializers.Serializer):
+    north = serializers.FloatField(required=True)
+    south = serializers.FloatField(required=True)
+    east = serializers.FloatField(required=True)
+    west = serializers.FloatField(required=True)
+    zoom = serializers.IntegerField(required=True)
+    
+    def validate(self, attrs):
+        north = attrs["north"]
+        south = attrs["south"]
+        east = attrs["east"]
+        west = attrs["west"]
+
+        if south >= north:
+            raise serializers.ValidationError({
+                "south": "South must be less than north."
+            })
+
+        if west >= east:
+            raise serializers.ValidationError({
+                "west": "West must be less than east."
+            })
+
+        return attrs
+    
 
 
 class HotelSearchResultSerializer(serializers.ModelSerializer):

@@ -11,6 +11,7 @@ from apps.app_hotel.models import KhachSan, LoaiPhong, ChinhSachTreEm
 from apps.app_booking.models import DatPhong
 from apps.app_location.models import Phuong
 
+
 class PartnerHotelViewMixin:
     def get_partner_hotel(self, partner: NguoiDung):
         try:
@@ -28,24 +29,25 @@ class PartnerHotelViewMixin:
             )
         except LoaiPhong.DoesNotExist:
             raise exceptions.NotFound(
-                detail={"error": "Room type not found or does not belong to your hotel."}
+                detail={
+                    "error": "Room type not found or does not belong to your hotel."
+                }
             )
-            
-    
+
     def get_partner_room_type(self, partner, id_room_type):
         hotel = self.get_partner_hotel(partner)
-        
-        return self.get_room_type(hotel, id_room_type)
-    
 
-class HotelSearchViewMixin():
+        return self.get_room_type(hotel, id_room_type)
+
+
+class HotelSearchViewMixin:
     search_params_serializer = None
     hotels_search_result_serializer = None
-    
+
     ward_model = Phuong
     hotel_model = KhachSan
     booking_model = DatPhong
-    
+
     def _normalize_search_query_params(self, request: Request) -> QueryDict:
         query_params = request.query_params.copy()
 
@@ -57,10 +59,11 @@ class HotelSearchViewMixin():
 
         return query_params
 
-    def _get_hotel_search_params(self, request: Request) -> dict:
+    def _validate_hotel_search_params(self, request: Request) -> dict:
         """Normalize each parameter in the query and validate each."""
 
         hotel_filters = {}
+        map_bounds_exclude = {"north", "south", "east", "west", "zoom"}
 
         query_params = self._normalize_search_query_params(request)
 
@@ -69,10 +72,11 @@ class HotelSearchViewMixin():
 
             if hotel_query_key == "children_ages":
                 hotel_filters[hotel_query_key] = values
-            else:
+
+            elif hotel_query_key not in map_bounds_exclude:
                 hotel_filters[hotel_query_key] = values[0]
 
-        serializer = self.search_params_serializer(data=query_params)
+        serializer = self.search_params_serializer(data=hotel_filters)
         serializer.is_valid(raise_exception=True)
 
         return serializer.validated_data
@@ -119,7 +123,7 @@ class HotelSearchViewMixin():
         destination_hotels_list: QuerySet[KhachSan],
         overlap_bookings: QuerySet[DatPhong],
         requested_rooms: int,
-        requested_total_guests: int
+        requested_total_guests: int,
     ) -> QuerySet[KhachSan]:
         """Return list of hotels in which each has enough rooms for incoming requested booking."""
 
@@ -149,42 +153,42 @@ class HotelSearchViewMixin():
 
                 booked_rooms = booked_rooms_by_hotel_room.get(key, 0)
 
-                available_rooms_left = (
-                    room_type.total_rooms - booked_rooms
-                )
+                available_rooms_left = room_type.total_rooms - booked_rooms
 
                 total_available_rooms += available_rooms_left
 
-                total_capacity += (
-                    available_rooms_left * room_type.max_capacity
-                )
+                total_capacity += available_rooms_left * room_type.max_capacity
 
             if (
                 total_available_rooms >= requested_rooms
                 and total_capacity >= requested_total_guests
             ):
                 available_hotels.append(hotel.id_hotel)
-                
+
         return self.hotel_model.objects.filter(id_hotel__in=available_hotels)
-    
-    def get_available_hotels_for_requested_date(self, request: Request) -> QuerySet[KhachSan]:
-        hotel_filters = self._get_hotel_search_params(request)
+
+    def get_available_hotels_for_requested_date(
+        self, request: Request
+    ) -> QuerySet[KhachSan]:
+        hotel_filters = self._validate_hotel_search_params(request)
 
         destination_hotels_list: QuerySet[KhachSan] = self._get_destination_hotels(
             hotel_filters.get("location")
         )
 
-        overlap_bookings = self._get_overlapping_bookings(
+        overlap_bookings: QuerySet[DatPhong] = self._get_overlapping_bookings(
             hotel_filters.get("check_in"),
             hotel_filters.get("check_out"),
             hotels_list=destination_hotels_list,
         )
 
-        available_hotels_list = self._get_available_hotels_for_requested_date(
-            destination_hotels_list,
-            overlap_bookings,
-            hotel_filters["requested_rooms"],
-            hotel_filters["requested_total_guests"],
+        available_hotels_list: QuerySet[KhachSan] = (
+            self._get_available_hotels_for_requested_date(
+                destination_hotels_list,
+                overlap_bookings,
+                hotel_filters["requested_rooms"],
+                hotel_filters["requested_total_guests"],
+            )
         )
-        
+
         return available_hotels_list
