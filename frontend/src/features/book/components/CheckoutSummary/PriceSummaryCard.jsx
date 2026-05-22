@@ -4,9 +4,12 @@ import { calculateChildFee } from "../../../../helpers/booking/calculateChildFee
 
 import useBookingSummary from "../../../../hooks/booking/useBookingSummary"
 
+import { getNightsFromSearchParams } from "../../../../helpers/booking/bookingHelpers"
+
 export default function PriceSummaryCard({ totalRoomPrice }) {
     const [searchParams] = useSearchParams()
     const { data: hotel } = useBookingSummary()
+    const nights = getNightsFromSearchParams()
 
     const childFees = calculateChildFee(
         hotel.child_policy.max_free_age,
@@ -23,7 +26,7 @@ export default function PriceSummaryCard({ totalRoomPrice }) {
                 <h2 className="text-lg font-bold">Tóm tắt giá</h2>
                 <div className="flex flex-col gap-2">
                     <p className="mt-2 leading-none">
-                        Giá phòng: {Intl.NumberFormat("vi-VN").format(totalRoomPrice)} VND
+                        Giá phòng ({nights} đêm): {Intl.NumberFormat("vi-VN").format(totalRoomPrice)} VND
                     </p>
                     <p>
                         Tổng phụ thụ trẻ em: {Intl.NumberFormat("vi-VN").format(childFees)} VND
@@ -39,7 +42,7 @@ export default function PriceSummaryCard({ totalRoomPrice }) {
 
                     <div>
                         <p className="mt-2 font-bold leading-none text-slate-900">
-                            Giá phòng: {Intl.NumberFormat("vi-VN").format(finalPrice)} VND
+                            Giá phòng ({nights} đêm): {Intl.NumberFormat("vi-VN").format(finalPrice)} VND
                         </p>
 
                         <p className="mt-2 text-slate-600">

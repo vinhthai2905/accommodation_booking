@@ -1,4 +1,4 @@
-import { formatDate } from "../utils/bookingUtils"
+import { formatDate } from "../../../helpers/booking/bookingHelpers"
 
 import { CalendarDays, Clock, Users } from "lucide-react"
 

@@ -1,4 +1,4 @@
-import { useMap, useMapEvents } from "react-leaflet"
+import { useMapEvents } from "react-leaflet"
 import { useEffect } from "react"
 
 import { getMapBounds } from "../../../helpers/map/getMapBounds"

@@ -5,7 +5,7 @@ import BookingCardFooter from "../ui/BookingCardFooter"
 
 import { orderStatus } from "../helpers/orderStatus"
 import { paymentLabel } from "../helpers/paymentLabel"
-import { nightsBetween } from "../utils/bookingUtils"
+import { nightsBetween } from "../../../helpers/booking/bookingHelpers"
 
 import { clsx } from "clsx"
 

@@ -1,6 +1,5 @@
-// import useHotelDetailsContext from "../hotel/useHotelDetailsContext"
-
 import { useState } from "react"
+import { getNightsFromSearchParams } from "../../helpers/booking/bookingHelpers"
 
 export default function useRoomSelected() {
     const [selectedRooms, setSelectedRooms] = useState({})
@@ -24,10 +23,12 @@ export default function useRoomSelected() {
         .reduce((sumCapacity, room) => sumCapacity + room.roomCapacity, 0)
     )
 
+    const nights = getNightsFromSearchParams()
+
     const totalPrice = (
         Object
             .values(selectedRooms)
-            .reduce((sum, room) => sum + Number(room.price), 0)
+            .reduce((sum, room) => sum + Number(room.price) * nights, 0)
     )
 
     return {

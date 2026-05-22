@@ -1,4 +1,4 @@
-import { formatCurrency } from "../utils/bookingUtils"
+import { formatCurrency } from "../../../helpers/booking/bookingHelpers"
 
 import { BedDouble, ChevronRight, CreditCard, Wallet } from "lucide-react"
 import { Link } from "lucide-react"
