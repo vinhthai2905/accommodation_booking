@@ -1,8 +1,10 @@
+import HotelDisplayMapList from "../../map/section/HotelDisplayMapList"
 import HotelDisplayMapMarkers from "../../map/section/HotelDisplayMapMarkers"
 
 import { clsx } from "clsx"
 import { useState } from "react"
-import HotelDisplayMapList from "../../map/section/HotelDisplayMapList"
+
+import { getNightsFromSearchParams } from "../../../helpers/booking/bookingHelpers"
 
 export default function SearchMap({ 
     onClose, 
@@ -12,6 +14,7 @@ export default function SearchMap({
     errorLoadingHotelsMap
 }) {
     const [selectedHotel, setSelectedHotel] = useState(null)
+    const nights = getNightsFromSearchParams()
 
     return (
         <div className={clsx(
@@ -49,6 +52,7 @@ export default function SearchMap({
 
             <HotelDisplayMapMarkers
                 hotelListMap={hotelListMap}
+                nightsStayin={nights}
                 selectedHotel={selectedHotel}
                 setSelectedHotel={setSelectedHotel}
                 handleMapViewPortChange={handleMapViewPortChange}

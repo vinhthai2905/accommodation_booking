@@ -1,4 +1,6 @@
 import HotelDisplayMapCardMarker from "../components/HotelDisplayMapCardMarker"
+import MapBoundsWatcher from "../components/MapBoundsWatcher"
+
 import HotelMarkerIcon from "../ui/HotelMarkerIcon"
 
 import { clsx } from "clsx"
@@ -7,10 +9,10 @@ import { Hotel, List as ListIcon } from "lucide-react"
 
 import "leaflet/dist/leaflet.css"
 import "../css/search-map.css"
-import MapBoundsWatcher from "../components/MapBoundsWatcher"
 
 export default function HotelDisplayMapMarkers({
     hotelListMap = [],
+    nightsStayin,
     selectedHotel,
     setSelectedHotel,
     handleMapViewPortChange,
@@ -49,7 +51,7 @@ export default function HotelDisplayMapMarkers({
                     return (
                         <Marker
                             position={[hotel.latitude, hotel.longitude]}
-                            icon={HotelMarkerIcon({ price: hotel.appealing_price, isSelectedHotel })}
+                            icon={HotelMarkerIcon({ price: hotel.appealing_price * nightsStayin , isSelectedHotel })}
                             zIndexOffset={isSelectedHotel ? 1000 : 0}
                             key={hotel.id_hotel}
                             eventHandlers={{
@@ -75,7 +77,7 @@ export default function HotelDisplayMapMarkers({
                         </Marker>
                     )
                 })}
-                <MapBoundsWatcher handleMapViewPortChange={handleMapViewPortChange}/>
+                <MapBoundsWatcher handleMapViewPortChange={handleMapViewPortChange} />
             </MapContainer>
         </div>
     )
