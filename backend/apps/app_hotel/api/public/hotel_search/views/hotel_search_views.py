@@ -74,6 +74,7 @@ class HotelSearchResultMapView(HotelSearchViewMixin, APIView):
             # destination_ward = self.ward_model.objects.get(ward_name=f"{hotel_filters["location"]}")
             # destination_hotels: QuerySet[KhachSan] = destination_ward.hotels.all()
             map_bounds = hotel_filters["map_bounds"]
+            map_zoom = map_bounds["zoom"]
             
             bounds_polygon = Polygon.from_bbox((
                 map_bounds["west"],   

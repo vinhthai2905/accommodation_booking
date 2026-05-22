@@ -82,6 +82,16 @@ class KhachSan(models.Model):
         blank=True,
         db_column="vi_tri",
     )
+    
+    distance_to_beach = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        db_column="khoan_cach_toi_bien"
+    )
+    
+    is_near_beach = models.BooleanField(
+        default=False
+    )
 
     class Meta:
         db_table = "khach_san"
