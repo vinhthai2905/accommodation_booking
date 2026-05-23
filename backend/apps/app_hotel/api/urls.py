@@ -28,6 +28,7 @@ from . import (
     PartnerHotelCategoryAmenitiesListView,
     PartnerHotelCategoryListView,
     PartnerHotelCategoryDetailView,
+    UpdateHotelsNearBeachView,
 )
 
 from django.urls import path
@@ -47,6 +48,7 @@ urlpatterns = [
     
     # PRIVATE SESSION
     path("api/partner/hotel", PartnerHotelView.as_view(), name="partner-hotel-info"),
+    path("api/partner/hotel/update-near-beach", UpdateHotelsNearBeachView.as_view(), name="update-hotels-near-beach"),
     path("api/partner/hotel/images", PartnerHotelImageListView.as_view(), name="partner-hotel-images"),
     path("api/partner/hotel/images/<int:id_hotel_image>", PartnerHotelImageDetailView.as_view(), name="partner-hotel-image-detail"),
     

@@ -64,7 +64,11 @@ class PartnerHotelImageListView(BasePartnerHotelImageView):
         if serializer.is_valid():
             # If this is set as primary, unset other primary images
             # QueryDict returns strings, so we must parse boolean
-            is_primary = request_data.get('is_primary', 'false').lower() == 'true' if isinstance(request_data.get('is_primary'), str) else request_data.get('is_primary', False)
+            is_primary = (
+                request_data.get('is_primary', 'false').lower() == 'true' 
+                if isinstance(request_data.get('is_primary'), str) 
+                else request_data.get('is_primary', False)
+            )
             
             if is_primary:
                 HinhAnhKhachSan.objects.filter(id_hotel=hotel, is_primary=True).update(is_primary=False)

@@ -1,7 +1,6 @@
 import { clsx } from "clsx"
 import { AlertTriangle, Baby, ChevronRight, BookKey } from "lucide-react"
-import { Link } from "react-router"
-import { getNightsFromSearchParams } from "../../../../helpers/booking/bookingHelpers"
+import { Link } from "lucide-react"
 
 export default function RoomGuestSelectedAnalyzation({
     selectedRoomIds,
@@ -12,13 +11,11 @@ export default function RoomGuestSelectedAnalyzation({
     childPolicy,
     bookingSearchParams
 }) {
-    const nights = getNightsFromSearchParams()
-
     return (
         <>
             <div className="flex flex-col gap-1">
                 <span className="text-xs text-slate-500">
-                    Đã chọn {selectedRoomIds.length} phòng ({nights} đêm)
+                    Đã chọn {selectedRoomIds.length} phòng
                 </span>
                 <div className="flex items-baseline gap-1">
                     <span className="text-xl font-bold text-[#003580]">

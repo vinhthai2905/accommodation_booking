@@ -36,6 +36,7 @@ from .private.partner_hotel_detail.views.room_type_detail_views import (
 
 from .private.partner_hotel_detail.views.hotel_views import (
     PartnerHotelView,
+    UpdateHotelsNearBeachView,
 )
 
 from .private.partner_hotel_detail.views.hotel_images_views import (

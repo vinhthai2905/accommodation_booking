@@ -39,7 +39,6 @@ class PartnerHotelAmenityListView(BasePartnerHotelAmenityView):
         id_amenity_type = request.data.get('id_amenity_type')
         name = request.data.get('name')
         
-        # Nếu đối tác nhập thông tin tiện nghi mới trực tiếp
         if name:
             id_amenity_category = request.data.get('id_amenity_category')
             scope = request.data.get('scope', 'room')
@@ -47,7 +46,6 @@ class PartnerHotelAmenityListView(BasePartnerHotelAmenityView):
             if not slug:
                 slug = name.lower().replace(' ', '-')
             
-            # Tìm hoặc tạo LoaiTienNghi
             loai_tien_nghi, created = LoaiTienNghi.objects.get_or_create(
                 name__iexact=name,
                 defaults={
@@ -62,7 +60,6 @@ class PartnerHotelAmenityListView(BasePartnerHotelAmenityView):
         if not id_amenity_type:
             return Response({"error": "Vui lòng chọn hoặc nhập loại tiện nghi."}, status=status.HTTP_400_BAD_REQUEST)
             
-        # Kiểm tra xem tiện nghi đã tồn tại trong khách sạn của đối tác chưa
         if TienNghiKhachSan.objects.filter(id_hotel=hotel, id_amenity_type=id_amenity_type).exists():
             return Response({"error": "Tiện ích này đã tồn tại trong khách sạn của bạn."}, status=status.HTTP_400_BAD_REQUEST)
             

@@ -12,13 +12,17 @@ import "../css/search-map.css"
 
 export default function HotelDisplayMapMarkers({
     hotelListMap = [],
+    hotelsMapCacheRef,
     nightsStayin,
     selectedHotel,
     setSelectedHotel,
     handleMapViewPortChange,
     onClose,
 }) {
-    const DA_NANG_CENTER = [16.0544, 108.2022]
+    const daNangBounds = [
+        [15.85, 107.9],
+        [16.35, 108.55],
+    ]
     const DA_NANG_ZOOM = 13
 
     return (
@@ -38,20 +42,26 @@ export default function HotelDisplayMapMarkers({
                 Show List
             </button>
 
-            <MapContainer center={DA_NANG_CENTER} zoom={DA_NANG_ZOOM} scrollWheelZoom={true} className={clsx(
-                "z-0 h-full w-full"
-            )}>
+            <MapContainer
+                center={[16.047079, 108.20623]}
+                zoom={DA_NANG_ZOOM}
+                scrollWheelZoom={true}
+                className={"z-0 h-full w-full"}
+                minZoom={10}
+                maxBounds={daNangBounds}
+                maxBoundsViscosity={1.0}
+            >
                 <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; OpenStreetMap contributors &copy; CARTO'
+                    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                 />
-                {hotelListMap.map(hotel => {
+                {hotelListMap.map((hotel) => {
                     const isSelectedHotel = selectedHotel && hotel.id_hotel === selectedHotel
 
                     return (
                         <Marker
                             position={[hotel.latitude, hotel.longitude]}
-                            icon={HotelMarkerIcon({ price: hotel.appealing_price * nightsStayin , isSelectedHotel })}
+                            icon={HotelMarkerIcon({ price: hotel.appealing_price * nightsStayin, isSelectedHotel })}
                             zIndexOffset={isSelectedHotel ? 1000 : 0}
                             key={hotel.id_hotel}
                             eventHandlers={{
