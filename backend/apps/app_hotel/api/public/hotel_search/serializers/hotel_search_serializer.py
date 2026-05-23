@@ -74,6 +74,8 @@ class HotelSearchResultSerializer(serializers.ModelSerializer):
             "slug",
             "primary_image",
             "appealing_price",
+            "is_near_beach",
+            "distance_to_beach",
         ]
         read_only_fields = [
             "id_hotel",
@@ -82,6 +84,8 @@ class HotelSearchResultSerializer(serializers.ModelSerializer):
             "slug",
             "primary_image",
             "appealing_price",
+            "is_near_beach",
+            "distance_to_beach",
         ]
 
     def get_primary_image(self, obj: KhachSan):
@@ -124,17 +128,20 @@ class HotelSearchResultMapSerializer(serializers.ModelSerializer):
             "appealing_price",
             "latitude",
             "longitude",
-            
+            "is_near_beach",
+            "distance_to_beach",
         ]
         read_only_fields = [
             "id_hotel",
             "name",
-            "full_adress",
+            "full_address",
             "primary_image",
             "slug",
             "appealing_price",
             "latitude",
             "longitude",
+            "is_near_beach",
+            "distance_to_beach",
         ]
     
     def get_appealing_price(self, hotel: KhachSan):

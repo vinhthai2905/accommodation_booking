@@ -52,9 +52,14 @@ export default function HotelCardMapSummary({hotel, onClose, ratingLabel, review
                 </div>
             </div>
 
-            <div className="mt-1.5 text-xs md:text-sm text-slate-500 font-bold">
-                Sát biển
-            </div>
+            {hotel.is_near_beach && (
+                <div className="mt-1.5 text-xs md:text-sm text-slate-500 font-bold">
+                    {hotel.distance_to_beach <= 100 ? "Sát biển" : "Gần biển"}
+                    {hotel.distance_to_beach !== undefined && hotel.distance_to_beach !== null && (
+                        <span className="font-normal text-slate-400"> (Cách {hotel.distance_to_beach}m)</span>
+                    )}
+                </div>
+            )}
 
             <div className="mt-2">
                 <span className="rounded-sm bg-[#008009] px-2 py-0.5 text-[10px] font-bold text-white tracking-wide uppercase">
