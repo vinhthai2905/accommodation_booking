@@ -1,8 +1,9 @@
 import { clsx } from "clsx"
 import { Image, ChevronDown, ChevronRight } from "lucide-react"
 import { Link } from "react-router"
+import { motion } from "framer-motion"
 
-export default function HotelImgNavGroup({navStates, toggleImgNav, closeAllNav, motion}) {
+export default function HotelImgNavGroup({navStates, toggleImgNav, closeAllNav}) {
     return (
         <div>
             <button

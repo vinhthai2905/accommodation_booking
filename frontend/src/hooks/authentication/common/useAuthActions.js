@@ -44,8 +44,14 @@ export default function useAuthActions(setUserState) {
         try {
             const response = await fetchAuthUser()
 
-            if (!response.ok)
-                throw new Error(`Response status: ${response}`)
+            if (!response.ok) {
+                if (response.status === 401) {
+                    localStorage.removeItem("access_token")
+                    setUserState(null)
+                    return null
+                }
+                throw new Error(`Response status: ${response.status}`)
+            }
 
 
             const responseData = await response.json()
@@ -60,7 +66,8 @@ export default function useAuthActions(setUserState) {
 
         }
         catch (error) {
-            toast.error(`Hệ thống xảy ra lỗi. ${error}`)
+            toast.error(`Hệ thống xảy ra lỗi. ${error.message || error}`)
+            return null
         }
     }
 

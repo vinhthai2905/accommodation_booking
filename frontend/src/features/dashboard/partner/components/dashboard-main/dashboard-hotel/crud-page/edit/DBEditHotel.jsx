@@ -5,7 +5,7 @@ import DBHotelEditHeader from "./DBHotelEditHeader"
 import DBEditHotelForm from "../components/DBEditHotelForm"
 
 import { clsx } from "clsx"
-import { AnimatePresence } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { FormProvider } from "react-hook-form"
 import { Edit3, MapPin, Building, Globe, Copy, Check, Eye } from "lucide-react"
 import { useState, useEffect } from "react"
@@ -63,6 +63,12 @@ export default function DBEditHotel() {
     }
 
     const primaryImage = hotel?.hotel_images?.find(img => img.is_primary) || hotel?.hotel_images?.[0]
+    
+    const apiURL = import.meta.env.VITE_API_URL
+    const getImageUrl = (url) => {
+        if (!url) return ""
+        return url.startsWith("http") ? url : `${apiURL}${url}`
+    }
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">
@@ -85,7 +91,7 @@ export default function DBEditHotel() {
                         <div className="relative h-48 sm:h-64 bg-linear-to-r from-blue-500 to-indigo-600 overflow-hidden">
                             {primaryImage ? (
                                 <img 
-                                    src={primaryImage.url} 
+                                    src={getImageUrl(primaryImage.url)} 
                                     alt={hotel.name} 
                                     className="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-700"
                                 />

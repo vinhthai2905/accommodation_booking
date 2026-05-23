@@ -17,6 +17,7 @@ import Profile from './pages/users/Profile'
 import DashboardLanding from './features/dashboard/partner/pages/DashboardLanding'
 import PartnertLanding from './pages/partner/PartnerLanding'
 import PartnerRegister from './pages/partner/PartnerRegister'
+import PartnerOnboarding from './pages/partner/PartnerOnboarding'
 
 import DashboardBookings from './features/dashboard/partner/pages/DashboardBookings'
 import DashboardHotel from './features/dashboard/partner/pages/DashboardHotel'
@@ -31,10 +32,14 @@ import DBCreateRoomType from './features/dashboard/partner/components/dashboard-
 import DBEditRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/edit/DBEditRoomType'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
+import DashboardReviewApplications from './features/dashboard/admin/pages/DashboardReviewApplications'
 import DashboardCategoryAmenities from './features/dashboard/admin/pages/DashboardCategoryAmenities'
 import DashboardAmenities from './features/dashboard/admin/pages/DashboardAmenities'
 import DashboardWards from './features/dashboard/admin/pages/DashboardWards'
+import DashboardUsers from './features/dashboard/admin/pages/DashboardUsers'
 import DBCreateWard from './features/dashboard/admin/components/dashboard-admin-main/dashboard-ward/crud-page/create/DBCreateWard'
+import DBCreateUser from './features/dashboard/admin/components/dashboard-admin-main/dashboard-users/crud-page/create/DBCreateUser'
+import DBEditUser from './features/dashboard/admin/components/dashboard-admin-main/dashboard-users/crud-page/edit/DBEditUser'
 
 import DBCreateAmenity from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-amenities/crud-page/create/DBCreateAmenity"
 import DBCreateCategoryAmenity from "./features/dashboard/admin/components/dashboard-admin-main/dashboard-category-amenities/crud-page/create/DBCreateCategoryAmenity"
@@ -121,6 +126,10 @@ function App() {
       path: "/partner",
       children: [
         {
+          path: "onboarding",
+          element: <PartnerOnboarding />
+        },
+        {
           path: "dashboard",
           element: <PartnerDashboard />,
           children: [
@@ -154,13 +163,17 @@ function App() {
       element: <AdminLayout />,
       children: [
         { path: "dashboard", element: <AdminDashboard /> },
+        { path: "review-applications", element: <DashboardReviewApplications /> },
+        { path: "wards", element: <DashboardWards /> },
+        { path: "wards/new", element: <DBCreateWard /> },
+        { path: "users", element: <DashboardUsers /> },
+        { path: "users/new", element: <DBCreateUser /> },
+        { path: "users/:id_user/edit", element: <DBEditUser /> },
         { path: "amenities", element: <DashboardAmenities /> },
         { path: "amenities/new", element: <DBCreateAmenity /> },
         { path: "category-amenities", element: <DashboardCategoryAmenities /> },
         { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
-        { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> },
-        { path: "wards", element: <DashboardWards /> },
-        { path: "wards/new", element: <DBCreateWard /> }
+        { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> }
       ]
     }
     ,

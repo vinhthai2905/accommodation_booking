@@ -55,7 +55,7 @@ export default function useRegisterPartnerForm() {
         toaster.success("Tạo tài khoản thành công.")
         reset()
 
-        navigate("/index")
+        navigate("/partner/onboarding")
       }
 
     }

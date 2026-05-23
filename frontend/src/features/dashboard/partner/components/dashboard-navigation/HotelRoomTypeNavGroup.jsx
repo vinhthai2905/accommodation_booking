@@ -2,8 +2,9 @@ import DashboardNavLink from "../../ui/dashboard-nav/DashboardNavLink"
 
 import { clsx } from "clsx"
 import { BedDouble, ChevronDown, ChevronRight } from "lucide-react"
+import { motion } from "framer-motion"
 
-export default function HotelRoomTypeNavGroup({navStates, toggleRoomTypeNav, closeAllNav, motion}) {
+export default function HotelRoomTypeNavGroup({navStates, toggleRoomTypeNav, closeAllNav}) {
     return (
         <div>
             <button

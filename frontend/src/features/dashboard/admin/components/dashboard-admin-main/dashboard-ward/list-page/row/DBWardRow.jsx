@@ -34,10 +34,23 @@ export default function DBWardRow({ initialWard }) {
 
     const handleSaveWardEdit = (e) => {
         e.preventDefault()
+        
+        const generatedSlug = editForm.ward_name.toLowerCase()
+            .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+            .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+            .replace(/ì|í|ị|ỉ|ĩ/g, "i")
+            .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+            .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+            .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+            .replace(/đ/g, "d")
+            .replace(/ /g, "-")
+            .replace(/[^\w-]+/g, "")
+
         updateWard({
             id_ward: ward.id_ward,
             payload: { 
                 ward_name: editForm.ward_name,
+                slug: generatedSlug,
                 id_city: Number(editForm.id_city)
             }
         }, {
@@ -46,6 +59,7 @@ export default function DBWardRow({ initialWard }) {
                 setWard(prev => ({
                     ...prev,
                     ward_name: editForm.ward_name,
+                    slug: generatedSlug,
                     id_city: Number(editForm.id_city),
                     city_name: selectedCity ? selectedCity.city_name : prev.city_name
                 }))

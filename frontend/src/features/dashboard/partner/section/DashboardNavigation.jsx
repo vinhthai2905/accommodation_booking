@@ -7,7 +7,6 @@ import HotelBookingNavGroup from "../components/dashboard-navigation/HotelBookin
 
 import { clsx } from "clsx"
 import { Link } from "react-router"
-import { LogOut } from "lucide-react"
 
 import useToggleNavSection from "../../../../hooks/dashboard/partner/useToggleNavSection"
 
@@ -72,17 +71,6 @@ export default function DashboardNavigation() {
 
 
             </nav>
-
-            <div className="p-4 border-t border-gray-200">
-                <button className={clsx(
-                    "flex items-center gap-3 w-full px-4 py-3 rounded-xl",
-                    "text-red-500 hover:bg-red-50",
-                    "transition-colors font-medium"
-                )}>
-                    <LogOut size={20} />
-                    Đăng xuất
-                </button>
-            </div>
 
         </AnimatedSidebarDashboard>
     )

@@ -1,8 +1,7 @@
 import AnimatedSidebarDashboard from '../ui/AnimatedSidebarDashboard'
 import DashboardPanel from '../ui/DashboardPanel'
-import DashboardNav from '../ui/DashboardNav'
-import DashboardLogout from '../ui/DashboardLogout'
-
+import DashboardNav from '../../features/dashboard/admin/ui/dashboard-nav/DashboardNav'
+import AdminDashboardProfile from '../../features/dashboard/admin/section/AdminDashboardProfile'
 import { clsx } from 'clsx'
 import { Menu, Bell } from 'lucide-react'
 import { Outlet, Link, useLocation } from 'react-router'
@@ -27,7 +26,6 @@ export default function AdminLayout() {
         <DashboardNav
           location={location}
         />
-        <DashboardLogout />
 
       </AnimatedSidebarDashboard>
 
@@ -50,17 +48,7 @@ export default function AdminLayout() {
               <Bell size={20} />
               <span className={clsx("absolute top-1.5 right-1.5 w-2 h-2 bg-[#003b95] rounded-full")}></span>
             </button>
-            <div className={clsx(
-              "h-8 w-8 p-0.5 rounded-full",
-              "bg-linear-to-tr from-blue-500 to-purple-500"
-            )}>
-              <div className={clsx(
-                "flex items-center justify-center w-full h-full",
-                "bg-gray-100 rounded-full text-sm font-bold text-gray-700"
-              )}>
-                A
-              </div>
-            </div>
+            <AdminDashboardProfile />
           </div>
         </header>
 

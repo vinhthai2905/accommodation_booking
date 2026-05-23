@@ -5,7 +5,7 @@ export default function DBHotelAmenitiesCategoryBar({
     filteredAmenityCategories,
     categorySearchTerm,
     activeAmenityCategoryID,
-    setActiveCategoryId,
+    setActiveAmenityCategoryID,
     amenityCategoryStats,
     getAmenityIcon 
 }) {
@@ -29,7 +29,7 @@ export default function DBHotelAmenitiesCategoryBar({
                         return (
                             <button
                                 key={category.id_amenity_category}
-                                onClick={() => setActiveCategoryId(category.id_amenity_category)}
+                                onClick={() => setActiveAmenityCategoryID(category.id_amenity_category)}
                                 className={`flex items-center gap-3 px-5 py-3 rounded-xl font-bold text-sm whitespace-nowrap cursor-pointer transition-all duration-300 relative border ${isActive
                                     ? "bg-[#003b95] text-white border-[#003b95] shadow-md shadow-blue-900/10"
                                     : "bg-white text-gray-700 border-gray-200 hover:border-gray-300 hover:bg-gray-50"
