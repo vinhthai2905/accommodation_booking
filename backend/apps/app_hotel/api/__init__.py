@@ -56,3 +56,8 @@ from .private.partner_hotel_detail.views.hotel_category_amenities_views import (
     PartnerHotelCategoryListView,
     PartnerHotelCategoryDetailView,
 )
+
+from .views.onboarding_views import (
+    HotelTypeListView,
+    PartnerHotelRegistrationView
+)

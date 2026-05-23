@@ -1,3 +1,4 @@
+
 from . import (
     HotelSearchResultView,
     HotelSearchResultMapView
@@ -30,6 +31,13 @@ from . import (
     PartnerHotelCategoryListView,
     PartnerHotelCategoryDetailView,
     UpdateHotelsNearBeachView,
+    HotelTypeListView,
+    PartnerHotelRegistrationView,
+)
+
+from .views.admin_onboarding_views import (
+    AdminRegistrationApplicationListView,
+    AdminRegistrationApplicationUpdateView
 )
 
 from django.urls import path
@@ -81,5 +89,10 @@ urlpatterns = [
         PartnerRoomTypeDetailView.as_view(), 
         name="partner-hotel-room-type-bed-detail-item"
     ),
+    path("api/partner/hotel-types", HotelTypeListView.as_view(), name="partner-hotel-types"),
+    path("api/partner/hotel/register", PartnerHotelRegistrationView.as_view(), name="partner-hotel-registration"),
+    
+    # ADMIN SESSION
+    path("api/admin/hotel/registrations", AdminRegistrationApplicationListView.as_view(), name="admin-hotel-registrations"),
+    path("api/admin/hotel/registrations/<int:id_registration>", AdminRegistrationApplicationUpdateView.as_view(), name="admin-hotel-registration-update"),
 ]
-
