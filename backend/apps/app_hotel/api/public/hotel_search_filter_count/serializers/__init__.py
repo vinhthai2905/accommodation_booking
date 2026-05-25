@@ -1,1 +1,1 @@
-from .hotel_filter_count_serializers import HotelFilterCountSerializer
+from .count_by_amenities import HotelCountByAmenitiesSerializer

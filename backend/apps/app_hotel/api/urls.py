@@ -2,7 +2,7 @@
 from . import (
     HotelSearchResultView,
     HotelSearchResultMapView,
-    HotelFilterCountView
+    HotelCountByAmenitiesView
 )
 
 from . import HotelDetailView, RoomTypeAvailabilityView
@@ -46,7 +46,7 @@ from django.urls import path
 urlpatterns = [
     path("api/hotels/search", HotelSearchResultView.as_view()),
     path("api/hotels/search/map", HotelSearchResultMapView.as_view()),
-    path("api/hotels/search/amenities/hotel_count", HotelFilterCountView.as_view()),
+    path("api/hotels/search/amenities/hotel_count", HotelCountByAmenitiesView.as_view()),
     
     path("api/hotel/<uuid:id_hotel>", HotelDetailView.as_view()),
     path("api/hotel/<uuid:id_hotel>/room_types", RoomTypeAvailabilityView.as_view()),

@@ -15,7 +15,6 @@ from apps.app_user.api.serializers import (
     FetchAuthUserSerializer,
 )
 
-
 class AuthLoginView(APIView):
     http_method_names = ["post"]
     permission_classes = [AllowAny]

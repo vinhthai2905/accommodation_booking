@@ -2,12 +2,15 @@ from rest_framework.generics import ListAPIView, UpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import PermissionDenied
+
 from django.utils import timezone
+from django.utils.text import slugify
 
 from apps.app_hotel.models import DonDangKyKhachSan
 from apps.app_hotel.api.serializers.admin_onboarding_serializer import AdminDonDangKyKhachSanSerializer
 from apps.app_user.choices import RoleChoice
-from rest_framework.exceptions import PermissionDenied
+from apps.app_hotel.models import KhachSan
 
 
 class AdminRegistrationApplicationListView(ListAPIView):
@@ -64,8 +67,6 @@ class AdminRegistrationApplicationUpdateView(UpdateAPIView):
                 pass
                 
             # Create KhachSan if it doesn't exist
-            from apps.app_hotel.models import KhachSan
-            from django.utils.text import slugify
             
             if not KhachSan.objects.filter(id_user=user).exists():
                 # Generate a unique slug

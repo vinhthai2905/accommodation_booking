@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from apps.app_hotel.models import LoaiTienNghi
 
-class HotelFilterCountSerializer(serializers.ModelSerializer):
+class HotelCountByAmenitiesSerializer(serializers.ModelSerializer):
     count = serializers.IntegerField(read_only=True)
 
     class Meta:

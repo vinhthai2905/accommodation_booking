@@ -1,5 +1,8 @@
 from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
+from rest_framework import status
+
 from apps.app_hotel.models import LoaiKhachSan, DonDangKyKhachSan
 from apps.app_hotel.api.serializers import (
     LoaiKhachSanSerializer,
@@ -10,9 +13,6 @@ class HotelTypeListView(ListAPIView):
     permission_classes = [AllowAny]
     serializer_class = LoaiKhachSanSerializer
     queryset = LoaiKhachSan.objects.all().order_by("id")
-
-from rest_framework.response import Response
-from rest_framework import status
 
 class PartnerHotelRegistrationView(CreateAPIView):
     permission_classes = [IsAuthenticated]

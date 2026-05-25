@@ -1,14 +1,3 @@
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router"
-import { ArrowLeft, ArrowRight, Loader2, Clock, Info, RefreshCw } from "lucide-react"
-import toast from "react-hot-toast"
-import {
-    fetchHotelTypes, 
-    fetchWards, 
-    submitHotelRegistration,
-    fetchHotelRegistrationStatus
-} from "../services/partnerOnboardingServices"
-import { useAuthUserContext } from "../../../hooks/authentication/common/useAuthUserContext"
 import BasicInfoStep from "../components/onboarding-steps/BasicInfoStep"
 import PropertySetupStep from "../components/onboarding-steps/PropertySetupStep"
 import LegalInfoStep from "../components/onboarding-steps/LegalInfoStep"
@@ -17,10 +6,25 @@ import OnboardingStepper from "../section/OnboardingStepper"
 import PendingApproval from "../components/onboarding-status/PendingApproval"
 import RejectionAlert from "../components/onboarding-status/RejectionAlert"
 
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router"
+import { ArrowLeft, ArrowRight, Loader2, Clock, Info, RefreshCw } from "lucide-react"
+import toast from "react-hot-toast"
+
+import {
+    fetchHotelTypes,
+    fetchWards,
+    submitHotelRegistration,
+    fetchHotelRegistrationStatus
+} from "../services/partnerOnboardingServices"
+import { useAuthUserContext } from "../../../hooks/authentication/common/useAuthUserContext"
+
+import { useFormPartnerHotelRegistration } from "../../../hooks/partner-onboarding/useFormPartnerHotelRegistration"
+
 export default function PartnerOnboarding() {
     const navigate = useNavigate()
     const { user, clearAuthUserState } = useAuthUserContext()
-    
+
     // Onboarding Form States
     const [currentStep, setCurrentStep] = useState(1)
     const [hotelTypes, setHotelTypes] = useState([])
@@ -29,17 +33,10 @@ export default function PartnerOnboarding() {
     const [submitting, setSubmitting] = useState(false)
     const [completed, setCompleted] = useState(false)
 
+
+    const { formData, setFormData } = useFormPartnerHotelRegistration()
+
     // Form fields
-    const [formData, setFormData] = useState({
-        hotel_name: "",
-        id_hotel_type: "",
-        phone_number: "",
-        id_ward: "",
-        address: "",
-        document_name: "Giấy phép kinh doanh",
-        document_url: "",
-        document_file: null
-    })
 
     // Mock UI helper states
     const [channelManager, setChannelManager] = useState("no")
@@ -117,8 +114,8 @@ export default function PartnerOnboarding() {
     const handleFileUploadSimulate = () => {
         // Simulate a file upload
         const simulatedUrl = `/media/documents/${Date.now()}_document.pdf`
-        setFormData(prev => ({ 
-            ...prev, 
+        setFormData(prev => ({
+            ...prev,
             document_url: simulatedUrl,
             document_file: null
         }))
@@ -128,8 +125,8 @@ export default function PartnerOnboarding() {
     const handleFileChange = (e) => {
         const file = e.target.files[0]
         if (file) {
-            setFormData(prev => ({ 
-                ...prev, 
+            setFormData(prev => ({
+                ...prev,
                 document_file: file,
                 document_url: ""
             }))
@@ -198,7 +195,7 @@ export default function PartnerOnboarding() {
                 payload.append("id_ward", parseInt(formData.id_ward))
                 payload.append("address", formData.address)
                 payload.append("document_name", formData.document_name)
-                payload.append("document_file", formData.document_file) 
+                payload.append("document_file", formData.document_file)
                 if (formData.document_url) {
                     payload.append("document_url", formData.document_url)
                 }
@@ -224,7 +221,7 @@ export default function PartnerOnboarding() {
                 const parsed = JSON.parse(err.message)
                 const firstError = Object.values(parsed)[0]
                 if (firstError) errorMsg = Array.isArray(firstError) ? firstError[0] : firstError
-            } catch (_) {}
+            } catch (_) { }
             toast.error(errorMsg)
         } finally {
             setSubmitting(false)
@@ -240,19 +237,19 @@ export default function PartnerOnboarding() {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-            <OnboardingHeader 
-                user={user} 
-                navigate={navigate} 
-                clearAuthUserState={clearAuthUserState} 
+            <OnboardingHeader
+                user={user}
+                navigate={navigate}
+                clearAuthUserState={clearAuthUserState}
             />
 
             {/* Stepper progress bar */}
             {(!registration || registration.status !== "Chờ duyệt") && (
-                <OnboardingStepper 
-                    steps={STEPS} 
-                    currentStep={currentStep} 
-                    setCurrentStep={setCurrentStep} 
-                    validateStep={validateStep} 
+                <OnboardingStepper
+                    steps={STEPS}
+                    currentStep={currentStep}
+                    setCurrentStep={setCurrentStep}
+                    validateStep={validateStep}
                 />
             )}
 
@@ -266,8 +263,8 @@ export default function PartnerOnboarding() {
                 ) : (registration && registration.status === "Chờ duyệt") ? (
                     /* Pending Approval screen */
                     <div className="px-4">
-                        <PendingApproval 
-                            registration={registration} 
+                        <PendingApproval
+                            registration={registration}
                             loadingStatus={loadingStatus}
                             checkRegistrationStatus={checkRegistrationStatus}
                             clearAuthUserState={clearAuthUserState}
@@ -277,22 +274,22 @@ export default function PartnerOnboarding() {
                     /* Wizard Forms */
                     <div className="flex flex-col gap-6">
                         <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 md:p-8">
-                            
+
                             {/* Rejection Alert if applicable */}
                             <RejectionAlert registration={registration} />
 
                             {/* STEP 1: Basic Info */}
                             {currentStep === 1 && (
-                                <BasicInfoStep 
-                                    formData={formData} 
-                                    handleInputChange={handleInputChange} 
-                                    hotelTypes={hotelTypes} 
+                                <BasicInfoStep
+                                    formData={formData}
+                                    handleInputChange={handleInputChange}
+                                    hotelTypes={hotelTypes}
                                 />
                             )}
 
                             {/* STEP 2: Address and Property settings */}
                             {currentStep === 2 && (
-                                <PropertySetupStep 
+                                <PropertySetupStep
                                     formData={formData}
                                     handleInputChange={handleInputChange}
                                     wards={wards}
@@ -302,21 +299,21 @@ export default function PartnerOnboarding() {
                             )}
 
                             {/* STEP 3: Legal Info, Document Upload & Summary */}
-                             {currentStep === 3 && (
-                                 <LegalInfoStep 
-                                     formData={formData}
-                                     handleInputChange={handleInputChange}
-                                     handleFileUploadSimulate={handleFileUploadSimulate}
-                                     handleFileChange={handleFileChange}
-                                     hotelTypes={hotelTypes}
-                                     wards={wards}
-                                 />
-                             )}
+                            {currentStep === 3 && (
+                                <LegalInfoStep
+                                    formData={formData}
+                                    handleInputChange={handleInputChange}
+                                    handleFileUploadSimulate={handleFileUploadSimulate}
+                                    handleFileChange={handleFileChange}
+                                    hotelTypes={hotelTypes}
+                                    wards={wards}
+                                />
+                            )}
 
                             {/* Navigation buttons */}
                             <div className="mt-8 pt-6 border-t border-gray-100 flex justify-between items-center">
                                 {currentStep > 1 ? (
-                                    <button 
+                                    <button
                                         onClick={prevStep}
                                         className="px-5 py-2.5 border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold rounded-lg transition-colors flex items-center gap-2 text-sm"
                                         disabled={submitting}
@@ -328,14 +325,14 @@ export default function PartnerOnboarding() {
                                 )}
 
                                 {currentStep < 3 ? (
-                                    <button 
+                                    <button
                                         onClick={nextStep}
                                         className="px-6 py-2.5 bg-[#006ce4] hover:bg-[#0053b4] text-white font-bold rounded-lg shadow transition-colors flex items-center gap-2 text-sm"
                                     >
                                         Tiếp tục <ArrowRight size={16} />
                                     </button>
                                 ) : (
-                                    <button 
+                                    <button
                                         onClick={handleSubmit}
                                         disabled={submitting}
                                         className="px-8 py-2.5 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-bold rounded-lg shadow-md transition-colors flex items-center gap-2 text-sm"
