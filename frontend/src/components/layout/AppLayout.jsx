@@ -1,7 +1,6 @@
 import Header from "./Header"
-
 import Footer from "/src/components/layout/Footer"
-
+import Bumblebee from "/src/features/ai/section/Bumblebee"
 import { clsx } from "clsx"
 import { Outlet, useLocation } from "react-router"
 
@@ -16,6 +15,7 @@ export default function AppLayout() {
             <main className="flex-1">
                 <Outlet />
             </main>
+            <Bumblebee />
             {location.hash === "#map_opened" ? undefined : <Footer />}
         </div>
     )

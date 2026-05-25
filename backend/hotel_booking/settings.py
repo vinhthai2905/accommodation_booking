@@ -21,11 +21,11 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-if os.name == "nt":
-    GDAL_DLL_DIR = r"C:\Users\ASUS\miniconda3\envs\django\Library\bin"
-    os.add_dll_directory(GDAL_DLL_DIR)
+# if os.name == "nt":
+#     GDAL_DLL_DIR = r"C:\Users\ASUS\miniconda3\envs\django\Library\bin"
+#     os.add_dll_directory(GDAL_DLL_DIR)
 
-    GDAL_LIBRARY_PATH = os.path.join(GDAL_DLL_DIR, "gdal.dll")
+#     GDAL_LIBRARY_PATH = os.path.join(GDAL_DLL_DIR, "gdal.dll")
 
 load_dotenv(BASE_DIR / ".env")
 
@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -70,7 +71,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'hotel_booking.urls'

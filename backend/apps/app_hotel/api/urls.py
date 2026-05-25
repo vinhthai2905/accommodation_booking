@@ -1,19 +1,3 @@
-
-from . import (
-    HotelSearchResultView,
-    HotelSearchResultMapView,
-    HotelCountByAmenitiesView
-)
-
-from . import HotelDetailView, RoomTypeAvailabilityView
-
-
-from . import (
-    HotelImageView,
-    ChildPolicyPreviewView,
-    HotelBookingPreviewView,
-)
-
 from . import (
     PartnerRoomTypeListView,
     PartnerRoomTypeView,
@@ -41,20 +25,14 @@ from .views.admin_onboarding_views import (
     AdminRegistrationApplicationUpdateView
 )
 
-from django.urls import path
+from django.urls import path, include
+
+BASE_URL_INCLUDE_PRIVATE = "apps.app_hotel.api.private"
 
 urlpatterns = [
-    path("api/hotels/search", HotelSearchResultView.as_view()),
-    path("api/hotels/search/map", HotelSearchResultMapView.as_view()),
-    path("api/hotels/search/amenities/hotel_count", HotelCountByAmenitiesView.as_view()),
-    
-    path("api/hotel/<uuid:id_hotel>", HotelDetailView.as_view()),
-    path("api/hotel/<uuid:id_hotel>/room_types", RoomTypeAvailabilityView.as_view()),
-    path("api/hotel/<uuid:id_hotel>/booking_summary", HotelBookingPreviewView.as_view(), name="hotel-booking"),
-    path("api/hotel/<uuid:id_hotel>/child_policy", ChildPolicyPreviewView.as_view(), name="hotel-child-policy"),
-    
-    
-    path("api/hotel/<uuid:id_hotel>/images",HotelImageView.as_view(),name="hotel-images"),
+    # PUBLIC SESSION
+    path("api/hotels/search/", include("apps.app_hotel.api.public.hotel_search.hotel_search_urls")),
+    path("api/hotel/", include("apps.app_hotel.api.public.hotel_detail.hotel_detail_urls")),
     
     
     # PRIVATE SESSION

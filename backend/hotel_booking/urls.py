@@ -25,7 +25,8 @@ urlpatterns = [
     path('', include('apps.app_location.api.urls')),
     path('', include('apps.app_hotel.api.urls')),
     path('', include('apps.app_booking.api.urls')),
-    path('', include('apps.app_payment.api.urls'))
+    path('', include('apps.app_payment.api.urls')),
+    path('', include('apps.app_ai.api.urls'))
 ]
 
 if settings.DEBUG:

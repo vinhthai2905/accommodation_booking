@@ -3,13 +3,14 @@ import BookingCardHeader from "../ui/BookingCardHeader"
 import BookingCardDetails from "../ui/BookingCardDetails"
 import BookingCardFooter from "../ui/BookingCardFooter"
 
+import { motion } from "framer-motion"
+import { clsx } from "clsx"
+
 import { orderStatus } from "../helpers/orderStatus"
 import { paymentLabel } from "../helpers/paymentLabel"
 import { nightsBetween } from "../../../helpers/booking/bookingHelpers"
 
-import { clsx } from "clsx"
-
-export default function BookingCard({ booking, index, motion }) {
+export default function BookingCard({ booking, index }) {
     const { hotel, invoice } = booking
 
     const nights = nightsBetween(booking.check_in_date, booking.check_out_date)

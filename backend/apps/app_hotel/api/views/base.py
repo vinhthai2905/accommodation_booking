@@ -74,7 +74,7 @@ class HotelSearchViewMixin:
                 hotel_filters[hotel_query_key] = values
 
             elif hotel_query_key not in map_bounds_exclude:
-                hotel_filters[hotel_query_key] = values[0]
+                    hotel_filters[hotel_query_key] = values[0]
 
         serializer = self.search_params_serializer(data=hotel_filters)
         serializer.is_valid(raise_exception=True)
