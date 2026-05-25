@@ -20,7 +20,7 @@ from . import (
     PartnerHotelRegistrationView,
 )
 
-from .views.admin_onboarding_views import (
+from .public.hotel_partner_registration.views.admin_onboarding_views import (
     AdminRegistrationApplicationListView,
     AdminRegistrationApplicationUpdateView
 )

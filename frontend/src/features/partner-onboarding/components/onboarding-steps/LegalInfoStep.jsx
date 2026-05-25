@@ -1,6 +1,16 @@
 import { Upload, Check, Info } from "lucide-react"
+import { useFormContext } from "react-hook-form"
 
-export default function LegalInfoStep({ formData, handleInputChange, handleFileUploadSimulate, handleFileChange, hotelTypes, wards }) {
+export default function LegalInfoStep({ handleFileChange, hotelTypes, wards }) {
+    const { register, watch } = useFormContext()
+    
+    const document_file = watch("document_file")
+    const document_url = watch("document_url")
+    const hotel_name = watch("hotel_name")
+    const id_hotel_type = watch("id_hotel_type")
+    const id_ward = watch("id_ward")
+    const address = watch("address")
+
     return (
         <div className="space-y-6">
             <div>
@@ -12,9 +22,7 @@ export default function LegalInfoStep({ formData, handleInputChange, handleFileU
                 <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Tên tài liệu chứng thực (*)</label>
                     <select 
-                        name="document_name"
-                        value={formData.document_name}
-                        onChange={handleInputChange}
+                        {...register("document_name", { required: true })}
                         className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white text-gray-900 transition-all text-sm"
                     >
                         <option value="Giấy phép kinh doanh">Giấy phép đăng ký kinh doanh</option>
@@ -34,13 +42,13 @@ export default function LegalInfoStep({ formData, handleInputChange, handleFileU
                         />
                         <Upload className="text-gray-400 group-hover:text-blue-500 mb-3 transition-colors" size={32} />
                         <div className="text-sm text-gray-600 mb-3">
-                            {formData.document_file ? (
+                            {document_file ? (
                                 <span className="text-green-600 font-semibold flex items-center justify-center gap-1">
-                                    <Check size={16} /> Đã chọn tệp: {formData.document_file.name}
+                                    <Check size={16} /> Đã chọn tệp: {document_file.name}
                                 </span>
-                            ) : formData.document_url ? (
+                            ) : document_url ? (
                                 <span className="text-green-600 font-semibold flex items-center justify-center gap-1">
-                                    <Check size={16} /> Đã tải lên tài liệu: {formData.document_url.split('/').pop()}
+                                    <Check size={16} /> Đã tải lên tài liệu: {document_url.split('/').pop()}
                                 </span>
                             ) : (
                                 <span>Nhấp vào đây để chọn tệp từ máy của bạn (PDF, JPG, PNG)</span>
@@ -60,23 +68,23 @@ export default function LegalInfoStep({ formData, handleInputChange, handleFileU
                     <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 space-y-2 text-xs md:text-sm">
                         <div className="grid grid-cols-2">
                             <span className="text-gray-500">Tên chỗ nghỉ:</span>
-                            <span className="font-semibold text-gray-800 text-right">{formData.hotel_name}</span>
+                            <span className="font-semibold text-gray-800 text-right">{hotel_name}</span>
                         </div>
                         <div className="grid grid-cols-2">
                             <span className="text-gray-500">Loại chỗ nghỉ:</span>
                             <span className="font-semibold text-gray-800 text-right">
-                                {hotelTypes.find(t => t.id.toString() === formData.id_hotel_type.toString())?.name || formData.id_hotel_type}
+                                {hotelTypes.find(t => t.id.toString() === id_hotel_type?.toString())?.name || id_hotel_type}
                             </span>
                         </div>
                         <div className="grid grid-cols-2">
                             <span className="text-gray-500">Khu vực:</span>
                             <span className="font-semibold text-gray-800 text-right">
-                                {wards.find(w => w.id_ward.toString() === formData.id_ward.toString())?.ward_name || formData.id_ward}
+                                {wards.find(w => w.id_ward.toString() === id_ward?.toString())?.ward_name || id_ward}
                             </span>
                         </div>
                         <div className="grid grid-cols-2">
                             <span className="text-gray-500">Địa chỉ:</span>
-                            <span className="font-semibold text-gray-800 text-right">{formData.address}</span>
+                            <span className="font-semibold text-gray-800 text-right">{address}</span>
                         </div>
                     </div>
                 </div>

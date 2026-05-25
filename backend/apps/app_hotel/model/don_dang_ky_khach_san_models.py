@@ -50,6 +50,18 @@ class DonDangKyKhachSan(models.Model):
         db_column="so_dien_thoai",
     )
 
+    latitude = models.DecimalField(
+        max_digits=22, decimal_places=16,
+        null=True, blank=True,
+        db_column="vi_do",
+    )
+
+    longitude = models.DecimalField(
+        max_digits=22, decimal_places=16,
+        null=True, blank=True,
+        db_column="kinh_do",
+    )
+
     status = models.CharField(
         max_length=20,
         choices=TrangThaiDangKyChoice.choices,

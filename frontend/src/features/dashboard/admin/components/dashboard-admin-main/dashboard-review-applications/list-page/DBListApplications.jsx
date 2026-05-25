@@ -73,6 +73,13 @@ export default function DBListApplications() {
         })
     }
 
+    const getFullUrl = (url) => {
+        if (!url) return ""
+        if (url.startsWith("http")) return url
+        const baseUrl = import.meta.env.VITE_API_URL || ""
+        return `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`
+    }
+
     return (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200">
             {/* Header & Filter */}
@@ -148,7 +155,7 @@ export default function DBListApplications() {
                                     <td className="px-6 py-4">
                                         {app.document_url ? (
                                             <a 
-                                                href={app.document_url} 
+                                                href={getFullUrl(app.document_url)} 
                                                 target="_blank" 
                                                 rel="noreferrer"
                                                 className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-800 hover:underline text-xs font-medium"

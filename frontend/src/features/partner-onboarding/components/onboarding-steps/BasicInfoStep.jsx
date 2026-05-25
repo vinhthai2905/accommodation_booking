@@ -1,4 +1,8 @@
-export default function BasicInfoStep({ formData, handleInputChange, hotelTypes }) {
+import { useFormContext } from "react-hook-form"
+
+export default function BasicInfoStep({ hotelTypes }) {
+    const { register } = useFormContext()
+    
     return (
         <div className="space-y-6">
             <div>
@@ -11,9 +15,7 @@ export default function BasicInfoStep({ formData, handleInputChange, hotelTypes 
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Tên chỗ nghỉ (*)</label>
                     <input 
                         type="text"
-                        name="hotel_name"
-                        value={formData.hotel_name}
-                        onChange={handleInputChange}
+                        {...register("hotel_name", { required: true })}
                         placeholder="Ví dụ: Khách sạn Mường Thanh, Villa ven biển..."
                         className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm text-gray-900 bg-white"
                     />
@@ -22,9 +24,7 @@ export default function BasicInfoStep({ formData, handleInputChange, hotelTypes 
                 <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Loại chỗ nghỉ (*)</label>
                     <select 
-                        name="id_hotel_type"
-                        value={formData.id_hotel_type}
-                        onChange={handleInputChange}
+                        {...register("id_hotel_type", { required: true })}
                         className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white text-gray-900 transition-all text-sm"
                     >
                         <option value="">-- Chọn loại chỗ nghỉ --</option>
@@ -38,9 +38,7 @@ export default function BasicInfoStep({ formData, handleInputChange, hotelTypes 
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Số điện thoại liên hệ (*)</label>
                     <input 
                         type="text"
-                        name="phone_number"
-                        value={formData.phone_number}
-                        onChange={handleInputChange}
+                        {...register("phone_number", { required: true })}
                         placeholder="Số điện thoại dùng để liên lạc"
                         className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm text-gray-900 bg-white"
                     />

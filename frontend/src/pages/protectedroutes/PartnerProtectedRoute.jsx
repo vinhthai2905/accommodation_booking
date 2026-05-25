@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Outlet, Navigate, useLocation } from "react-router"
 import { useAuthUserContext } from "../../hooks/authentication/common/useAuthUserContext"
 import LoadingFullScreen from "../../features/book/components/Shared/LoadingFullScreen"
-import { fetchHotelRegistrationStatus } from "../../features/partner-onboarding/services/partnerOnboardingServices"
+import { fetchHotelRegistrationStatus } from "../../services/partner-onboarding/partnerOnboardingServices"
 
 export default function PartnerProtectedRoute() {
     const { user, accessToken: hasSession, isFetchingUser, isAuthenticated } = useAuthUserContext()
