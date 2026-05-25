@@ -19,32 +19,40 @@ class HotelCountByAmenitiesView(HotelSearchViewMixin, APIView):
             hotel_ids = list(KhachSan.objects.values_list("id_hotel", flat=True))
             
         return hotel_ids
+    
+    def _get_amenities_hotel_count(self, hotel_ids):
+        amenities_hotel_count_map = {}
+
+        hotel_amenities = (
+            TienNghiKhachSan.objects
+            .filter(id_hotel__in=hotel_ids, id_amenity_type__scope="Công cộng")
+            .values("id_amenity_type_id", "id_amenity_type__name", "id_hotel__name")
+        )
+        
+        for item in hotel_amenities:
+            amenities_hotel_count_map.setdefault(item["id_amenity_type_id"], set()).add(item["id_hotel__name"])
+            
+        return amenities_hotel_count_map
+            
+    def _add_hotel_count_to_each_amenity(self, hotel_ids):
+        amenities_hotel_count_map = self._get_amenities_hotel_count(hotel_ids)
+        
+        all_amenities_type = (
+            LoaiTienNghi.objects
+            .filter(scope="Công cộng")
+        )
+        
+        for amenity in all_amenities_type:
+            hotel_set = amenities_hotel_count_map.get(amenity.id_amenity_type, set())
+            amenity.hotel_count = len(hotel_set)
+            
+            
+        return all_amenities_type
 
     def get(self, request: Request, *args, **kwargs):
         hotel_ids = self._get_hotel_ids_for_count(request)
 
-        amenity_hotel_map = {}
+        all_amenities_type = self._add_hotel_count_to_each_amenity(hotel_ids)
 
-        # hotel_amenities = (
-        #     TienNghiKhachSan.objects
-        #     .prefetch_related("id_amenity_type")
-        #     .filter(id_hotel__in=hotel_ids, id_amenity_type__scope="")
-        #     .values("id_amenity_type_id", "id_amenity_type__name", "id_hotel_id")
-        # )
-        
-        # for item in hotel_amenities:
-        #     amenity_hotel_map.setdefault(item["id_amenity_type_id"], set()).add(item["id_hotel_id"])
-
-        all_amenities = (
-            LoaiTienNghi.objects
-            .prefetch_related("hotel_amenities")
-            .filter(scope="Công cộng")
-        )
-        
-        for amenity in all_amenities:
-            amenity_hotel_map[amenity] = amenity.hotel_amenities.all()
-            # hotel_set = amenity_hotel_map.get(amenity.id_amenity_type, set())
-            # amenity.count = len(hotel_set)
-
-        serializer = HotelCountByAmenitiesSerializer(all_amenities, many=True)
+        serializer = HotelCountByAmenitiesSerializer(all_amenities_type, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

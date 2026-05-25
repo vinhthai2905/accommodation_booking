@@ -15,9 +15,9 @@ export default function HotelsSearchResult() {
     const { mapBounds, setMapBounds, handleMapViewPortChange } = useMapBounds()
 
     const {
-        isPending: isLoadingHotelsList,
-        error: errorLoadingHotelsList,
-        data: hotelsList
+        isLoadingHotelsList,
+        errorLoadingHotelsList,
+        hotelsList
     } = useSearchHotels(isMapOpened)
 
     const {

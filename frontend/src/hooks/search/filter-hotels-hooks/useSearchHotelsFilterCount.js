@@ -5,8 +5,8 @@ import { fetchHotelAmenitiesCount } from "../../../services/search/searchHotelsF
 import { useSearchHotelsParams } from "../hotel-search-hooks/useSearchHotelsParams"
 
 export function useSearchHotelAmenitiesCount() {
-    const { searchHotelsParams } = useSearchHotelsParams()
     const location = useLocation()
+    const { searchHotelsParams } = useSearchHotelsParams()
 
     const { isPending, error, data } = useQuery({
         queryKey: ["fetchHotelAmenitiesCount", searchHotelsParams.toString(), location.key],

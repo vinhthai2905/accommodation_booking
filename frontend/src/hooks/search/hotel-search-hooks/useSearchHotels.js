@@ -8,16 +8,20 @@ export default function useSearchHotels(isMapOpened) {
     const { searchHotelsParams } = useSearchHotelsParams()
     const location = useLocation()
 
-    const { isPending, error, data } = useQuery({
-        queryKey: ["fetchHotelsResultList", searchHotelsParams.toString(), location.key],
-        queryFn: (() => fetchHotelResult(searchHotelsParams)),
-        enabled: !isMapOpened
+    const { 
+        isPending: isLoadingHotelsList,
+        error: errorLoadingHotelsList,
+        data: hotelsList
+     } = useQuery({
+            queryKey: ["fetchHotelsResultList", searchHotelsParams.toString(), location.key],
+            queryFn: (() => fetchHotelResult(searchHotelsParams)),
+            enabled: !isMapOpened
     })
 
     return {
-        isPending,
-        error,
-        data
+        isLoadingHotelsList,
+        errorLoadingHotelsList,
+        hotelsList
     }
 
 }

@@ -1,0 +1,1 @@
+from .count_by_amenities_views import HotelCountByAmenitiesView
