@@ -2,7 +2,7 @@ import { useLocation } from "react-router"
 import { useQuery } from "@tanstack/react-query"
 
 import { useSearchHotelsParamsMap } from "./useSearchHotelsParamsMap"
-import { fetchHotelResultMap } from "../../../services/search/hotelSearchServices"
+import { fetchHotelResultMap } from "../../../services/search/searchHotelsServices"
 
 export default function useSearchHotelsMap(isMapOpened, mapBounds) {
     const { searchHotelsParamsMap } = useSearchHotelsParamsMap(mapBounds)

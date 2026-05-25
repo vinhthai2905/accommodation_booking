@@ -9,6 +9,8 @@ from .public.hotel_search.views import (
     HotelSearchResultMapView
 )
 
+from .public.hotel_search_filter_count.views.hotel_filter_count_views import HotelFilterCountView
+
 from .public.hotel_detail.views import (
     HotelDetailView,
     RoomTypeAvailabilityView

@@ -198,7 +198,7 @@ export default function PartnerOnboarding() {
                 payload.append("id_ward", parseInt(formData.id_ward))
                 payload.append("address", formData.address)
                 payload.append("document_name", formData.document_name)
-                payload.append("document_file", formData.document_file)
+                payload.append("document_file", formData.document_file) 
                 if (formData.document_url) {
                     payload.append("document_url", formData.document_url)
                 }

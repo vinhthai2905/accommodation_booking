@@ -90,6 +90,7 @@ class KhachSan(models.Model):
     )
     
     is_near_beach = models.BooleanField(
+        null=True,
         default=False
     )
 
