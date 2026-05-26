@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 import { X, Sparkles } from "lucide-react"
 
-export default function BumblebeeChatboxHeader({setIsOpen}) {
+export default function BumblebeeChatboxHeader({ setIsOpenBumblebee }) {
     return (
         <div className={clsx(
             "bg-linear-to-r from-amber-500 to-yellow-400 text-slate-955 px-4 py-3.5",
@@ -20,7 +20,7 @@ export default function BumblebeeChatboxHeader({setIsOpen}) {
                 </div>
             </div>
             <button
-                onClick={() => setIsOpen(false)}
+                onClick={() => setIsOpenBumblebee(false)}
                 className="hover:bg-slate-950/15 p-1 rounded-full transition-colors cursor-pointer"
             >
                 <X className="w-5 h-5 stroke-[2.5]" />

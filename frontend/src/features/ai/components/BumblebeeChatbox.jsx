@@ -4,17 +4,26 @@ import BumblebeeTyping from "./BumblebeeTyping"
 import BumblebeeForm from "./BumblebeeForm"
 
 import { clsx } from "clsx"
+import { useBumblebeeForm } from "../../../hooks/ai/useBumblebeeForm"
+import { useBumblebeeAutoScroll } from "../../../hooks/ai/useBumblebeeAutoScroll"
+import { useClickNavigationHotel } from "../../../hooks/ai/useClickNavigationHotel"
 
 export default function BumblebeeChatbox({
-    setIsOpen,
-    messages,
-    handleHotelClick,
-    isThinking,
-    messagesEndRef,
-    handleSendMessage,
-    message,
-    setMessage
+    setIsOpenBumblebee,
 }) {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        messages,
+        isBumblebeeProcessing,
+        handleUserMessage
+    } = useBumblebeeForm()
+
+    const { messagesEndRef } = useBumblebeeAutoScroll(messages, isBumblebeeProcessing)
+
+    const { handleHotelClick } = useClickNavigationHotel(setIsOpenBumblebee)
+
     return (
         <div className={clsx(
             "absolute bottom-20 right-0 w-96 max-w-[calc(100vw-2rem)] h-137.5 max-h-[calc(100vh-8rem)]",
@@ -23,11 +32,10 @@ export default function BumblebeeChatbox({
             "flex flex-col overflow-hidden",
             "transition-all duration-300 animate-in fade-in slide-in-from-bottom-5"
         )}>
-            <BumblebeeChatboxHeader 
-                setIsOpen={setIsOpen}
+            <BumblebeeChatboxHeader
+                setIsOpenBumblebee={setIsOpenBumblebee}
             />
 
-            {/* Message Area */}
             <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-slate-800">
                 {messages.map((message) => (
                     <div
@@ -48,7 +56,6 @@ export default function BumblebeeChatbox({
                             {message.text}
                         </div>
 
-                        {/* Render Recommended Hotels if any */}
                         {message.hotels && message.hotels.length > 0 && (
                             <BumblebeeHotelCardResponses
                                 message={message}
@@ -58,17 +65,18 @@ export default function BumblebeeChatbox({
                     </div>
                 ))}
 
-                {isThinking && (
+                {isBumblebeeProcessing && (
                     <BumblebeeTyping />
                 )}
                 <div ref={messagesEndRef} />
             </div>
 
             <BumblebeeForm
-                handleSendMessage={handleSendMessage}
-                message={message}
-                setMessage={setMessage}
-                isThinking={isThinking}
+                register={register}
+                handleSubmit={handleSubmit}
+                handleUserMessage={handleUserMessage}
+                isBumblebeeProcessing={isBumblebeeProcessing}
+                watch={watch}
             />
         </div>
     );
