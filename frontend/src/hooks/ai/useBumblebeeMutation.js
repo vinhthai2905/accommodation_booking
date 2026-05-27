@@ -7,7 +7,7 @@ export function useBumblebeeMutation() {
     return useMutation({
         mutationKey: ["bumblebeeChat"],
         mutationFn: async (message) => {
-            const { data } = await axios.post(`${apiUrl}/api/ai/chat`, { message })
+            const { data } = await axios.post(`${apiUrl}/api/bumblebee/chat`, { message })
             return data
         }
     })

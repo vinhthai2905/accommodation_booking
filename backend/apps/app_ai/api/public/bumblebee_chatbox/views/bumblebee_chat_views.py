@@ -1,31 +1,52 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from apps.app_ai.services.recommendation_service import RecommendationService
-from apps.app_ai.api.public.bumblebee_chatbox.serializers import BumbebeeRecommendResultSerializer
+
+from apps.app_ai.services.bumblebee_recommendation_service import (
+    BumblebeeRecommendationService
+)
+from apps.app_ai.api.public.bumblebee_chatbox.serializers import (
+    BumblebeeRecommendResultSerializer,
+)
+from apps.app_ai.api.public.bumblebee_chatbox.serializers.bumblebee_chat_serializers import (
+    BumblebeeChatInputSerializer,
+)
+from apps.app_ai.helpers.amenity_helpers import parse_guest_preferences
+
 
 class BumblebeeChatView(APIView):
     def post(self, request, *args, **kwargs):
-        user_message = request.data.get("message", "").lower()
+        input_serializer = BumblebeeChatInputSerializer(data=request.data)
+        input_serializer.is_valid(raise_exception=True)
 
-        # Analyze intent weights based on keywords
-        w_price = 1.0
-        w_beach = 1.0
-        w_amenity = 1.0
+        user_message = input_serializer.validated_data["message"].lower()
+        preferences  = parse_guest_preferences(user_message)
 
-        has_price_intent = any(keyword in user_message for keyword in ["rẻ", "giá", "tiền", "cheap", "cost", "tiết kiệm"])
-        has_beach_intent = any(keyword in user_message for keyword in ["biển", "beach", "cát", "sóng", "đại dương"])
-        has_amenity_intent = any(keyword in user_message for keyword in ["tiện nghi", "wifi", "bể bơi", "hồ bơi", "pool", "dịch vụ", "ăn sáng"])
+        prefer_cheap      = preferences["prefer_cheap"]
+        prefer_no_beach   = preferences["prefer_no_beach"]
+        desired_amenities = preferences["desired_amenities"]
 
-        if has_price_intent:
-            w_price = 5.0
-        if has_beach_intent:
-            w_beach = 5.0
-        if has_amenity_intent:
-            w_amenity = 5.0
+        has_price_intent = any(
+            keyword in user_message
+            for keyword in ["rẻ", "giá", "tiền", "cheap", "cost", "tiết kiệm"]
+        )
+        has_beach_intent = any(
+            keyword in user_message
+            for keyword in ["biển", "beach", "cát", "sóng", "đại dương"]
+        ) and not prefer_no_beach
 
-        # Select response text based on intents
-        if has_price_intent and has_beach_intent and has_amenity_intent:
+        has_amenity_intent = any(
+            keyword in user_message
+            for keyword in ["tiện nghi", "wifi", "bể bơi", "hồ bơi", "pool", "dịch vụ", "ăn sáng"]
+        )
+
+        if prefer_no_beach and has_price_intent:
+            response_text = "Ưu tiên tiêu chí giá phòng tiết kiệm và vị trí trung tâm (không gần biển), đây là các gợi ý phù hợp nhất cho bạn:"
+        elif prefer_no_beach and has_amenity_intent:
+            response_text = "Dành cho nhu cầu ở xa biển nhưng vẫn đầy đủ tiện nghi dịch vụ, mình xin gợi ý các khách sạn sau:"
+        elif prefer_no_beach:
+            response_text = "Theo yêu cầu của bạn, đây là danh sách các khách sạn khu vực trung tâm/nội thành và không nằm sát biển:"
+        elif has_price_intent and has_beach_intent and has_amenity_intent:
             response_text = "Mình đã tìm được các khách sạn tại Đà Nẵng đáp ứng tối đa cả ba tiêu chí: giá tốt, gần biển và đầy đủ tiện nghi công cộng cho bạn."
         elif has_price_intent and has_beach_intent:
             response_text = "Ưu tiên tiêu chí giá phòng tiết kiệm và vị trí gần bãi biển nhất, đây là các gợi ý phù hợp nhất cho bạn:"
@@ -38,20 +59,26 @@ class BumblebeeChatView(APIView):
         elif has_beach_intent:
             response_text = "Để thuận tiện di chuyển ra bãi tắm, đây là danh sách các khách sạn có khoảng cách gần biển nhất:"
         elif has_amenity_intent:
-            response_text = "Dưới đây là danh sách các khách sạn sở hữu nhiều tiện nghi công cộng (hồ bơi, wifi, nhà hàng...) phong phú nhất:"
+            response_text = "Dưới đây là danh sách các khách sạn sở hữu nhiều tiện nghi công cộng phong phú nhất:"
         else:
-            response_text = "Dựa trên các thông số về giá cả, vị trí gần biển và tiện nghi dịch vụ, mình xin gợi ý danh sách khách sạn tốt nhất sau:"
+            response_text = "Dựa trên các thông số về giá cả, vị trí và tiện nghi dịch vụ, mình xin gợi ý danh sách khách sạn tốt nhất sau:"
 
-        recommendations = RecommendationService.get_recommendations(
-            w_price=w_price,
-            w_beach=w_beach,
-            w_amenity=w_amenity,
-            limit=3
+        recommendations = BumblebeeRecommendationService.get_hotel_recommendations(
+            limit=3,
+            desired_amenities=desired_amenities,
+            prefer_cheap=prefer_cheap,
+            prefer_no_beach=prefer_no_beach,
         )
 
-        serialized = BumbebeeRecommendResultSerializer(recommendations, many=True)
+        serialized = BumblebeeRecommendResultSerializer(
+            recommendations,
+            many=True,
+        )
 
-        return Response({
-            "response": response_text,
-            "hotels": serialized.data
-        }, status=status.HTTP_250_200_OK if hasattr(status, 'HTTP_250_200_OK') else status.HTTP_200_OK)
+        return Response(
+            {
+                "response": response_text,
+                "hotels": serialized.data,
+            },
+            status=status.HTTP_200_OK,
+        )

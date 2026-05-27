@@ -1,27 +1,41 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from apps.app_ai.services.recommendation_service import RecommendationService
-from apps.app_ai.api.public.bumblebee_chatbox.serializers import BumblebeeRecommendInputSerializer, BumbebeeRecommendResultSerializer
+
+from apps.app_ai.services.bumblebee_recommendation_service import (
+    BumblebeeRecommendationService,
+)
+from apps.app_ai.api.public.bumblebee_chatbox.serializers import (
+    BumblebeeRecommendInputSerializer,
+    BumblebeeRecommendResultSerializer,
+)
 
 class BumblebeeHotelRecommendView(APIView):
-    def get(self, request, *args, **kwargs):
-        input_serializer = BumblebeeRecommendInputSerializer(data=request.query_params)
+    def _validate_guest_input(self, input):
+        input_serializer = BumblebeeRecommendInputSerializer(
+            data=input
+        )
         input_serializer.is_valid(raise_exception=True)
         
-        validated_data = input_serializer.validated_data
+        limited_hotels = input_serializer.validated_data.get("limit", 10)
+        desired_amenities = input_serializer.validated_data.get("desired_amenities", [])
         
-        w_price = validated_data.get("w_price", 1.0)
-        w_beach = validated_data.get("w_beach", 1.0)
-        w_amenity = validated_data.get("w_amenity", 1.0)
-        limit = validated_data.get("limit", 10)
-        
-        recommendations = RecommendationService.get_recommendations(
-            w_price=w_price,
-            w_beach=w_beach,
-            w_amenity=w_amenity,
-            limit=limit
+        return limited_hotels, desired_amenities
+    
+    def get(self, request, *args, **kwargs):
+        limited_hotels, desired_amenities = self._validate_guest_input(request.query_params)
+
+        recommendations = BumblebeeRecommendationService.get_hotel_recommendations(
+            limit=limited_hotels,
+            desired_amenities=desired_amenities,
         )
-        
-        output_serializer = BumbebeeRecommendResultSerializer(recommendations, many=True)
-        return Response(output_serializer.data, status=status.HTTP_200_OK)
+
+        output_serializer = BumblebeeRecommendResultSerializer(
+            recommendations,
+            many=True,
+        )
+
+        return Response(
+            output_serializer.data,
+            status=status.HTTP_200_OK,
+        )
