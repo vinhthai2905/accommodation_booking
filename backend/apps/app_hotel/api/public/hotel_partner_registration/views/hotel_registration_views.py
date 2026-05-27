@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from apps.app_hotel.models import LoaiKhachSan, DonDangKyKhachSan
-from apps.app_hotel.api.serializers import (
+from apps.app_hotel.api.public.hotel_partner_registration.serializers import (
     LoaiKhachSanSerializer,
     DonDangKyKhachSanSerializer
 )

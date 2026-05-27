@@ -7,7 +7,7 @@ from rest_framework import status, exceptions
 
 from apps.app_user.models import NguoiDung
 
-from apps.app_hotel.api.views.base import PartnerHotelViewMixin
+from apps.app_hotel.api.base.base import PartnerHotelViewMixin
 from apps.app_hotel.models import LoaiPhong, KhachSan, Giuong, ChiTietLoaiPhong
 from apps.app_hotel.api.private.partner_hotel_detail.serializers import (
     BedSerializer,

@@ -2,7 +2,7 @@ from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpda
 from rest_framework.permissions import IsAuthenticated
 
 from apps.app_user.models import NguoiDung, VaiTro
-from apps.app_user.api.serializers.admin_user_serializers import AdminUserSerializer, RoleSerializer
+from apps.app_admin.api.private.admin_users.serializers.admin_user_serializers import AdminUserSerializer, RoleSerializer
 
 class AdminRolesView(ListAPIView):
     serializer_class = RoleSerializer

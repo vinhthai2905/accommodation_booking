@@ -2,9 +2,18 @@ import axios from "axios"
 
 const apiUrl = import.meta.env.VITE_API_URL
 
-
 export const fetchHotel = async (hotelID) => {
   const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}`)
+  return data
+}
+
+export const fetchHotelImages = async (hotelID) => {
+  const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/images`)
+  return data
+}
+
+export const fetchHotelAmenities = async (hotelID) => {
+  const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/amenities`)
   return data
 }
 
@@ -22,14 +31,11 @@ export const fetchHotelRoomTypesAvailability = async (hotelID, check_in, check_o
   return data
 }
 
-export const fetchHotelImages = async (hotelID) => {
-  const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/images`)
-  return data
-}
-
 export const fetchHotelChildPolicy = async (hotelID) => {
   const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/child_policy`)
 
   return data
 }
+
+
 

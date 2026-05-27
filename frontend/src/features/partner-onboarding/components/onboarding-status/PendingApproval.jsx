@@ -61,7 +61,7 @@ export default function PendingApproval({ registration, loadingStatus, checkRegi
                 
                 <button
                     onClick={clearAuthUserState}
-                    className="flex-1 py-2.5 px-4 border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold rounded-lg transition-colors text-sm text-gray-900 bg-white"
+                    className="flex-1 py-2.5 px-4 border border-gray-300 hover:bg-gray-50 text-gray-900 font-bold rounded-lg transition-colors text-sm text-gray-900 bg-white"
                 >
                     Đăng xuất
                 </button>

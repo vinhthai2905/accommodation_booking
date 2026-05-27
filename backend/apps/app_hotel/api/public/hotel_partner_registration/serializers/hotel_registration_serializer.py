@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from apps.app_hotel.models import DonDangKyKhachSan, TaiLieuDangKy, LoaiKhachSan
-from apps.app_location.models import Phuong
 
 class LoaiKhachSanSerializer(serializers.ModelSerializer):
     class Meta:

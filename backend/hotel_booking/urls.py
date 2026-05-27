@@ -21,12 +21,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('apps.app_user.api.urls')),
-    path('', include('apps.app_location.api.urls')),
-    path('', include('apps.app_hotel.api.urls')),
-    path('', include('apps.app_booking.api.urls')),
-    path('', include('apps.app_payment.api.urls')),
-    path('', include('apps.app_ai.api.urls'))
+    path('', include('apps.app_user.api.app_user_api_urls')),
+    path('', include('apps.app_location.api.app_location_api_urls')),
+    path('', include('apps.app_hotel.api.app_hotel_api_urls')),
+    path('', include('apps.app_booking.api.app_booking_api_urls')),
+    path('', include('apps.app_payment.api.app_payment_api_urls')),
+    path('', include('apps.app_ai.api.app_ai_api_urls')),
+    path('', include('apps.app_admin.api.app_admin_api_urls'))
 ]
 
 if settings.DEBUG:

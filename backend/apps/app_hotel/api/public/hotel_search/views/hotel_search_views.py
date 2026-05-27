@@ -19,7 +19,7 @@ from apps.app_hotel.api.public.hotel_search.serializers import (
     HotelSearchResultMapSerializer,
 )
 
-from apps.app_hotel.api.views.base import HotelSearchViewMixin
+from apps.app_hotel.api.base.base import HotelSearchViewMixin
 
 class HotelSearchResultView(HotelSearchViewMixin, APIView):
     search_params_serializer = HotelSearchParamsSerializer

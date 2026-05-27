@@ -1,0 +1,1 @@
+from .admin_hotel_registration_serializers import AdminDonDangKyKhachSanSerializer

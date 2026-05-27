@@ -1,9 +1,4 @@
 
-from .views import (
-    HotelImageView,
-)
-
-
 from .public.hotel_search.views import (
     HotelSearchResultView,
     HotelSearchResultMapView
@@ -59,7 +54,7 @@ from .private.partner_hotel_detail.views.hotel_category_amenities_views import (
     PartnerHotelCategoryDetailView,
 )
 
-from .public.hotel_partner_registration.views.onboarding_views import (
+from .public.hotel_partner_registration.views.hotel_registration_views import (
     HotelTypeListView,
     PartnerHotelRegistrationView
 )

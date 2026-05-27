@@ -57,16 +57,6 @@ export default function PartnerOnboarding() {
                 clearAuthUserState={clearAuthUserState}
             />
 
-            {/* Stepper progress bar */}
-            {(!registration || registration.status !== "Chờ duyệt") && (
-                <OnboardingStepper
-                    steps={STEPS}
-                    currentStep={currentStep}
-                    setCurrentStep={setCurrentStep}
-                    validateStep={validateStep}
-                />
-            )}
-
             {/* Main Form container */}
             <main className="flex-1 max-w-3xl w-full mx-auto p-4 md:p-8">
                 {loadingData ? (
@@ -87,8 +77,16 @@ export default function PartnerOnboarding() {
                 ) : (
                     /* Wizard Forms */
                     <div className="flex flex-col gap-6">
-                        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6 md:p-8">
+                        <div className="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+                            <OnboardingStepper
+                                steps={STEPS}
+                                currentStep={currentStep}
+                                setCurrentStep={setCurrentStep}
+                                validateStep={validateStep}
+                            />
                             
+                            <div className="p-6 md:p-8">
+
                             {/* Rejection Alert if applicable */}
                             <RejectionAlert registration={registration} />
 
@@ -158,6 +156,7 @@ export default function PartnerOnboarding() {
                                 )}
                             </div>
 
+                            </div>
                         </div>
                     </div>
                 )}

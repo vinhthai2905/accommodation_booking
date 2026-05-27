@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from apps.app_hotel.models import LoaiTienNghi, TienNghiKhachSan, TienNghiPhong, KhachSan
-from apps.app_hotel.api.views.base import HotelSearchViewMixin
+from apps.app_hotel.api.base.base import HotelSearchViewMixin
 from apps.app_hotel.api.public.hotel_search.serializers import HotelSearchParamsSerializer
 from apps.app_hotel.api.public.hotel_search_filter_count.serializers import HotelCountByAmenitiesSerializer
 

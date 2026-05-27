@@ -7,7 +7,7 @@ from rest_framework import exceptions, status
 from django.utils import timezone
 
 from apps.app_hotel.models import KhachSan
-from apps.app_hotel.api.views.base import PartnerHotelViewMixin
+from apps.app_hotel.api.base.base import PartnerHotelViewMixin
 from apps.app_hotel.api.permissions import IsAuthenticatedPartner, IsAuthenticatedPartnerActive
 
 from apps.app_booking.models import DatPhong

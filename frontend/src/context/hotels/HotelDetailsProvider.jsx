@@ -2,7 +2,7 @@ import { HotelDetailsContext } from "./HotelDetailsContext"
 import { useQuery } from "@tanstack/react-query"
 import { data, useParams, useSearchParams } from "react-router"
 
-import { fetchHotel, fetchHotelRoomTypesAvailability, fetchHotelChildPolicy } from "../../services/hotel/hotelServices"
+import { fetchHotel, fetchHotelRoomTypesAvailability, fetchHotelChildPolicy, fetchHotelAmenities } from "../../services/hotel/hotelServices"
 
 export default function HotelDetailsProvider({ children }) {
     const { uuid: hotelID } = useParams()
@@ -43,6 +43,16 @@ export default function HotelDetailsProvider({ children }) {
         enabled: !!hotel?.id_hotel
     })
 
+    const {
+        isLoading: isLoadingAmenities,
+        data: amenities,
+        error: amenitiesError
+    } = useQuery({
+        queryKey: ["hotelAmenities", hotel?.id_hotel],
+        queryFn: () => fetchHotelAmenities(hotel.id_hotel),
+        enabled: !!hotel?.id_hotel
+    })
+
     const hotelDetailValue = {
         hotelQuery: {
             isLoading: isLoadingHotel,
@@ -60,6 +70,12 @@ export default function HotelDetailsProvider({ children }) {
             isLoading: isLoadingChildPolicy,
             childPolicyError,
             childPolicy
+        },
+
+        hotelAmenitiesQuery: {
+            isLoading: isLoadingAmenities,
+            error: amenitiesError,
+            data: amenities
         }
     }
 

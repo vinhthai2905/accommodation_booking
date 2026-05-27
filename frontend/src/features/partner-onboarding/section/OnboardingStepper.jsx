@@ -13,7 +13,7 @@ export default function OnboardingStepper({ steps, currentStep, setCurrentStep, 
                             <div 
                                 key={s.id}
                                 className={clsx(
-                                    "relative py-4 px-2 flex items-center gap-2 cursor-pointer transition-all border-b-2 -mb-[1px] text-gray-500 hover:text-gray-700",
+                                    "relative py-4 px-2 flex items-center gap-2 cursor-pointer transition-all border-b-2 -mb-px text-gray-500 hover:text-gray-700",
                                     isActive 
                                         ? "border-[#006ce4] text-[#006ce4] font-bold" 
                                         : "border-transparent"

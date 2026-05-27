@@ -21,11 +21,11 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-if os.name == "nt":
-    GDAL_DLL_DIR = r"C:\Users\ASUS\miniconda3\envs\django\Library\bin"
-    os.add_dll_directory(GDAL_DLL_DIR)
+# if os.name == "nt":
+#     GDAL_DLL_DIR = r"C:\Users\ASUS\miniconda3\envs\django\Library\bin"
+#     os.add_dll_directory(GDAL_DLL_DIR)
 
-    GDAL_LIBRARY_PATH = os.path.join(GDAL_DLL_DIR, "gdal.dll")
+#     GDAL_LIBRARY_PATH = os.path.join(GDAL_DLL_DIR, "gdal.dll")
 
 load_dotenv(BASE_DIR / ".env")
 
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'apps.app_admin',
     'apps.app_ai',
     'apps.app_user',
     'apps.app_hotel',
@@ -91,7 +92,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hotel_booking.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
