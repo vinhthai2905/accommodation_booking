@@ -9,7 +9,6 @@ const STEPS = [
 
 export function useOnboardingSteps(methods) {
     const [currentStep, setCurrentStep] = useState(1)
-    const [channelManager, setChannelManager] = useState("no")
     
     const { trigger, getValues } = methods
 
@@ -49,8 +48,6 @@ export function useOnboardingSteps(methods) {
     return {
         currentStep,
         setCurrentStep,
-        channelManager,
-        setChannelManager,
         nextStep,
         prevStep,
         validateStep,

@@ -8,8 +8,6 @@ export function useOnboardingStatus(methods) {
     const { reset } = methods
 
     const { hotelTypes, loading: loadingHotelTypes } = useHotelTypesPartnerOnboarding()
-
-
     const {wards: wardsData, loading: loadingWards} = useWardsPartnerOnboarding()
 
     const { 

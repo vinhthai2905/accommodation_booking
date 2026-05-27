@@ -38,15 +38,16 @@ export default function PartnerOnboarding() {
     const {
         currentStep,
         setCurrentStep,
-        channelManager,
-        setChannelManager,
         nextStep,
         prevStep,
         validateStep,
         STEPS
     } = useOnboardingSteps(methods)
 
-    const { submitting, handleSubmitApi } = useOnboardingSubmit(checkRegistrationStatus)
+    const { 
+        submittingHotelRegistration, 
+        handleSubmitHotelRegistration 
+    } = useOnboardingSubmit(checkRegistrationStatus)
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
@@ -103,8 +104,6 @@ export default function PartnerOnboarding() {
                                 {currentStep === 2 && (
                                     <PropertySetupStep
                                         wards={wards}
-                                        channelManager={channelManager}
-                                        setChannelManager={setChannelManager}
                                     />
                                 )}
 
@@ -125,7 +124,7 @@ export default function PartnerOnboarding() {
                                     <button
                                         onClick={prevStep}
                                         className="px-5 py-2.5 border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold rounded-lg transition-colors flex items-center gap-2 text-sm"
-                                        disabled={submitting}
+                                        disabled={submittingHotelRegistration}
                                     >
                                         <ArrowLeft size={16} /> Quay lại
                                     </button>
@@ -142,11 +141,11 @@ export default function PartnerOnboarding() {
                                     </button>
                                 ) : (
                                     <button
-                                        onClick={methods.handleSubmit(handleSubmitApi)}
-                                        disabled={submitting}
+                                        onClick={methods.handleSubmit(handleSubmitHotelRegistration)}
+                                        disabled={submittingHotelRegistration}
                                         className="px-8 py-2.5 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-bold rounded-lg shadow-md transition-colors flex items-center gap-2 text-sm"
                                     >
-                                        {submitting ? (
+                                        {submittingHotelRegistration ? (
                                             <>
                                                 <Loader2 className="animate-spin" size={16} /> Đang gửi...
                                             </>

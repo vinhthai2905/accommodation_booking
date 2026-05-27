@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query"
 import { submitHotelRegistration } from "../../services/partner-onboarding/partnerOnboardingServices"
 
 export function useOnboardingSubmit(checkRegistrationStatus) {
-    const { mutateAsync: handleSubmitApi, isPending: submitting } = useMutation({
+    const { mutateAsync: handleSubmitHotelRegistration, isPending: submittingHotelRegistration } = useMutation({
         mutationFn: async (formData) => {
             let payload
             if (formData.document_file) {
@@ -54,7 +54,7 @@ export function useOnboardingSubmit(checkRegistrationStatus) {
     })
 
     return {
-        submitting,
-        handleSubmitApi
+        submittingHotelRegistration,
+        handleSubmitHotelRegistration
     }
 }

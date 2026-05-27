@@ -37,7 +37,7 @@ function LocationPicker() {
     ) : null
 }
 
-export default function PropertySetupStep({ wards, channelManager, setChannelManager }) {
+export default function PropertySetupStep({ wards }) {
     const { register, watch, setValue } = useFormContext()
     const address = watch("address")
     const id_ward = watch("id_ward")
@@ -125,32 +125,6 @@ export default function PropertySetupStep({ wards, channelManager, setChannelMan
                     </div>
                 </div>
 
-                {/* Channel Manager Simulation */}
-                <div className="border border-gray-200 rounded-lg p-4 space-y-3 bg-gray-50/50">
-                    <p className="text-sm font-semibold text-gray-700">Kết nối với công cụ quản lý kênh?</p>
-                    <div className="flex flex-col gap-2">
-                        <label className="flex items-center gap-2.5 text-sm text-gray-600 cursor-pointer">
-                            <input 
-                                type="radio" 
-                                name="channel_manager" 
-                                checked={channelManager === "yes"}
-                                onChange={() => setChannelManager("yes")}
-                                className="text-blue-600"
-                            />
-                            Có, kết nối với bên thứ ba
-                        </label>
-                        <label className="flex items-center gap-2.5 text-sm text-gray-600 cursor-pointer">
-                            <input 
-                                type="radio" 
-                                name="channel_manager" 
-                                checked={channelManager === "no"}
-                                onChange={() => setChannelManager("no")}
-                                className="text-blue-600"
-                            />
-                            Không sử dụng tại thời điểm này
-                        </label>
-                    </div>
-                </div>
             </div>
         </div>
     )
