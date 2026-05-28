@@ -8,7 +8,7 @@ export default function useUserBookingMutation() {
     const cancelBookingMutation = useMutation({
         mutationFn: cancelBooking,
         onSuccess: () => {
-            toast.success("Hủy phòng thành công!")
+            toast.success("Yêu cầu hủy đơn đặt phòng của bạn đang được xử lý!")
             queryClient.invalidateQueries({ queryKey: ["userBookings"] })
         },
         onError: (error) => {

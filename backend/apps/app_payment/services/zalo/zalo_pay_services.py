@@ -1,9 +1,11 @@
 from django.conf import settings
 
+import time
 import hmac
 import hashlib
 
 class ZaloPayBaseService:
+    timestamp = int(time.time() * 1000)
     secret_key = settings.ZALOPAY_SECRET_KEY
     app_id = settings.ZALOPAY_APP_ID
     
@@ -14,5 +16,7 @@ class ZaloPayBaseService:
             payload.encode("utf-8"),
             hashlib.sha256
         ).hexdigest()
+        
+    
         
         

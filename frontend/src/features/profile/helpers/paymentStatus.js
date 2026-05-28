@@ -22,7 +22,7 @@ export const paymentStatus = {
         icon: CheckCircle2,
     },
     FAILED: {
-        label: "Thất bại",
+        label: "Hoàn tiền thất bại",
         color: "bg-red-100 text-red-600",
         icon: XCircle,
     },

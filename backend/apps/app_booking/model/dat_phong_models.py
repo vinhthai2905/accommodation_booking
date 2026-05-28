@@ -64,7 +64,7 @@ class DatPhong(TimeStampedModel):
     )
 
     status = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=TrangThaiDatPhong.choices,
         default=TrangThaiDatPhong.PENDING,
         db_column="trang_thai",

@@ -5,12 +5,15 @@ class TrangThaiDatPhong(models.TextChoices):
     CONFIRMED      = "CONFIRMED", "Đã nhận phòng"
     COMPLETED = "COMPLETED", "Đã trả phòng"
     CANCELLED = "CANCELLED", "Đã hủy"
+    CANCELLED_FAILED = "CANCELLED_FAILED", "Hủy phòng thất bại"
 
 class TrangThaiThanhToan(models.TextChoices):
     PENDING   = "PENDING_PAYMENT",  "Chờ thanh toán"
     PAID      = "PAID",      "Đã thanh toán"
-    PENDING_REFUND = "PENDING_REFUND", "Chờ hoàn tiền"
+    REFUND_PENDING = "REFUND_PENDING", "Chờ hoàn tiền"
+    REFUND_PROCESSING = "REFUND_PROCESSING", "Chờ thanh toán"
     REFUNDED = "REFUNDED", "Đã hoàn tiền"
+    REFUND_FAILED = "FAILED_REFUND", "Hoàn tiền thất bại"
     FAILED = "FAILED", "Thanh toán thất bại"
 
 class PhuongThucThanhToan(models.TextChoices):

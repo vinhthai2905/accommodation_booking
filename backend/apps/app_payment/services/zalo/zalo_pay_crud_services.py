@@ -165,3 +165,70 @@ class ZaloPayGetOrderStatusService(ZaloPayBaseService):
         zalo_order_status_response = cls._send_get_order_status_request(cls.app_id, app_trans_id, mac)
         
         return cls._get_order_status_result(zalo_order_status_response)
+    
+class ZaloPayRefundService(ZaloPayGetOrderStatusService):
+    @classmethod
+    def _get_zp_trans_id(cls, app_trans_id):
+        order_status = cls.get_order_status(app_trans_id)
+        if order_status.get("return_code") != 1:
+            return {
+                "return_code": order_status.get("return_code", -1),
+                "return_message": order_status.get("return_message", "Failed to fetch order status"),
+                "sub_return_message": "Cannot fetch zp_trans_id"
+            }
+            
+        zp_trans_id = str(order_status.get("zp_trans_id"))
+        
+        return zp_trans_id
+    
+    @classmethod
+    def _generate_merchant_refund_id(cls):
+        vietnam_now = datetime.now(timezone.utc) + timedelta(hours=7)
+        trans_id_date = vietnam_now.strftime("%y%m%d")
+        unique_id = str(uuid.uuid4())[:8].upper()
+        return f"{trans_id_date}_{cls.app_id}_{unique_id}"
+
+    @classmethod
+    def _generate_refund_mac(cls, mac_payload, secret_key):
+        encrypting_payload = (
+            f"{mac_payload['app_id']}|"
+            f"{mac_payload['zp_trans_id']}|"
+            f"{mac_payload['amount']}|"
+            f"{mac_payload['description']}|"
+            f"{mac_payload['timestamp']}"
+        )
+        return cls._hash_mac(encrypting_payload, secret_key)
+
+    @staticmethod
+    def _send_refund_request(refund_payload):
+        return requests.post(
+            settings.ZALOPAY_CANCEL_ORDER_URL, json=refund_payload, timeout=15
+        )
+
+    @classmethod
+    def refund(cls, app_trans_id: str, amount: int, description: str = "") -> dict:
+        zp_trans_id = cls._get_zp_trans_id(app_trans_id)
+        
+        mac_payload = {
+            "app_id": cls.app_id,
+            "zp_trans_id": zp_trans_id,
+            "amount": amount,
+            "description": description,
+            "timestamp": cls.timestamp
+        }
+        
+        mac = cls._generate_refund_mac(mac_payload, cls.secret_key)
+        
+        refund_payload = {
+            "app_id": cls.app_id,
+            "m_refund_id": cls._generate_merchant_refund_id(),
+            "timestamp": cls.timestamp,
+            "zp_trans_id": zp_trans_id,
+            "amount": amount,
+            "description": description,
+            "mac": mac
+        }
+        
+        response = cls._send_refund_request(refund_payload)
+        
+        return response.json()
