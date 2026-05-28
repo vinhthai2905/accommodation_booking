@@ -18,7 +18,7 @@ from apps.app_booking.api.public.bookings_users.serializers import (
     BookingCreateSerializer
 )
 
-from apps.app_payment.services import ZaloPayService
+from apps.app_payment.services import ZaloPayCreateOrderService
 from apps.app_payment.api.exceptions.zalo import ZaloPaymentGatewayException
 
 from apps.app_hotel.models import PhongKhachSan, KhachSan, ChinhSachTreEm
@@ -168,7 +168,7 @@ class BookingCreateView(views.APIView):
         
     def _create_zalo_order_service(self, booking: DatPhong, invoice: HoaDon, user: NguoiDung) -> dict:
         try:
-            zalo_create_order_result = ZaloPayService.create_order(booking, invoice, user)
+            zalo_create_order_result = ZaloPayCreateOrderService.create_order(booking, invoice, user)
         except Exception as e:
             raise ZaloPaymentGatewayException(detail={"error": e})
 

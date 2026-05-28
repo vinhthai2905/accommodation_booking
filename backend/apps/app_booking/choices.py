@@ -6,8 +6,6 @@ class TrangThaiDatPhong(models.TextChoices):
     COMPLETED = "COMPLETED", "Đã trả phòng"
     CANCELLED = "CANCELLED", "Đã hủy"
 
-
-
 class TrangThaiThanhToan(models.TextChoices):
     PENDING   = "PENDING_PAYMENT",  "Chờ thanh toán"
     PAID      = "PAID",      "Đã thanh toán"

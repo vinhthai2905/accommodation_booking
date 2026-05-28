@@ -13,9 +13,9 @@ from apps.app_booking.api.public.bookings_users.serializers import (
     BookingConfirmationDetailSerializer,
 )
 from apps.app_booking.models import DatPhong, ThanhToan
-from apps.app_booking.choices import TrangThaiDatPhong, TrangThaiThanhToan
+from apps.app_booking.choices import TrangThaiThanhToan
 
-from apps.app_payment.services.zalo import ZaloPayService
+from apps.app_payment.services.zalo import ZaloPayGetOrderStatusService
 from apps.app_payment.api.exceptions.zalo import ZaloPaymentGatewayException
 
 
@@ -44,7 +44,7 @@ class BookingConfirmationView(views.APIView):
         id_transaction = booking.invoice.payments.id_transaction_service
 
         try:
-            zalo_transaction_status = ZaloPayService.get_order_status(id_transaction)
+            zalo_transaction_status = ZaloPayGetOrderStatusService.get_order_status(id_transaction)
         except Exception as e:
             raise ZaloPaymentGatewayException(detail={"error": e})
 
