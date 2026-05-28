@@ -8,9 +8,10 @@ import { clsx } from "clsx"
 
 import { orderStatus } from "../helpers/orderStatus"
 import { paymentLabel } from "../helpers/paymentLabel"
+import { paymentStatus } from "../helpers/paymentStatus"
 import { nightsBetween } from "../../../helpers/booking/bookingHelpers"
 
-export default function BookingCard({ booking, index }) {
+export default function BookingCard({ booking, index, activeTab }) {
     const { hotel, invoice } = booking
 
     const nights = nightsBetween(booking.check_in_date, booking.check_out_date)
@@ -29,9 +30,23 @@ export default function BookingCard({ booking, index }) {
                 <BookingCardImage hotel={hotel} />
 
                 <div className="flex-1 p-5 flex flex-col justify-between min-w-0">
-                    <BookingCardHeader booking={booking} hotel={hotel} orderStatus={orderStatus} />
+                    <BookingCardHeader 
+                        booking={booking} 
+                        hotel={hotel} 
+                        orderStatus={orderStatus}
+                        payment={booking.payment}
+                        paymentStatus={paymentStatus}
+                        paymentLabel={paymentLabel}
+                    />
                     <BookingCardDetails booking={booking} nights={nights} />
-                    <BookingCardFooter booking={booking} paymentLabel={paymentLabel} invoice={invoice}/>
+                    <BookingCardFooter
+                        booking={booking}
+                        paymentLabel={paymentLabel}
+                        invoice={invoice}
+                        payment={booking.payment}
+                        hotel={hotel}
+                        activeTab={activeTab}
+                    />
                 </div>
             </div>
         </motion.div>

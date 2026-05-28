@@ -8,6 +8,7 @@ export default function PartnerProtectedRoute() {
     const { user, accessToken: hasSession, isFetchingUser, isAuthenticated } = useAuthUserContext()
     const [checkingStatus, setCheckingStatus] = useState(true)
     const [registrationStatus, setRegistrationStatus] = useState(null)
+    const isOnboardingPage = location.pathname === "/partner/onboarding"
     const location = useLocation()
 
     useEffect(() => {
@@ -38,17 +39,9 @@ export default function PartnerProtectedRoute() {
     if (!isAuthenticated || user.role !== "Đối tác")
         return <Navigate to="/auth/partner/sign-in" replace />
 
-    const isOnboardingPage = location.pathname === "/partner/onboarding"
 
-    if (registrationStatus !== "Đã duyệt") {
-        if (!isOnboardingPage) {
-            return <Navigate to="/partner/onboarding" replace />
-        }
-    } else {
-        if (isOnboardingPage) {
-            return <Navigate to="/partner/dashboard" replace />
-        }
-    }
+    if (registrationStatus !== "Đã duyệt") 
+        return <Navigate to="/partner/onboarding" replace />
 
     return <Outlet />
 }

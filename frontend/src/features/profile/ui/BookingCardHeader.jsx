@@ -2,7 +2,7 @@ import StatusBadge from "./StatusBadge"
 
 import { MapPin } from "lucide-react"
 
-export default function BookingCardHeader({ hotel, booking, orderStatus }) {
+export default function BookingCardHeader({ hotel, booking, orderStatus, payment, paymentStatus, paymentLabel }) {
     return (
         <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
@@ -19,7 +19,12 @@ export default function BookingCardHeader({ hotel, booking, orderStatus }) {
                     </p>
                 )}
             </div>
-            <StatusBadge orderStatus={orderStatus} status={booking.status} />
+            <div className="flex flex-row gap-2 items-center shrink-0">
+                <StatusBadge statusMap={orderStatus} status={booking.status} />
+                {payment?.status && (
+                    <StatusBadge statusMap={paymentStatus} status={payment.status} />
+                )}
+            </div>
         </div>
     )
 }

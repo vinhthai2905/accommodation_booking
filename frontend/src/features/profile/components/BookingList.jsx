@@ -1,6 +1,7 @@
 import BookingCard from "./BookingCard"
 
-export default function BookingList({ filteredBooking, motion }) {
+
+export default function BookingList({ filteredBooking, activeTab, motion }) {
     return (
         <div className="flex flex-col gap-4">
             {
@@ -9,7 +10,7 @@ export default function BookingList({ filteredBooking, motion }) {
                         key={booking.id_booking}
                         booking={booking}
                         index={i}
-                        
+                        activeTab={activeTab}
                     />
                 ))
             }

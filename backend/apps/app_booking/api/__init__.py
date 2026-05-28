@@ -1,7 +1,8 @@
 from .public.bookings_users.views import (
     BookingCreateView,
     BookingConfirmationView,
-    UserBookingListView
+    UserBookingListView,
+    BookingCancelView
 )
 
 from .private.bookings_partners.views import (

@@ -1,3 +1,4 @@
 from .booking_create_views import BookingCreateView
 from .booking_confirmation_views import BookingConfirmationView
 from .bookings_user_views import UserBookingListView
+from .booking_cancel_views import BookingCancelView

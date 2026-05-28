@@ -3,8 +3,8 @@ import { orderStatus } from "../helpers/orderStatus"
 import { clsx } from "clsx"
 import { AlertCircle } from "lucide-react"
 
-export default function StatusBadge({ status }) {
-    const meta = orderStatus[status] ?? {
+export default function StatusBadge({ status, statusMap = orderStatus }) {
+    const meta = statusMap[status] ?? {
         label: status,
         color: "bg-gray-100 text-gray-600",
         icon: AlertCircle,

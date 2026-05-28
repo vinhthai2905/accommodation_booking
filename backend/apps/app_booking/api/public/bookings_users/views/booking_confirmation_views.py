@@ -58,7 +58,6 @@ class BookingConfirmationView(views.APIView):
             case 1:
                 booking_payment.paid_at = timezone.now()
                 booking_payment.status = TrangThaiThanhToan.PAID
-                booking.status = TrangThaiDatPhong.CONFIRMED
             case 3:
                 return booking_payment
 
