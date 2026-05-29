@@ -1,11 +1,11 @@
 import { clsx } from "clsx"
-import { Pencil, Save, X } from "lucide-react"
+import { Plus, Save, X } from "lucide-react"
 
-export default function EditRoomModal({
-    setIsEditModalOpen,
-    handleSaveRoomEdit,
-    editForm,
-    setEditForm,
+export default function CreateRoomModal({
+    setIsCreateModalOpen,
+    handleCreateRoom,
+    createForm,
+    setCreateForm,
 }) {
     return (
         <div
@@ -38,17 +38,17 @@ export default function EditRoomModal({
                                 "bg-blue-50 text-blue-600"
                             )}
                         >
-                            <Pencil size={18} />
+                            <Plus size={18} />
                         </div>
 
                         <h3 className="text-base font-bold text-gray-900">
-                            Chỉnh sửa tên phòng
+                            Thêm phòng vật lý mới
                         </h3>
                     </div>
 
                     <button
                         type="button"
-                        onClick={() => setIsEditModalOpen(false)}
+                        onClick={() => setIsCreateModalOpen(false)}
                         className={clsx(
                             "rounded-lg p-1.5",
                             "text-gray-400",
@@ -62,7 +62,7 @@ export default function EditRoomModal({
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSaveRoomEdit} className="space-y-4 p-6">
+                <form onSubmit={handleCreateRoom} className="space-y-4 p-6">
                     <div>
                         <label
                             className={clsx(
@@ -78,6 +78,7 @@ export default function EditRoomModal({
                             <input
                                 type="text"
                                 required
+                                placeholder="VD: Phòng 101, P102..."
                                 className={clsx(
                                     "w-full rounded-xl px-4 py-2.5 outline-none",
                                     "border border-gray-200",
@@ -85,55 +86,14 @@ export default function EditRoomModal({
                                     "transition-all",
                                     "focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
                                 )}
-                                value={editForm.room_name}
+                                value={createForm.room_name}
                                 onChange={(e) =>
-                                    setEditForm({
-                                        ...editForm,
+                                    setCreateForm({
+                                        ...createForm,
                                         room_name: e.target.value,
                                     })
                                 }
                             />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label
-                            className={clsx(
-                                "mb-1.5 block",
-                                "text-xs font-semibold uppercase tracking-wider",
-                                "text-gray-600"
-                            )}
-                        >
-                            Trạng thái
-                        </label>
-                        <div className="relative">
-                            <select
-                                className={clsx(
-                                    "w-full rounded-xl px-4 py-2.5 outline-none appearance-none cursor-pointer",
-                                    "border border-gray-200 bg-white",
-                                    "text-sm font-medium text-gray-900",
-                                    "transition-all",
-                                    "focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-                                )}
-                                value={editForm.status || "AVAILABLE"}
-                                onChange={(e) =>
-                                    setEditForm({
-                                        ...editForm,
-                                        status: e.target.value,
-                                    })
-                                }
-                            >
-                                <option value="AVAILABLE">Sẵn sàng</option>
-                                <option value="MAINTENANCE">Bảo trì</option>
-                                <option value="BOOKED">Đã đặt</option>
-                            </select>
-                            
-                            {/* Dropdown arrow icon */}
-                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </div>
                         </div>
                     </div>
 
@@ -146,7 +106,7 @@ export default function EditRoomModal({
                     >
                         <button
                             type="button"
-                            onClick={() => setIsEditModalOpen(false)}
+                            onClick={() => setIsCreateModalOpen(false)}
                             className={clsx(
                                 "rounded-xl px-4 py-2",
                                 "text-sm font-semibold text-gray-600",
@@ -171,7 +131,7 @@ export default function EditRoomModal({
                             )}
                         >
                             <Save size={16} />
-                            <span>Lưu thay đổi</span>
+                            <span>Tạo phòng</span>
                         </button>
                     </div>
                 </form>

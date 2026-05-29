@@ -4,6 +4,7 @@ import HotelNavGroup from "../components/dashboard-navigation/HotelNavGroup"
 import HotelRoomTypeNavGroup from "../components/dashboard-navigation/HotelRoomTypeNavGroup"
 import HotelImgNavGroup from "../components/dashboard-navigation/HotelImgNavGroup"
 import HotelBookingNavGroup from "../components/dashboard-navigation/HotelBookingNavGroup"
+import HotelPolicyNavGroup from "../components/dashboard-navigation/HotelPolicyNavGroup"
 
 import { clsx } from "clsx"
 import { Link } from "react-router"
@@ -17,6 +18,7 @@ export default function DashboardNavigation() {
         toggleImgNav,
         toggleBookingNav,
         toggleRoomTypeNav,
+        togglePolicyNav,
         closeAllNav
     } = useToggleNavSection()
 
@@ -69,6 +71,11 @@ export default function DashboardNavigation() {
                     
                 />
 
+                <HotelPolicyNavGroup
+                    navStates={navStates}
+                    togglePolicyNav={togglePolicyNav}
+                    closeAllNav={closeAllNav}
+                />
 
             </nav>
 

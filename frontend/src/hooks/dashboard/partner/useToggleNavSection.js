@@ -19,7 +19,8 @@ const initialNavStates = {
     hotel: false,
     image: false,
     booking: false,
-    roomType: false
+    roomType: false,
+    policy: false
 }
 
 function navReducer(navStates, action) {
@@ -55,6 +56,10 @@ export default function useToggleNavSection() {
         dispatch({ type: "TOGGLE_NAV", payload: "roomType" })
     }
 
+    const togglePolicyNav = () => {
+        dispatch({ type: "TOGGLE_NAV", payload: "policy" })
+    }
+
     const closeAllNav = () => {
         dispatch({ type: "CLOSE_ALL_NAV" })
     }
@@ -68,6 +73,7 @@ export default function useToggleNavSection() {
         toggleImgNav,
         toggleBookingNav,
         toggleRoomTypeNav,
+        togglePolicyNav,
         closeAllNav
     }
 }

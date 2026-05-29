@@ -4,7 +4,7 @@ import { ChevronDown } from "lucide-react"
 export default function ChildAgeInput({ index, setGuestOptions, guestOptions, setIsAgeInputError, isAgeInputError }) {
     const handleAddChildAge = (age) => {
         setGuestOptions((prevOption) => {
-            const newChildrenAge = [...(prevOption.childrenAge || null)]
+            const newChildrenAge = [...(prevOption.childrenAge || [])]
             newChildrenAge[index] = age
 
             const newGuestOptions = {
@@ -43,17 +43,15 @@ export default function ChildAgeInput({ index, setGuestOptions, guestOptions, se
                 name="childAge"
                 id="childAge"
                 value={guestOptions.childrenAge[index] >= 0 ? guestOptions.childrenAge[index] : -1}
-                onChange={() => { }}
+                onChange={(e) => handleAddChildAge(Number(e.target.value))}
             >
                 <option key={-1} value={-1}>Chọn tuổi</option>
                 {
                     Array.from({ length: 18 }, (_, i) => i).map((age) => {
-                        console.log(age)
                         return (
                             <option
                                 key={age}
                                 value={age}
-                                onClick={() => handleAddChildAge(age)}
                             >
                                 {age} tuổi
                             </option>

@@ -36,12 +36,38 @@ export default function DBRoomRowDatas({ room }) {
             </td>
 
             <td className="p-4">
-                <span className={clsx(
-                    "inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase shadow-sm",
-                    "bg-emerald-50 text-emerald-700 border border-emerald-200/80"
-                )}>
-                    Sẵn sàng
-                </span>
+                {room.status === "AVAILABLE" && (
+                    <span className={clsx(
+                        "inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase shadow-sm",
+                        "bg-emerald-50 text-emerald-700 border border-emerald-200/80"
+                    )}>
+                        Sẵn sàng
+                    </span>
+                )}
+                {room.status === "MAINTENANCE" && (
+                    <span className={clsx(
+                        "inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase shadow-sm",
+                        "bg-amber-50 text-amber-700 border border-amber-200/80"
+                    )}>
+                        Bảo trì
+                    </span>
+                )}
+                {room.status === "BOOKED" && (
+                    <span className={clsx(
+                        "inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase shadow-sm",
+                        "bg-red-50 text-red-700 border border-red-200/80"
+                    )}>
+                        Đã đặt
+                    </span>
+                )}
+                {!room.status && (
+                    <span className={clsx(
+                        "inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase shadow-sm",
+                        "bg-gray-50 text-gray-700 border border-gray-200/80"
+                    )}>
+                        Không rõ
+                    </span>
+                )}
             </td>
         </>
     )

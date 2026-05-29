@@ -21,11 +21,14 @@ export default function useHotelSearchSubmit({
             return
         }
 
-        // if (guestOptions.children + 1 !== guestOptions.childrenAge.length){
-        //     setIsGuestOpened(true)
-        //     setIsAgeInputError(true)
-        //     return
-        // }
+        if (guestOptions.children > 0) {
+            const selectedAges = (guestOptions.childrenAge || []).filter(age => age !== undefined && age >= 0);
+            if (selectedAges.length !== guestOptions.children) {
+                setIsGuestOpened(true)
+                setIsAgeInputError(true)
+                return
+            }
+        }
 
 
         const params = parseHotelSearchParams(selectedPlace, ranges, guestOptions)

@@ -6,8 +6,33 @@ export default function DBBookingRowDatas({ booking }) {
     const userEmail = booking.booking_user.email
 
     const totalPrice = booking.total_price || booking.total_amount || booking.invoice?.total_amount || 0
-    const paymentStatus = booking.payment_status || booking.invoice?.status || "Chưa thanh toán"
-    const status = booking.status || "PENDING"
+    const paymentStatusRaw = booking.payment?.status || booking.payment_status || booking.invoice?.status || "PENDING"
+    const isPaid = paymentStatusRaw?.toUpperCase() === "PAID"
+    const paymentStatusDisplay = isPaid ? "Đã thanh toán" : "Chưa thanh toán"
+
+    const statusRaw = booking.status || "PENDING"
+    let statusDisplay = "Chờ nhận phòng"
+    let statusColor = "bg-blue-50 text-blue-700 border border-blue-200/80"
+
+    switch (statusRaw.toUpperCase()) {
+        case "CONFIRMED":
+            statusDisplay = "Đã nhận phòng"
+            statusColor = "bg-emerald-50 text-emerald-700 border border-emerald-200/80"
+            break
+        case "COMPLETED":
+            statusDisplay = "Đã trả phòng"
+            statusColor = "bg-emerald-50 text-emerald-700 border border-emerald-200/80"
+            break
+        case "CANCELLED":
+            statusDisplay = "Đã hủy"
+            statusColor = "bg-rose-50 text-rose-700 border border-rose-200/80"
+            break
+        case "PENDING":
+        default:
+            statusDisplay = "Chờ nhận phòng"
+            statusColor = "bg-amber-50 text-amber-700 border border-amber-200/80"
+            break
+    }
 
     return (
         <>
@@ -61,22 +86,20 @@ export default function DBBookingRowDatas({ booking }) {
             <td className="p-4">
                 <span className={clsx(
                     "inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase shadow-sm",
-                    paymentStatus?.toLowerCase().includes("paid")
+                    isPaid
                         ? "bg-emerald-50 text-emerald-700 border border-emerald-200/80"
                         : "bg-amber-50 text-amber-700 border border-amber-200/80"
                 )}>
-                    {paymentStatus}
+                    {paymentStatusDisplay}
                 </span>
             </td>
 
             <td className="p-4">
                 <span className={clsx(
                     "inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase shadow-sm",
-                    status?.toLowerCase().includes("cancel")
-                        ? "bg-rose-50 text-rose-700 border border-rose-200/80"
-                        : "bg-blue-50 text-blue-700 border border-blue-200/80"
+                    statusColor
                 )}>
-                    {status}
+                    {statusDisplay}
                 </span>
             </td>
         </>

@@ -4,6 +4,7 @@ from apps.app_hotel.api import (
     PartnerRoomTypeListView,
     PartnerRoomTypeView,
     PartnerRoomTypeRoomsListView,
+    PartnerRoomDetailView,
     PartnerRoomTypeDetailsListView,
     PartnerRoomTypeDetailView,
     PartnerBedListView,
@@ -20,10 +21,12 @@ from apps.app_hotel.api import (
     UpdateHotelsNearBeachView,
     HotelTypeListView,
     PartnerHotelRegistrationView,
+    PartnerChildrenPolicyView
 )
 
 urlpatterns = [
     path("hotel", PartnerHotelView.as_view(), name="partner-hotel-info"),
+    path("hotel/policy/children", PartnerChildrenPolicyView.as_view(), name="partner-hotel-children-policy"),
     path("hotel/update-near-beach", UpdateHotelsNearBeachView.as_view(), name="update-hotels-near-beach"),
     path("hotel/images", PartnerHotelImageListView.as_view(), name="partner-hotel-images"),
     path("hotel/images/<int:id_hotel_image>", PartnerHotelImageDetailView.as_view(), name="partner-hotel-image-detail"),
@@ -43,6 +46,7 @@ urlpatterns = [
     path("hotel/room_types", PartnerRoomTypeListView.as_view(), name="partner-hotel-room-types"),
     path("hotel/room_type/<int:id_room_type>", PartnerRoomTypeView.as_view(), name="partner-hotel-room-type-manage"),
     path("hotel/room_type/<int:id_room_type>/rooms", PartnerRoomTypeRoomsListView.as_view(), name="partner-hotel-rooms"),
+    path("hotel/rooms/<int:id_room>", PartnerRoomDetailView.as_view(), name="partner-hotel-room-detail"),
     
     # Hotel's room types detail 
     path("hotel/beds", PartnerBedListView.as_view(), name="partner-hotel-beds"),

@@ -100,6 +100,18 @@ class PhongKhachSan(models.Model):
         db_column="ten_phong",
     )
 
+    class RoomStatus(models.TextChoices):
+        AVAILABLE = 'AVAILABLE', 'Sẵn sàng'
+        MAINTENANCE = 'MAINTENANCE', 'Bảo trì'
+        BOOKED = 'BOOKED', 'Đã đặt'
+
+    status = models.CharField(
+        max_length=20,
+        choices=RoomStatus.choices,
+        default=RoomStatus.AVAILABLE,
+        db_column="trang_thai",
+    )
+
     class Meta:
         db_table = "phong_khach_san"
         verbose_name = "Phòng khách sạn"

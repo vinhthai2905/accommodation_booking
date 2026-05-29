@@ -6,10 +6,17 @@ import DeleteRoomModal from "../../modal/DeleteRoomModal"
 import EditRoomModal from "../../modal/EditRoomModal"
 
 import { useState } from "react"
+import { useParams } from "react-router"
+import toast from "react-hot-toast"
 
 import usePartnerRoomModals from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/modals/usePartnerRoomModals"
+import { 
+    useUpdatePhysicalRoomMutation, 
+    useDeletePhysicalRoomMutation 
+} from "../../../../../../../../hooks/dashboard/partner/room-type-hooks/services/usePartnerRoomTypeMutations"
 
 export default function RoomTableRow({ initialRoom }) {
+    const { id_room_type } = useParams()
     const [room, setRoom] = useState(initialRoom)
     const {
         menuRef,
@@ -21,21 +28,42 @@ export default function RoomTableRow({ initialRoom }) {
         setIsDeleteModalOpen
     } = usePartnerRoomModals()
 
+    const updateRoomMutation = useUpdatePhysicalRoomMutation(id_room_type)
+    const deleteRoomMutation = useDeletePhysicalRoomMutation(id_room_type)
+
     const [editForm, setEditForm] = useState({
         room_name: initialRoom.room_name || "",
+        status: initialRoom.status || "AVAILABLE",
     })
 
     const handleSaveRoomEdit = (e) => {
         e.preventDefault()
-        setRoom(prev => ({
-            ...prev,
-            room_name: editForm.room_name,
-        }))
-        setIsEditModalOpen(false)
+        
+        updateRoomMutation.mutate(
+            { id_room: room.id_room, payload: editForm },
+            {
+                onSuccess: (data) => {
+                    setRoom(data) // Update local state with the returned new room data
+                    setIsEditModalOpen(false)
+                    toast.success("Cập nhật tên phòng thành công!")
+                },
+                onError: (error) => {
+                    toast.error(error.response?.data?.error || "Đã xảy ra lỗi khi cập nhật phòng.")
+                }
+            }
+        )
     }
 
     const handleDeleteRoom = () => {
-        setIsDeleteModalOpen(false)
+        deleteRoomMutation.mutate(room.id_room, {
+            onSuccess: () => {
+                setIsDeleteModalOpen(false)
+                toast.success("Xóa phòng thành công!")
+            },
+            onError: (error) => {
+                toast.error(error.response?.data?.error || "Đã xảy ra lỗi khi xóa phòng.")
+            }
+        })
     }
 
     return (
@@ -43,7 +71,7 @@ export default function RoomTableRow({ initialRoom }) {
             <DBRoomRowDatas room={room} />
 
             <td className="p-4 text-center relative" ref={menuRef}>
-                <DBRoomActionsButton
+                <DBRoomActionButton
                     isMenuOpen={isMenuOpen}
                     setIsMenuOpen={setIsMenuOpen}
                 />

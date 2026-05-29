@@ -30,6 +30,7 @@ import DashboardRoomTypeDetail from './features/dashboard/partner/pages/Dashboar
 import DBEditHotel from './features/dashboard/partner/components/dashboard-main/dashboard-hotel/crud-page/edit/DBEditHotel'
 import DBCreateRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/create/DBCreateRoomType'
 import DBEditRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/edit/DBEditRoomType'
+import DashboardChildrenPolicy from './features/dashboard/partner/pages/DashboardChildrenPolicy'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 import DashboardReviewApplications from './features/dashboard/admin/pages/DashboardReviewApplications'
@@ -141,6 +142,7 @@ function App() {
                 { path: "info", element: <DBEditHotel /> },
                 { path: "images", element: <DashboardHotelImages /> },
                 { path: "amenities", element: <DashboardHotelAmenities /> },
+                { path: "policy/children", element: <DashboardChildrenPolicy /> },
                 { path: "room-type", element: <DashboardRoomTypes /> },
                 { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRooms /> },
                 { path: "bookings", element: <DashboardBookings /> },

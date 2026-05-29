@@ -3,7 +3,7 @@ import DBRoomToolBarButton from "../../../../../ui/dashboard-main/dashboard-room
 import { clsx } from "clsx"
 import { Filter, Plus, Search } from "lucide-react"
 
-export default function DBRoomToolBar({ searchTerm, setSearchTerm }) {
+export default function DBRoomToolBar({ searchTerm, setSearchTerm, setIsCreateModalOpen }) {
     return (
         <div
             className={clsx(
@@ -43,7 +43,7 @@ export default function DBRoomToolBar({ searchTerm, setSearchTerm }) {
                     Trạng thái
                 </DBRoomToolBarButton>
 
-                <DBRoomToolBarButton>
+                <DBRoomToolBarButton onClick={() => setIsCreateModalOpen(true)}>
                     <Plus size={16} />
                     Thêm phòng mới
                 </DBRoomToolBarButton>

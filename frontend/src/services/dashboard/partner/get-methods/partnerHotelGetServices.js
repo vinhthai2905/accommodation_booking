@@ -88,3 +88,26 @@ export const fetchPartnerHotelCategoryDetail = async (id_amenity_category) => {
   return data
 }
 
+export const fetchPartnerChildrenPolicy = async () => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.get(
+    `${apiUrl}/api/partner/hotel/policy/children`,
+    { headers }
+  )
+
+  return data
+}
+
+export const updatePartnerChildrenPolicy = async (payload) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.put(
+    `${apiUrl}/api/partner/hotel/policy/children`,
+    payload,
+    { headers }
+  )
+
+  return data
+}
+

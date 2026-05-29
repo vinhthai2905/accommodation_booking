@@ -41,7 +41,10 @@ class BookingCreateSerializer(serializers.Serializer):
     note = serializers.CharField(required=False, allow_blank=True)
 
     def validate(self, attrs):
-        if len(attrs["children_ages"]) != int(attrs["total_children"]):
+        children_ages = attrs.get("children_ages", [])
+        total_children = attrs.get("total_children", 0)
+        
+        if len(children_ages) != int(total_children):
             raise exceptions.ValidationError(
                 {"children_ages": "Children and children ages are not consistent."}
             )

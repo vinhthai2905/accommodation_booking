@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.db import transaction
 from django.db.models import QuerySet
+from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import views, status
 from rest_framework import exceptions
@@ -76,8 +77,11 @@ class BookingCreateView(views.APIView):
 
         return user
 
-    def _get_hotel_child_policy(self, hotel: KhachSan) -> ChinhSachTreEm:
-        return hotel.child_policy
+    def _get_hotel_child_policy(self, hotel: KhachSan):
+        try:
+            return hotel.child_policy
+        except ObjectDoesNotExist:
+            return None
 
     def _create_booking(
         self, validated_data, hotel: KhachSan, user: NguoiDung
@@ -87,7 +91,7 @@ class BookingCreateView(views.APIView):
             id_hotel=hotel,
             check_in_date=validated_data["check_in"],
             check_out_date=validated_data["check_out"],
-            check_in_time=validated_data["check_in_time"],
+            check_in_time=validated_data.get("check_in_time"),
             total_room_quantity=len(validated_data["selected_rooms"]),
             total_adults=validated_data.get("total_adults", 0),
             total_children=validated_data.get("total_children", 0),
@@ -134,15 +138,18 @@ class BookingCreateView(views.APIView):
         return chargeable_ages
 
     def _create_child_booking_details(
-        self, booking: DatPhong, hotel_child_policy: ChinhSachTreEm, validated_data
+        self, booking: DatPhong, hotel_child_policy, validated_data
     ) -> int:
 
-        if int(validated_data["total_children"]) == 0:
+        if int(validated_data.get("total_children", 0)) == 0:
+            return 0
+            
+        if not hotel_child_policy:
             return 0
 
         total_child_surcharge = 0
         chargeable_ages = self._get_chargeable_child_ages(
-            validated_data["children_ages"], hotel_child_policy
+            validated_data.get("children_ages", []), hotel_child_policy
         )
 
         if len(chargeable_ages) > 0:

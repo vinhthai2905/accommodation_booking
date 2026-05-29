@@ -13,10 +13,15 @@ import { useParams } from "react-router"
 
 import usePartnerRooms from "../../../../hooks/dashboard/partner/room-type-hooks/services/usePartnerRooms"
 
+import CreateRoomModal from "../components/dashboard-main/dashboard-room/modal/CreateRoomModal"
+import usePartnerCreateRoomForm from "../../../../hooks/dashboard/partner/room-type-hooks/form/usePartnerCreateRoomForm"
+
 export default function DashboardRooms() {
     const { id_room_type } = useParams()
     const { data: rooms, isPending, isError, error } = usePartnerRooms(id_room_type, true)
     const [searchTerm, setSearchTerm] = useState("")
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+    const { createForm, setCreateForm, handleCreateRoom, isCreating } = usePartnerCreateRoomForm(id_room_type, setIsCreateModalOpen)
 
     if (isPending)
         return <LoadingHotelRooms labelLoading={"Đang tải dữ liệu phòng vật lý..."} />
@@ -50,10 +55,20 @@ export default function DashboardRooms() {
                     "rounded-xl border border-gray-200 bg-white shadow-sm"
                 )}
             >
-                <DBRoomToolBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                <DBRoomToolBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} setIsCreateModalOpen={setIsCreateModalOpen} />
                 <DBRoomTable filteredRooms={filteredRooms} />
                 <DBRoomPagination filteredRooms={filteredRooms} />
             </motion.div>
+            
+            {isCreateModalOpen && (
+                <CreateRoomModal
+                    setIsCreateModalOpen={setIsCreateModalOpen}
+                    handleCreateRoom={handleCreateRoom}
+                    createForm={createForm}
+                    setCreateForm={setCreateForm}
+                    isCreating={isCreating}
+                />
+            )}
         </div>
     )
 }

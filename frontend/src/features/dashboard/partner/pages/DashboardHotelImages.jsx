@@ -11,6 +11,7 @@ import UploadHotelImageModal from "../components/dashboard-main/dashboard-hotel-
 
 import { clsx } from "clsx"
 import { useState } from "react"
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion"
 
 import usePartnerHotel from "../../../../hooks/dashboard/partner/hotel-hooks/services/usePartnerHotel"
@@ -61,6 +62,7 @@ export default function DashboardHotelImages() {
         })
 
     const handleSearchChange = (e) => setSearchTerm(e.target.value)
+    // eslint-disable-next-line no-unused-vars
     const handleFilterChange = (type) => {
         // Implement filter logic if needed
     }

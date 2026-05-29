@@ -18,8 +18,10 @@ export default function useCreateBooking(setStepCheckout) {
                 window.location.href = redirectPaymentGateway
         },
 
-        onError: () => {
-            toast.error("Create booking failed.")
+        onError: (err) => {
+            const errorData = err.response?.data
+            console.error(errorData)
+            toast.error("Lỗi đặt phòng: " + JSON.stringify(errorData))
         },
     })
 

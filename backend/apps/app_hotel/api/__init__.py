@@ -22,7 +22,12 @@ from .private.partner_hotel_detail.views.room_type_views import (
 )
 
 from .private.partner_hotel_detail.views.room_views import (
-    PartnerRoomTypeRoomsListView
+    PartnerRoomTypeRoomsListView,
+    PartnerRoomDetailView
+)
+
+from .private.partner_hotel_detail.views.hotel_policy_views import (
+    PartnerChildrenPolicyView
 )
 
 from .private.partner_hotel_detail.views.room_type_detail_views import (

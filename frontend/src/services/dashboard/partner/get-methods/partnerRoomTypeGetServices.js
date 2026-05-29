@@ -36,3 +36,38 @@ export const deletePartnerRoomType = async (id_room_type) => {
 
   return data
 }
+
+export const createPartnerPhysicalRoom = async (id_room_type, payload) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.post(
+    `${apiUrl}/api/partner/hotel/room_type/${id_room_type}/rooms`,
+    payload,
+    { headers }
+  )
+
+  return data
+}
+
+export const updatePartnerPhysicalRoom = async (id_room, payload) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.put(
+    `${apiUrl}/api/partner/hotel/rooms/${id_room}`,
+    payload,
+    { headers }
+  )
+
+  return data
+}
+
+export const deletePartnerPhysicalRoom = async (id_room) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.delete(
+    `${apiUrl}/api/partner/hotel/rooms/${id_room}`,
+    { headers }
+  )
+
+  return data
+}
