@@ -1,5 +1,5 @@
-import UserProfileDrop from "../../../components/layout/UserProfileDrop"
-import UserProfileButton from "../../../components/layout/UserProfileButton"
+import UserProfileDrop from "../components/user-profile-badge/UserProfileDrop"
+import UserProfileButton from "../components/user-profile-badge/UserProfileButton"
 
 import { clsx } from "clsx"
 import { useContext, useState } from "react"
@@ -8,7 +8,7 @@ import { AuthUserContext } from "../../../context/authentication/AuthUserContext
 
 import useClickOutside from "../../../hooks/common/useClickOutside"
 
-import { parseFullName } from "../../../helpers/parseFullName"
+import { parseFullName } from "../../../helpers/common/parseFullName"
 
 export default function UserProfileBadge() {
   const [isOpen, setIsOpen] = useState(false)

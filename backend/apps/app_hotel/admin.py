@@ -4,11 +4,31 @@ from django.contrib import admin
 
 from .models import *
 
-admin.site.register(KhachSan)
+@admin.register(KhachSan)
+class KhachSanAdmin(admin.ModelAdmin):
+    list_display = ("id_hotel", "name")
+
+
+@admin.register(LoaiPhong)
+class LoaiPhongAdmin(admin.ModelAdmin):
+    list_display = ("id_room_type", "type_name", "id_hotel")
+
+
+@admin.register(PhongKhachSan)
+class PhongKhachSanAdmin(admin.ModelAdmin):
+    list_display = ("id_room", "room_name", "id_room_type", "get_hotel")
+
+    def get_hotel(self, obj):
+        return obj.id_room_type.id_hotel
+
+    get_hotel.short_description = "Hotel"
+
 admin.site.register(LoaiKhachSan)
 admin.site.register(ChinhSachTreEm)
-admin.site.register(LoaiPhong)
 admin.site.register(ChiTietLoaiPhong)
 admin.site.register(Giuong)
-admin.site.register(PhongKhachSan)
 admin.site.register(HinhAnhKhachSan)
+
+admin.site.register(DanhMucTienNghi)
+admin.site.register(LoaiTienNghi)
+admin.site.register(TienNghiKhachSan)

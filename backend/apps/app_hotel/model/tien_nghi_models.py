@@ -1,5 +1,7 @@
 from django.db import models
 
+from .danh_muc_tien_nghi_models import DanhMucTienNghi
+
 from .khach_san_models import KhachSan
 from .phong_models import LoaiPhong
 
@@ -8,6 +10,15 @@ class LoaiTienNghi(models.Model):
     id_amenity_type = models.AutoField(
         primary_key=True,
         db_column="id_loai_tien_nghi",
+    )
+
+    id_amenity_category = models.ForeignKey(
+        DanhMucTienNghi,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        db_column="id_danh_muc_tien_nghi",
+        related_name="amenity_types",
     )
 
     name = models.CharField(
@@ -29,6 +40,7 @@ class LoaiTienNghi(models.Model):
         db_table = "loai_tien_nghi"
         verbose_name = "Loại tiện nghi"
         verbose_name_plural = "Loại tiện nghi"
+        ordering = ['-id_amenity_type']
 
     def __str__(self):
         return self.name
@@ -58,6 +70,7 @@ class TienNghiKhachSan(models.Model):
         db_table = "tien_nghi_khach_san"
         verbose_name = "Tiện nghi khách sạn"
         verbose_name_plural = "Tiện nghi khách sạn"
+        ordering = ['-id_hotel_amenity']
 
     def __str__(self):
         return f"{self.id_hotel} - {self.id_amenity_type}"

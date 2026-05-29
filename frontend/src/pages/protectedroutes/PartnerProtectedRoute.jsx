@@ -1,17 +1,29 @@
-import { Outlet, Navigate } from "react-router"
-
-import { useAuthUserContext } from "../../hooks/authentication/common/useAuthUserContext"
 import LoadingFullScreen from "../../features/book/components/Shared/LoadingFullScreen"
 
+import { Outlet, Navigate, useLocation } from "react-router"
+import { useAuthUserContext } from "../../hooks/authentication/common/useAuthUserContext"
+
+import { usePartnerOnboarding } from "../../hooks/partner-onboarding/services/usePartnerOnboarding"
+
 export default function PartnerProtectedRoute() {
-    const { user, isFetchingUser, isAuthenticated } = useAuthUserContext()
+    const { user, accessToken: hasSession, isFetchingUser, isAuthenticated } = useAuthUserContext()
+
+    const { partnerRegistration, isLoadingPartnerRegistration } = usePartnerOnboarding()
+
+    const location = useLocation()
+    const isOnboardingPage = location.pathname === "/partner/onboarding"
+
+    const isPartner = isAuthenticated && user?.role === "Đối tác"
+    const isFetchingPartnerRegistration = isFetchingUser || isLoadingPartnerRegistration
     
-    if (isFetchingUser)
+    if (hasSession && isFetchingPartnerRegistration)
         return <LoadingFullScreen />
 
-    if (!isAuthenticated || user.role !== "Đối tác")
-        return <Navigate to="/index" replace />
+    if (!isPartner)
+        return <Navigate to="/auth/partner/sign-in" replace />
 
+    if (partnerRegistration?.status !== "Đã duyệt" && !isOnboardingPage) 
+        return <Navigate to="/partner/onboarding" replace />
 
     return <Outlet />
 }

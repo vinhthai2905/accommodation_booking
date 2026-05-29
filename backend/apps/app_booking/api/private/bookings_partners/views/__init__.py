@@ -1,0 +1,1 @@
+from .bookings_partner_views import PartnerBookingListView

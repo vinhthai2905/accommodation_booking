@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { BookingContext } from "../../context/booking/BookingContext"
 
 import { buildBookingPayLoad } from "../../features/book/helpers/buildBookingPayload"
-import { getCheckoutParams } from "../../helpers/getCheckoutParams"
+import { getCheckoutParams } from "../../helpers/booking/getCheckoutParams"
 
 export default function useBookingPayload() {
     const [searchParams] = useSearchParams()

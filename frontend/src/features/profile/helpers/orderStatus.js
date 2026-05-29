@@ -2,17 +2,17 @@ import { AlertCircle, CheckCircle2, XCircle } from "lucide-react"
 
 export const orderStatus = {
     PENDING: {
-        label: "Chờ xác nhận",
+        label: "Chờ nhận phòng",
         color: "bg-amber-100 text-amber-700",
         icon: AlertCircle,
     },
     CONFIRMED: {
-        label: "Đã xác nhận",
+        label: "Đã nhận phòng",
         color: "bg-blue-100 text-blue-700",
         icon: CheckCircle2,
     },
     COMPLETED: {
-        label: "Hoàn tất",
+        label: "Đã trả phòng",
         color: "bg-emerald-100 text-emerald-700",
         icon: CheckCircle2,
     },

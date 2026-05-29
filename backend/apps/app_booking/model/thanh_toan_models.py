@@ -35,7 +35,7 @@ class ThanhToan(models.Model):
     )
     
     status = models.CharField(
-        max_length=15,
+        max_length=20,
         choices=TrangThaiThanhToan.choices,
         default=TrangThaiThanhToan.PENDING,
         db_column="trang_thai",

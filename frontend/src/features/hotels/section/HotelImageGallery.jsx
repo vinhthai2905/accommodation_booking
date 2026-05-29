@@ -1,5 +1,5 @@
-import TopGallery from "../components/TopGallery"
-import BottomGallery from "../components/BottomGallery"
+import TopGallery from "../components/hotel-overview/TopGallery"
+import BottomGallery from "../components/hotel-overview/BottomGallery"
 
 const images = [
     "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1200&auto=format&fit=crop",

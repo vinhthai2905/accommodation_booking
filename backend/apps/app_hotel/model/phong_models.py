@@ -3,7 +3,7 @@ from django.db import models
 from .khach_san_models import KhachSan
 from .giuong_models import Giuong
 
-from apps.common.models import TimeStampedModel
+from apps.common.model.models import TimeStampedModel
 
 
 class LoaiPhong(TimeStampedModel):
@@ -98,6 +98,18 @@ class PhongKhachSan(models.Model):
     room_name = models.CharField(
         max_length=100,
         db_column="ten_phong",
+    )
+
+    class RoomStatus(models.TextChoices):
+        AVAILABLE = 'AVAILABLE', 'Sẵn sàng'
+        MAINTENANCE = 'MAINTENANCE', 'Bảo trì'
+        BOOKED = 'BOOKED', 'Đã đặt'
+
+    status = models.CharField(
+        max_length=20,
+        choices=RoomStatus.choices,
+        default=RoomStatus.AVAILABLE,
+        db_column="trang_thai",
     )
 
     class Meta:

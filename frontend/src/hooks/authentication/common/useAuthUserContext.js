@@ -8,7 +8,8 @@ export const useAuthUserContext = () => {
         isFetchingUser,
         setAuthUserState,
         clearAuthUserState,
-        isAuthenticated
+        isAuthenticated,
+        accessToken
     } = useContext(AuthUserContext)
 
     return {
@@ -17,5 +18,6 @@ export const useAuthUserContext = () => {
         setAuthUserState,
         clearAuthUserState,
         isAuthenticated,
+        accessToken
     }
 }

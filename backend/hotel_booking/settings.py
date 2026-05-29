@@ -20,6 +20,13 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+if os.name == "nt":
+    GDAL_DLL_DIR = r"C:\Users\ASUS\miniconda3\envs\django\Library\bin"
+    os.add_dll_directory(GDAL_DLL_DIR)
+
+    GDAL_LIBRARY_PATH = os.path.join(GDAL_DLL_DIR, "gdal.dll")
+
 load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
@@ -47,6 +54,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'apps.app_admin',
+    'apps.app_ai',
     'apps.app_user',
     'apps.app_hotel',
     'apps.app_location',
@@ -55,6 +64,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,7 +72,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'hotel_booking.urls'
@@ -83,7 +92,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hotel_booking.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -154,6 +162,7 @@ SIMPLE_JWT = {
 ZALOPAY_APP_ID = int(os.getenv("ZALOPAY_APP_ID"))
 ZALOPAY_SECRET_KEY = os.getenv("ZALOPAY_SECRET_KEY")
 ZALOPAY_CREATE_ORDER_URL = os.getenv("ZALOPAY_CREATE_ORDER_URL")
+ZALOPAY_CANCEL_ORDER_URL = os.getenv("ZALOPAY_CANCEL_ORDER_URL")
 ZALOPAY_GET_ORDER_STATUS_URL = os.getenv("ZALOPAY_GET_ORDER_STATUS_URL")
 
 
@@ -165,3 +174,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

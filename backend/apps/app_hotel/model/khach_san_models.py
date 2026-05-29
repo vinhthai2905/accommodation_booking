@@ -50,7 +50,7 @@ class KhachSan(models.Model):
         NguoiDung,
         on_delete=models.CASCADE,
         db_column="id_doi_tac",
-        related_name="hotels",
+        related_name="hotel",
     )
 
     id_ward = models.ForeignKey(
@@ -81,6 +81,18 @@ class KhachSan(models.Model):
         null=True,
         blank=True,
         db_column="vi_tri",
+    )
+    
+    distance_to_beach = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        db_column="khoan_cach_toi_bien"
+    )
+    
+    is_near_beach = models.BooleanField(
+        null=True,
+        default=False,
+        db_column="gan_bien"
     )
 
     class Meta:

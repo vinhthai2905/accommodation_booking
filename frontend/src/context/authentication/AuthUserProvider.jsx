@@ -8,7 +8,7 @@ import useAuthActions from "../../hooks/authentication/common/useAuthActions"
 export default function AuthUserProvider({ children }) {
     const [user, setUserState] = useState(null)
     const { setAuthUserState, fetchAuthUserState, clearAuthUserState } = useAuthActions(setUserState)
-    const { isPending, error, data } = useAuthFetchUser(fetchAuthUserState)
+    const { isPending, error, data, accessToken } = useAuthFetchUser(fetchAuthUserState)
 
     const authUserContext = {
         user,
@@ -16,6 +16,7 @@ export default function AuthUserProvider({ children }) {
         setAuthUserState,
         clearAuthUserState,
         isAuthenticated: !!user,
+        accessToken
     }
 
     return (

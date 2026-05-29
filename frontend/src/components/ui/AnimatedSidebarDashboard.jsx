@@ -1,7 +1,8 @@
 import { clsx } from "clsx"
 import { motion } from "framer-motion"
 
-export default function AnimatedSidebarDashboard({ children, className }) {
+export default function AnimatedSidebarDashboard({ children, className}) {
+    
     return (
         <motion.aside
             initial={{ x: -100, opacity: 0 }}

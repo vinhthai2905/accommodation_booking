@@ -20,6 +20,7 @@ export default function HotelCardSlider() {
             behavior: "smooth",
         })
     }
+
     return (
         <div className={clsx(
             "flex flex-col"

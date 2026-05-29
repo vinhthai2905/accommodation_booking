@@ -1,3 +1,11 @@
-from .views.bookings_user_views import *
-from .views.booking_create_views import *
-from .views.booking_confirmation_views import *
+from .public.bookings_users.views import (
+    BookingCreateView,
+    BookingConfirmationView,
+    UserBookingListView,
+    BookingCancelView
+)
+
+from .private.bookings_partners.views import (
+    PartnerBookingListView
+)
+

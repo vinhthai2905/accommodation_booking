@@ -1,0 +1,25 @@
+.hotel-hover-popup {
+    width: 380px !important;
+}
+
+.hotel-hover-popup .leaflet-popup-content-wrapper {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.hotel-hover-popup .leaflet-popup-content {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+}
+
+.hotel-hover-popup .leaflet-popup-tip-container {
+    display: none !important;
+}
+
+.custom-price-marker {
+    background: transparent !important;
+    border: none !important;
+}

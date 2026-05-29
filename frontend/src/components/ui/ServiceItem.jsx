@@ -1,13 +1,14 @@
 import { clsx } from "clsx"
+import { Link } from "react-router"
 
-export default function ServiceItem({ pathLink, serviceName }) {
+export default function ServiceItem({ pathLink, serviceName, to = "#" }) {
     return (
         <li className={clsx(
             "px-2 py-2",
             "hover:bg-[#1a4fa0] hover:rounded-2xl hover:cursor-pointer",
 
         )}>
-            <a>
+            <Link to={to}>
                 <span className={clsx(
                     "flex gap-3",
                     "sm:gap-2",
@@ -20,7 +21,7 @@ export default function ServiceItem({ pathLink, serviceName }) {
                     </span>
                     <div className="text-sm">{serviceName}</div>
                 </span>
-            </a>
+            </Link>
         </li>
     )
 }

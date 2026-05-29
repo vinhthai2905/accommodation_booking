@@ -5,7 +5,7 @@ from django.db import models
 from apps.app_user.models import NguoiDung
 from apps.app_hotel.models import KhachSan
 
-from apps.common.models import TimeStampedModel
+from apps.common.model.models import TimeStampedModel
 from apps.app_booking.choices import TrangThaiDatPhong
 
 class DatPhong(TimeStampedModel):
@@ -64,7 +64,7 @@ class DatPhong(TimeStampedModel):
     )
 
     status = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=TrangThaiDatPhong.choices,
         default=TrangThaiDatPhong.PENDING,
         db_column="trang_thai",

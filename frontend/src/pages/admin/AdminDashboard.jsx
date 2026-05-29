@@ -1,6 +1,6 @@
-import { Users, DollarSign, Hotel, TrendingUp, ArrowUpRight, ArrowDownRight, MoreHorizontal } from 'lucide-react';
-import { motion } from 'framer-motion';
-import clsx from 'clsx';
+import { Users, DollarSign, Hotel, TrendingUp, ArrowUpRight, ArrowDownRight, MoreHorizontal } from "lucide-react"
+import { motion } from "framer-motion"
+import { clsx } from "clsx"
 
 const StatCard = ({ title, value, change, isPositive, icon: Icon, delay }) => (
   <motion.div
@@ -60,7 +60,7 @@ const AdminDashboard = () => {
 
   return (
     <div className={clsx("space-y-8")}>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         className={clsx("flex justify-between items-end")}
@@ -89,7 +89,7 @@ const AdminDashboard = () => {
       {/* Sections */}
       <div className={clsx("grid grid-cols-1 xl:grid-cols-3 gap-6")}>
         {/* Main Chart Area placeholder */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
@@ -122,7 +122,7 @@ const AdminDashboard = () => {
         </motion.div>
 
         {/* Recent Activity */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
@@ -137,14 +137,14 @@ const AdminDashboard = () => {
               <MoreHorizontal size={20} />
             </button>
           </div>
-          
+
           <div className={clsx("space-y-4")}>
             {recentBookings.map((booking, i) => (
               <div key={i} className={clsx(
                 "flex items-center justify-between",
                 "p-3 rounded-xl hover:bg-gray-700/50",
                 "transition-colors"
-               )}>
+              )}>
                 <div>
                   <p className={clsx("font-medium text-gray-200")}>{booking.user}</p>
                   <p className={clsx("text-sm text-gray-400")}>{booking.hotel}</p>

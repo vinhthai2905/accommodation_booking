@@ -37,11 +37,11 @@ export default function useAuthLoginForm() {
             const responseData = await response.json()
 
             if (!response.ok) {
-                const { error } = responseData
+                const errorMessage = responseData.detail || (responseData.error ? JSON.stringify(responseData.error) : "Đăng nhập thất bại");
 
                 setError("root.server", {
                     type: "server",
-                    message: JSON.stringify(error[0]),
+                    message: errorMessage,
                 })
             }
             else {

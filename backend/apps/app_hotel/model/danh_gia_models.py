@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.db import models
 
-from backend.apps.app_booking.model.dat_phong_models import DatPhong
-from apps.common.models import TimeStampedModel
+from apps.app_booking.model.dat_phong_models import DatPhong
+from backend.apps.common.model.models import TimeStampedModel
 
 
 class DanhGiaKhachSan(TimeStampedModel):

@@ -1,8 +1,4 @@
-import { parsedData } from "../../helpers/parseInput"
-
 const apiURL = import.meta.env.VITE_API_URL
-
-
 
 // export const registerUser = (data) => {
 //     return fetch("http://localhost:8000/api/users", {
@@ -11,7 +7,7 @@ const apiURL = import.meta.env.VITE_API_URL
 //         headers: {
 //             "Content-Type": "application/json"
 //         },
-//         body: JSON.stringify(parsedData(data))
+//         body: JSON.stringify(parsedPythonData(data))
 //     }).then(
 //         response => response
 //     )
@@ -31,7 +27,7 @@ export const fetchAuthUser = async () => {
 }
 
 export const loginAuthUser = async (data) => {
-    const response = await fetch("http://localhost:8000/api/auth/user/login", {
+    const response = await fetch(`${apiURL}/api/auth/user/login`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -44,7 +40,7 @@ export const loginAuthUser = async (data) => {
 }
 
 export const logoutAuthUser = async () => {
-    const response = await fetch("http://localhost:8000/api/auth/user/logout", {
+    const response = await fetch(`${apiURL}/api/auth/user/logout`, {
         method: "POST",
         credentials: "include",
         headers: {

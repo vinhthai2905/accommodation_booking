@@ -1,0 +1,2 @@
+from .bumblebee_chat_views import BumblebeeChatView
+from .bumblebee_hotel_recommend_views  import BumblebeeHotelRecommendView

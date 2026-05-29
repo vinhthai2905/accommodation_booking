@@ -16,12 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('apps.app_user.api.urls')),
-    path('', include('apps.app_location.api.urls')),
-    path('', include('apps.app_hotel.api.urls')),
-    path('', include('apps.app_booking.api.urls')),
-    path('', include('apps.app_payment.api.urls'))
+    path('', include('apps.app_user.api.app_user_api_urls')),
+    path('', include('apps.app_location.api.app_location_api_urls')),
+    path('', include('apps.app_hotel.api.app_hotel_api_urls')),
+    path('', include('apps.app_booking.api.app_booking_api_urls')),
+    path('', include('apps.app_payment.api.app_payment_api_urls')),
+    path('', include('apps.app_ai.api.app_ai_api_urls')),
+    path('', include('apps.app_admin.api.app_admin_api_urls'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
