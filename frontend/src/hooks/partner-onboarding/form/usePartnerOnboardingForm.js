@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
-export function useFormPartnerHotelRegistration() {
+export function usePartnerOnboardingForm() {
     const methods = useForm({
         defaultValues: {
             hotel_name: "",

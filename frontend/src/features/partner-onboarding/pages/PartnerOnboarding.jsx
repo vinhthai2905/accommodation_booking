@@ -6,34 +6,40 @@ import OnboardingStepper from "../section/OnboardingStepper"
 import PendingApproval from "../components/onboarding-status/PendingApproval"
 import RejectionAlert from "../components/onboarding-status/RejectionAlert"
 
-import { useNavigate } from "react-router"
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react"
 import { FormProvider } from "react-hook-form"
 
 import { useAuthUserContext } from "../../../hooks/authentication/common/useAuthUserContext"
-import { useFormPartnerHotelRegistration } from "../../../hooks/partner-onboarding/useFormPartnerHotelRegistration"
-import { useOnboardingStatus } from "../../../hooks/partner-onboarding/useOnboardingStatus"
-import { useOnboardingSteps } from "../../../hooks/partner-onboarding/useOnboardingSteps"
-import { useOnboardingSubmit } from "../../../hooks/partner-onboarding/useOnboardingSubmit"
+import { usePartnerOnboardingForm } from "../../../hooks/partner-onboarding/form/usePartnerOnboardingForm"
+import { usePartnerOnboardingStatus } from "../../../hooks/partner-onboarding/common/usePartnerOnboardingStatus"
+import { usePartnerOnboardingOptions } from "../../../hooks/partner-onboarding/common/usePartnerOnboardingOptions"
+import { usePartnerOnboardingSteps } from "../../../hooks/partner-onboarding/common/usePartnerOnboardingSteps"
+import { usePartnerOnboardingSubmit } from "../../../hooks/partner-onboarding/form/usePartnerOnboardingSubmit"
+import OnboardingSubmitButton from "../components/onboarding/OnboardingSubmitButton"
+import OnboardingNavigation from "../components/onboarding/OnboardingNavigation"
 
 export default function PartnerOnboarding() {
-    const navigate = useNavigate()
     const { user, clearAuthUserState } = useAuthUserContext()
 
     const {
         methods,
         handleFileUploadSimulate,
         handleFileChange
-    } = useFormPartnerHotelRegistration()
+    } = usePartnerOnboardingForm()
 
     const {
         hotelTypes,
         wards,
-        loadingData,
+        loadingOptions
+    } = usePartnerOnboardingOptions()
+
+    const {
         registration,
         loadingStatus,
         checkRegistrationStatus
-    } = useOnboardingStatus(methods)
+    } = usePartnerOnboardingStatus(methods)
+
+    const loadingData = loadingOptions || loadingStatus
 
     const {
         currentStep,
@@ -42,12 +48,13 @@ export default function PartnerOnboarding() {
         prevStep,
         validateStep,
         STEPS
-    } = useOnboardingSteps(methods)
+    } = usePartnerOnboardingSteps(methods)
 
     const { 
+        navigate,
         submittingHotelRegistration, 
         handleSubmitHotelRegistration 
-    } = useOnboardingSubmit(checkRegistrationStatus)
+    } = usePartnerOnboardingSubmit(checkRegistrationStatus)
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
@@ -120,46 +127,15 @@ export default function PartnerOnboarding() {
                                     )}
                                 </FormProvider>
 
-                                {/* Navigation buttons */}
-                                <div className="mt-8 pt-6 border-t border-gray-100 flex justify-between items-center">
-                                    {currentStep > 1 ? (
-                                        <button
-                                            onClick={prevStep}
-                                            className="px-5 py-2.5 border border-gray-300 hover:bg-gray-50 text-gray-700 font-bold rounded-lg transition-colors flex items-center gap-2 text-sm"
-                                            disabled={submittingHotelRegistration}
-                                        >
-                                            <ArrowLeft size={16} /> Quay lại
-                                        </button>
-                                    ) : (
-                                        <div />
-                                    )}
-
-                                    {currentStep < 3 ? (
-                                        <button
-                                            onClick={nextStep}
-                                            className="px-6 py-2.5 bg-[#006ce4] hover:bg-[#0053b4] text-white font-bold rounded-lg shadow transition-colors flex items-center gap-2 text-sm"
-                                        >
-                                            Tiếp tục <ArrowRight size={16} />
-                                        </button>
-                                    ) : (
-                                        <button
-                                            onClick={methods.handleSubmit(handleSubmitHotelRegistration)}
-                                            disabled={submittingHotelRegistration}
-                                            className="px-8 py-2.5 bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-bold rounded-lg shadow-md transition-colors flex items-center gap-2 text-sm"
-                                        >
-                                            {submittingHotelRegistration ? (
-                                                <>
-                                                    <Loader2 className="animate-spin" size={16} /> Đang gửi...
-                                                </>
-                                            ) : (
-                                                <>
-                                                    Hoàn tất và gửi đăng ký
-                                                </>
-                                            )}
-                                        </button>
-                                    )}
-                                </div>
-
+                                <OnboardingNavigation 
+                                    currentStep={currentStep}
+                                    prevStep={prevStep}
+                                    nextStep={nextStep}
+                                    methods={methods}
+                                    submittingHotelRegistration={submittingHotelRegistration}
+                                    handleSubmitHotelRegistration={handleSubmitHotelRegistration}
+                                />
+                                
                                 </div>
                             </div>
                         </div>

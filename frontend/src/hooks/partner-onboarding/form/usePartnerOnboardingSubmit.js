@@ -1,8 +1,13 @@
 import toast from "react-hot-toast"
-import { useMutation } from "@tanstack/react-query"
-import { submitHotelRegistration } from "../../services/partner-onboarding/partnerOnboardingServices"
 
-export function useOnboardingSubmit(checkRegistrationStatus) {
+import { useMutation } from "@tanstack/react-query"
+import { useNavigate } from "react-router"
+
+import { submitHotelRegistration } from "../../../services/partner-onboarding/partnerOnboardingServices"
+
+export function usePartnerOnboardingSubmit(checkRegistrationStatus) {
+    const navigate = useNavigate()
+
     const { mutateAsync: handleSubmitHotelRegistration, isPending: submittingHotelRegistration } = useMutation({
         mutationFn: async (formData) => {
             let payload
@@ -54,6 +59,7 @@ export function useOnboardingSubmit(checkRegistrationStatus) {
     })
 
     return {
+        navigate,
         submittingHotelRegistration,
         handleSubmitHotelRegistration
     }

@@ -1,10 +1,10 @@
+import DashboardNavigation from "../../features/dashboard/partner/section/DashboardNavigation"
+import DashboardProfile from "../../features/dashboard/partner/section/DashboardProfile"
+
 import { clsx } from "clsx"
 import { Bell } from "lucide-react"
 import { Outlet } from "react-router"
 import { motion } from "framer-motion"
-
-import DashboardNavigation from "../../features/dashboard/partner/section/DashboardNavigation"
-import DashboardProfile from "../../features/dashboard/partner/section/DashboardProfile"
 
 export default function PartnerDashboard() {
 

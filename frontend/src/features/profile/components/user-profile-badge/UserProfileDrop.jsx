@@ -17,7 +17,7 @@ import {
 import { AuthUserContext } from "../../../../context/authentication/AuthUserContext"
 
 const menuItems = [
-    { title: "My account", icon: CircleUserRound, to: "/profile" },
+    { title: "My account", icon: CircleUserRound, to: "/profile/user" },
     { title: "Bookings & Trips", icon: BriefcaseBusiness, to:"/profile/mytrips.html" },
     { title: "Genius loyalty program", icon: BadgeDollarSign },
     { title: "Rewards & Wallet", icon: Wallet },
