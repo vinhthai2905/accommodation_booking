@@ -1,5 +1,5 @@
-import UserProfileDrop from "../../../components/layout/UserProfileDrop"
-import UserProfileButton from "../../../components/layout/UserProfileButton"
+import UserProfileDrop from "../components/user-profile-badge/UserProfileDrop"
+import UserProfileButton from "../components/user-profile-badge/UserProfileButton"
 
 import { clsx } from "clsx"
 import { useContext, useState } from "react"

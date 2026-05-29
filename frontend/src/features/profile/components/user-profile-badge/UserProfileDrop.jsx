@@ -14,7 +14,7 @@ import {
 } from "lucide-react"
 
 
-import { AuthUserContext } from "../../context/authentication/AuthUserContext"
+import { AuthUserContext } from "../../../../context/authentication/AuthUserContext"
 
 const menuItems = [
     { title: "My account", icon: CircleUserRound, to: "/profile" },

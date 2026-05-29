@@ -1,15 +1,15 @@
-import BookingCardImage from "../ui/BookingCardImage"
-import BookingCardHeader from "../ui/BookingCardHeader"
-import BookingCardDetails from "../ui/BookingCardDetails"
-import BookingCardFooter from "../ui/BookingCardFooter"
+import BookingCardImage from "../../ui/BookingCardImage"
+import BookingCardHeader from "../../ui/BookingCardHeader"
+import BookingCardDetails from "../../ui/BookingCardDetails"
+import BookingCardFooter from "../../ui/BookingCardFooter"
 
 import { motion } from "framer-motion"
 import { clsx } from "clsx"
 
-import { orderStatus } from "../helpers/orderStatus"
-import { paymentLabel } from "../helpers/paymentLabel"
-import { paymentStatus } from "../helpers/paymentStatus"
-import { nightsBetween } from "../../../helpers/booking/bookingHelpers"
+import { orderStatus } from "../../helpers/orderStatus"
+import { paymentLabel } from "../../helpers/paymentLabel"
+import { paymentStatus } from "../../helpers/paymentStatus"
+import { nightsBetween } from "../../../../helpers/booking/bookingHelpers"
 
 export default function BookingCard({ booking, index, activeTab }) {
     const { hotel, invoice } = booking

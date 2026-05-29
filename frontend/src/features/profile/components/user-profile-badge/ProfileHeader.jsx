@@ -1,8 +1,8 @@
-import HomeIcon from "../../../components/ui/HomeIcon"
-import HelpIcon from "../../../components/ui/HelpIcon"
-import Flag from "../../../components/ui/Flag"
+import HomeIcon from "../../../../components/ui/HomeIcon"
+import HelpIcon from "../../../../components/ui/HelpIcon"
+import Flag from "../../../../components/ui/Flag"
 
-import UserProfileBadge from "../../profile/section/UserProfileBadge"
+import UserProfileBadge from "../../section/UserProfileBadge"
 
 import { clsx } from "clsx"
 

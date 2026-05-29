@@ -1,8 +1,9 @@
+import BookingCancelButton from "../components/my-booking/BookingCancelButton"
+
 import { formatCurrency } from "../../../helpers/booking/bookingHelpers"
 
 import { BedDouble, ChevronRight, CreditCard, Wallet } from "lucide-react"
 import { Link } from "react-router"
-import BookingCancelButton from "../components/BookingCancelButton"
 
 export default function BookingCardFooter({ booking, paymentLabel, invoice, payment, hotel, activeTab }) {
     return (

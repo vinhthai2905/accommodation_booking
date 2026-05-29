@@ -8,7 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from apps.app_user.helpers import create_auth_tokens
 from apps.app_user.models import NguoiDung, VaiTroNguoiDung
 
-from apps.app_user.api.serializers import (
+from apps.app_user.api.public.authentication.serializers import (
     LoginSerializer,
     LogoutSerializer,
     AuthenticatedUserSerializer,

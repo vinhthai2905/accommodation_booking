@@ -153,7 +153,8 @@ class ZaloPayGetOrderStatusService(ZaloPayBaseService):
             settings.ZALOPAY_GET_ORDER_STATUS_URL,
             json={"app_id": app_id, "app_trans_id": app_trans_id, "mac": mac},
         )
-        
+    
+    @staticmethod
     def _get_order_status_result(zalo_order_status_response: requests.Response) -> dict:
         return zalo_order_status_response.json()
 

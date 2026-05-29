@@ -1,43 +1,42 @@
-from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.request import Request
+from rest_framework.permissions import AllowAny
 from rest_framework import status
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
-
 from apps.app_user.helpers import create_auth_tokens
-from apps.app_user.api.serializers import (
-    UserRegisterSerializer,
+from apps.app_user.api.public.authentication.serializers import (
+    PartnerRegisterSerializer,
     AuthenticatedUserSerializer,
 )
 
 
-class UserRegisterView(APIView):
+class PartnerRegisterView(APIView):
     http_method_names = ["post"]
     permission_classes = [AllowAny]
 
     # renderer_classes = [JSONRenderer]
-    serializer_class = UserRegisterSerializer
+    serializer_class = PartnerRegisterSerializer
 
     def post(self, request: Request, *args, **kwargs):
-        user_register_serializer: UserRegisterSerializer = self.serializer_class(
+        partner_register_serializer: PartnerRegisterSerializer = self.serializer_class(
             data=request.data
         )
-        user_register_serializer.peform_validation()
+        partner_register_serializer.peform_validation()
 
-
-        user = user_register_serializer.create(
-            validated_data=user_register_serializer.validated_data
+        user = partner_register_serializer.create(
+            validated_data=partner_register_serializer.validated_data
         )
-        refresh = create_auth_tokens(user, user_register_serializer.role_assignment)
+        
+        refresh = create_auth_tokens(user, partner_register_serializer.role_assignment)
 
         response = Response(
             data={
                 "user": AuthenticatedUserSerializer(
                     instance=user,
-                    context={"role": user_register_serializer.role_assignment},
+                    context={"role": partner_register_serializer.role_assignment},
                 ).data,
                 "access_token": str(refresh.access_token),
             },

@@ -1,6 +1,6 @@
 import { clsx } from "clsx"
 import { Loader2 } from "lucide-react"
-import useUserBookingMutation from "../../../hooks/profile/useUserBookingMutation"
+import useUserBookingMutation from "../../../../hooks/profile/useUserBookingMutation"
 
 export default function BookingCancelButton({ booking }) {
     const { cancelBookingMutation } = useUserBookingMutation()

@@ -1,4 +1,4 @@
-import ProfileHeader from "../../features/profile/components/ProfileHeader"
+import ProfileHeader from "../../features/profile/components/user-profile-badge/ProfileHeader"
 
 import { Outlet } from "react-router"
 import { useContext } from "react"

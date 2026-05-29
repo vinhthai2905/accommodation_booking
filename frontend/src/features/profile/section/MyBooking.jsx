@@ -1,8 +1,8 @@
-import BookingList from "../components/BookingList"
-import BookingEmptyList from "../components/BookingEmptyList"
-import BookingTabs from "../components/BookingTabs"
-import BookingCardSkeleton from "../components/BookingCardSkeleton"
-import BookingErrorState from "../components/BookingErrorState"
+import BookingList from "../components/my-booking/BookingList"
+import BookingEmptyList from "../components/my-booking/BookingEmptyList"
+import BookingTabs from "../components/my-booking/BookingTabs"
+import BookingCardSkeleton from "../components/my-booking/BookingCardSkeleton"
+import BookingErrorState from "../components/my-booking/BookingErrorState"
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
