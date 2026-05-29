@@ -2,16 +2,19 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.request import Request
-from django.shortcuts import get_object_or_404
 
-from apps.app_hotel.api.permissions import IsAuthenticatedPartner, IsAuthenticatedPartnerActive
+from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
-from .....model.chinh_sach_tre_em_models import ChinhSachTreEm
-from .....model.khach_san_models import KhachSan
-from ..serializers.hotel_policy_serializers import ChildrenPolicySerializer
+
+from apps.app_hotel.api.permissions import IsAuthenticatedPartner
+from apps.common.permission import IsAuthenticatedUserActive
+
+from apps.app_hotel.models import KhachSan
+
+from apps.app_hotel.api.private.partner_hotel_detail.serializers import ChildrenPolicySerializer
 
 class PartnerChildrenPolicyView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = ChildrenPolicySerializer
 
     def _get_partner_hotel(self, user):
