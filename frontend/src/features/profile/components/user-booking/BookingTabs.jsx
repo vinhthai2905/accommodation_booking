@@ -1,5 +1,6 @@
+import BookingNumber from "../../ui/user-booking/BookingNumber"
+
 import { clsx } from "clsx"
-import BookingNumber from "../../ui/BookingNumber"
 
 export default function BookingTabs({ isFetchingBookings, activeTab, setActiveTab, tabs, bookings }) {
     const currentTabTotalBookings = bookings?.length ?? 0;

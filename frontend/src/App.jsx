@@ -3,8 +3,8 @@ import AppLayout from './components/layout/AppLayout'
 import AuthLayout from './components/layout/AuthLayout'
 import PartnerDashboard from './pages/partner/PartnerDashboard'
 
-import MyBooking from './features/profile/section/MyBooking'
-import PersonalInformation from './features/profile/section/PersonalInformation'
+import UserBooking from './features/profile/section/UserBooking'
+import UserInformation from './features/profile/section/UserInformation'
 import Book from './pages/users/Book'
 import CustomerRegister from './pages/users/CustomerRegister'
 import CustomerSignIn from './pages/users/CustomerSignIn'
@@ -108,8 +108,8 @@ function App() {
           path: "profile",
           element: <Profile />,
           children: [
-            { path: "user", element: <PersonalInformation /> },
-            { path: "mytrips.html", element: <MyBooking /> }
+            { path: "user", element: <UserInformation /> },
+            { path: "mytrips.html", element: <UserBooking /> }
           ]
         },
         {

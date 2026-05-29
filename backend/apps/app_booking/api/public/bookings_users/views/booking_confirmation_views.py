@@ -7,7 +7,7 @@ from rest_framework import views, status, exceptions
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from apps.app_booking.api.permission import UserIsCustomer
+from apps.common.permission.user_permissions import IsCustomer
 from apps.app_booking.api.public.bookings_users.serializers import (
     IDBookingConfirmationSerializer,
     BookingConfirmationDetailSerializer,
@@ -20,7 +20,7 @@ from apps.app_payment.api.exceptions.zalo import ZaloPaymentGatewayException
 
 
 class BookingConfirmationView(views.APIView):
-    permission_classes = [UserIsCustomer]
+    permission_classes = [IsCustomer]
     serializer_class = IDBookingConfirmationSerializer
 
     def _validate_id_booking_path_params(self, id_booking) -> UUID:

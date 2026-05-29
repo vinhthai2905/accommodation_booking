@@ -8,17 +8,18 @@ from rest_framework import status, exceptions
 from apps.app_user.models import NguoiDung
 
 from apps.app_hotel.api.base.base import PartnerHotelViewMixin
-from apps.app_hotel.models import LoaiPhong, KhachSan, PhongKhachSan
+from apps.app_hotel.api.permissions import IsAuthenticatedPartner
+from apps.app_hotel.models import LoaiPhong, KhachSan
 from apps.app_hotel.api.private.partner_hotel_detail.serializers import (
     RoomTypeSerializer,
     RoomTypeCreateSerializer,
     RoomTypeUpdateSerializer,
 )
-from apps.app_hotel.api.permissions import IsAuthenticatedPartner, IsAuthenticatedPartnerActive
+from apps.common.permission import IsAuthenticatedUserActive
 
 
 class PartnerRoomTypeListView(PartnerHotelViewMixin, APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = RoomTypeSerializer
 
     def _get_hotel_room_types(self, hotel: KhachSan) -> QuerySet[LoaiPhong]:
@@ -57,7 +58,7 @@ class PartnerRoomTypeListView(PartnerHotelViewMixin, APIView):
 class PartnerRoomTypeView(PartnerHotelViewMixin, APIView):
     """Handles update (PUT/PATCH) for a single room type."""
     
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = RoomTypeSerializer
     
     def get(self, request: Request, id_room_type: int, *args, **kwargs):

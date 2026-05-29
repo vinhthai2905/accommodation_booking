@@ -8,7 +8,7 @@ from rest_framework import exceptions
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from apps.app_booking.api.permission import UserIsCustomer
+from apps.common.permission.user_permissions import IsCustomer
 from apps.app_booking.choices import TrangThaiDatPhong, PhuongThucThanhToan, TrangThaiThanhToan
 from apps.app_booking.models import DatPhong, HoaDon, ThanhToan
 from apps.app_booking.models import (
@@ -27,7 +27,7 @@ from apps.app_user.models import NguoiDung
 
 
 class BookingCreateView(views.APIView):
-    permission_classes = [UserIsCustomer]
+    permission_classes = [IsCustomer]
     serializer_class = BookingCreateSerializer
     hotel_model = KhachSan
 

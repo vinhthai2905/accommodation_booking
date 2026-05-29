@@ -12,11 +12,11 @@ from apps.app_hotel.api.private.partner_hotel_detail.serializers.hotel_type_amen
 )
 from apps.app_hotel.api.permissions import (
     IsAuthenticatedPartner,
-    IsAuthenticatedPartnerActive,
 )
+from apps.common.permission import IsAuthenticatedUserActive
 
 class BasePartnerHotelAmenityView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
 
     def _get_partner_hotel(self, partner: NguoiDung) -> KhachSan:
         try:
@@ -82,7 +82,7 @@ class PartnerHotelAmenityDetailView(BasePartnerHotelAmenityView):
             raise exceptions.NotFound(detail={"error": "Amenity not found or does not belong to your hotel."})
 
 class AvailableAmenityTypeListView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
 
     def get(self, request: Request, *args, **kwargs):
         amenities = LoaiTienNghi.objects.all().select_related('id_amenity_category')
@@ -97,7 +97,7 @@ class AvailableAmenityTypeListView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class AvailableAmenityTypeDetailView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
 
     def _get_amenity(self, id_amenity_type: int) -> LoaiTienNghi:
         try:

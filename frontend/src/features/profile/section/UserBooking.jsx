@@ -1,8 +1,8 @@
-import BookingList from "../components/my-booking/BookingList"
-import BookingEmptyList from "../components/my-booking/BookingEmptyList"
-import BookingTabs from "../components/my-booking/BookingTabs"
-import BookingCardSkeleton from "../components/my-booking/BookingCardSkeleton"
-import BookingErrorState from "../components/my-booking/BookingErrorState"
+import BookingList from "../components/user-booking/BookingList"
+import BookingEmptyList from "../components/user-booking/BookingEmptyList"
+import BookingTabs from "../components/user-booking/BookingTabs"
+import BookingCardSkeleton from "../components/user-booking/BookingCardSkeleton"
+import BookingErrorState from "../components/user-booking/BookingErrorState"
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -12,7 +12,7 @@ import useUserBookings from "../../../hooks/profile/useUserBookings"
 import { tabs } from "../helpers/orderStatus"
 import { emptyContentTabs } from "../helpers/emptyContentTabs"
 
-export default function MyBooking() {
+export default function UserBooking() {
     const [activeTab, setActiveTab] = useState("upcoming")
     const { bookings, isLoading: isFetchingBookings, isError } = useUserBookings(activeTab)
 

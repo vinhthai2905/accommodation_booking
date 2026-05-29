@@ -5,7 +5,7 @@ from rest_framework import status, exceptions
 
 from apps.app_booking.models import DatPhong
 from apps.app_booking.api.public.bookings_users.serializers.booking_cancel_serializers import BookingCancelSerializer
-from apps.app_booking.api.permission import UserIsCustomer
+from apps.common.permission.user_permissions import IsCustomer
 
 from apps.app_payment.services import ZaloPayRefundService
 
@@ -37,7 +37,7 @@ class BookingCancellationService:
         return updated_booking
 
 class BookingCancelView(APIView):
-    permission_classes = [UserIsCustomer]
+    permission_classes = [IsCustomer]
     
     def _get_booking(self, id_booking, user):
         try:

@@ -16,12 +16,12 @@ from apps.app_hotel.api.private.partner_hotel_detail.serializers.hotel_images_se
     PartnerHotelImageSerializer,
 )
 from apps.app_hotel.api.permissions import (
-    IsAuthenticatedPartner,
-    IsAuthenticatedPartnerActive,
+    IsAuthenticatedPartner
 )
+from apps.common.permission import IsAuthenticatedUserActive
 
 class BasePartnerHotelImageView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = PartnerHotelImageSerializer
 
     def _get_partner_hotel(self, partner: NguoiDung) -> KhachSan:

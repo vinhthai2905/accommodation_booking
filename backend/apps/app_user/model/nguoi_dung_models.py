@@ -179,6 +179,23 @@ class ThongTinNguoiDung(models.Model):
         db_column="quoc_gia",
         null=True,
     )
+    
+    display_name = models.CharField(
+        max_length=50,
+        db_column="ten_hien_thi",
+        null=True,
+    )
+
+    date_of_birth = models.DateField(
+        db_column="ngay_sinh",
+        null=True,
+    )
+
+    address = models.CharField(
+        max_length=255,
+        db_column="dia_chi",
+        null=True,
+    )
 
     phone_number = models.CharField(
         max_length=25,
@@ -191,6 +208,7 @@ class ThongTinNguoiDung(models.Model):
         db_column="gioi_tinh",
         null=True,
     )
+
 
     class Meta:
         db_table = "thong_tin_nguoi_dung"

@@ -1,1 +1,1 @@
-from .partner_permissions import IsAuthenticatedPartner, IsAuthenticatedPartnerActive
+from .partner_permissions import IsAuthenticatedPartner

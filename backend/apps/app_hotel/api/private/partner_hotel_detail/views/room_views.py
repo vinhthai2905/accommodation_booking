@@ -12,12 +12,12 @@ from apps.app_hotel.api.private.partner_hotel_detail.serializers import (
 )
 from apps.app_hotel.api.permissions import (
     IsAuthenticatedPartner,
-    IsAuthenticatedPartnerActive,
 )
+from apps.common.permission import IsAuthenticatedUserActive
 
 
 class PartnerRoomTypeRoomsListView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = RoomTypeRoomsSerializer
 
     def _get_partner_hotel(self, partner: NguoiDung) -> KhachSan:

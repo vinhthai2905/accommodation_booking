@@ -1,6 +1,6 @@
-import BookingCancelButton from "../components/my-booking/BookingCancelButton"
+import BookingCancelButton from "../../components/user-booking/BookingCancelButton"
 
-import { formatCurrency } from "../../../helpers/booking/bookingHelpers"
+import { formatCurrency } from "../../../../helpers/booking/bookingHelpers"
 
 import { BedDouble, ChevronRight, CreditCard, Wallet } from "lucide-react"
 import { Link } from "react-router"

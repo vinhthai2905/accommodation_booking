@@ -11,12 +11,12 @@ from apps.app_hotel.api.private.partner_hotel_detail.serializers.hotel_serialize
     PartnerHotelSerializer,
 )
 from apps.app_hotel.api.permissions import (
-    IsAuthenticatedPartner,
-    IsAuthenticatedPartnerActive,
+    IsAuthenticatedPartner
 )
+from apps.common.permission import IsAuthenticatedUserActive
 
 class PartnerHotelView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = PartnerHotelSerializer
 
     def _get_partner_hotel(self, partner: NguoiDung) -> KhachSan:

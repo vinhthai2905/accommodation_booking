@@ -1,4 +1,4 @@
-import { orderStatus } from "../helpers/orderStatus"
+import { orderStatus } from "../../helpers/orderStatus"
 
 import { clsx } from "clsx"
 import { AlertCircle } from "lucide-react"

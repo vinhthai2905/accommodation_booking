@@ -18,8 +18,4 @@ class IsAuthenticatedPartner(BasePermission):
         )
 
 
-class IsAuthenticatedPartnerActive(BasePermission):
-    message = "User is inactive."
 
-    def has_permission(self, request: Request, view):
-        return request.user.is_active

@@ -3,7 +3,7 @@ from django.db import models
 from .khach_san_models import KhachSan
 from .giuong_models import Giuong
 
-from apps.common.models import TimeStampedModel
+from apps.common.model.models import TimeStampedModel
 
 
 class LoaiPhong(TimeStampedModel):

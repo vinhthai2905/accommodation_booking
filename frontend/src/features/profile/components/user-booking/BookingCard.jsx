@@ -1,7 +1,7 @@
-import BookingCardImage from "../../ui/BookingCardImage"
-import BookingCardHeader from "../../ui/BookingCardHeader"
-import BookingCardDetails from "../../ui/BookingCardDetails"
-import BookingCardFooter from "../../ui/BookingCardFooter"
+import BookingCardImage from "../../ui/user-booking/BookingCardImage"
+import BookingCardHeader from "../../ui/user-booking/BookingCardHeader"
+import BookingCardDetails from "../../ui/user-booking/BookingCardDetails"
+import BookingCardFooter from "../../ui/user-booking/BookingCardFooter"
 
 import { motion } from "framer-motion"
 import { clsx } from "clsx"
@@ -30,9 +30,9 @@ export default function BookingCard({ booking, index, activeTab }) {
                 <BookingCardImage hotel={hotel} />
 
                 <div className="flex-1 p-5 flex flex-col justify-between min-w-0">
-                    <BookingCardHeader 
-                        booking={booking} 
-                        hotel={hotel} 
+                    <BookingCardHeader
+                        booking={booking}
+                        hotel={hotel}
                         orderStatus={orderStatus}
                         payment={booking.payment}
                         paymentStatus={paymentStatus}

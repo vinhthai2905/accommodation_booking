@@ -135,7 +135,6 @@ export default function PartnerOnboarding() {
                                     submittingHotelRegistration={submittingHotelRegistration}
                                     handleSubmitHotelRegistration={handleSubmitHotelRegistration}
                                 />
-                                
                                 </div>
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-import StatusBadge from "./StatusBadge"
+import StatusBadge from "../user-profile-badge/StatusBadge"
 
 import { MapPin } from "lucide-react"
 

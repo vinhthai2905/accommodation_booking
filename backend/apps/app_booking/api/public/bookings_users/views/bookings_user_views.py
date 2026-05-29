@@ -14,13 +14,13 @@ from apps.app_booking.api.public.bookings_users.serializers import (
     UserBookingListSerializer,
     FilterBookingSerializer
 )
-from apps.app_booking.api.permission import UserIsCustomer
+from apps.common.permission.user_permissions import IsCustomer
 
 
 class UserBookingListView(APIView):
     """Return all bookings (past and active) for the authenticated user."""
 
-    permission_classes = [UserIsCustomer]
+    permission_classes = [IsCustomer]
     serializer_class = UserBookingListSerializer
 
     def _validate_filtering_bookings(self, current_tab: str):

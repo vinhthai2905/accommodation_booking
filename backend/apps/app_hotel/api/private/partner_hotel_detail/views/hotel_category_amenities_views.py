@@ -13,13 +13,13 @@ from apps.app_hotel.api.private.partner_hotel_detail.serializers.hotel_category_
     HotelCategorySerializer,
 )
 from apps.app_hotel.api.permissions import (
-    IsAuthenticatedPartner,
-    IsAuthenticatedPartnerActive,
+    IsAuthenticatedPartner
 )
+from apps.common.permission import IsAuthenticatedUserActive
 
 
 class PartnerHotelCategoryAmenitiesListView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = HotelCategoryAmenitiesSerializer
 
     def _get_partner_hotel(self, partner: NguoiDung) -> KhachSan:
@@ -57,7 +57,7 @@ class PartnerHotelCategoryAmenitiesListView(APIView):
 
 
 class PartnerHotelCategoryListView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = HotelCategorySerializer
 
     def get(self, request: Request, *args, **kwargs):
@@ -74,7 +74,7 @@ class PartnerHotelCategoryListView(APIView):
 
 
 class PartnerHotelCategoryDetailView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = HotelCategorySerializer
 
     def _get_category(self, id_amenity_category: int) -> DanhMucTienNghi:

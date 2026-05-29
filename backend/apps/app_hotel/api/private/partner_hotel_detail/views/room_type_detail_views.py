@@ -15,13 +15,12 @@ from apps.app_hotel.api.private.partner_hotel_detail.serializers import (
     RoomTypeDetailCreateSerializer
 )
 from apps.app_hotel.api.permissions import (
-    IsAuthenticatedPartner,
-    IsAuthenticatedPartnerActive,
+    IsAuthenticatedPartner
 )
-
+from apps.common.permission import IsAuthenticatedUserActive
 
 class PartnerBedListView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = BedSerializer
 
     def get(self, request: Request, *args, **kwargs):
@@ -31,7 +30,7 @@ class PartnerBedListView(APIView):
 
 
 class PartnerRoomTypeDetailsListView(PartnerHotelViewMixin, APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = RoomTypeDetailsSerializer
     deserializer_class = RoomTypeDetailCreateSerializer
     
@@ -58,7 +57,7 @@ class PartnerRoomTypeDetailsListView(PartnerHotelViewMixin, APIView):
 
 
 class PartnerRoomTypeDetailView(PartnerHotelViewMixin, APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
 
     def delete_detail_item(self, room_type: LoaiPhong, id_room_type_detail_bed: int):
         try:

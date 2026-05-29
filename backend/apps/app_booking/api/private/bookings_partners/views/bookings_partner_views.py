@@ -8,7 +8,6 @@ from django.utils import timezone
 
 from apps.app_hotel.models import KhachSan
 from apps.app_hotel.api.base.base import PartnerHotelViewMixin
-from apps.app_hotel.api.permissions import IsAuthenticatedPartner, IsAuthenticatedPartnerActive
 
 from apps.app_booking.models import DatPhong
 from apps.app_booking.api.public.bookings_users.serializers import (
@@ -17,11 +16,14 @@ from apps.app_booking.api.public.bookings_users.serializers import (
 from apps.app_booking.api.private.bookings_partners.serializers import (
     PartnerBookingListSerializer,
 )
+from apps.app_hotel.api.permissions import IsAuthenticatedPartner
+from apps.common.permission import IsAuthenticatedUserActive
+
 
 class PartnerBookingListView(PartnerHotelViewMixin, APIView):
     """Return all bookings (past and active) for the authenticated partner."""
 
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedPartnerActive]
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
     serializer_class = PartnerBookingListSerializer
 
     def _validate_filtering_bookings(self, current_tab: str):
