@@ -79,7 +79,7 @@ ROOT_URLCONF = 'hotel_booking.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -159,11 +159,19 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 
+
 ZALOPAY_APP_ID = int(os.getenv("ZALOPAY_APP_ID"))
 ZALOPAY_SECRET_KEY = os.getenv("ZALOPAY_SECRET_KEY")
 ZALOPAY_CREATE_ORDER_URL = os.getenv("ZALOPAY_CREATE_ORDER_URL")
 ZALOPAY_CANCEL_ORDER_URL = os.getenv("ZALOPAY_CANCEL_ORDER_URL")
 ZALOPAY_GET_ORDER_STATUS_URL = os.getenv("ZALOPAY_GET_ORDER_STATUS_URL")
+
+DEFAULT_FROM_EMAIL = "noreply@booking.com"
+EMAIL_HOST=os.getenv("EMAIL_HOST")
+EMAIL_PORT=os.getenv("EMAIL_PORT")
+EMAIL_USE_TLS= os.getenv("EMAIL_USE_TLS")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
 
 CORS_ALLOW_ALL_ORIGINS = False

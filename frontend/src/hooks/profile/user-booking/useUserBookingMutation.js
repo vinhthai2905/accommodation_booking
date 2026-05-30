@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "react-hot-toast"
-import { cancelBooking } from "../../services/book/bookingServices"
+import { cancelBooking } from "../../../services/book/bookingServices"
 
 export default function useUserBookingMutation() {
     const queryClient = useQueryClient()

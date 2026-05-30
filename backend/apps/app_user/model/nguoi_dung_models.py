@@ -1,8 +1,7 @@
-from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManager
 from django.db import models
+from django.contrib.auth.models import BaseUserManager, AbstractUser
 
 from apps.app_user.choices import AuthTypeChoice
-from apps.app_user import models as table
 
 import uuid
 
@@ -29,9 +28,11 @@ class NguoiDungManager(BaseUserManager):
         ).save()
         
     def _create_user_role(self, user, role_name):
-        role = table.VaiTro.objects.get(role_name=role_name)
+        from .vai_tro_models import VaiTro, VaiTroNguoiDung
+
+        role = VaiTro.objects.get(role_name=role_name)
         
-        table.VaiTroNguoiDung(
+        VaiTroNguoiDung(
             id_role=role,
             id_user=user
         ).save()
@@ -64,7 +65,6 @@ class NguoiDungManager(BaseUserManager):
 
         return self._create_user(email, password, **extra_fields)
 
-
 class NguoiDung(AbstractUser):
     username = None
     first_name = None
@@ -90,24 +90,30 @@ class NguoiDung(AbstractUser):
         db_column="email",
     )
 
-    lan_xac_nhan_email = models.DateTimeField(
+    verified_at = models.DateTimeField(
         null=True,
         blank=True,
         db_column="lan_xac_nhan_email",
     )
-
-    password = models.CharField(
-        max_length=255,
-        db_column="mat_khau",
+    
+    verification_expires_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        db_column="xac_nhan_email_het_han_luc"
     )
-
-    loai_xac_thuc = models.CharField(
+    
+    verification_type = models.CharField(
         max_length=20,
         choices=AuthTypeChoice,
         default=AuthTypeChoice.EMAIL,
         db_column="loai_xac_thuc",
     )
 
+    password = models.CharField(
+        max_length=255,
+        db_column="mat_khau",
+    )
+   
     is_superuser = models.BooleanField(
         default=False,
         db_column="la_superuser",

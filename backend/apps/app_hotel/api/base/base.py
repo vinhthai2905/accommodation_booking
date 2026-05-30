@@ -3,7 +3,7 @@ from django.http import QueryDict
 
 from rest_framework.request import Request
 from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from rest_framework import exceptions, views
 
 from apps.app_user.models import NguoiDung
@@ -40,7 +40,8 @@ class PartnerHotelViewMixin:
         return self.get_room_type(hotel, id_room_type)
 
 
-class HotelSearchViewMixin:
+class HotelSearchViewMixin(APIView):
+    permission_classes=[AllowAny]
     search_params_serializer = None
     hotels_search_result_serializer = None
 

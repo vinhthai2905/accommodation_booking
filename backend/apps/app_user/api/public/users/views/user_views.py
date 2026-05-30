@@ -2,7 +2,8 @@ from rest_framework.views import APIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
 
-from apps.app_user.api.public.users.serializers.user_serializers import UserPartialUpdateSerializer, UserSerializer
+
+from apps.app_user.api.public.users.serializers import UserPartialUpdateSerializer, UserSerializer
 
 class UserProfileView(APIView):
     """
@@ -19,3 +20,7 @@ class UserProfileView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+
+        

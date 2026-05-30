@@ -4,14 +4,13 @@ from rest_framework.response import Response
 from rest_framework import exceptions
 
 from django.db.models import QuerySet
-from django.http import QueryDict
 from django.contrib.gis.geos import Polygon
 from django.contrib.gis.db.models.functions import AsGeoJSON
 
 
 from apps.app_booking.models import DatPhong
 from apps.app_location.models import Phuong
-from apps.app_hotel.models import KhachSan, ChinhSachTreEm
+from apps.app_hotel.models import KhachSan
 from apps.app_hotel.api.public.hotel_search.serializers import (
     HotelSearchParamsSerializer,
     SearchParamsMapBoundsSerializer,
@@ -21,7 +20,7 @@ from apps.app_hotel.api.public.hotel_search.serializers import (
 
 from apps.app_hotel.api.base.base import HotelSearchViewMixin
 
-class HotelSearchResultView(HotelSearchViewMixin, APIView):
+class HotelSearchResultView(HotelSearchViewMixin):
     search_params_serializer = HotelSearchParamsSerializer
     hotels_search_result_serializer = HotelSearchResultSerializer
 
@@ -41,7 +40,7 @@ class HotelSearchResultView(HotelSearchViewMixin, APIView):
         return Response(serializer.data)
 
 
-class HotelSearchResultMapView(HotelSearchViewMixin, APIView):
+class HotelSearchResultMapView(HotelSearchViewMixin):
     search_params_serializer = HotelSearchParamsSerializer
     search_params_map_bounds_serializer = SearchParamsMapBoundsSerializer
     hotels_search_result_serializer = HotelSearchResultMapSerializer

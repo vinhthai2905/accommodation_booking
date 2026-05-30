@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchAuthUserBookings } from "../../services/book/bookingServices"
+import { fetchAuthUserBookings } from "../../../services/book/bookingServices"
 
 export default function useUserBookings(activeTab) {
     const { data, isLoading, isError, error } = useQuery({

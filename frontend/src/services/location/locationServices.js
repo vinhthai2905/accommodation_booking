@@ -1,6 +1,6 @@
 const apiURL = import.meta.env.VITE_API_URL
 
-export const fetchWard = async () => {
+export const fetchWards = async () => {
     const response = await fetch(`${apiURL}/api/location/ward`, {
         method: "GET",
         headers: {

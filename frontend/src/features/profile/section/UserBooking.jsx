@@ -7,7 +7,7 @@ import BookingErrorState from "../components/user-booking/BookingErrorState"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
-import useUserBookings from "../../../hooks/profile/useUserBookings"
+import useUserBookings from "../../../hooks/profile/user-booking/useUserBookings"
 
 import { tabs } from "../helpers/orderStatus"
 import { emptyContentTabs } from "../helpers/emptyContentTabs"
