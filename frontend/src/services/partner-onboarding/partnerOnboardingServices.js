@@ -3,9 +3,9 @@ import { selectContentType } from "../../helpers/partner-onboarding/selectConten
 
 const apiURL = import.meta.env.VITE_API_URL
 
-const headers = buildTokenHeader()
 
 export const fetchHotelTypes = async () => {
+    const headers = buildTokenHeader()
     const response = await fetch(`${apiURL}/api/partner/hotel-types`, {
         method: "GET",
         headers
@@ -19,6 +19,7 @@ export const fetchHotelTypes = async () => {
 }
 
 export const submitHotelRegistration = async (data) => {
+    const headers = buildTokenHeader()
     const body = selectContentType(data, headers)
 
     const response = await fetch(`${apiURL}/api/partner/hotel/register`, {
@@ -36,6 +37,7 @@ export const submitHotelRegistration = async (data) => {
 }
 
 export const fetchHotelRegistrationStatus = async () => {
+    const headers = buildTokenHeader()
     const response = await fetch(`${apiURL}/api/partner/hotel/register`, {
         method: "GET",
         headers

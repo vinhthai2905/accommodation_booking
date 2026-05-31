@@ -10,3 +10,7 @@ class SendVerificationEmailSerializer(serializers.ModelSerializer):
         
     def update(self, instance: NguoiDung, validated_data):
         pass
+    
+
+class VerifyUserEmailSerializer(serializers.Serializer):
+    pass

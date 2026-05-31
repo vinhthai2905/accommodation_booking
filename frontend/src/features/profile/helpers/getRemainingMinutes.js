@@ -8,3 +8,10 @@ export function getRemainingMinutes(verificationExpiresAt) {
 
     return `${minutes}:${String(seconds).padStart(2, "0")}`
 }
+
+export function checkTokenExpiration(verificationExpiresAt) {
+    const today = new Date()
+    const tokenExpiresAt = new Date(verificationExpiresAt)
+
+    return today > tokenExpiresAt
+}

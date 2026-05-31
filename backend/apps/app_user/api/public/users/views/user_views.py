@@ -2,14 +2,14 @@ from rest_framework.views import APIView
 from rest_framework import permissions, status
 from rest_framework.response import Response
 
-
 from apps.app_user.api.public.users.serializers import UserPartialUpdateSerializer, UserSerializer
+from apps.common.permission import IsAuthenticatedUserActive, IsCustomer
 
 class UserProfileView(APIView):
     """
     Endpoint for the currently authenticated user to retrieve and patch their profile.
     """
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsCustomer, IsAuthenticatedUserActive]
 
     def get(self, request, *args, **kwargs):
         serializer = UserSerializer(request.user)

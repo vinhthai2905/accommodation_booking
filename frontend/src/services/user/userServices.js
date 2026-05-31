@@ -2,9 +2,10 @@ import { buildTokenHeader } from "../../helpers/authentication/buildTokenHeader"
 
 const apiURL = import.meta.env.VITE_API_URL
 
-const headers = buildTokenHeader()
+// const headers = buildTokenHeader() cũ, trước khi fix
 
 export const fetchUserProfile = async () => {
+    const headers = buildTokenHeader()
     const response = await fetch(`${apiURL}/api/public/users/me`, {
         method: "GET",
         headers,
@@ -18,6 +19,7 @@ export const fetchUserProfile = async () => {
 }
 
 export const updateUserProfile = async (data) => {
+    const headers = buildTokenHeader()
     const response = await fetch(`${apiURL}/api/public/users/me`, {
         method: "PATCH",
         headers,

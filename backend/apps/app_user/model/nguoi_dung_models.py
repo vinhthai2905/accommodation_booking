@@ -96,6 +96,12 @@ class NguoiDung(AbstractUser):
         db_column="lan_xac_nhan_email",
     )
     
+    verification_token = models.UUIDField(
+        null=True,
+        blank=True,
+        db_column="token_xac_nhan_email"
+    )
+    
     verification_expires_at = models.DateTimeField(
         null=True,
         blank=True,

@@ -1,21 +1,26 @@
 import { clsx } from "clsx"
 import { useEffect, useState } from "react"
 
-import { getRemainingMinutes } from "../../helpers/getRemainingMinutes"
+import { checkTokenExpiration, getRemainingMinutes } from "../../helpers/getRemainingMinutes"
 
-export default function FieldEmailVerificationCount({ handleSendVerificationEmail, isSending, verificationExpiresAt }) {
+export default function FieldEmailVerificationCount({ 
+    handleSendVerificationEmail, 
+    isSending, 
+    isVerificationExpired,
+    setIsVerificationExpired, 
+    verificationExpiresAt 
+}) {
     const [verificationTimeout, setVerificationTimeout] = useState(null)
-    const [isVerificationExpired, setIsVerificationExpired] = useState(false)
 
     useEffect(() => {
         const verificationExpiration = setInterval(() => {
-            const minutes = getRemainingMinutes(verificationExpiresAt)
-            setVerificationTimeout(minutes)
-
-            if (minutes < 0) {
+            if (checkTokenExpiration(verificationExpiresAt)) {
                 setIsVerificationExpired(true)
                 clearInterval(verificationExpiration)
             }
+
+            const minutes = getRemainingMinutes(verificationExpiresAt)
+            setVerificationTimeout(minutes)
 
         }, 1000)
 
@@ -32,7 +37,9 @@ export default function FieldEmailVerificationCount({ handleSendVerificationEmai
                                 Vui lòng xác minh địa chỉ email của bạn để đảm bảo có thể nhận thông tin về các đặt phòng.
                             </p>
                             <button
-                                onClick={handleSendVerificationEmail}
+                                onClick={() => {
+                                    handleSendVerificationEmail()
+                                }}
                                 disabled={isSending}
                                 className={`text-sm font-medium ${isSending ? 'text-amber-500 cursor-wait' : 'text-amber-700 hover:text-amber-800 cursor-pointer'}`}
                             >

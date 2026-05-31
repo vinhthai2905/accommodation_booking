@@ -1,10 +1,15 @@
 import FieldEmailVerificationStatus from "../../ui/user-profile/FieldEmailVerificationStatus"
 import FieldEmailVerificationCount from "../../ui/user-profile/FieldEmailVerificationCount"
 
+import { useState } from "react"
+
 import useUserEmailMutation from "../../../../hooks/profile/user-profile/useUserEmailMutation"
 
+import { checkTokenExpiration } from "../../helpers/getRemainingMinutes"
+
 export default function EditableEmailField({ email, verifiedAt, verificationExpiresAt }) {
-    const { handleSendVerificationEmail, isSending } = useUserEmailMutation()
+    const [isVerificationExpired, setIsVerificationExpired] = useState(checkTokenExpiration(verificationExpiresAt))
+    const { handleSendVerificationEmail, isSending } = useUserEmailMutation(setIsVerificationExpired)
 
     return (
         <div className="py-5 flex flex-col sm:flex-row gap-4 border-b border-gray-200">
@@ -14,15 +19,17 @@ export default function EditableEmailField({ email, verifiedAt, verificationExpi
             <div className="flex-1">
                 <div className="flex items-center gap-2">
                     <span className="text-slate-900">{email}</span>
-                    <FieldEmailVerificationStatus verifiedAt={verifiedAt}/>
+                    <FieldEmailVerificationStatus verifiedAt={verifiedAt} />
                 </div>
                 <p className="text-slate-500 text-sm mt-1">
                     Đây là địa chỉ email bạn dùng để đăng nhập. Đây cũng là nơi chúng tôi gửi xác nhận đặt phòng của bạn.
                 </p>
                 {!verifiedAt ? (
-                    <FieldEmailVerificationCount 
+                    <FieldEmailVerificationCount
                         handleSendVerificationEmail={handleSendVerificationEmail}
                         isSending={isSending}
+                        isVerificationExpired={isVerificationExpired}
+                        setIsVerificationExpired={setIsVerificationExpired}
                         verificationExpiresAt={verificationExpiresAt}
                     />
                 ) : (

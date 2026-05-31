@@ -13,6 +13,7 @@ import Hotel from './pages/users/Hotel'
 import HotelsSearchResult from "./pages/users/HotelsSearchResult"
 import PaymentConfirmation from './pages/users/PaymentConfirmation'
 import Profile from './pages/users/Profile'
+import UserVerificationEmail from './features/profile/section/UserVerificationEmail'
 
 import DashboardLanding from './features/dashboard/partner/pages/DashboardLanding'
 import PartnertLanding from './pages/partner/PartnerLanding'
@@ -120,6 +121,7 @@ function App() {
           path: "payment/confirmation.html",
           element: <PaymentConfirmation />,
         },
+
       ]
     },
     {
@@ -180,9 +182,14 @@ function App() {
     }
     ,
     {
+      path: "verify-email",
+      element: <UserVerificationEmail />
+    },
+    {
       path: "testground",
       element: <ChildAgeInput />
-    }
+    },
+    
   ])
   return (
     <QueryClientProvider client={queryClient}>
