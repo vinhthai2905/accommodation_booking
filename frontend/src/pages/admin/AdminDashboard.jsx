@@ -28,16 +28,14 @@ export default function AdminDashboard() {
 
       </AnimatedSidebarDashboard>
 
-      {/* Main Content */}
       <main className={clsx("relative flex flex-col flex-1 h-screen overflow-hidden")}>
-        {/* Header */}
         <header className={clsx(
           "sticky top-0 z-30",
           "flex items-center justify-between h-16 px-6",
           "bg-white/80 backdrop-blur-md border-b border-gray-200"
         )}>
 
-          <div className={clsx("flex-1")} /> {/* Spacer */}
+          <div className={clsx("flex-1")} />
 
           <div className={clsx("flex items-center gap-4")}>
             <button className={clsx(
@@ -51,7 +49,6 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        {/* Scrollable Content Area */}
         <div className={clsx("flex-1 overflow-y-auto bg-gray-50 p-4 lg:p-8")}>
           <div className={clsx("max-w-7xl mx-auto")}>
             <Outlet />

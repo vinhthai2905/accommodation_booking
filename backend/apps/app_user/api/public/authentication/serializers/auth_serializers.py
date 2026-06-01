@@ -17,17 +17,14 @@ from apps.app_user.models import NguoiDung, ThongTinNguoiDung, VaiTroNguoiDung, 
 class LoginSerializer(Serializer):
     email = serializers.EmailField(write_only=True)
     password = serializers.CharField(write_only=True, style={"input_style": "password"})
-    login_as = serializers.ChoiceField(
-        RoleChoice,
-        write_only=True
-    )
+    login_as = serializers.ChoiceField(RoleChoice, write_only=True)
 
     def validate(self, attrs: dict):
         """Calling is_valid() would validate the data and authenticate the user."""
 
         attrs["user"] = self.validate_user(credentials=attrs)
         attrs["role"] = self.validate_user_role(attrs["user"], attrs["login_as"])
-        
+
         attrs.pop("password")
 
         return attrs
@@ -46,14 +43,14 @@ class LoginSerializer(Serializer):
 
     def validate_user_role(self, user: NguoiDung, login_as) -> VaiTroNguoiDung:
         try:
-            role: VaiTroNguoiDung = (
-                user.role_set
-                .select_related("id_role")
-                .get(id_role__role_name=login_as)
+            role: VaiTroNguoiDung = user.role_set.select_related("id_role").get(
+                id_role__role_name=login_as
             )
         except Exception as e:
-            raise ValidationError(detail={"error": "User doesn't have access to this role."})
-            
+            raise ValidationError(
+                detail={"error": "User doesn't have access to this role."}
+            )
+
         return role
 
     def validate_email(self, email):
@@ -77,44 +74,46 @@ class LogoutSerializer(Serializer):
         """Attempt to delete the token after being validated."""
 
         RefreshToken.blacklist(self.validated_data["refresh"])
-        
+
+
 class FetchAuthUserSerializer(Serializer):
     id_auth_user = serializers.UUIDField()
     role = serializers.ChoiceField(
         choices=RoleChoice,
     )
-    
+
     def validate(self, attrs):
         user: NguoiDung = self.validate_auth_user(attrs["id_auth_user"])
-        auth_user_role: VaiTroNguoiDung = self.validate_auth_user_role(user, attrs["role"])
-        
+        auth_user_role: VaiTroNguoiDung = self.validate_auth_user_role(
+            user, attrs["role"]
+        )
+
         attrs["auth_user_role"] = auth_user_role
-        
+
         return attrs
-    
+
     def validate_auth_user(self, id_auth_user: UUID):
         try:
             user = NguoiDung.objects.get(id_user=id_auth_user)
         except Exception as e:
-            raise AuthenticationFailed({
-                "error": "The user is either inactive or no longer existed."
-            })
+            raise AuthenticationFailed(
+                {"error": "The user is either inactive or no longer existed."}
+            )
         return user
-    
+
     def validate_auth_user_role(self, user: NguoiDung, role: str):
         try:
-            auth_user_role: VaiTroNguoiDung = (
-                user.role_set.select_related("id_role").get(id_role__role_name=role)
-            )
+            auth_user_role: VaiTroNguoiDung = user.role_set.select_related(
+                "id_role"
+            ).get(id_role__role_name=role)
         except Exception as e:
-            raise AuthenticationFailed({
-                "error": "The user's role is either removed or no longer existed."
-            })
-            
+            raise AuthenticationFailed(
+                {"error": "The user's role is either removed or no longer existed."}
+            )
+
         return auth_user_role
-            
-            
-        
+
+
 class PersonalInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ThongTinNguoiDung
@@ -124,27 +123,20 @@ class PersonalInfoSerializer(serializers.ModelSerializer):
             "phone_number",
         ]
 
+
 class AuthenticatedUserSerializer(serializers.ModelSerializer):
     personal_info = PersonalInfoSerializer()
     role = serializers.SerializerMethodField()
 
     class Meta:
         model = NguoiDung
-        fields = [
-            "email",
-            "personal_info",
-            "role"
-        ]
-        read_only_fields = [
-            "email",
-            "personal_info",
-            "role"
-        ]
-        
+        fields = ["email", "personal_info", "role"]
+        read_only_fields = ["email", "personal_info", "role"]
+
     def get_role(self, user: NguoiDung):
         role: VaiTroNguoiDung = self.context.get("role")
-        
+
         if not role:
             raise APIException(detail={"error": "Missing role context."})
-        
+
         return role.id_role.role_name
