@@ -5,9 +5,11 @@ export default function useAuthNavigation() {
 
     const navigateAfterAuth = (userRole) => {
         const navigateTo =
-            userRole === "Đối tác"
-                ? "/partner/dashboard"
-                : "/index"
+            userRole === "Admin"
+                ? "/admin/dashboard"
+                : userRole === "Đối tác"
+                    ? "/partner/dashboard"
+                    : "/index"
 
         navigate(navigateTo, { replace: true })
     }

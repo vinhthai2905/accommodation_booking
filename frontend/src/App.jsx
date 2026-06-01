@@ -64,6 +64,7 @@ import ToasterUI from './components/ui/ToasterUI'
 
 import ChildAgeInput from './features/search/components/search-bar/input/ChildAgeInput'
 import PartnerLogin from './pages/partner/PartnerLogin'
+import AdminLogin from './pages/admin/AdminLogin'
 
 const queryClient = new QueryClient()
 
@@ -84,7 +85,8 @@ function App() {
             { path: "sign-up", element: <CustomerRegister /> },
             { path: "sign-in", element: <CustomerSignIn /> },
             { path: "partner/sign-up", element: <PartnerRegister /> },
-            { path: "partner/sign-in", element: <PartnerLogin /> }
+            { path: "partner/sign-in", element: <PartnerLogin /> },
+            { path: "admin/sign-in", element: <AdminLogin /> }
           ]
         }
       ]

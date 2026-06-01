@@ -61,7 +61,7 @@ export default function AdminDashboardProfile() {
                     : "opacity-0 translate-y-3 pointer-events-none"
             )}>
                 <Link
-                    to="/index"
+                    to="/auth/admin/sign-in"
                     className={clsx(
                         "w-full px-5 py-3 flex items-center gap-2",
                         "text-left text-[#1a1a1a] text-[0.8rem]",
@@ -70,7 +70,7 @@ export default function AdminDashboardProfile() {
                     onClick={clearAuthUserState}
                 >
                     <LogOut size={18} strokeWidth={1.75} className="text-[#3d3d3d]" />
-                    <span>Sign out</span>
+                    <span>Đăng xuất</span>
                 </Link>
             </div>
         </div>
