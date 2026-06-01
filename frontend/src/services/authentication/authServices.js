@@ -51,3 +51,13 @@ export const logoutAuthUser = async () => {
     return response
 }
 
+export const verifyEmail = async (uidb64, token) => {
+    const response = await fetch(`${apiURL}/api/auth/user/verify-email/${uidb64}/${token}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+
+    return response
+}

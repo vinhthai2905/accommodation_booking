@@ -47,7 +47,7 @@ export default function UserInformation() {
     const info = userProfile?.personal_info || {}
     const email = userProfile?.email
     const verifiedAt = userProfile?.verified_at
-    const verificationExpiresAt  = userProfile?.verification_expires_at
+    const verificationExpiresAt = userProfile?.verification_expires_at
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-10">
@@ -96,8 +96,8 @@ export default function UserInformation() {
                         isDisabledField={isDisabledField("display_name")}
                     />
 
-                    <EditableEmailField 
-                        email={email} 
+                    <EditableEmailField
+                        email={email}
                         verifiedAt={verifiedAt}
                         verificationExpiresAt={verificationExpiresAt}
                     />

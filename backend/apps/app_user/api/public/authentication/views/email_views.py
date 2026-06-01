@@ -4,12 +4,10 @@ from rest_framework.response import Response
 from rest_framework import status, exceptions
 from rest_framework.permissions import AllowAny
 
-from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator
-from django.urls import reverse
 from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils import timezone
 
 from apps.common.permission import IsCustomer, IsAuthenticatedUserActive
@@ -24,7 +22,6 @@ from apps.app_user.api.public.authentication.serializers import (
     SendVerificationEmailSerializer,
     VerifyUserEmailSerializer,
 )
-
 
 class SendVerificationEmailView(APIView):
     permission_classes = [IsCustomer, IsAuthenticatedUserActive]
@@ -80,3 +77,39 @@ class SendVerificationEmailView(APIView):
 class VerifyUserEmailView(APIView):
     permission_classes = [AllowAny]
     serializer_class = VerifyUserEmailSerializer
+
+    def _get_user_from_uidb64(self, uidb64: str) -> NguoiDung:
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            return NguoiDung.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, NguoiDung.DoesNotExist):
+            raise exceptions.ValidationError(
+                detail={"detail": "Invalid or expired verification link."}
+            )
+
+    def _validate_token(self, user: NguoiDung, token: str):
+        if not default_token_generator.check_token(user, token):
+            raise exceptions.ValidationError(
+                detail={"detail": "Invalid or expired verification link."}
+            )
+            
+        if user.verified_at:
+            raise exceptions.ValidationError(
+                detail={"detail": "Email is already verified."}
+            )
+
+    def _verify_user(self, user: NguoiDung):
+        user.verified_at = timezone.now()
+        user.verification_token = None
+        user.verification_expires_at = None
+        user.save()
+
+    def post(self, request: Request, uidb64, token, *args, **kwargs):
+        user = self._get_user_from_uidb64(uidb64)
+        self._validate_token(user, token)
+        self._verify_user(user)
+        
+        return Response(
+            {"detail": "Email verified successfully."},
+            status=status.HTTP_200_OK,
+        )
