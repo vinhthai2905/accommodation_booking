@@ -65,7 +65,7 @@ export default function DBCreateWard() {
 
         createWard(payload, {
             onSuccess: () => {
-                navigate("/admin/wards")
+                navigate("/admin/dashboard/wards")
             }
         })
     }

@@ -43,7 +43,7 @@ export default function DBEditUser() {
                 })
             } else {
                 // Not found, could navigate back
-                navigate("/admin/users")
+                navigate("/admin/dashboard/users")
             }
         }
     }, [users, id_user, navigate])
@@ -70,7 +70,7 @@ export default function DBEditUser() {
 
         updateUser({ id_user, payload }, {
             onSuccess: () => {
-                navigate("/admin/users")
+                navigate("/admin/dashboard/users")
             }
         })
     }

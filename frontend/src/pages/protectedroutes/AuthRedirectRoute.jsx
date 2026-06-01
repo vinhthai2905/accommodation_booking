@@ -14,6 +14,9 @@ export default function AuthRedirectRoute() {
     if (isAuthenticated) {
         if (user?.role === "Đối tác")
             return <Navigate to="/partner/dashboard" replace />
+            
+        if (user?.role === "Admin")
+            return <Navigate to="/admin/dashboard" replace />
 
         return <Navigate to="/index" replace />
     }

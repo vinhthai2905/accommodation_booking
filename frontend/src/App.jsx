@@ -1,4 +1,4 @@
-import AdminLayout from "./components/layout/AdminLayout"
+
 import AppLayout from './components/layout/AppLayout'
 import AuthLayout from './components/layout/AuthLayout'
 import PartnerDashboard from './pages/partner/PartnerDashboard'
@@ -39,6 +39,7 @@ import DashboardChildrenPolicy from './features/dashboard/partner/pages/Dashboar
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminProtectedRoute from "./pages/protectedroutes/AdminProtectedRoute"
 import AdminDashboard from './pages/admin/AdminDashboard'
+import AdminDashboardLanding from './features/dashboard/admin/pages/AdminDashboardLanding'
 import DashboardReviewApplications from './features/dashboard/admin/pages/DashboardReviewApplications'
 import DashboardCategoryAmenities from './features/dashboard/admin/pages/DashboardCategoryAmenities'
 import DashboardAmenities from './features/dashboard/admin/pages/DashboardAmenities'
@@ -172,18 +173,24 @@ function App() {
       path: "/admin",
       element: <AdminProtectedRoute />,
       children: [
-        { path: "dashboard", element: <AdminDashboard /> },
-        { path: "review-applications", element: <DashboardReviewApplications /> },
-        { path: "wards", element: <DashboardWards /> },
-        { path: "wards/new", element: <DBCreateWard /> },
-        { path: "users", element: <DashboardUsers /> },
-        { path: "users/new", element: <DBCreateUser /> },
-        { path: "users/:id_user/edit", element: <DBEditUser /> },
-        { path: "amenities", element: <DashboardAmenities /> },
-        { path: "amenities/new", element: <DBCreateAmenity /> },
-        { path: "category-amenities", element: <DashboardCategoryAmenities /> },
-        { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
-        { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> }
+        {
+          path: "dashboard",
+          element: <AdminDashboard />,
+          children: [
+            { path: "", element: <AdminDashboardLanding /> },
+            { path: "review-applications", element: <DashboardReviewApplications /> },
+            { path: "wards", element: <DashboardWards /> },
+            { path: "wards/new", element: <DBCreateWard /> },
+            { path: "users", element: <DashboardUsers /> },
+            { path: "users/new", element: <DBCreateUser /> },
+            { path: "users/:id_user/edit", element: <DBEditUser /> },
+            { path: "amenities", element: <DashboardAmenities /> },
+            { path: "amenities/new", element: <DBCreateAmenity /> },
+            { path: "category-amenities", element: <DashboardCategoryAmenities /> },
+            { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
+            { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> }
+          ]
+        }
       ]
     }
     ,

@@ -20,7 +20,7 @@ export default function DBCreateCategoryAmenity() {
         onErrorValidatedForm,
     } = useAdminCreateAmenityCategoryForm()
 
-    useSuccessRedirect(createCategoryMutation, navigate, "/admin/category-amenities")
+    useSuccessRedirect(createCategoryMutation, navigate, "/admin/dashboard/category-amenities")
 
     return (
         <div className="flex flex-col flex-1 w-full space-y-6">

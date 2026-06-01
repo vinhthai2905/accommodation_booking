@@ -41,7 +41,7 @@ export default function DBCategoryAmenitiesToolBar({ searchTerm, setSearchTerm }
             </div>
 
             <div className="flex w-full items-center gap-3 md:w-auto">
-                <DBRoomToolBarButton onClick={() => navigate("/admin/category-amenities/new")}>
+                <DBRoomToolBarButton onClick={() => navigate("/admin/dashboard/category-amenities/new")}>
                     <Plus size={16} />
                     Thêm danh mục mới
                 </DBRoomToolBarButton>

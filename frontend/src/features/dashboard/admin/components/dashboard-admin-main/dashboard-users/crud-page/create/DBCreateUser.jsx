@@ -43,7 +43,7 @@ export default function DBCreateUser() {
 
         createUser(payload, {
             onSuccess: () => {
-                navigate("/admin/users")
+                navigate("/admin/dashboard/users")
             }
         })
     }

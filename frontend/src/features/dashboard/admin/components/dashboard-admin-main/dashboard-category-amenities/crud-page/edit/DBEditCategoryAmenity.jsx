@@ -32,7 +32,7 @@ export default function DBEditCategoryAmenity() {
         onErrorValidatedForm,
     } = useAdminEditAmenityCategoryForm(category)
 
-    useSuccessRedirect(updateCategoryMutation, navigate, "/admin/category-amenities")
+    useSuccessRedirect(updateCategoryMutation, navigate, "/admin/dashboard/category-amenities")
 
     if (isPendingCategory)
         return <LoadingEditCategoryAmenity labelLoading="Đang tải dữ liệu danh mục tiện nghi..." />

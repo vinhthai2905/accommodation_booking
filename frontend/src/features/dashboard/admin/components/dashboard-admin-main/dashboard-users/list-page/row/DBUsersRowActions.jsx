@@ -14,7 +14,7 @@ export default function DBUsersRowActions({setIsMenuOpen, setIsDeleteModalOpen, 
                 type="button"
                 onClick={() => {
                     setIsMenuOpen(false)
-                    navigate(`/admin/users/${idUser}/edit`)
+                    navigate(`/admin/dashboard/users/${idUser}/edit`)
                 }}
                 className={clsx(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-semibold text-gray-700",

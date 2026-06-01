@@ -108,7 +108,7 @@ export default function DBWardsToolBar({
                 )}
 
                 <button 
-                    onClick={() => navigate("/admin/wards/new")}
+                    onClick={() => navigate("/admin/dashboard/wards/new")}
                     className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-gray-900 cursor-pointer transition-colors"
                 >
                     <Plus size={16} />
