@@ -17,3 +17,16 @@ export const fetchPartnerBookings = async (tab = "upcoming") => {
 
     return data
 }
+
+export const fetchPartnerBookingDetail = async (bookingId) => {
+    const headers = buildTokenHeader()
+
+    const { data } = await axios.get(
+        `${apiUrl}/api/partner/hotel/bookings/${bookingId}`,
+        {
+            headers,
+        }
+    )
+
+    return data
+}

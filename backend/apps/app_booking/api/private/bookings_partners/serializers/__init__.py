@@ -1,1 +1,1 @@
-from .bookings_partner_serializers import PartnerBookingListSerializer
+from .bookings_partner_serializers import PartnerBookingListSerializer, PartnerBookingDetailSerializer

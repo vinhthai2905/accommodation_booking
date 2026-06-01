@@ -1,13 +1,10 @@
-import { useState } from "react"
-
 import DBBookingRowDatas from "./DBBookingRowDatas"
 import DBBookingRowActions from "./DBBookingRowActions"
 
 import DBRoomTypeActionsButton from "../../../../../ui/dashboard-main/dashboard-room-type/DBRoomTypeActionsButton"
 import usePartnerRoomTypeModals from "/src/hooks/dashboard/partner/room-type-hooks/modals/usePartnerRoomTypeModals"
 
-export default function DBBookingRow({ initialBooking }) {
-    const [booking, setBooking] = useState(initialBooking)
+export default function DBBookingRow({ booking }) {
 
     const {
         menuRef,

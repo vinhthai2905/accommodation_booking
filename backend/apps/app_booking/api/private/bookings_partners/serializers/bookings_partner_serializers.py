@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.db import models
 
 from apps.app_booking.models import DatPhong, HoaDon, ThanhToan
 from apps.app_user.models import NguoiDung
@@ -59,3 +60,21 @@ class PartnerBookingListSerializer(serializers.ModelSerializer):
         ]
         
         read_only_fields = fields
+
+
+class PartnerBookingDetailSerializer(PartnerBookingListSerializer):
+    booked_rooms = serializers.SerializerMethodField()
+
+    class Meta(PartnerBookingListSerializer.Meta):
+        fields = PartnerBookingListSerializer.Meta.fields + ["booked_rooms", "check_in_time"]
+        read_only_fields = fields
+
+    def get_booked_rooms(self, booking):
+        from django.db.models import Count
+        # Count rooms grouped by room type name
+        room_counts = booking.booking_details.values(
+            room_type_name=models.F('id_room__id_room_type__type_name')
+        ).annotate(
+            quantity=Count('id_booking_detail')
+        )
+        return list(room_counts)

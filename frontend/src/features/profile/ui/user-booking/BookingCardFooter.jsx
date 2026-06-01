@@ -28,7 +28,7 @@ export default function BookingCardFooter({ booking, paymentLabel, invoice, paym
             </div>
 
             <div className="flex items-center gap-3">
-                {activeTab === 'upcoming' && <BookingCancelButton booking={booking} />}
+                {activeTab === 'upcoming' && booking.status === 'PENDING' && <BookingCancelButton booking={booking} />}
                 {hotel?.slug && hotel?.id_hotel && (
                     <Link
                         to={`/hotel/${hotel.slug}/${hotel.id_hotel}`}

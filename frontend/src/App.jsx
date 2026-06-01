@@ -21,6 +21,7 @@ import PartnerRegister from './pages/partner/PartnerRegister'
 import PartnerOnboarding from './pages/partner/PartnerOnboarding'
 
 import DashboardBookings from './features/dashboard/partner/pages/DashboardBookings'
+import DashboardBookingDetail from './features/dashboard/partner/pages/DashboardBookingDetail'
 import DashboardHotel from './features/dashboard/partner/pages/DashboardHotel'
 import DashboardHotelImages from './features/dashboard/partner/pages/DashboardHotelImages'
 import DashboardHotelAmenities from './features/dashboard/partner/pages/DashboardHotelAmenities'
@@ -150,6 +151,7 @@ function App() {
                 { path: "room-type", element: <DashboardRoomTypes /> },
                 { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRooms /> },
                 { path: "bookings", element: <DashboardBookings /> },
+                { path: "bookings/:id_booking/details", element: <DashboardBookingDetail /> },
 
                 { path: "room-type/new", element: <DBCreateRoomType /> },
                 { path: "room-type/:slug/:id_room_type/edit", element: <DBEditRoomType /> },
