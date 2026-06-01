@@ -1,11 +1,12 @@
-import AnimatedSidebarDashboard from '../ui/AnimatedSidebarDashboard'
-import DashboardPanel from '../ui/DashboardPanel'
-import DashboardNav from '../../features/dashboard/admin/ui/dashboard-nav/DashboardNav'
-import AdminDashboardProfile from '../../features/dashboard/admin/section/AdminDashboardProfile'
-import { clsx } from 'clsx'
-import { Menu, Bell } from 'lucide-react'
-import { Outlet, Link, useLocation } from 'react-router'
-import { motion, AnimatePresence } from 'framer-motion'
+import AnimatedSidebarDashboard from "../ui/AnimatedSidebarDashboard"
+import DashboardPanel from "../ui/DashboardPanel"
+import DashboardNav from "../../features/dashboard/admin/ui/dashboard-nav/DashboardNav"
+import AdminDashboardProfile from "../../features/dashboard/admin/section/AdminDashboardProfile"
+
+import { clsx } from "clsx"
+import { Menu, Bell } from "lucide-react"
+import { Outlet, Link, useLocation } from "react-router"
+import { motion, AnimatePresence } from "framer-motion"
 
 
 export default function AdminLayout() {

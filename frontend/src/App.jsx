@@ -18,6 +18,7 @@ import UserVerificationEmail from './features/profile/section/UserVerificationEm
 import DashboardLanding from './features/dashboard/partner/pages/DashboardLanding'
 import PartnertLanding from './pages/partner/PartnerLanding'
 import PartnerRegister from './pages/partner/PartnerRegister'
+import PartnerLogin from './pages/partner/PartnerLogin'
 import PartnerOnboarding from './pages/partner/PartnerOnboarding'
 
 import DashboardBookings from './features/dashboard/partner/pages/DashboardBookings'
@@ -34,6 +35,9 @@ import DBCreateRoomType from './features/dashboard/partner/components/dashboard-
 import DBEditRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/edit/DBEditRoomType'
 import DashboardChildrenPolicy from './features/dashboard/partner/pages/DashboardChildrenPolicy'
 
+
+import AdminLogin from './pages/admin/AdminLogin'
+import AdminProtectedRoute from "./pages/protectedroutes/AdminProtectedRoute"
 import AdminDashboard from './pages/admin/AdminDashboard'
 import DashboardReviewApplications from './features/dashboard/admin/pages/DashboardReviewApplications'
 import DashboardCategoryAmenities from './features/dashboard/admin/pages/DashboardCategoryAmenities'
@@ -64,8 +68,6 @@ import BookingProvider from './context/booking/BookingProvider'
 import ToasterUI from './components/ui/ToasterUI'
 
 import ChildAgeInput from './features/search/components/search-bar/input/ChildAgeInput'
-import PartnerLogin from './pages/partner/PartnerLogin'
-import AdminLogin from './pages/admin/AdminLogin'
 
 const queryClient = new QueryClient()
 
@@ -167,8 +169,8 @@ function App() {
       ]
     },
     {
-      path: "admin",
-      element: <AdminLayout />,
+      path: "/admin",
+      element: <AdminProtectedRoute />,
       children: [
         { path: "dashboard", element: <AdminDashboard /> },
         { path: "review-applications", element: <DashboardReviewApplications /> },

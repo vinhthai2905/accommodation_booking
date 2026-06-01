@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutDashboard, Users, Hotel, Settings, BadgeCheckIcon } from 'lucide-react';
-import { Link } from 'react-router';
+import { motion, AnimatePresence } from 'framer-motion'
+import { LayoutDashboard, Users, Hotel, Settings, BadgeCheckIcon } from 'lucide-react'
+import { Link } from 'react-router'
 
 import { clsx } from "clsx"
 
