@@ -107,8 +107,6 @@ class PartnerRoomDetailView(APIView):
         room = self._get_room(hotel, id_room)
         
         room_name = request.data.get("room_name")
-        status_val = request.data.get("status")
-        
         if not room_name:
             return Response(
                 {"error": "Tên phòng không được để trống."},
@@ -116,8 +114,6 @@ class PartnerRoomDetailView(APIView):
             )
             
         room.room_name = room_name
-        if status_val:
-            room.status = status_val
             
         room.save()
         

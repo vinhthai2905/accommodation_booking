@@ -63,7 +63,7 @@ class RoomTypeAvailabilitySerializer(serializers.ModelSerializer):
         rooms = [
             room
             for room in obj.rooms.all()
-            if room.id_room not in booked_room_ids_set and room.status != "MAINTENANCE"
+            if room.id_room not in booked_room_ids_set
         ]
 
         return (

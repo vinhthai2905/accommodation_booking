@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .....model.chinh_sach_tre_em_models import ChinhSachTreEm
+from .....model.chinh_sach_models import ChinhSachTreEm
 
 class ChildrenPolicySerializer(serializers.ModelSerializer):
     class Meta:
