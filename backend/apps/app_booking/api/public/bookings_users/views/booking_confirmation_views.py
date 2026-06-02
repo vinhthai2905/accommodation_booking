@@ -8,6 +8,8 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from apps.common.permission.user_permissions import IsCustomer
+from apps.common.helpers import get_booking
+
 from apps.app_booking.api.public.bookings_users.serializers import (
     IDBookingConfirmationSerializer,
     BookingConfirmationDetailSerializer,
@@ -29,18 +31,7 @@ class BookingConfirmationView(views.APIView):
         serializer.is_valid(raise_exception=True)
 
         return serializer.validated_data["id_booking"]
-
-    def _get_booking(self, id_booking) -> DatPhong:
-        try:
-            booking = DatPhong.objects.select_related("invoice__payments").get(
-                id_booking=id_booking
-            )
-        except Exception as e:
-            raise exceptions.NotFound(
-                detail={"error": "Booking wasn't found with the given ID."}
-            )
-        return booking
-
+   
     def _get_booking_status(self, booking: DatPhong):
         return booking.invoice.payments.status
 
@@ -79,7 +70,7 @@ class BookingConfirmationView(views.APIView):
 
     def get(self, request: Request, id_booking, *args, **kwargs):
         validated_id_booking = self._validate_id_booking_path_params(id_booking)
-        booking = self._get_booking(validated_id_booking)
+        booking = get_booking(validated_id_booking, request.user)
         payment_status = self._get_booking_status(booking)
 
         try:

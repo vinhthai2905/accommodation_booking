@@ -62,8 +62,11 @@ class NguoiDungManager(BaseUserManager):
             raise ValueError("Superuser phải có is_staff=True.")
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser phải có is_superuser=True.")
+        
+        admin_user = self._create_user(email, password, **extra_fields)
+        admin_user_role = self._create_user_role(admin_user, role_name="Admin")
 
-        return self._create_user(email, password, **extra_fields)
+        return admin_user
 
 class NguoiDung(AbstractUser):
     username = None
@@ -152,7 +155,8 @@ class NguoiDung(AbstractUser):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = [
+    ]
 
     objects = NguoiDungManager()
 

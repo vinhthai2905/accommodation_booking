@@ -3,9 +3,11 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status, exceptions
 
+from apps.common.permission.user_permissions import IsCustomer
+from apps.common.helpers import get_booking
+
 from apps.app_booking.models import DatPhong
 from apps.app_booking.api.public.bookings_users.serializers.booking_cancel_serializers import BookingCancelSerializer
-from apps.common.permission.user_permissions import IsCustomer
 
 from apps.app_payment.services import ZaloPayRefundService
 
@@ -44,14 +46,8 @@ class BookingCancellationService:
 class BookingCancelView(APIView):
     permission_classes = [IsCustomer]
     
-    def _get_booking(self, id_booking, user):
-        try:
-            return DatPhong.objects.get(id_booking=id_booking, id_user=user)
-        except DatPhong.DoesNotExist:
-            raise exceptions.NotFound("Booking not found.")
-
     def patch(self, request: Request, id_booking: UUID, *args, **kwargs):
-        booking = self._get_booking(id_booking, request.user)
+        booking = get_booking(id_booking, request.user)
 
         serializer = BookingCancelSerializer(instance=booking, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)

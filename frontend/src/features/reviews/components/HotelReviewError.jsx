@@ -16,7 +16,7 @@ export default function HotelReviewError({ error, onRetry }) {
                     <AlertCircle size={32} />
                 </div>
                 
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Đã xảy ra lỗi!</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Đã xảy ra lỗi khi đánh giá!</h2>
                 
                 <p className="text-gray-500 mb-6">
                     {error?.message || "Không thể tải thông tin đặt phòng. Vui lòng thử lại sau."}

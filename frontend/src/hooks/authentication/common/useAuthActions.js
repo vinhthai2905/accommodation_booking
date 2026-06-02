@@ -13,12 +13,12 @@ export default function useAuthActions(setUserState, queryClient) {
     }
 
     const setCurrentUser = (email, personal_info, role) => {
-        if (!personal_info || !email || !role)
+        if (!email || !role)
             throw new Error("Thông tin không tồn tại")
 
         setUserState({
             email,
-            personal_info,
+            personal_info: personal_info || {},
             role
         })
     }

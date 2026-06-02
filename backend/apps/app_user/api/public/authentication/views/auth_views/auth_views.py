@@ -15,6 +15,7 @@ from apps.app_user.api.public.authentication.serializers import (
     FetchAuthUserSerializer,
 )
 
+
 class AuthLoginView(APIView):
     http_method_names = ["post"]
     permission_classes = [AllowAny]
@@ -65,7 +66,7 @@ class AuthLogoutView(APIView):
         logout_serializer.perform_blacklist()
 
         response = Response(
-        data={"message": "Token successfully deleted."},
+            data={"message": "Token successfully deleted."},
             status=status.HTTP_204_NO_CONTENT,
         )
 
@@ -87,13 +88,15 @@ class FetchAuthUserView(APIView):
             }
         )
         fetch_user_serializer.is_valid(raise_exception=True)
+        
+        user_data = AuthenticatedUserSerializer(
+            instance=request.user,
+            context={
+                "role": fetch_user_serializer.validated_data["auth_user_role"]
+            },
+        ).data
 
         return Response(
-            data={
-                "user": AuthenticatedUserSerializer(
-                    instance=request.user,
-                    context={"role": fetch_user_serializer.validated_data["auth_user_role"]},
-                ).data
-            },
+            data={"user": user_data},
             status=status.HTTP_200_OK,
         )

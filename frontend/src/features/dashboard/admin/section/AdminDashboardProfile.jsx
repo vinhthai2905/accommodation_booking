@@ -12,12 +12,12 @@ export default function AdminDashboardProfile() {
     const { ref } = useClickOutside(setIsOpen)
     const { user, clearAuthUserState } = useAuthUserContext()
 
-    if (!user || !user.personal_info) return null;
+    if (!user) return null
 
-    const userName = parseFullName(
-        user.personal_info.first_name,
-        user.personal_info.last_name
-    )
+    const userName =parseFullName(
+            user?.personal_info?.first_name,
+            user?.personal_info?.last_name
+        )
 
     return (
         <div ref={ref} className="relative">
@@ -38,7 +38,7 @@ export default function AdminDashboardProfile() {
                         "flex items-center justify-center w-full h-full",
                         "bg-white rounded-full text-sm font-bold text-[#003b95]"
                     )}>
-                        {user.personal_info.first_name[0]}
+                        {"A"}
                     </div>
                 </div>
 

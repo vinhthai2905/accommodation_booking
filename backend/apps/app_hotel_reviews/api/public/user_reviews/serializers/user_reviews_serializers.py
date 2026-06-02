@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from apps.common.helpers import get_booking
 from apps.app_hotel.model.danh_gia_models import DanhGiaKhachSan
 
 class UserCreateReviewSerializer(serializers.ModelSerializer):
@@ -25,3 +27,9 @@ class UserCreateReviewSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"detail": "Bạn đã đánh giá đặt phòng này rồi."})
             
         return attrs
+    
+    def _validate_booking_owner(booking, user):
+        pass
+        
+    def _validate_hotel(id_hotel):
+        pass

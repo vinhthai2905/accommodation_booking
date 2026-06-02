@@ -4,6 +4,8 @@ export default function useAuthNavigation() {
     const navigate = useNavigate()
 
     const navigateAfterAuth = (userRole) => {
+        console.log(userRole)
+        
         const navigateTo =
             userRole === "Admin"
                 ? "/admin/dashboard"

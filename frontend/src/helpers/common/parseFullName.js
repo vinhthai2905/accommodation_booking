@@ -1,3 +1,3 @@
-export const parseFullName = (firstName, lastName) => {
+export const parseFullName = (firstName = "New", lastName = "Admin") => {
     return `${firstName} ${lastName}`
 }

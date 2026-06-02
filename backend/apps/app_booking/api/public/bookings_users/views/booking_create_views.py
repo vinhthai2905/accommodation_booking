@@ -1,14 +1,16 @@
-from django.utils import timezone
 from django.db import transaction
 from django.db.models import QuerySet
 from django.core.exceptions import ObjectDoesNotExist
 
-from rest_framework import views, status
+from rest_framework import status
 from rest_framework import exceptions
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+from apps.common.base import HotelBaseView
+from apps.common.helpers import get_hotel
 from apps.common.permission.user_permissions import IsCustomer
+
 from apps.app_booking.choices import TrangThaiDatPhong, PhuongThucThanhToan, TrangThaiThanhToan
 from apps.app_booking.models import DatPhong, HoaDon, ThanhToan
 from apps.app_booking.models import (
@@ -26,7 +28,7 @@ from apps.app_hotel.models import PhongKhachSan, KhachSan, ChinhSachTreEm
 from apps.app_user.models import NguoiDung
 
 
-class BookingCreateView(views.APIView):
+class BookingCreateView(HotelBaseView):
     permission_classes = [IsCustomer]
     serializer_class = BookingCreateSerializer
     hotel_model = KhachSan
@@ -60,14 +62,6 @@ class BookingCreateView(views.APIView):
         serializer.is_valid(raise_exception=True)
 
         return serializer.validated_data
-
-    def _get_hotel_by_id(self, id_hotel):
-        try:
-            hotel = KhachSan.objects.get(id_hotel=id_hotel)
-        except:
-            raise exceptions.NotFound("Hotel not found by the given ID.")
-
-        return hotel
 
     def _get_user_by_id(self, email):
         try:
@@ -196,7 +190,7 @@ class BookingCreateView(views.APIView):
 
         try:
             with transaction.atomic():
-                hotel = self._get_hotel_by_id(id_hotel=validated_data["id_hotel"])
+                hotel = get_hotel(id_hotel=validated_data["id_hotel"])
                 hotel_child_policy = self._get_hotel_child_policy(hotel)
                 user = self._get_user_by_id(email=validated_data["email"])
 
