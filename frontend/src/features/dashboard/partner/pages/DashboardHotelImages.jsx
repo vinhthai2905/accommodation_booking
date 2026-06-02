@@ -36,9 +36,7 @@ export default function DashboardHotelImages() {
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false)
     
     const [editForm, setEditForm] = useState({ image_name: "" })
-    const [uploadForm, setUploadForm] = useState({ image_name: "", is_primary: false })
-    const [selectedFile, setSelectedFile] = useState(null)
-    const [previewUrl, setPreviewUrl] = useState("")
+    const [uploadForm, setUploadForm] = useState({ image_name: "", is_primary: false, url: "" })
 
     if (isPending)
         return <LoadingHotelImages labelLoading={"Đang tải danh sách hình ảnh..."} />
@@ -112,44 +110,28 @@ export default function DashboardHotelImages() {
         })
     }
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0]
-        if (file) {
-            setSelectedFile(file)
-            setPreviewUrl(URL.createObjectURL(file))
-        } else {
-            setSelectedFile(null)
-            setPreviewUrl("")
-        }
-    }
-
     const handleSaveNewImage = (e) => {
         e.preventDefault()
-        if (!selectedFile) return
+        if (!uploadForm.url) return
         
-        const formData = new FormData()
-        formData.append("file", selectedFile)
-        formData.append("image_name", uploadForm.image_name)
-        formData.append("is_primary", uploadForm.is_primary)
+        const payload = {
+            url: uploadForm.url,
+            image_name: uploadForm.image_name,
+            is_primary: uploadForm.is_primary
+        }
         
-        uploadImage(formData, {
+        uploadImage(payload, {
             onSuccess: () => {
                 setIsUploadModalOpen(false)
-                setUploadForm({ image_name: "", is_primary: false })
-                setSelectedFile(null)
-                setPreviewUrl("")
+                setUploadForm({ image_name: "", is_primary: false, url: "" })
             }
         })
     }
 
-    // Clean up preview URL when modal closes to prevent memory leaks
     const handleCloseUploadModal = () => {
         if (!isUploading) {
             setIsUploadModalOpen(false)
-            setUploadForm({ image_name: "", is_primary: false })
-            setSelectedFile(null)
-            if (previewUrl) URL.revokeObjectURL(previewUrl)
-            setPreviewUrl("")
+            setUploadForm({ image_name: "", is_primary: false, url: "" })
         }
     }
 
@@ -208,8 +190,6 @@ export default function DashboardHotelImages() {
                         uploadForm={uploadForm}
                         setUploadForm={setUploadForm}
                         isPending={isUploading}
-                        previewUrl={previewUrl}
-                        handleFileChange={handleFileChange}
                     />
                 )}
             </AnimatePresence>

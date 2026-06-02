@@ -1,3 +1,5 @@
+import { Loader2 } from "lucide-react"
+
 export default function OnboardingSubmitButton({ methods, submittingHotelRegistration, handleSubmitHotelRegistration }) {
     return (
         <button

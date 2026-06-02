@@ -1,4 +1,5 @@
 import OnboardingSubmitButton from "./OnboardingSubmitButton"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 
 export default function OnboardingNavigation({
     currentStep, 
