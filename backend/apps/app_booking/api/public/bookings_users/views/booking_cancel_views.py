@@ -8,7 +8,7 @@ from apps.common.helpers import get_booking
 
 from apps.app_booking.models import DatPhong
 from apps.app_booking.api.public.bookings_users.serializers.booking_cancel_serializers import BookingCancelSerializer
-
+from apps.app_hotel.models import PhongKhachSan
 from apps.app_payment.services import ZaloPayRefundService
 
 from uuid import UUID
@@ -33,11 +33,6 @@ class BookingCancellationService:
 
         if refund_result.get("return_code") in [1, 3]:
             serializer.update(updated_booking, "Success")
-            
-            from apps.app_hotel.models import PhongKhachSan
-            PhongKhachSan.objects.filter(booking_details__id_booking=booking).update(
-                status=PhongKhachSan.RoomStatus.AVAILABLE
-            )
         else:
             serializer.update(updated_booking, "Failed")
 
