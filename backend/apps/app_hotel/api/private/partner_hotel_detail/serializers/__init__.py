@@ -1,5 +1,6 @@
 from .hotel_policy_serializers import (
-    ChildrenPolicySerializer
+    ChildrenPolicySerializer,
+    RefundPolicySerializer
 )
 
 from .room_type_serializers import (

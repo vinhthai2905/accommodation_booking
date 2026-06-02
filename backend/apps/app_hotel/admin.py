@@ -25,6 +25,7 @@ class PhongKhachSanAdmin(admin.ModelAdmin):
 
 admin.site.register(LoaiKhachSan)
 admin.site.register(ChinhSachTreEm)
+admin.site.register(ChinhSachHoanTien)
 admin.site.register(ChiTietLoaiPhong)
 admin.site.register(Giuong)
 admin.site.register(HinhAnhKhachSan)

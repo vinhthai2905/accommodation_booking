@@ -5,9 +5,10 @@ from rest_framework import exceptions
 
 from uuid import UUID
 
-from apps.app_hotel.models import KhachSan, ChinhSachTreEm
-from apps.app_hotel.api.public.booking_preview.serializers import (
-    HotelBookingPreviewSerializer, ChildPolicyPreviewSerializer
+from apps.common.helpers import get_hotel
+from apps.app_hotel.models import KhachSan, ChinhSachTreEm, ChinhSachHoanTien
+from apps.app_hotel.api.public.hotel_preview.serializers import (
+    HotelBookingPreviewSerializer, ChildPolicyPreviewSerializer, RefundPolicyPreviewSerializer
 )
 
 class HotelBookingPreviewView(APIView):
@@ -20,7 +21,7 @@ class HotelBookingPreviewView(APIView):
         try:
             hotel = (
                 self.hotel_model.objects
-                .select_related("child_policy")
+                .select_related("child_policy", "refund_policy")
                 .prefetch_related("hotel_images")
                 .get(id_hotel=id_hotel)
             )
@@ -36,10 +37,7 @@ class ChildPolicyPreviewView(APIView):
     child_policy_model = ChinhSachTreEm
 
     def get(self, request: Request, id_hotel: UUID):
-        try:
-            hotel = self.hotel_model.objects.get(id_hotel=id_hotel)
-        except self.hotel_model.DoesNotExist:
-            raise exceptions.NotFound("Hotel not found.")
+        hotel = get_hotel(id_hotel)
 
         try:
             child_policy = self.child_policy_model.objects.get(id_hotel=hotel)
@@ -47,5 +45,22 @@ class ChildPolicyPreviewView(APIView):
             raise exceptions.NotFound("Child policy not found for this hotel.")
 
         serializer = self.serializer_class(instance=child_policy)
+
+        return Response(serializer.data)
+
+class RefundPolicyPreviewView(APIView):
+    serializer_class = RefundPolicyPreviewSerializer
+    hotel_model = KhachSan
+    refund_policy_model = ChinhSachHoanTien
+
+    def get(self, request: Request, id_hotel: UUID):
+        hotel = get_hotel(id_hotel)
+
+        try:
+            refund_policy = self.refund_policy_model.objects.get(id_hotel=hotel)
+        except self.refund_policy_model.DoesNotExist:
+            raise exceptions.NotFound("Refund policy not found for this hotel.")
+
+        serializer = self.serializer_class(instance=refund_policy)
 
         return Response(serializer.data)

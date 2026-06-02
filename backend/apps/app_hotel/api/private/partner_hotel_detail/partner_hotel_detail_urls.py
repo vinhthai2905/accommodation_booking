@@ -21,12 +21,14 @@ from apps.app_hotel.api import (
     UpdateHotelsNearBeachView,
     HotelTypeListView,
     PartnerHotelRegistrationView,
-    PartnerChildrenPolicyView
+    PartnerChildrenPolicyView,
+    PartnerRefundPolicyView
 )
 
 urlpatterns = [
     path("hotel", PartnerHotelView.as_view(), name="partner-hotel-info"),
     path("hotel/policy/children", PartnerChildrenPolicyView.as_view(), name="partner-hotel-children-policy"),
+    path("hotel/policy/refund", PartnerRefundPolicyView.as_view(), name="partner-hotel-refund-policy"),
     path("hotel/update-near-beach", UpdateHotelsNearBeachView.as_view(), name="update-hotels-near-beach"),
     path("hotel/images", PartnerHotelImageListView.as_view(), name="partner-hotel-images"),
     path("hotel/images/<int:id_hotel_image>", PartnerHotelImageDetailView.as_view(), name="partner-hotel-image-detail"),

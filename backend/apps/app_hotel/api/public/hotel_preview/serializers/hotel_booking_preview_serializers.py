@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.app_hotel.models import KhachSan, ChinhSachTreEm
+from apps.app_hotel.models import KhachSan, ChinhSachTreEm, ChinhSachHoanTien
 from apps.app_hotel.helpers import get_full_address
 
 class ChildPolicyPreviewSerializer(serializers.ModelSerializer):
@@ -15,12 +15,24 @@ class ChildPolicyPreviewSerializer(serializers.ModelSerializer):
             "surcharge_amount",
         ]
 
+class RefundPolicyPreviewSerializer(serializers.ModelSerializer):
+    """Serialize the refund policy belongs to a hotel, then expose to public API."""
+
+    class Meta:
+        model = ChinhSachHoanTien
+        fields = [
+            "is_cancellation_allowed",
+            "days_before_arrival_penalty",
+            "penalty_percentage",
+        ]
+
 class HotelBookingPreviewSerializer(serializers.ModelSerializer):
     """Serialize hotel data for booking purposes, then expose it to public API."""
 
     primary_image = serializers.SerializerMethodField()
     full_address = serializers.SerializerMethodField()
     child_policy = ChildPolicyPreviewSerializer(read_only=True)
+    refund_policy = RefundPolicyPreviewSerializer(read_only=True)
 
     class Meta:
         model = KhachSan
@@ -30,6 +42,7 @@ class HotelBookingPreviewSerializer(serializers.ModelSerializer):
             "full_address",
             "primary_image",
             "child_policy",
+            "refund_policy",
         ]
         read_only_fields = fields
 
