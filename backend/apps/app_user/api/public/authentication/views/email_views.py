@@ -10,6 +10,8 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils import timezone
 
+from uuid import UUID
+
 from apps.common.permission import IsCustomer, IsAuthenticatedUserActive
 from apps.app_user.models import NguoiDung
 
@@ -80,9 +82,9 @@ class VerifyUserEmailView(APIView):
 
     def _get_user_from_uidb64(self, uidb64: str) -> NguoiDung:
         try:
-            uid = urlsafe_base64_decode(uidb64).decode()
+            uid = UUID(urlsafe_base64_decode(uidb64).decode())
             return NguoiDung.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, NguoiDung.DoesNotExist):
+        except NguoiDung.DoesNotExist:
             raise exceptions.ValidationError(
                 detail={"detail": "Invalid or expired verification link."}
             )

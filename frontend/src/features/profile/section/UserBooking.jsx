@@ -11,10 +11,14 @@ import useUserBookings from "../../../hooks/profile/user-booking/useUserBookings
 
 import { tabs } from "../helpers/orderStatus"
 import { emptyContentTabs } from "../helpers/emptyContentTabs"
+import { useSearchParams } from "react-router"
 
 export default function UserBooking() {
-    const [activeTab, setActiveTab] = useState("upcoming")
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const [activeTab, setActiveTab] = useState(searchParams.get("tab"))
     const { bookings, isLoading: isFetchingBookings, isError } = useUserBookings(activeTab)
+
 
     const emptyContentCurrentTab = emptyContentTabs[activeTab]
 
@@ -33,6 +37,7 @@ export default function UserBooking() {
                     setActiveTab={setActiveTab}
                     tabs={tabs}
                     bookings={bookings}
+                    setSearchParams={setSearchParams}
                 />
 
                 <AnimatePresence mode="wait">

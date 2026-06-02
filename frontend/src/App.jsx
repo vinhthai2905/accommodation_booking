@@ -14,6 +14,7 @@ import HotelsSearchResult from "./pages/users/HotelsSearchResult"
 import PaymentConfirmation from './pages/users/PaymentConfirmation'
 import Profile from './pages/users/Profile'
 import UserVerificationEmail from './features/profile/section/UserVerificationEmail'
+import UserCreateReview from './features/reviews/pages/UserCreateReview'
 
 import DashboardLanding from './features/dashboard/partner/pages/DashboardLanding'
 import PartnertLanding from './pages/partner/PartnerLanding'
@@ -69,6 +70,7 @@ import BookingProvider from './context/booking/BookingProvider'
 import ToasterUI from './components/ui/ToasterUI'
 
 import ChildAgeInput from './features/search/components/search-bar/input/ChildAgeInput'
+import Page404Redirect from './features/404 /pages/404PageRedirect'
 
 const queryClient = new QueryClient()
 
@@ -118,6 +120,10 @@ function App() {
             { path: "user", element: <UserInformation /> },
             { path: "mytrips.html", element: <UserBooking /> }
           ]
+        },
+        {
+          path: "profile/booking/review/:slug/:id_booking",
+          element: <UserCreateReview />
         },
         {
           path: "book.html",
@@ -202,7 +208,10 @@ function App() {
       path: "testground",
       element: <ChildAgeInput />
     },
-    
+    {
+      path: "*",
+      element: <Page404Redirect />
+    }
   ])
   return (
     <QueryClientProvider client={queryClient}>

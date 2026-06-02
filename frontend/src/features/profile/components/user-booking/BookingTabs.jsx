@@ -2,7 +2,14 @@ import BookingNumber from "../../ui/user-booking/BookingNumber"
 
 import { clsx } from "clsx"
 
-export default function BookingTabs({ isFetchingBookings, activeTab, setActiveTab, tabs, bookings }) {
+export default function BookingTabs({
+    isFetchingBookings,
+    activeTab,
+    setActiveTab,
+    tabs,
+    bookings,
+    setSearchParams,
+}) {
     const currentTabTotalBookings = bookings?.length ?? 0;
     const hasBookings = currentTabTotalBookings > 0
 
@@ -17,7 +24,10 @@ export default function BookingTabs({ isFetchingBookings, activeTab, setActiveTa
                 <button
                     key={tab.id}
                     id={`tab-${tab.id}`}
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => {
+                        setActiveTab(tab.id)
+                        setSearchParams({ tab: tab.id })
+                    }}
                     className={clsx(
                         "px-4 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200",
                         "cursor-pointer",

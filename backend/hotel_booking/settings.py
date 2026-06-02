@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'apps.app_ai',
     'apps.app_user',
     'apps.app_hotel',
+    'apps.app_hotel_reviews',
     'apps.app_location',
     'apps.app_booking',
     'apps.app_payment'
@@ -172,7 +173,7 @@ EMAIL_PORT=os.getenv("EMAIL_PORT")
 EMAIL_USE_TLS= os.getenv("EMAIL_USE_TLS")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-EMAIL_VERIFICATION_TIMEOUT = 60 * 15
+EMAIL_VERIFICATION_TIMEOUT = 1 * 60
 
 
 FRONT_END_URL = "http://localhost:5173"

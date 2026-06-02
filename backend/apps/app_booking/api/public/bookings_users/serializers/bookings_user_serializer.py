@@ -19,6 +19,7 @@ class UserPaymentSerializer(serializers.ModelSerializer):
 
 class UserBookingHotelSerializer(serializers.Serializer):
     name = serializers.CharField()
+    slug = serializers.SlugField()
     full_address = serializers.SerializerMethodField()
     primary_image = serializers.SerializerMethodField()
 

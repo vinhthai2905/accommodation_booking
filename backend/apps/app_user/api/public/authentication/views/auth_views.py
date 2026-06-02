@@ -65,7 +65,7 @@ class AuthLogoutView(APIView):
         logout_serializer.perform_blacklist()
 
         response = Response(
-            data={"message": "Token successfully deleted."},
+        data={"message": "Token successfully deleted."},
             status=status.HTTP_204_NO_CONTENT,
         )
 

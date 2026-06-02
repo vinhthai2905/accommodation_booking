@@ -8,7 +8,7 @@ from rest_framework import exceptions, views
 
 from apps.app_user.models import NguoiDung
 from apps.app_hotel.models import KhachSan, LoaiPhong, ChinhSachTreEm
-from apps.app_booking.models import DatPhong
+from apps.app_booking.models import DatPhong, TrangThaiDatPhong
 from apps.app_location.models import Phuong
 
 
@@ -112,6 +112,9 @@ class HotelSearchViewMixin(APIView):
                 check_in_date__lt=check_out_request,
                 check_out_date__gt=check_in_request,
                 id_hotel__in=hotels_list,
+            )
+            .exclude(
+                status=TrangThaiDatPhong.CANCELLED
             )
             .select_related("id_hotel")
             .prefetch_related("booking_details")

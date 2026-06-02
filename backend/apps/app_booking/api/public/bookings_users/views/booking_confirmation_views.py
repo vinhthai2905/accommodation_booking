@@ -14,6 +14,7 @@ from apps.app_booking.api.public.bookings_users.serializers import (
 )
 from apps.app_booking.models import DatPhong, ThanhToan
 from apps.app_booking.choices import TrangThaiThanhToan
+from apps.app_booking.models import TrangThaiThanhToan
 
 from apps.app_payment.services.zalo import ZaloPayGetOrderStatusService
 from apps.app_payment.api.exceptions.zalo import ZaloPaymentGatewayException
@@ -40,11 +41,16 @@ class BookingConfirmationView(views.APIView):
             )
         return booking
 
+    def _get_booking_status(self, booking: DatPhong):
+        return booking.invoice.payments.status
+
     def _get_zalo_status_order_service(self, booking: DatPhong) -> dict:
         id_transaction = booking.invoice.payments.id_transaction_service
 
         try:
-            zalo_transaction_status = ZaloPayGetOrderStatusService.get_order_status(id_transaction)
+            zalo_transaction_status = ZaloPayGetOrderStatusService.get_order_status(
+                id_transaction
+            )
         except Exception as e:
             raise ZaloPaymentGatewayException(detail={"error": e})
 
@@ -73,16 +79,15 @@ class BookingConfirmationView(views.APIView):
 
     def get(self, request: Request, id_booking, *args, **kwargs):
         validated_id_booking = self._validate_id_booking_path_params(id_booking)
+        booking = self._get_booking(validated_id_booking)
+        payment_status = self._get_booking_status(booking)
 
         try:
             with transaction.atomic():
-                booking = self._get_booking(validated_id_booking)
-
                 zalo_transaction_status = self._get_zalo_status_order_service(booking)
                 booking_payment = self._update_booking_payment(
                     booking, zalo_transaction_status
                 )
-
                 return Response(
                     {
                         **zalo_transaction_status,
@@ -92,6 +97,5 @@ class BookingConfirmationView(views.APIView):
                     },
                     status=status.HTTP_200_OK,
                 )
-
         except exceptions.APIException as e:
             raise e

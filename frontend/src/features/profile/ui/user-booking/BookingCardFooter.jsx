@@ -29,6 +29,15 @@ export default function BookingCardFooter({ booking, paymentLabel, invoice, paym
 
             <div className="flex items-center gap-3">
                 {activeTab === 'upcoming' && booking.status === 'PENDING' && <BookingCancelButton booking={booking} />}
+                {activeTab === 'past' && ['CONFIRMED', 'COMPLETED'].includes(booking.status) && (
+                    <Link 
+                        to={`/profile/booking/review/${booking.hotel.slug}/${booking.id_booking}`}
+                        state={{ hotelName: hotel?.name }}
+                        className="flex items-center gap-1.5 px-4 py-1.5 text-blue-700 font-medium text-xs rounded-lg border border-blue-200 transition-colors shadow-sm bg-blue-50 hover:bg-blue-100 cursor-pointer"
+                    >
+                        Đánh giá
+                    </Link>
+                )}
                 {hotel?.slug && hotel?.id_hotel && (
                     <Link
                         to={`/hotel/${hotel.slug}/${hotel.id_hotel}`}

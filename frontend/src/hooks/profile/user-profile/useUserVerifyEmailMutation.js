@@ -14,7 +14,7 @@ export const useUserVerifyEmailMutation = () => {
             return response.json()
         },
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ["userProfile"]})
+            queryClient.invalidateQueries({ queryKey: ["userProfile"] })
         }
     })
 }
