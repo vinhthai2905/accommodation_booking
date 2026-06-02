@@ -14,7 +14,8 @@ export default function usePaymentConfirmation() {
     const { isLoading, isSuccess, data, isError, error } = useQuery({
         queryKey: ["fetchBookingConfirmation", user?.email, bookingID],
         queryFn: () => fetchBookingConfirmation(bookingID),
-        enabled: !!user && !!bookingID
+        enabled: !!user && !!bookingID,
+        staleTime: Infinity
     })
     
     const booking = isSuccess ? data?.booking_details : null
