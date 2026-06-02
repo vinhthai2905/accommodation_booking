@@ -30,7 +30,7 @@ class RoomTypeAvailabilityView(APIView):
             id_hotel=hotel,
             check_in_date__lt=booking_date_serializer.validated_data["check_out"],
             check_out_date__gt=booking_date_serializer.validated_data["check_in"],
-        ).exclude(status__in=["COMPLETED", "CANCELLED", "CANCELLED_FAILED"])
+        ).exclude(status__in=["COMPLETED", "CANCELLED"])
 
         booked_room_ids_set = set(
             ChiTietDatPhong.objects.filter(

@@ -37,5 +37,8 @@ export const fetchHotelChildPolicy = async (hotelID) => {
   return data
 }
 
+export const fetchHotelRefundPolicy = async (hotelID) => {
+  const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/refund_policy`)
 
-
+  return data
+}
