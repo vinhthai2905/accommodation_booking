@@ -128,6 +128,14 @@ class PartnerRoomDetailView(APIView):
         hotel = self._get_partner_hotel(request.user)
         room = self._get_room(hotel, id_room)
         
-        room.delete()
+        from django.db.models import ProtectedError
+        
+        try:
+            room.delete()
+        except ProtectedError:
+            return Response(
+                {"error": "Không thể xóa phòng này vì đã có dữ liệu lịch sử đặt phòng liên quan."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
         return Response(status=status.HTTP_204_NO_CONTENT)

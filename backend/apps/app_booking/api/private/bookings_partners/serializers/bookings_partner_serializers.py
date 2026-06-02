@@ -70,11 +70,21 @@ class PartnerBookingDetailSerializer(PartnerBookingListSerializer):
         read_only_fields = fields
 
     def get_booked_rooms(self, booking):
-        from django.db.models import Count
-        # Count rooms grouped by room type name
-        room_counts = booking.booking_details.values(
-            room_type_name=models.F('id_room__id_room_type__type_name')
-        ).annotate(
-            quantity=Count('id_booking_detail')
-        )
-        return list(room_counts)
+        details = booking.booking_details.select_related('id_room__id_room_type')
+        
+        result = {}
+        for detail in details:
+            rt_name = detail.id_room.id_room_type.type_name
+            room_name = detail.id_room.room_name
+            
+            if rt_name not in result:
+                result[rt_name] = {
+                    "room_type_name": rt_name,
+                    "quantity": 0,
+                    "room_names": []
+                }
+            
+            result[rt_name]["quantity"] += 1
+            result[rt_name]["room_names"].append(room_name)
+            
+        return list(result.values())

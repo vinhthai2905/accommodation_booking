@@ -108,11 +108,22 @@ export default function DashboardBookingDetail() {
                         </h2>
                         <div className="space-y-3">
                             {booking.booked_rooms && booking.booked_rooms.map((room, index) => (
-                                <div key={index} className="flex justify-between items-center p-3 border border-gray-100 rounded-xl bg-gray-50/50">
-                                    <span className="font-medium text-gray-700">{room.room_type_name}</span>
-                                    <span className="bg-violet-100 text-violet-700 px-3 py-1 text-sm font-semibold rounded-full">
-                                        {room.quantity} phòng
-                                    </span>
+                                <div key={index} className="flex flex-col p-3 border border-gray-100 rounded-xl bg-gray-50/50">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <span className="font-medium text-gray-700">{room.room_type_name}</span>
+                                        <span className="bg-violet-100 text-violet-700 px-3 py-1 text-sm font-semibold rounded-full">
+                                            {room.quantity} phòng
+                                        </span>
+                                    </div>
+                                    {room.room_names && room.room_names.length > 0 && (
+                                        <div className="flex flex-wrap gap-2">
+                                            {room.room_names.map((rn, idx) => (
+                                                <span key={idx} className="bg-white border border-gray-200 text-gray-600 px-2.5 py-1 text-xs font-medium rounded-md shadow-sm">
+                                                    Phòng {rn}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>

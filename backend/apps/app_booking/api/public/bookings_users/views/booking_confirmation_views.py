@@ -58,6 +58,11 @@ class BookingConfirmationView(views.APIView):
             case 1:
                 booking_payment.paid_at = timezone.now()
                 booking_payment.status = TrangThaiThanhToan.PAID
+                
+                from apps.app_hotel.models import PhongKhachSan
+                PhongKhachSan.objects.filter(booking_details__id_booking=booking).update(
+                    status=PhongKhachSan.RoomStatus.BOOKED
+                )
             case 3:
                 return booking_payment
 

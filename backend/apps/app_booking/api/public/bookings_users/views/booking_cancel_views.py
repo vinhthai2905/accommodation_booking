@@ -31,6 +31,11 @@ class BookingCancellationService:
 
         if refund_result.get("return_code") in [1, 3]:
             serializer.update(updated_booking, "Success")
+            
+            from apps.app_hotel.models import PhongKhachSan
+            PhongKhachSan.objects.filter(booking_details__id_booking=booking).update(
+                status=PhongKhachSan.RoomStatus.AVAILABLE
+            )
         else:
             serializer.update(updated_booking, "Failed")
 
