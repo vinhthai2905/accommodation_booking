@@ -33,7 +33,10 @@ export default function useHotelSearchSubmit({
 
         const params = parseHotelSearchParams(selectedPlace, ranges, guestOptions)
 
-        navigate(`/searchresults?${params.toString()}`)
+        window.open(
+            `/searchresults?${params.toString()}`,
+            "_blank"
+        )
     }
 
     return {

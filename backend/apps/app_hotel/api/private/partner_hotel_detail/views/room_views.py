@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status, exceptions
 
+from django.db.models import ProtectedError
 from django.db.models import QuerySet
 
 from apps.app_user.models import NguoiDung
@@ -124,7 +125,6 @@ class PartnerRoomDetailView(APIView):
         hotel = self._get_partner_hotel(request.user)
         room = self._get_room(hotel, id_room)
         
-        from django.db.models import ProtectedError
         
         try:
             room.delete()

@@ -43,6 +43,11 @@ export default function HotelCardSummaryPrice({ hotel, originalPrice }) {
 
             <Link
                 to={`/hotel/${hotel.slug}/${hotel.id_hotel}${location.search}`}
+                target="_blank"
+                state={{
+                    hotelName: hotel.name,
+                }}
+                rel="noopener noreferrer"
                 className={clsx(
                     "w-full text-center rounded-md bg-[#003b95] px-4 py-2.5",
                     "text-sm font-bold text-white hover:bg-blue-800 transition-colors shadow-sm cursor-pointer"
