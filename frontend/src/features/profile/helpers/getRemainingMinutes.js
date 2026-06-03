@@ -1,5 +1,5 @@
-export function getRemainingMinutes(verificationExpiresAt) {
-    const remainingMs = new Date(verificationExpiresAt) - new Date()
+export function getRemainingMinutes(expiresAt) {
+    const remainingMs = new Date(expiresAt) - new Date()
     const totalSeconds = Math.max(0, Math.floor(remainingMs / 1000))
 
     const minutes = Math.floor(totalSeconds / 60)
@@ -9,9 +9,9 @@ export function getRemainingMinutes(verificationExpiresAt) {
     return `${minutes}:${String(seconds).padStart(2, "0")}`
 }
 
-export function checkTokenExpiration(verificationExpiresAt) {
+export function checkExpiration(expiresAt) {
     const today = new Date()
-    const tokenExpiresAt = new Date(verificationExpiresAt)
+    const tokenExpiresAt = new Date(expiresAt)
 
     return today > tokenExpiresAt
 }

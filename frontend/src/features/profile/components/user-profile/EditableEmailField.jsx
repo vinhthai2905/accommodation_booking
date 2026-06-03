@@ -5,10 +5,10 @@ import { useState } from "react"
 
 import useUserEmailMutation from "../../../../hooks/profile/user-profile/useUserEmailMutation"
 
-import { checkTokenExpiration } from "../../helpers/getRemainingMinutes"
+import { checkExpiration } from "../../helpers/getRemainingMinutes"
 
 export default function EditableEmailField({ email, verifiedAt, verificationExpiresAt }) {
-    const [isVerificationExpired, setIsVerificationExpired] = useState(checkTokenExpiration(verificationExpiresAt))
+    const [isVerificationExpired, setIsVerificationExpired] = useState(checkExpiration(verificationExpiresAt))
     const { handleSendVerificationEmail, isSending } = useUserEmailMutation(setIsVerificationExpired)
 
     return (

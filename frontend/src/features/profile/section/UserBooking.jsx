@@ -17,11 +17,16 @@ import { emptyContentTabs } from "../helpers/emptyContentTabs"
 
 export default function UserBooking() {
     useTabTitle("Booking.com | Chuyến đi của tôi")
-    const [searchParams, setSearchParams] = useSearchParams()
 
+    const [searchParams, setSearchParams] = useSearchParams()
     const { isAuthenticated } = useAuthUserContext()
+
     const [activeTab, setActiveTab] = useState(searchParams.get("tab"))
-    const { bookings, isPending: isFetchingBookings, isError } = useUserBookings(activeTab, isAuthenticated)
+    const { 
+        bookings, 
+        isPending: isFetchingBookings, 
+        isError: isErrorBookings 
+    } = useUserBookings(activeTab, isAuthenticated)
 
 
     const emptyContentCurrentTab = emptyContentTabs[activeTab]
@@ -47,12 +52,11 @@ export default function UserBooking() {
                 <AnimatePresence mode="wait">
                     {isFetchingBookings
                         ? <BookingCardSkeleton />
-                        : isError
+                        : isErrorBookings
                             ? <BookingErrorState />
                             : (
                                 bookings.length === 0
                                     ? <BookingEmptyList
-
                                         activeTab={activeTab}
                                         emptyContentCurrentTab={emptyContentCurrentTab}
                                     />

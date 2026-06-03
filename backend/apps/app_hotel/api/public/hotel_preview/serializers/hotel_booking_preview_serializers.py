@@ -22,6 +22,7 @@ class RefundPolicyPreviewSerializer(serializers.ModelSerializer):
         model = ChinhSachHoanTien
         fields = [
             "is_cancellation_allowed",
+            "free_cancellation_minutes",
             "days_before_arrival_penalty",
             "penalty_percentage",
         ]

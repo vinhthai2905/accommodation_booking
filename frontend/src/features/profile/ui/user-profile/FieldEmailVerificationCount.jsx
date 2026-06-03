@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 import { useEffect, useState } from "react"
 
-import { checkTokenExpiration, getRemainingMinutes } from "../../helpers/getRemainingMinutes"
+import { checkExpiration, getRemainingMinutes } from "../../helpers/getRemainingMinutes"
 
 export default function FieldEmailVerificationCount({ 
     handleSendVerificationEmail, 
@@ -14,7 +14,7 @@ export default function FieldEmailVerificationCount({
 
     useEffect(() => {
         const verificationExpiration = setInterval(() => {
-            if (checkTokenExpiration(verificationExpiresAt)) {
+            if (checkExpiration(verificationExpiresAt)) {
                 setIsVerificationExpired(true)
                 clearInterval(verificationExpiration)
             }

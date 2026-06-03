@@ -6,15 +6,20 @@ import BookingCardFooter from "../../ui/user-booking/BookingCardFooter"
 import { motion } from "framer-motion"
 import { clsx } from "clsx"
 
+import useBookingRefundPolicy from "../../../../hooks/profile/user-booking/useBookingRefundPolicy"
+import useBookingReviews from "../../../../hooks/profile/user-booking/useBookingReviews"
+
 import { orderStatus } from "../../helpers/orderStatus"
 import { paymentLabel } from "../../helpers/paymentLabel"
 import { paymentStatus } from "../../helpers/paymentStatus"
 import { nightsBetween } from "../../../../helpers/booking/bookingHelpers"
 
 export default function BookingCard({ booking, index, activeTab }) {
-    const { hotel, invoice } = booking
-
     const nights = nightsBetween(booking.check_in_date, booking.check_out_date)
+    
+    const { hotel, invoice } = booking
+    const { refundPolicy, isFetchingRefundPolicy, isErrorFetchingHotelPolicy } = useBookingRefundPolicy(activeTab, hotel?.id_hotel)
+    const { reviews, isFetchingReviews, isErrorFetchingReview } = useBookingReviews(activeTab, hotel?.id_hotel)
 
     return (
         <motion.div
@@ -38,14 +43,21 @@ export default function BookingCard({ booking, index, activeTab }) {
                         paymentStatus={paymentStatus}
                         paymentLabel={paymentLabel}
                     />
-                    <BookingCardDetails booking={booking} nights={nights} />
+                    <BookingCardDetails 
+                        booking={booking} 
+                        nights={nights} 
+                    />
                     <BookingCardFooter
-                        booking={booking}
                         paymentLabel={paymentLabel}
+                        activeTab={activeTab}
+                        booking={booking}
+                        hotel={hotel}
                         invoice={invoice}
                         payment={booking.payment}
-                        hotel={hotel}
-                        activeTab={activeTab}
+                        isFetchingReviews={isFetchingReviews}
+                        reviews={reviews}
+                        refundPolicy={refundPolicy}
+                        isFetchingRefundPolicy={isFetchingRefundPolicy}
                     />
                 </div>
             </div>

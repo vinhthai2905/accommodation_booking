@@ -16,7 +16,14 @@ export default function useUserBookingMutation() {
         }
     })
 
+    const handleCancelBooking = (booking) => {
+        if (window.confirm("Bạn có chắc chắn muốn hủy đặt phòng này?")) {
+            cancelBookingMutation.mutate(booking.id_booking)
+        }
+    }
+
     return {
+        handleCancelBooking,
         cancelBookingMutation
     }
 }
