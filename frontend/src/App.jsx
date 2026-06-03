@@ -1,4 +1,3 @@
-
 import AppLayout from './components/layout/AppLayout'
 import AuthLayout from './components/layout/AuthLayout'
 import PartnerDashboard from './pages/partner/PartnerDashboard'
@@ -36,7 +35,6 @@ import DBCreateRoomType from './features/dashboard/partner/components/dashboard-
 import DBEditRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/edit/DBEditRoomType'
 import DashboardChildrenPolicy from './features/dashboard/partner/pages/DashboardChildrenPolicy'
 
-
 import AdminLogin from './pages/admin/AdminLogin'
 import AdminProtectedRoute from "./pages/protectedroutes/AdminProtectedRoute"
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -70,7 +68,7 @@ import BookingProvider from './context/booking/BookingProvider'
 import ToasterUI from './components/ui/ToasterUI'
 
 import ChildAgeInput from './features/search/components/search-bar/input/ChildAgeInput'
-import Page404Redirect from './features/404 /pages/404PageRedirect'
+import Page404Redirect from './features/404/pages/404PageRedirect'
 
 const queryClient = new QueryClient()
 

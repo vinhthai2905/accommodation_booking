@@ -15,6 +15,7 @@ from apps.app_hotel.models import ChinhSachHoanTien
 from apps.app_payment.services import ZaloPayRefundService
 
 from uuid import UUID
+from decimal import Decimal
 
 class BookingCancellationService:
     @classmethod
@@ -25,12 +26,12 @@ class BookingCancellationService:
 
         ).days
         
-        amount_percentage_left = 100.00 - refund_policy.penalty_percentage
+        amount_percentage_left = Decimal('100.00') - refund_policy.penalty_percentage
         
         if days_before_checkin <= refund_policy.days_before_arrival_penalty:
-            return payment_record.paid_amount * (amount_percentage_left / 100)
+            return int(payment_record.paid_amount * (amount_percentage_left / Decimal('100.00')))
         
-        return payment_record.paid_amount
+        return int(payment_record.paid_amount)
     
     @classmethod
     def dispatch_refund_request(cls, payment_record: ThanhToan, booking: DatPhong):
