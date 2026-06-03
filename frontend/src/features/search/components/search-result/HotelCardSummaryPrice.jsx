@@ -1,23 +1,25 @@
 import { clsx } from "clsx"
-import { Link } from "react-router"
+import { Link, useLocation } from "react-router"
 import { Check } from "lucide-react"
 
 export default function HotelCardSummaryPrice({ hotel, originalPrice }) {
+    const location = useLocation()
+
     return (
         <div className={clsx(
-            "w-full md:w-55 px-4 py-4",
+            "w-full md:w-44 lg:w-48 xl:w-56 px-3 md:px-4 py-3 md:py-4",
             "flex flex-col justify-end",
-            "md:items-end border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-4"
+            "md:items-end border-t md:border-t-0 md:border-l border-slate-100 pt-3 md:pt-0 md:pl-4 md:ml-auto"
         )}>
             <div className="flex flex-col md:items-end gap-1 mb-3">
-                <span className="text-xs text-slate-500 font-medium">1 đêm, 2 người lớn</span>
+                <span className="text-[11px] md:text-xs text-slate-500 font-medium">1 đêm, 2 người lớn</span>
 
                 {hotel.appealing_price && hotel.appealing_price > 0 ? (
                     <>
                         <span className="text-xs text-red-600 line-through font-semibold">
                             VND {originalPrice.toLocaleString('vi-VN')}
                         </span>
-                        <span className="text-xl font-extrabold text-slate-900 leading-none">
+                        <span className="text-lg md:text-xl font-extrabold text-slate-900 leading-none">
                             VND {hotel.appealing_price.toLocaleString('vi-VN')}
                         </span>
                     </>
@@ -30,13 +32,13 @@ export default function HotelCardSummaryPrice({ hotel, originalPrice }) {
                 <span className="text-[10px] text-slate-500 font-medium mt-0.5">Đã bao gồm thuế và phí</span>
             </div>
 
-            <div className="flex flex-col gap-1 mb-4 md:items-end text-xs text-[#008009] font-bold">
-                <span className="flex items-center gap-1">
-                    <Check size={14} className="stroke-3" />
+            <div className="flex flex-col gap-1 mb-4 md:items-end text-[11px] md:text-xs text-[#008009] font-bold text-left md:text-right">
+                <span className="flex items-start md:items-center justify-start md:justify-end gap-1">
+                    <Check size={14} className="stroke-3 shrink-0" />
                     Bao gồm bữa sáng
                 </span>
-                <span className="flex items-center gap-1">
-                    <Check size={14} className="stroke-3" />
+                <span className="flex items-start md:items-center justify-start md:justify-end gap-1">
+                    <Check size={14} className="stroke-3 shrink-0" />
                     Không cần trả trước - thanh toán tại chỗ
                 </span>
             </div>

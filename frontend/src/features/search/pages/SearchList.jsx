@@ -9,12 +9,12 @@ export default function SearchList({ onOpenMap, hotelList }) {
 
     return (
         <div className={clsx(
-            "mx-[20%] mt-10",
+            "w-full max-w-[1140px] mx-auto px-4 sm:px-6 md:px-8 mt-10",
             "flex flex-col"
         )}>
             <Breadcrumbs usedFor={"HotelsSearchResult"} />
             <div className={clsx(
-                "mt-2 my-6 grid grid-cols-[auto_1fr] gap-5",
+                "mt-2 my-6 grid grid-cols-1 md:grid-cols-[240px_1fr] lg:grid-cols-[280px_1fr] gap-5",
                 "text-black",
             )}>
                 <aside>
