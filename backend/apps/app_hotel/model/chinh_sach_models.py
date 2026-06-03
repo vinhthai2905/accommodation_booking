@@ -3,7 +3,9 @@ from .khach_san_models import KhachSan
 
 
 class ChinhSachTreEm(models.Model):
-    id_child_policy = models.AutoField(primary_key=True, db_column="id_chinh_sach_tre_em")
+    id_child_policy = models.AutoField(
+        primary_key=True, db_column="id_chinh_sach_tre_em"
+    )
 
     id_hotel = models.OneToOneField(
         KhachSan,
@@ -12,9 +14,7 @@ class ChinhSachTreEm(models.Model):
         related_name="child_policy",
     )
 
-    max_free_age = models.PositiveSmallIntegerField(
-        db_column="tuoi_toi_da_mien_phi"
-    )
+    max_free_age = models.PositiveSmallIntegerField(db_column="tuoi_toi_da_mien_phi")
     max_surcharge_age = models.PositiveSmallIntegerField(
         db_column="tuoi_toi_da_phu_thu"
     )
@@ -36,7 +36,9 @@ class ChinhSachTreEm(models.Model):
 
 
 class ChinhSachHoanTien(models.Model):
-    id_refund_policy = models.AutoField(primary_key=True, db_column="id_chinh_sach_hoan_tien")
+    id_refund_policy = models.AutoField(
+        primary_key=True, db_column="id_chinh_sach_hoan_tien"
+    )
 
     id_hotel = models.OneToOneField(
         KhachSan,
@@ -50,10 +52,17 @@ class ChinhSachHoanTien(models.Model):
         db_column="cho_phep_huy",
     )
 
+    free_cancellation_minutes = models.PositiveSmallIntegerField(
+        default=15,
+        db_column="so_phut_huy_mien_phi",
+        null=True,
+        help_text="Số phút được hủy miễn phí sau khi đặt phòng (VD: 60)",
+    )
+
     days_before_arrival_penalty = models.PositiveSmallIntegerField(
         default=1,
         db_column="so_ngay_truoc_khi_den_bi_phat",
-        help_text="Số ngày còn lại trước khi đến sẽ bị tính phí phạt (VD: 1)"
+        help_text="Số ngày còn lại trước khi đến sẽ bị tính phí phạt (VD: 1)",
     )
 
     penalty_percentage = models.DecimalField(
@@ -61,7 +70,7 @@ class ChinhSachHoanTien(models.Model):
         decimal_places=2,
         default=10.00,
         db_column="phan_tram_phat",
-        help_text="Phần trăm trừ vào số tiền hoàn lại nếu hủy trong thời hạn (VD: 10.00)"
+        help_text="Phần trăm trừ vào số tiền hoàn lại nếu hủy trong thời hạn (VD: 10.00)",
     )
 
     class Meta:
