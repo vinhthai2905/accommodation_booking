@@ -1,14 +1,13 @@
-import axios from "axios"
+import bookingAPI from "../../../base/bookingAPI"
 
 import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
 
-const apiUrl = import.meta.env.VITE_API_URL
 
 export const deleteAdminAmenityCategory = async (id_amenity_category) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.delete(
-    `${apiUrl}/api/partner/hotel/category-amenities/${id_amenity_category}`,
+  const { data } = await bookingAPI.delete(
+    `/api/partner/hotel/category-amenities/${id_amenity_category}`,
     { headers }
   )
 
@@ -18,8 +17,8 @@ export const deleteAdminAmenityCategory = async (id_amenity_category) => {
 export const deleteAdminAmenity = async (id_amenity_type) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.delete(
-    `${apiUrl}/api/partner/hotel/available-amenities/${id_amenity_type}`,
+  const { data } = await bookingAPI.delete(
+    `/api/partner/hotel/available-amenities/${id_amenity_type}`,
     { headers }
   )
 

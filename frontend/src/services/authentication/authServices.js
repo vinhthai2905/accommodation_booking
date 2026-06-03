@@ -1,63 +1,38 @@
-const apiURL = import.meta.env.VITE_API_URL
-
-// export const registerUser = (data) => {
-//     return fetch("http://localhost:8000/api/users", {
-//         method: "POST",
-//         credentials: "include",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(parsedPythonData(data))
-//     }).then(
-//         response => response
-//     )
-// }
+import bookingAPI from "../base/bookingAPI"
 
 export const fetchAuthUser = async () => {
-    const response = await fetch(`${apiURL}/api/auth/user/refresh`, {
-        method: "POST",
-        // credentials: "include",
+    const { data } = await bookingAPI.post(`/api/auth/user/refresh`, {}, {
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
             "Content-Type": "application/json"
         },
     })
-
-    return response
+    return data
 }
 
 export const loginAuthUser = async (data) => {
-    const response = await fetch(`${apiURL}/api/auth/user/login`, {
-        method: "POST",
-        credentials: "include",
+    const response = await bookingAPI.post(`/api/auth/user/login`, data, {
         headers: {
             "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+        }
     })
-
-    return response
+    return response.data
 }
 
 export const logoutAuthUser = async () => {
-    const response = await fetch(`${apiURL}/api/auth/user/logout`, {
-        method: "POST",
-        credentials: "include",
+    const { data } = await bookingAPI.post(`/api/auth/user/logout`, {}, {
         headers: {
             "Content-Type": "application/json"
         }
     })
-
-    return response
+    return data
 }
 
 export const verifyEmail = async (uidb64, token) => {
-    const response = await fetch(`${apiURL}/api/auth/user/verify-email/${uidb64}/${token}`, {
-        method: "POST",
+    const { data } = await bookingAPI.post(`/api/auth/user/verify-email/${uidb64}/${token}`, {}, {
         headers: {
             "Content-Type": "application/json"
         }
     })
-
-    return response
+    return data
 }

@@ -4,6 +4,8 @@ import { useFormContext } from "react-hook-form"
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import L from "leaflet"
+import axios from "axios"
+import bookingAPI from "../../../../services/base/bookingAPI"
 
 // Fix Leaflet's default icon path issues in React
 delete L.Icon.Default.prototype._getIconUrl
@@ -53,8 +55,7 @@ export default function PropertySetupStep({ wards, prevStep, nextStep }) {
             const query = `${address}, ${wardName}, Đà Nẵng, Việt Nam`;
 
             try {
-                const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
-                const data = await response.json();
+                const { data } = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
                 if (data && data.length > 0) {
                     // Update location and map will auto-fly to these coordinates
                     setValue("latitude", parseFloat(data[0].lat), { shouldValidate: true });
@@ -73,14 +74,10 @@ export default function PropertySetupStep({ wards, prevStep, nextStep }) {
 
         const timeoutId = setTimeout(async () => {
             try {
-                const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
-                const response = await fetch(`${apiUrl}/api/location/distance-to-beach?lat=${latitude}&lng=${longitude}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data && data.distance_meters !== undefined) {
-                        setValue("distance_to_beach", data.distance_meters, { shouldValidate: true });
-                        setValue("is_near_beach", data.is_near_beach, { shouldValidate: true });
-                    }
+                const { data } = await bookingAPI.get(`/api/location/distance-to-beach?lat=${latitude}&lng=${longitude}`);
+                if (data && data.distance_meters !== undefined) {
+                    setValue("distance_to_beach", data.distance_meters, { shouldValidate: true });
+                    setValue("is_near_beach", data.is_near_beach, { shouldValidate: true });
                 }
             } catch (error) {
                 console.error("Failed to fetch distance to beach", error);

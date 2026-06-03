@@ -47,12 +47,15 @@ export function usePartnerOnboardingSubmit(checkRegistrationStatus) {
         onError: (err) => {
             console.error(err)
             let errorMsg = "Gửi đơn đăng ký thất bại."
-            try {
-                const parsed = JSON.parse(err.message)
-                const firstError = Object.values(parsed)[0]
+            if (err.response && err.response.data) {
+                const firstError = Object.values(err.response.data)[0]
                 if (firstError) errorMsg = Array.isArray(firstError) ? firstError[0] : firstError
-            } catch (parseError) {
-                console.warn("Could not parse error message", parseError)
+            } else {
+                try {
+                    const parsed = JSON.parse(err.message)
+                    const firstError = Object.values(parsed)[0]
+                    if (firstError) errorMsg = Array.isArray(firstError) ? firstError[0] : firstError
+                } catch (parseError) {}
             }
             toast.error(errorMsg)
         }

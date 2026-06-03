@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query"
 import { fetchAuthUserBookings } from "../../../services/book/bookingServices"
 
-export default function useUserBookings(activeTab) {
-    const { data, isLoading, isError, error } = useQuery({
+export default function useUserBookings(activeTab, isAuthenticated) {
+    const { data, isPending, isError, error } = useQuery({
         queryKey: ["userBookings", activeTab],
         queryFn: () => fetchAuthUserBookings(activeTab),
-        staleTime: Infinity, // 2 min
+        enabled: !!isAuthenticated,
+        staleTime: Infinity, 
     })
 
-    return { bookings: data ?? [], isLoading, isError, error }
+    return { bookings: data ?? [], isPending, isError, error }
 }

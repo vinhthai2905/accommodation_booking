@@ -7,11 +7,8 @@ export const useUserVerifyEmailMutation = () => {
 
     return useMutation({
         mutationFn: async ({ uid, token }) => {
-            const response = await verifyEmail(uid, token)
-            if (!response.ok) {
-                throw new Error("Xác thực không thành công. ")
-            }
-            return response.json()
+            const data = await verifyEmail(uid, token)
+            return data
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["userProfile"] })

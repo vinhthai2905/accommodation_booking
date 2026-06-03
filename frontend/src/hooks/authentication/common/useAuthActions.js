@@ -45,31 +45,21 @@ export default function useAuthActions(setUserState, queryClient) {
 
     const fetchAuthUserState = async () => {
         try {
-            const response = await fetchAuthUser()
-
-            if (!response.ok) {
-                if (response.status === 401) {
-                    localStorage.removeItem("access_token")
-                    queryClient.clear()
-                    setUserState(null)
-                    return null
-                }
-                throw new Error(`Response status: ${response.status}`)
-            }
-
-
-            const responseData = await response.json()
-            
+            const responseData = await fetchAuthUser()
             setCurrentUser(
                 responseData.user.email, 
                 responseData.user.personal_info, 
                 responseData.user.role
             )
-
             return responseData
-
         }
         catch (error) {
+            if (error.response && error.response.status === 401) {
+                localStorage.removeItem("access_token")
+                queryClient.clear()
+                setUserState(null)
+                return null
+            }
             toast.error(`Hệ thống xảy ra lỗi. ${error.message || error}`)
             return null
         }

@@ -1,13 +1,12 @@
-import axios from "axios"
+import bookingAPI from "../../../base/bookingAPI"
 
 import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
 
-const apiUrl = import.meta.env.VITE_API_URL
 
 export const fetchAdminHotelAmenityCategories = async () => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(`${apiUrl}/api/partner/hotel/category-amenities`, {
+  const { data } = await bookingAPI.get(`/api/partner/hotel/category-amenities`, {
     headers,
   })
 

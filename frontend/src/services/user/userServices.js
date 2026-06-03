@@ -1,34 +1,18 @@
 import { buildTokenHeader } from "../../helpers/authentication/buildTokenHeader"
-
-const apiURL = import.meta.env.VITE_API_URL
-
-// const headers = buildTokenHeader() cũ, trước khi fix
+import bookingAPI from "../base/bookingAPI"
 
 export const fetchUserProfile = async () => {
     const headers = buildTokenHeader()
-    const response = await fetch(`${apiURL}/api/public/users/me`, {
-        method: "GET",
+    const { data } = await bookingAPI.get(`/api/public/users/me`, {
         headers,
     })
-    
-    if (!response.ok) {
-        throw new Error('Tải thông tin cá nhân thất bại.')
-    }
-
-    return response.json()
+    return data
 }
 
-export const updateUserProfile = async (data) => {
+export const updateUserProfile = async (dataPayload) => {
     const headers = buildTokenHeader()
-    const response = await fetch(`${apiURL}/api/public/users/me`, {
-        method: "PATCH",
+    const { data } = await bookingAPI.patch(`/api/public/users/me`, dataPayload, {
         headers,
-        body: JSON.stringify(data)
     })
-    
-    if (!response.ok) {
-        throw new Error('Cập nhật thông tin thất bại.')
-    }
-
-    return response.json()
+    return data
 }

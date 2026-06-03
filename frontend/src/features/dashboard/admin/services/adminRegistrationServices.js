@@ -1,35 +1,23 @@
 import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
-
-const apiURL = import.meta.env.VITE_API_URL
+import bookingAPI from "../../../../services/base/bookingAPI"
 
 export const fetchAdminRegistrations = async (statusFilter = "Tất cả") => {
-    let url = `${apiURL}/api/admin/hotel/registrations`
+    let url = `/api/admin/hotel/registrations`
     if (statusFilter && statusFilter !== "Tất cả") {
         url += `?status=${encodeURIComponent(statusFilter)}`
     }
 
-    const response = await fetch(url, {
-        method: "GET",
+    const { data } = await bookingAPI.get(url, {
         headers: buildTokenHeader()
     })
 
-    if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`)
-    }
-
-    return await response.json()
+    return data
 }
 
 export const updateAdminRegistrationStatus = async (id, payload) => {
-    const response = await fetch(`${apiURL}/api/admin/hotel/registrations/${id}`, {
-        method: "PATCH",
-        headers: buildTokenHeader(),
-        body: JSON.stringify(payload)
+    const { data } = await bookingAPI.patch(`/api/admin/hotel/registrations/${id}`, payload, {
+        headers: buildTokenHeader()
     })
 
-    if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`)
-    }
-
-    return await response.json()
+    return data
 }

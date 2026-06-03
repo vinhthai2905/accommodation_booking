@@ -1,17 +1,9 @@
 import { buildTokenHeader } from "../../helpers/authentication/buildTokenHeader"
-
-const apiURL = import.meta.env.VITE_API_URL
+import bookingAPI from "../base/bookingAPI"
 
 export const sendVerificationEmail = async () => {
-    const response = await fetch(`${apiURL}/api/auth/user/send/email-verification`, {
-        method: "POST",
+    const { data } = await bookingAPI.post(`/api/auth/user/send/email-verification`, {}, {
         headers: buildTokenHeader(),
     })
-    
-    if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}))
-        throw new Error(errorData.detail || 'Gửi yêu cầu xác minh email thất bại.')
-    }
-
-    return response.json()
+    return data
 }

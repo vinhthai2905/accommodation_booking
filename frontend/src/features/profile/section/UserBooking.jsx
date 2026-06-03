@@ -5,19 +5,21 @@ import BookingCardSkeleton from "../components/user-booking/BookingCardSkeleton"
 import BookingErrorState from "../components/user-booking/BookingErrorState"
 
 import { useState } from "react"
+import { useSearchParams } from "react-router"
 import { motion, AnimatePresence } from "framer-motion"
 
 import useUserBookings from "../../../hooks/profile/user-booking/useUserBookings"
+import { useAuthUserContext } from "../../../hooks/authentication/common/useAuthUserContext"
 
 import { tabs } from "../helpers/orderStatus"
 import { emptyContentTabs } from "../helpers/emptyContentTabs"
-import { useSearchParams } from "react-router"
 
 export default function UserBooking() {
     const [searchParams, setSearchParams] = useSearchParams()
 
+    const { isAuthenticated } = useAuthUserContext()
     const [activeTab, setActiveTab] = useState(searchParams.get("tab"))
-    const { bookings, isLoading: isFetchingBookings, isError } = useUserBookings(activeTab)
+    const { bookings, isPending: isFetchingBookings, isError } = useUserBookings(activeTab, isAuthenticated)
 
 
     const emptyContentCurrentTab = emptyContentTabs[activeTab]
@@ -42,22 +44,22 @@ export default function UserBooking() {
 
                 <AnimatePresence mode="wait">
                     {isFetchingBookings
-                        ? <BookingCardSkeleton  />
+                        ? <BookingCardSkeleton />
                         : isError
-                            ? <BookingErrorState  />
+                            ? <BookingErrorState />
                             : (
                                 bookings.length === 0
-                                ? <BookingEmptyList
-                                    
-                                    activeTab={activeTab}
-                                    emptyContentCurrentTab={emptyContentCurrentTab}
-                                />
-                                : (
-                                    <BookingList
-                                        filteredBooking={bookings}
+                                    ? <BookingEmptyList
+
                                         activeTab={activeTab}
+                                        emptyContentCurrentTab={emptyContentCurrentTab}
                                     />
-                                )
+                                    : (
+                                        <BookingList
+                                            filteredBooking={bookings}
+                                            activeTab={activeTab}
+                                        />
+                                    )
                             )
                     }
                 </AnimatePresence>

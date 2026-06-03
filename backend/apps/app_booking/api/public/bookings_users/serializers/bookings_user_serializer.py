@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from apps.app_booking.models import DatPhong, HoaDon, ThanhToan
-from apps.app_hotel.models import KhachSan
+from apps.app_hotel.models import KhachSan, DanhGiaKhachSan
 from apps.app_hotel.helpers import get_full_address
 
 
@@ -9,12 +9,6 @@ class FilterBookingSerializer(serializers.Serializer):
     current_tab = serializers.ChoiceField(
         choices=["upcoming", "past", "cancelled"], default="upcoming"
     )
-
-
-class UserPaymentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ThanhToan
-        fields = ["paid_amount", "payment_method", "status"]
 
 
 class UserBookingHotelSerializer(serializers.Serializer):
@@ -37,10 +31,23 @@ class UserBookingInvoiceSerializer(serializers.ModelSerializer):
         fields = ["total_amount"]
 
 
+class UserBookingPaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ThanhToan
+        fields = ["paid_amount", "payment_method", "status"]
+
+
+class UserBookingReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DanhGiaKhachSan
+        fields = ["content"]
+
+
 class UserBookingListSerializer(serializers.ModelSerializer):
     hotel = UserBookingHotelSerializer(source="id_hotel", read_only=True)
     invoice = UserBookingInvoiceSerializer(read_only=True)
-    payment = UserPaymentSerializer(source="invoice.payments", read_only=True)
+    payment = UserBookingPaymentSerializer(source="invoice.payments", read_only=True)
+    review = UserBookingReviewSerializer("review", read_only=True)
 
     class Meta:
         model = DatPhong
@@ -56,5 +63,6 @@ class UserBookingListSerializer(serializers.ModelSerializer):
             "hotel",
             "invoice",
             "payment",
+            "review"
         ]
         read_only_fields = fields

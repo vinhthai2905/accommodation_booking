@@ -1,14 +1,13 @@
-import axios from "axios"
+import bookingAPI from "../../../base/bookingAPI"
 
 import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
 
-const apiUrl = import.meta.env.VITE_API_URL
 
 export const createAdminAmenityCategory = async (payload) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.post(
-    `${apiUrl}/api/partner/hotel/category-amenities`,
+  const { data } = await bookingAPI.post(
+    `/api/partner/hotel/category-amenities`,
     payload,
     { headers }
   )
@@ -19,8 +18,8 @@ export const createAdminAmenityCategory = async (payload) => {
 export const updateAdminAmenityCategory = async (id_amenity_category, payload) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.put(
-    `${apiUrl}/api/partner/hotel/category-amenities/${id_amenity_category}`,
+  const { data } = await bookingAPI.put(
+    `/api/partner/hotel/category-amenities/${id_amenity_category}`,
     payload,
     { headers }
   )
@@ -31,8 +30,8 @@ export const updateAdminAmenityCategory = async (id_amenity_category, payload) =
 export const createAdminAmenity = async (payload) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.post(
-    `${apiUrl}/api/partner/hotel/available-amenities`,
+  const { data } = await bookingAPI.post(
+    `/api/partner/hotel/available-amenities`,
     payload,
     { headers }
   )
@@ -43,8 +42,8 @@ export const createAdminAmenity = async (payload) => {
 export const updateAdminAmenity = async (id_amenity_type, payload) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.put(
-    `${apiUrl}/api/partner/hotel/available-amenities/${id_amenity_type}`,
+  const { data } = await bookingAPI.put(
+    `/api/partner/hotel/available-amenities/${id_amenity_type}`,
     payload,
     { headers }
   )

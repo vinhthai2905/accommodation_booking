@@ -1,14 +1,13 @@
-import axios from "axios"
+import bookingAPI from "../../../base/bookingAPI"
 
 import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
 
-const apiUrl = import.meta.env.VITE_API_URL
 
 export const updatePartnerHotel = async (payload) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.put(
-    `${apiUrl}/api/partner/hotel`,
+  const { data } = await bookingAPI.put(
+    `/api/partner/hotel`,
     payload,
     { headers }
   )
@@ -23,8 +22,8 @@ export const createPartnerHotelImage = async (payload) => {
     delete headers["Content-Type"]
   }
 
-  const { data } = await axios.post(
-    `${apiUrl}/api/partner/hotel/images`,
+  const { data } = await bookingAPI.post(
+    `/api/partner/hotel/images`,
     payload,
     { headers }
   )
@@ -35,8 +34,8 @@ export const createPartnerHotelImage = async (payload) => {
 export const updatePartnerHotelImage = async (id_hotel_image, payload) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.put(
-    `${apiUrl}/api/partner/hotel/images/${id_hotel_image}`,
+  const { data } = await bookingAPI.put(
+    `/api/partner/hotel/images/${id_hotel_image}`,
     payload,
     { headers }
   )
@@ -47,8 +46,8 @@ export const updatePartnerHotelImage = async (id_hotel_image, payload) => {
 export const createPartnerHotelAmenity = async (payload) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.post(
-    `${apiUrl}/api/partner/hotel/amenities`,
+  const { data } = await bookingAPI.post(
+    `/api/partner/hotel/amenities`,
     payload,
     { headers }
   )

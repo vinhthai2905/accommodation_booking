@@ -14,7 +14,12 @@ export function useReviewMutation() {
             queryClient.invalidateQueries({ queryKey: ["user-bookings"] })
         },
         onError: (error) => {
-            toast.error(error.message || "Có lỗi xảy ra khi gửi đánh giá. Vui lòng thử lại!")
+            let errorMessage = error.message
+            if (error.response && error.response.data) {
+                const errorData = error.response.data
+                errorMessage = errorData.detail || errorData.non_field_errors?.[0] || JSON.stringify(errorData)
+            }
+            toast.error(errorMessage || "Có lỗi xảy ra khi gửi đánh giá. Vui lòng thử lại!")
         }
     });
 

@@ -1,12 +1,10 @@
-const apiURL = import.meta.env.VITE_API_URL
+import bookingAPI from "../base/bookingAPI"
 
 export const fetchWards = async () => {
-    const response = await fetch(`${apiURL}/api/location/ward`, {
-        method: "GET",
+    const { data } = await bookingAPI.get(`/api/location/ward`, {
         headers: {
             "Content-Type": "application/json"
         }
     })
-
-    return await response.json()
+    return data
 }

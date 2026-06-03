@@ -1,14 +1,13 @@
-import axios from "axios"
+import bookingAPI from "../../../base/bookingAPI"
 
 import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
 
-const apiUrl = import.meta.env.VITE_API_URL
 
 export const fetchPartnerBookings = async (tab = "upcoming") => {
     const headers = buildTokenHeader()
 
-    const { data } = await axios.get(
-        `${apiUrl}/api/partner/hotel/bookings`,
+    const { data } = await bookingAPI.get(
+        `/api/partner/hotel/bookings`,
         {
             headers,
             params: { tab },
@@ -21,8 +20,8 @@ export const fetchPartnerBookings = async (tab = "upcoming") => {
 export const fetchPartnerBookingDetail = async (bookingId) => {
     const headers = buildTokenHeader()
 
-    const { data } = await axios.get(
-        `${apiUrl}/api/partner/hotel/bookings/${bookingId}`,
+    const { data } = await bookingAPI.get(
+        `/api/partner/hotel/bookings/${bookingId}`,
         {
             headers,
         }

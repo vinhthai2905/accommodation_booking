@@ -11,11 +11,11 @@ class DanhGiaKhachSan(TimeStampedModel):
         db_column="id_danh_gia",
     )
 
-    id_booking = models.ForeignKey(
+    id_booking = models.OneToOneField(
         DatPhong,
         on_delete=models.CASCADE,
         db_column="id_dat_phong",
-        related_name="reviews",
+        related_name="review",
     )
 
     id_user = models.ForeignKey(

@@ -32,35 +32,24 @@ export default function useRegisterPartnerForm() {
     setLoading(true)
 
     try {
-      const response = await registerPartner(data)
-      const responseData = await response.json()
-
-      if (!response.ok) {
-        toast.error("Đăng ký không thành công.")
-
-        for (const [keyInput, error] of Object.entries(responseData)) {
-          setError(
-            keyInput,
-            { type: "server", message: error },
-            { shouldFocus: true }
-          )
-        }
-      }
-
-      else {
-        const { user, access_token } = responseData
-
-        setAuthUserState(access_token, user.email, user.personal_info, user.role)
-
-        toaster.success("Tạo tài khoản thành công.")
-        reset()
-
-        navigate("/partner/onboarding")
-      }
+      const responseData = await registerPartner(data)
+      const { user, access_token } = responseData
+      setAuthUserState(access_token, user.email, user.personal_info, user.role)
+      toaster.success("Tạo tài khoản thành công.")
+      reset()
+      navigate("/partner/onboarding")
 
     }
     catch (error) {
-      toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}`)
+      if (error.response && error.response.status >= 400 && error.response.status < 500) {
+        const responseData = error.response.data
+        toast.error("Đăng ký không thành công.")
+        for (const [keyInput, err] of Object.entries(responseData)) {
+          setError(keyInput, { type: "server", message: err }, { shouldFocus: true })
+        }
+      } else {
+        toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}`)
+      }
     }
     finally {
       setLoading(false)

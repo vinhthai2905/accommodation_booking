@@ -1,14 +1,13 @@
-import axios from "axios"
+import bookingAPI from "../../../base/bookingAPI"
 
 import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
 
-const apiUrl = import.meta.env.VITE_API_URL
 
 export const fetchPartnerHotelDetail = async () => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(
-    `${apiUrl}/api/partner/hotel`,
+  const { data } = await bookingAPI.get(
+    `/api/partner/hotel`,
     { headers }
   )
 
@@ -18,7 +17,7 @@ export const fetchPartnerHotelDetail = async () => {
 export const fetchPartnerRoomTypes = async () => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(`${apiUrl}/api/partner/hotel/room_types`, {
+  const { data } = await bookingAPI.get(`/api/partner/hotel/room_types`, {
     headers,
   })
 
@@ -28,8 +27,8 @@ export const fetchPartnerRoomTypes = async () => {
 export const fetchPartnerRoomTypeDetail = async (id_room_type) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(
-    `${apiUrl}/api/partner/hotel/room_type/${id_room_type}`,
+  const { data } = await bookingAPI.get(
+    `/api/partner/hotel/room_type/${id_room_type}`,
     { headers }
   )
 
@@ -39,7 +38,7 @@ export const fetchPartnerRoomTypeDetail = async (id_room_type) => {
 export const fetchPartnerPhysicalRooms = async (id_room_type) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(`${apiUrl}/api/partner/hotel/room_type/${id_room_type}/rooms`, {
+  const { data } = await bookingAPI.get(`/api/partner/hotel/room_type/${id_room_type}/rooms`, {
     headers,
   })
 
@@ -49,7 +48,7 @@ export const fetchPartnerPhysicalRooms = async (id_room_type) => {
 export const fetchPartnerHotelAmenities = async () => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(`${apiUrl}/api/partner/hotel/amenities`, {
+  const { data } = await bookingAPI.get(`/api/partner/hotel/amenities`, {
     headers,
   })
 
@@ -59,8 +58,8 @@ export const fetchPartnerHotelAmenities = async () => {
 export const fetchPartnerHotelAmenitiesByCategory = async (id_amenity_category) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(
-    `${apiUrl}/api/partner/hotel/category-amenities/${id_amenity_category}/amenities`,
+  const { data } = await bookingAPI.get(
+    `/api/partner/hotel/category-amenities/${id_amenity_category}/amenities`,
     { headers }
   )
 
@@ -70,7 +69,7 @@ export const fetchPartnerHotelAmenitiesByCategory = async (id_amenity_category) 
 export const fetchAvailableAmenities = async () => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(`${apiUrl}/api/partner/hotel/available-amenities`, {
+  const { data } = await bookingAPI.get(`/api/partner/hotel/available-amenities`, {
     headers,
   })
 
@@ -80,8 +79,8 @@ export const fetchAvailableAmenities = async () => {
 export const fetchPartnerHotelCategoryDetail = async (id_amenity_category) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(
-    `${apiUrl}/api/partner/hotel/category-amenities/${id_amenity_category}`,
+  const { data } = await bookingAPI.get(
+    `/api/partner/hotel/category-amenities/${id_amenity_category}`,
     { headers }
   )
 
@@ -91,8 +90,8 @@ export const fetchPartnerHotelCategoryDetail = async (id_amenity_category) => {
 export const fetchPartnerChildrenPolicy = async () => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(
-    `${apiUrl}/api/partner/hotel/policy/children`,
+  const { data } = await bookingAPI.get(
+    `/api/partner/hotel/policy/children`,
     { headers }
   )
 
@@ -102,8 +101,8 @@ export const fetchPartnerChildrenPolicy = async () => {
 export const updatePartnerChildrenPolicy = async (payload) => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.put(
-    `${apiUrl}/api/partner/hotel/policy/children`,
+  const { data } = await bookingAPI.put(
+    `/api/partner/hotel/policy/children`,
     payload,
     { headers }
   )

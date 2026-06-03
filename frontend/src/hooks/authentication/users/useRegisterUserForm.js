@@ -60,7 +60,15 @@ export default function useRegisterUserForm() {
 
     }
     catch (error) {
-      toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}`)
+      if (error.response && error.response.status >= 400 && error.response.status < 500) {
+        const responseData = error.response.data
+        toast.error("Đăng ký không thành công.")
+        for (const [keyInput, err] of Object.entries(responseData)) {
+          setError(keyInput, { type: "server", message: err }, { shouldFocus: true })
+        }
+      } else {
+        toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}`)
+      }
     }
     finally {
       setLoading(false)

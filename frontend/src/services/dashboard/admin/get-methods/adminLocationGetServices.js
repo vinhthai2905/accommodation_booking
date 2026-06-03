@@ -1,14 +1,13 @@
-import axios from "axios"
+import bookingAPI from "../../../base/bookingAPI"
 
 import { buildTokenHeader } from "../../../../helpers/authentication/buildTokenHeader"
 
-const apiUrl = import.meta.env.VITE_API_URL
 
 export const getAdminWards = async () => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(
-    `${apiUrl}/api/location/ward`,
+  const { data } = await bookingAPI.get(
+    `/api/location/ward`,
     { headers }
   )
 
@@ -18,8 +17,8 @@ export const getAdminWards = async () => {
 export const getAdminCities = async () => {
   const headers = buildTokenHeader()
 
-  const { data } = await axios.get(
-    `${apiUrl}/api/location/cities`,
+  const { data } = await bookingAPI.get(
+    `/api/location/cities`,
     { headers }
   )
 
