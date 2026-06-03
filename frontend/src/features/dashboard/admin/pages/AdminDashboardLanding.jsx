@@ -1,3 +1,5 @@
+
+
 import { Users, DollarSign, Hotel, TrendingUp, ArrowUpRight, ArrowDownRight, MoreHorizontal } from "lucide-react"
 import { motion } from "framer-motion"
 import { clsx } from "clsx"
@@ -40,7 +42,7 @@ const StatCard = ({ title, value, change, isPositive, icon: Icon, delay }) => (
       <span className={clsx("text-sm text-gray-500")}>vs last month</span>
     </div>
   </motion.div>
-);
+)
 
 const AdminDashboardLanding = () => {
   const stats = [
@@ -48,7 +50,7 @@ const AdminDashboardLanding = () => {
     { title: "Active Users", value: "2,405", change: "+15.2%", isPositive: true, icon: Users },
     { title: "Total Bookings", value: "842", change: "+5.4%", isPositive: true, icon: TrendingUp },
     { title: "Listed Hotels", value: "142", change: "-1.2%", isPositive: false, icon: Hotel },
-  ];
+  ]
 
   const recentBookings = [
     { id: "BOK-001", user: "Alice Johnson", hotel: "Grand Plaza Hotel", status: "Completed", amount: "$350" },
@@ -56,7 +58,7 @@ const AdminDashboardLanding = () => {
     { id: "BOK-003", user: "Charlie Brown", hotel: "Mountain Retreat", status: "Cancelled", amount: "$120" },
     { id: "BOK-004", user: "Diana Prince", hotel: "City Center Inn", status: "Completed", amount: "$450" },
     { id: "BOK-005", user: "Evan Wright", hotel: "Riverside Lodge", status: "Completed", amount: "$210" },
-  ];
+  ]
 
   return (
     <div className={clsx("space-y-8")}>
@@ -166,7 +168,7 @@ const AdminDashboardLanding = () => {
         </motion.div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AdminDashboardLanding;
+export default AdminDashboardLanding

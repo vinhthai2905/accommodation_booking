@@ -1,7 +1,7 @@
 import { AlertCircle } from "lucide-react"
 
 export default function RejectionAlert({ registration }) {
-    if (!registration || registration.status !== "Từ chối") return null;
+    if (!registration || registration.status !== "Từ chối") return null
 
     return (
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 flex gap-3 text-red-800 text-sm text-left">

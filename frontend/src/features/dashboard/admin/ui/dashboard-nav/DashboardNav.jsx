@@ -11,14 +11,14 @@ const navItems = [
     { name: 'Phường', path: '/admin/dashboard/wards', icon: Hotel },
     { name: 'Danh mục tiện ích', path: '/admin/dashboard/category-amenities', icon: LayoutDashboard },
     { name: 'Tiện ích', path: '/admin/dashboard/amenities', icon: Settings },
-];
+]
 
 export default function DashboardNav({ location }) {
     return (
         <nav className={clsx("flex-1 overflow-y-auto py-6 px-4 space-y-2")}>
             {navItems.map((item) => {
-                const isActive = location.pathname === item.path;
-                const Icon = item.icon;
+                const isActive = location.pathname === item.path
+                const Icon = item.icon
                 return (
                     <Link
                         key={item.path}
@@ -40,7 +40,7 @@ export default function DashboardNav({ location }) {
                             />
                         )}
                     </Link>
-                );
+                )
             })}
         </nav>
     )

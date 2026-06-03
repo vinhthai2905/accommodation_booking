@@ -10,11 +10,11 @@ export default function BookingTabs({
     bookings,
     setSearchParams,
 }) {
-    const currentTabTotalBookings = bookings?.length ?? 0;
+    const currentTabTotalBookings = bookings?.length ?? 0
     const hasBookings = currentTabTotalBookings > 0
 
     const shouldShowNumberBookings = (tab) => {
-        return !isFetchingBookings && activeTab === tab.id && hasBookings;
+        return !isFetchingBookings && activeTab === tab.id && hasBookings
     }
 
     return (

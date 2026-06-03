@@ -14,5 +14,5 @@ export default function FilterSection({ title, items }) {
         ))}
       </div>
     </section>
-  );
+  )
 }

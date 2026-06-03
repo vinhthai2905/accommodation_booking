@@ -47,45 +47,45 @@ export default function PropertySetupStep({ wards, prevStep, nextStep }) {
     const longitude = watch("longitude")
 
     useEffect(() => {
-        if (!address || !id_ward || address.trim().length < 5) return;
+        if (!address || !id_ward || address.trim().length < 5) return
 
         const timeoutId = setTimeout(async () => {
-            const ward = wards.find(w => w.id_ward.toString() === id_ward.toString());
-            const wardName = ward ? ward.ward_name : "";
-            const query = `${address}, ${wardName}, Đà Nẵng, Việt Nam`;
+            const ward = wards.find(w => w.id_ward.toString() === id_ward.toString())
+            const wardName = ward ? ward.ward_name : ""
+            const query = `${address}, ${wardName}, Đà Nẵng, Việt Nam`
 
             try {
-                const { data } = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
+                const { data } = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`)
                 if (data && data.length > 0) {
                     // Update location and map will auto-fly to these coordinates
-                    setValue("latitude", parseFloat(data[0].lat), { shouldValidate: true });
-                    setValue("longitude", parseFloat(data[0].lon), { shouldValidate: true });
+                    setValue("latitude", parseFloat(data[0].lat), { shouldValidate: true })
+                    setValue("longitude", parseFloat(data[0].lon), { shouldValidate: true })
                 }
             } catch (error) {
-                console.error("Geocoding failed", error);
+                console.error("Geocoding failed", error)
             }
-        }, 1500); // 1.5s debounce
+        }, 1500) // 1.5s debounce
 
-        return () => clearTimeout(timeoutId);
-    }, [address, id_ward, wards, setValue]);
+        return () => clearTimeout(timeoutId)
+    }, [address, id_ward, wards, setValue])
 
     useEffect(() => {
-        if (!latitude || !longitude) return;
+        if (!latitude || !longitude) return
 
         const timeoutId = setTimeout(async () => {
             try {
-                const { data } = await bookingAPI.get(`/api/location/distance-to-beach?lat=${latitude}&lng=${longitude}`);
+                const { data } = await bookingAPI.get(`/api/location/distance-to-beach?lat=${latitude}&lng=${longitude}`)
                 if (data && data.distance_meters !== undefined) {
-                    setValue("distance_to_beach", data.distance_meters, { shouldValidate: true });
-                    setValue("is_near_beach", data.is_near_beach, { shouldValidate: true });
+                    setValue("distance_to_beach", data.distance_meters, { shouldValidate: true })
+                    setValue("is_near_beach", data.is_near_beach, { shouldValidate: true })
                 }
             } catch (error) {
-                console.error("Failed to fetch distance to beach", error);
+                console.error("Failed to fetch distance to beach", error)
             }
-        }, 1000); // 1s debounce to prevent spamming
+        }, 1000) // 1s debounce to prevent spamming
 
-        return () => clearTimeout(timeoutId);
-    }, [latitude, longitude, setValue]);
+        return () => clearTimeout(timeoutId)
+    }, [latitude, longitude, setValue])
 
     return (
         <div className="absolute inset-0 z-0">
@@ -97,14 +97,14 @@ export default function PropertySetupStep({ wards, prevStep, nextStep }) {
                 className="h-full w-full z-0"
             >
                 <TileLayer
-                    attribution='&copy; OpenStreetMap contributors'
+                    attribution='&copy OpenStreetMap contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <LocationPicker />
             </MapContainer>
 
             {/* Floating Form Popup */}
-            <div className="absolute top-6 left-6 z-10 w-full max-w-[420px] bg-white rounded-xl shadow-2xl p-6 max-h-[calc(100vh-180px)] overflow-y-auto border border-gray-100">
+            <div className="absolute top-6 left-6 z-10 w-full max-w-105 bg-white rounded-xl shadow-2xl p-6 max-h-[calc(100vh-180px)] overflow-y-auto border border-gray-100">
                 <div className="mb-6">
                     <h2 className="text-2xl font-bold text-gray-800 mb-1">Địa điểm & Cài đặt chỗ nghỉ</h2>
                     <p className="text-sm text-gray-500">Giúp khách hàng dễ dàng tìm kiếm và đặt chỗ.</p>

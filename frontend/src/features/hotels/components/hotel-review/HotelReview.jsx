@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "clsx"
 
 export default function ReviewBox() {
   return (
@@ -79,5 +79,5 @@ export default function ReviewBox() {
         ›
       </button>
     </div>
-  );
+  )
 }

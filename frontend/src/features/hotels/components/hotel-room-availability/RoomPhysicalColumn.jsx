@@ -1,10 +1,10 @@
 import { clsx } from "clsx"
 
-import useBookingContext from "../../../../hooks/common/useBookingContext";
+import useBookingContext from "../../../../hooks/common/useBookingContext"
 
 export default function RoomPhysicalColumn({ roomType, handleRoomSelection }) {
     const { selectedRoomIds } = useBookingContext()
-    const availableRooms = roomType?.available_rooms || [];
+    const availableRooms = roomType?.available_rooms || []
     const roomTypeId = roomType.id_room_type
     const roomPrice = roomType.price
     const roomCapacity = roomType.max_capacity
@@ -52,5 +52,5 @@ export default function RoomPhysicalColumn({ roomType, handleRoomSelection }) {
                     </div>
                 )}
         </div>
-    );
+    )
 }

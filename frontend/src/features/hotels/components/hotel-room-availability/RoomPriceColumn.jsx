@@ -1,8 +1,8 @@
-import { Info } from "lucide-react";
-import useHotelDetailsContext from "../../../../hooks/hotel/useHotelDetailsContext";
+import { Info } from "lucide-react"
+import useHotelDetailsContext from "../../../../hooks/hotel/useHotelDetailsContext"
 
 export default function RoomPriceColumn({ roomType }) {
-    const { refundPolicyQuery: { data: refundPolicy } } = useHotelDetailsContext();
+    const { refundPolicyQuery: { data: refundPolicy } } = useHotelDetailsContext()
 
     return (
         <div className="px-4 py-3 flex flex-col gap-2 justify-start">
@@ -41,5 +41,5 @@ export default function RoomPriceColumn({ roomType }) {
                 </div>
             )}
         </div>
-    );
+    )
 }

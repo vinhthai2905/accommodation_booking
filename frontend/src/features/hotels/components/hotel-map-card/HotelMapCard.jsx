@@ -1,9 +1,9 @@
 import { clsx } from "clsx"
-import { Link } from "react-router";
+import { Link } from "react-router"
 
 import { MapContainer, TileLayer, Marker } from "react-leaflet"
 
-import Icon from "/src/components/ui/Icon";
+import Icon from "/src/components/ui/Icon"
 
 export default function HotelMapCard() {
 

@@ -1,7 +1,7 @@
 import { clsx } from "clsx"
 
-import { useQuery } from "@tanstack/react-query";
-import { fetchWards } from "../../../../services/location/locationServices";
+import { useQuery } from "@tanstack/react-query"
+import { fetchWards } from "../../../../services/location/locationServices"
 
 export default function PlaceSearchDropdown({ onSelect }) {
     const { data, isPending, error } = useQuery({
@@ -29,5 +29,5 @@ export default function PlaceSearchDropdown({ onSelect }) {
                 </div>
             ))}
         </div>
-    );
+    )
 }

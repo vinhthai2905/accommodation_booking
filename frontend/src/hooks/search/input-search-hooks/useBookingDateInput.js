@@ -6,12 +6,13 @@ import useClickOutside from "../../common/useClickOutside"
 
 export default function useBookingDateInput() {
     const today = startOfDay(new Date())
+    const tomorrow = addDays(today, 1)
     const [isDateOpened, setIsDateOpened] = useState(false)
     const { ref: dateRef } = useClickOutside(setIsDateOpened)
     const [ranges, setRanges] = useState([
         {
-            startDate: today,
-            endDate: addDays(today, 1),
+            startDate: tomorrow,
+            endDate: addDays(tomorrow, 1),
             key: "bookingDate",
         },
     ])

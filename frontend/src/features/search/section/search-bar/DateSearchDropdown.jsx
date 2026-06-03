@@ -1,7 +1,7 @@
-import { clsx } from "clsx";
+import { clsx } from "clsx"
 import { DateRange } from "react-date-range"
-import { useState, useRef } from "react";
-import { isSameDay, startOfDay } from "date-fns";
+import { useState, useRef } from "react"
+import { isSameDay, startOfDay, addDays } from "date-fns"
 
 import "react-date-range/dist/styles.css"
 import "react-date-range/dist/theme/default.css"
@@ -10,6 +10,7 @@ import "../../css/dateRangeOverrides.css"
 
 export default function DateSearchDropdown({ ranges, setRanges }) {
     const today = startOfDay(new Date())
+    const tomorrow = addDays(today, 1)
 
     const [focusedRange, setFocusedRange] = useState([0, 0])
     const keepFocusedCheckout = useRef(false)
@@ -17,7 +18,7 @@ export default function DateSearchDropdown({ ranges, setRanges }) {
     const isSelectingCheckout = focusedRange[1] === 1
     const minSelectableDate = isSelectingCheckout
         ? ranges[0].startDate
-        : today
+        : tomorrow
 
     const onRangeFocusChange = (nextFocusedRange) => {
         if (
@@ -65,5 +66,5 @@ export default function DateSearchDropdown({ ranges, setRanges }) {
                 rangeColors={['#00000']}
             />
         </div>
-    );
+    )
 }

@@ -8,6 +8,7 @@ import { useState } from "react"
 import { useSearchParams } from "react-router"
 import { motion, AnimatePresence } from "framer-motion"
 
+import { useTabTitle } from "../../../hooks/common/useTabTitle"
 import useUserBookings from "../../../hooks/profile/user-booking/useUserBookings"
 import { useAuthUserContext } from "../../../hooks/authentication/common/useAuthUserContext"
 
@@ -15,6 +16,7 @@ import { tabs } from "../helpers/orderStatus"
 import { emptyContentTabs } from "../helpers/emptyContentTabs"
 
 export default function UserBooking() {
+    useTabTitle("Booking.com | Chuyến đi của tôi")
     const [searchParams, setSearchParams] = useSearchParams()
 
     const { isAuthenticated } = useAuthUserContext()

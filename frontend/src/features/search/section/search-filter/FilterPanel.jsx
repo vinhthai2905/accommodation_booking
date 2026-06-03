@@ -1,8 +1,8 @@
-import MapCard from "../../components/search-map/MapCard";
-import { useSearchHotelAmenitiesCount } from "../../../../hooks/search/filter-hotels-hooks/useSearchHotelsFilterCount";
+import MapCard from "../../components/search-map/MapCard"
+import { useSearchHotelAmenitiesCount } from "../../../../hooks/search/filter-hotels-hooks/useSearchHotelsFilterCount"
 
 export default function FilterPanel() {
-    const { isPending, error, data: amenitiesData } = useSearchHotelAmenitiesCount();
+    const { isPending, error, data: amenitiesData } = useSearchHotelAmenitiesCount()
 
     return (
         <div className="flex flex-col gap-1">
@@ -36,5 +36,5 @@ export default function FilterPanel() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
