@@ -40,6 +40,12 @@ export default function HotelPolicyNavGroup({navStates, togglePolicyNav, closeAl
                         closeAllNav={closeAllNav}
                         label={"Trẻ em"}
                     />
+
+                    <DashboardNavLink
+                        to={"/partner/dashboard/hotel/policy/refund"}
+                        closeAllNav={closeAllNav}
+                        label={"Hoàn tiền"}
+                    />
                 </div>
 
                 

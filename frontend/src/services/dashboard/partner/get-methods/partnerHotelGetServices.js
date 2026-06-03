@@ -110,3 +110,25 @@ export const updatePartnerChildrenPolicy = async (payload) => {
   return data
 }
 
+export const fetchPartnerRefundPolicy = async () => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.get(
+    `${apiUrl}/api/partner/hotel/policy/refund`,
+    { headers }
+  )
+
+  return data
+}
+
+export const updatePartnerRefundPolicy = async (payload) => {
+  const headers = buildTokenHeader()
+
+  const { data } = await axios.put(
+    `${apiUrl}/api/partner/hotel/policy/refund`,
+    payload,
+    { headers }
+  )
+
+  return data
+}

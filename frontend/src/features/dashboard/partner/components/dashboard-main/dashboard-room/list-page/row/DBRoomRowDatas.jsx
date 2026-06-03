@@ -63,9 +63,9 @@ export default function DBRoomRowDatas({ room }) {
                 {!room.status && (
                     <span className={clsx(
                         "inline-flex items-center px-2.5 py-1 rounded-lg text-[11px] font-semibold tracking-wide uppercase shadow-sm",
-                        "bg-gray-50 text-gray-700 border border-gray-200/80"
+                        "bg-emerald-50 text-emerald-700 border border-emerald-200/80"
                     )}>
-                        Không rõ
+                        Sẵn sàng
                     </span>
                 )}
             </td>

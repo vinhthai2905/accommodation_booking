@@ -14,7 +14,6 @@ export default function DashboardNavigation() {
     const {
         navStates,
         toggleHotelNav,
-        toggleImgNav,
         toggleBookingNav,
         toggleRoomTypeNav,
         togglePolicyNav,
