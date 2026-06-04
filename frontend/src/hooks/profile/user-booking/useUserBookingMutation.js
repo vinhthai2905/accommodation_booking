@@ -1,8 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "react-hot-toast"
 import { cancelBooking } from "../../../services/book/bookingServices"
+import { checkIsExpiration } from "../../../features/profile/helpers/getRemainingMinutes"
 
-export default function useUserBookingMutation() {
+export default function useUserBookingMutation(refundPolicy, freeCancellationExpiresAt) {
     const queryClient = useQueryClient()
 
     const cancelBookingMutation = useMutation({
@@ -18,8 +19,8 @@ export default function useUserBookingMutation() {
 
     const handleCancelBooking = (booking) => {
         if (window.confirm("Bạn có chắc chắn muốn hủy đặt phòng này?")) {
-            cancelBookingMutation.mutate(booking.id_booking)
-        }
+                cancelBookingMutation.mutate(booking.id_booking)
+            }
     }
 
     return {

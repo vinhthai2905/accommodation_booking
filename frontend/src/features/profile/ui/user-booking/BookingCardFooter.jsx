@@ -67,7 +67,7 @@ export default function BookingCardFooter({
                     />
                 }
 
-                {isCheckoutBooking && !isFetchingReviews (
+                {isCheckoutBooking && !isFetchingReviews && (
                     <BookingReviewStatus
                         booking={booking}
                         hotel={hotel}
