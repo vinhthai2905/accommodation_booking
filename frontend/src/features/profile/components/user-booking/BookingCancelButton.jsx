@@ -3,10 +3,15 @@ import { Loader2 } from "lucide-react"
 
 import useUserBookingMutation from "../../../../hooks/profile/user-booking/useUserBookingMutation"
 import { useFreeCancellationTimeout } from "../../../../hooks/profile/user-booking/useFreeCancellationTimeout"
+import { checkIsExpiration } from "../../helpers/getRemainingMinutes"
 
-export default function BookingCancelButton({ booking, refundPolicy, isFetchingRefundPolicy }) {
+export default function BookingCancelButton({ booking, refundPolicy }) {
     const { handleCancelBooking, cancelBookingMutation } = useUserBookingMutation()
-    const { freeCancellationTimeout } = useFreeCancellationTimeout(booking, refundPolicy)
+    const {
+        freeCancellationTimeout,
+        setFreeCancellationTimeout,
+        freeCancellationExpiresAt
+    } = useFreeCancellationTimeout(booking, refundPolicy)
 
     return (
         <button

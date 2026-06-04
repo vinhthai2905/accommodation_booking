@@ -56,8 +56,8 @@ export default function BookingCard({ booking, index, activeTab }) {
                         payment={booking.payment}
                         isFetchingReviews={isFetchingReviews}
                         reviews={reviews}
-                        refundPolicy={refundPolicy}
                         isFetchingRefundPolicy={isFetchingRefundPolicy}
+                        refundPolicy={refundPolicy}
                     />
                 </div>
             </div>

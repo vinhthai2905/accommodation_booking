@@ -9,7 +9,7 @@ export function getRemainingMinutes(expiresAt) {
     return `${minutes}:${String(seconds).padStart(2, "0")}`
 }
 
-export function checkExpiration(expiresAt) {
+export function checkIsExpiration(expiresAt) {
     const today = new Date()
     const tokenExpiresAt = new Date(expiresAt)
 

@@ -7,16 +7,16 @@ import { Link } from "react-router"
 import BookingReviewStatus from "./BookingReviewStatus"
 
 export default function BookingCardFooter({
-    activeTab,
     paymentLabel,
+    activeTab,
     booking,
     hotel,
     invoice,
     payment,
     isFetchingReviews,
     reviews,
-    refundPolicy,
-    isFetchingRefundPolicy
+    isFetchingRefundPolicy,
+    refundPolicy
 }) {
     const isCheckoutBooking = ['CONFIRMED', 'COMPLETED'].includes(booking?.status)
 
@@ -59,7 +59,7 @@ export default function BookingCardFooter({
             </div>
 
             <div className="flex items-center gap-3">
-                {activeTab === 'upcoming' && booking.status === 'PENDING'
+                {activeTab === 'upcoming' && booking.status === 'PENDING' && !isFetchingRefundPolicy
                     && <BookingCancelButton
                         booking={booking}
                         refundPolicy={refundPolicy}
@@ -67,7 +67,7 @@ export default function BookingCardFooter({
                     />
                 }
 
-                {isCheckoutBooking && (
+                {isCheckoutBooking && !isFetchingReviews (
                     <BookingReviewStatus
                         booking={booking}
                         hotel={hotel}
