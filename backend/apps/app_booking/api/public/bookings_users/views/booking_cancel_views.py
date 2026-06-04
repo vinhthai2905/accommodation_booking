@@ -51,7 +51,7 @@ class BookingCancellationService:
         else:
             serializer.update(updated_booking, "Failed")
         
-        return updated_booking   
+        return updated_booking, refund_result
     
     @classmethod
     def cancel_booking(
@@ -70,14 +70,24 @@ class BookingCancellationService:
 class BookingCancelView(APIView):
     permission_classes = [IsCustomer]
     
+    def _build_response_data(self, refund_result):
+        response_data = {"message": "Booking has been processing for refund."}
+        
+        if refund_result.get("return_code") not in [1, 3]:
+            response_data["refund_result"] = refund_result
+            
+        return response_data
+    
     def patch(self, request: Request, id_booking: UUID, *args, **kwargs):
         booking = get_booking(id_booking, request.user)
 
         serializer = BookingCancelSerializer(instance=booking, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
-        BookingCancellationService.cancel_booking(serializer, booking, request.user)
+        _, refund_result = BookingCancellationService.cancel_booking(serializer, booking, request.user)
+
+        response_data = self._build_response_data(refund_result)
 
         return Response(
-            {"message": "Booking has been processing for refund."}, 
+            response_data, 
             status=status.HTTP_200_OK
         )
