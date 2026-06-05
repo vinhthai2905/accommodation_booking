@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchHotelReviews } from "../../../services/reviews/reviewServices"
+import { fetchHotelReviews } from "../../../services/reviews/userReviewServices"
 
 export default function useBookingReviews(activeTab, hotelId) {
     const { data, isPending, isError, error } = useQuery({

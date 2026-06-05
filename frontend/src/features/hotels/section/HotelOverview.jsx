@@ -2,7 +2,7 @@ import { useState } from "react"
 import HotelHeader from "../components/hotel-overview/HotelHeader"
 import HotelImageGallery from "./HotelImageGallery"
 import HotelMapCard from "../components/hotel-map-card/HotelMapCard"
-import HotelReview from "../components/hotel-review/HotelReview"
+import HotelReviewOverview from "../components/hotel-review/HotelReviewOverview"
 import Amenities from "./Amenities"
 import RoomAvailability from "./RoomAvailability"
 import HotelReviewListDrawer from "../components/hotel-review/HotelReviewListDrawer"
@@ -17,7 +17,7 @@ export default function HotelOverview() {
                 <div className="flex gap-3">
                     <HotelImageGallery />
                     <div className="flex flex-col w-[25%] gap-2">
-                        <HotelReview onRatingClick={() => setIsReviewDrawerOpen(true)} />
+                        <HotelReviewOverview onRatingClick={() => setIsReviewDrawerOpen(true)} />
                         <HotelMapCard />
                     </div>
                 </div>
@@ -26,7 +26,7 @@ export default function HotelOverview() {
             </div>
 
             <HotelReviewListDrawer 
-                isOpen={isReviewDrawerOpen} 
+                isReviewDrawerOpen={isReviewDrawerOpen} 
                 onClose={() => setIsReviewDrawerOpen(false)} 
             />
         </>

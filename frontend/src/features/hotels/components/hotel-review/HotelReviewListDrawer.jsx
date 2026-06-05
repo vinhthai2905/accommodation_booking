@@ -4,9 +4,20 @@ import { useEffect } from "react"
 import { X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
-export default function HotelReviewListDrawer({ isOpen, onClose }) {
+import useHotelDetailsContext from "../../../../hooks/hotel/useHotelDetailsContext"
+
+import { useReviewHotelList } from "../../../../hooks/reviews/useReviewHotelList"
+
+export default function HotelReviewListDrawer({ isReviewDrawerOpen, onClose }) {
+  const { hotelQuery } = useHotelDetailsContext()
+  const id_hotel = hotelQuery.data?.id_hotel
+
+  const { data: reviewsData, isLoading, isError } = useReviewHotelList(id_hotel)
+
+  const reviews = Array.isArray(reviewsData) ? reviewsData : reviewsData?.results || []
+
   useEffect(() => {
-    if (isOpen) {
+    if (isReviewDrawerOpen) {
       document.body.style.overflow = "hidden"
     } else {
       document.body.style.overflow = ""
@@ -14,11 +25,11 @@ export default function HotelReviewListDrawer({ isOpen, onClose }) {
     return () => {
       document.body.style.overflow = ""
     }
-  }, [isOpen])
+  }, [isReviewDrawerOpen])
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isReviewDrawerOpen && (
         <>
           <motion.div
             initial={{ opacity: 0 }}
@@ -36,9 +47,10 @@ export default function HotelReviewListDrawer({ isOpen, onClose }) {
             className="fixed inset-y-0 right-0 z-9999 w-full md:w-[80%] lg:w-[60%] xl:w-[50%] bg-white shadow-2xl flex flex-col"
           >
             <div className="flex items-center justify-between p-6 border-b border-gray-200">
+              <h2 className="text-xl font-bold text-gray-900">Đánh giá của khách</h2>
               <button
                 onClick={onClose}
-                className="p-2 text-gray-500 transition-colors hover:text-gray-900 rounded-md hover:bg-gray-100 cursor-pointer"
+                className="p-2 text-gray-500 transition-colors hover:text-gray-900 rounded-md hover:bg-gray-100"
                 aria-label="Đóng"
               >
                 <X className="w-6 h-6" />
@@ -51,9 +63,7 @@ export default function HotelReviewListDrawer({ isOpen, onClose }) {
                   <h3 className="text-lg font-bold text-gray-900">Đánh giá của khách</h3>
                 </div>
 
-                <div className="flex flex-col border-t border-gray-200">
-                  <HotelReviewListItem />
-                </div>
+                
               </div>
             </div>
           </motion.div>

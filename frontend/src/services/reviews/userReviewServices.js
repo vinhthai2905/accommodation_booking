@@ -3,7 +3,6 @@ import { selectContentType } from "../../helpers/partner-onboarding/selectConten
 import bookingAPI from "../base/bookingAPI"
 
 export const createUserReview = async (payload) => {
-    // Extract id_booking from the payload to use in the URL
     const { id_booking, ...restPayload } = payload
 
     const headers = buildTokenHeader()

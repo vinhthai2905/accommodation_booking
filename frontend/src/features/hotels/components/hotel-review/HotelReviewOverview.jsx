@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import HotelReviewGuestHighlight from "./HotelReviewGuestHighlight"
 
-export default function HotelReview({ onRatingClick }) {
+export default function HotelReviewOverview({ onRatingClick }) {
   return (
     <div
       className={clsx(

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createUserReview } from "../../services/reviews/reviewServices"
+import { createUserReview } from "../../services/reviews/userReviewServices"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router"
 

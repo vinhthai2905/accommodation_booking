@@ -221,13 +221,13 @@ class ZaloPayRefundService(ZaloPayGetOrderStatusService):
         mac = cls._generate_refund_mac(mac_payload, cls.secret_key)
         
         refund_payload = {
-            "app_id": cls.app_id,
             "m_refund_id": cls._generate_merchant_refund_id(),
-            "timestamp": cls.timestamp,
+            "app_id": cls.app_id,
             "zp_trans_id": zp_trans_id,
             "amount": amount,
+            "timestamp": cls.timestamp,
+            "mac": mac,
             "description": description,
-            "mac": mac
         }
         
         response = cls._send_refund_request(refund_payload)
