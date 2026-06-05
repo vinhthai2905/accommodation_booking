@@ -9,13 +9,13 @@ export default function HotelMapCard() {
 
     return (
         <div className={clsx(
-            "relative w-full"
+            "relative w-full grow-3"
         )}>
             <MapContainer
                 center={[10.7769, 106.7009]}
                 zoom={13}
                 className={clsx(
-                    "h-40 w-full rounded-lg "
+                    "h-full w-full rounded-lg"
                 )}
             >
                 <TileLayer

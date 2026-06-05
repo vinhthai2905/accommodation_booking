@@ -66,7 +66,7 @@ export default function RoomAvailability() {
                     </div>
                 </div>
 
-                <div className="flex flex-col gap-4 sticky top-6">
+                <div className="flex flex-col gap-4 top-6">
                     <div className="border border-slate-200 rounded-xl shadow-sm bg-white overflow-hidden">
                         <div className="px-6 py-4 bg-slate-50/50 border-b border-slate-200 flex items-center gap-2">
                             <CreditCard size={18} className="text-blue-600" />
