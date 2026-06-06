@@ -6,6 +6,6 @@ from .public.bookings_users.views import (
 )
 
 from .private.bookings_partners.views import (
-    PartnerBookingListView, PartnerBookingStatusUpdateView, PartnerBookingDetailView
+    PartnerBookingListView, PartnerBookingStatusUpdateView, PartnerBookingDetailView, PartnerStatisticsView
 )
 

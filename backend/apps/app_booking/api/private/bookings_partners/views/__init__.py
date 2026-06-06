@@ -1,1 +1,2 @@
 from .bookings_partner_views import PartnerBookingListView, PartnerBookingStatusUpdateView, PartnerBookingDetailView
+from .partner_statistics_views import PartnerStatisticsView

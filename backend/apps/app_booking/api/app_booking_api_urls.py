@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import BookingCreateView, BookingConfirmationView, UserBookingListView, BookingCancelView
 
-from . import PartnerBookingListView, PartnerBookingStatusUpdateView, PartnerBookingDetailView
+from . import PartnerBookingListView, PartnerBookingStatusUpdateView, PartnerBookingDetailView, PartnerStatisticsView
 
 urlpatterns = [
     path("api/hotel/booking", BookingCreateView.as_view(), name="create-booking"),
@@ -28,5 +28,10 @@ urlpatterns = [
         "api/partner/hotel/bookings/<uuid:id_booking>",
         PartnerBookingDetailView.as_view(),
         name="partner-booking-detail",
+    ),
+    path(
+        "api/partner/hotel/statistics",
+        PartnerStatisticsView.as_view(),
+        name="partner-statistics",
     ),
 ]
