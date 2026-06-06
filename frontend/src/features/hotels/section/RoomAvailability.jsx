@@ -56,13 +56,19 @@ export default function RoomAvailability() {
                     </div>
 
                     <div className="divide-y divide-slate-100">
-                        {roomTypes.map((roomType) => (
-                            <RoomRow
-                                key={roomType.id_room_type}
-                                roomType={roomType}
-                                handleRoomSelection={handleRoomSelection}
-                            />
-                        ))}
+                        {roomTypes?.length > 0 ? (
+                            roomTypes.map((roomType) => (
+                                <RoomRow
+                                    key={roomType.id_room_type}
+                                    roomType={roomType}
+                                    handleRoomSelection={handleRoomSelection}
+                                />
+                            ))
+                        ) : (
+                            <div className="p-8 text-center text-slate-500">
+                                Vui lòng chọn ngày nhận/trả phòng để xem phòng trống.
+                            </div>
+                        )}
                     </div>
                 </div>
 

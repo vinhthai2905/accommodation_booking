@@ -5,6 +5,6 @@ export default function useHotelRoomTypesAvailability(hotelID, checkIn, checkOut
     return useQuery({
         queryKey: ["hotelRoomTypesAvailability", hotelID],
         queryFn: () => fetchHotelRoomTypesAvailability(hotelID, checkIn, checkOut),
-        enabled: !!hotelID
+        enabled: !!hotelID && !!checkIn && !!checkOut
     })
 }

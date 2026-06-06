@@ -1,22 +1,44 @@
-import { Bed, Calendar, Users, Frown, Smile, ThumbsUp, ThumbsDown } from "lucide-react"
+import { Bed, Calendar, Users, Frown, Smile, ThumbsUp, ThumbsDown, Star } from "lucide-react"
 import { clsx } from "clsx"
 
+const formatDate = (dateString) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return `Đã đánh giá: ${date.getDate()} tháng ${date.getMonth() + 1}, ${date.getFullYear()}`;
+};
+
+const getTitleFromScore = (scoreStr) => {
+  const score = parseFloat(scoreStr);
+  if (isNaN(score)) return "Đánh giá";
+  if (score >= 5) return "Tuyệt vời";
+  if (score >= 4) return "Rất tốt";
+  if (score >= 3) return "Tốt";
+  if (score >= 2) return "Bình thường";
+  return "Kém";
+};
+
 export default function HotelReviewListItem({ review }) {
-  const {
-    authorInitial = "S",
-    authorName = "Stephanie",
-    authorCountryFlag = "🇭🇰",
-    authorCountry = "Hồng Kông",
-    roomType = "Phòng Đôi Deluxe",
-    stayDuration = "6 đêm · Tháng 6 2026",
-    groupType = "Cặp đôi",
-    reviewedDate = "Đã đánh giá: 5 tháng 6, 2026",
-    title = "Rất tốt",
-    score = "8,0",
-    negativeText = "Thoát nước phòng tắm hơi chậm",
-    positiveText = "Kỳ nghỉ tuyệt vời chắc chắn sẽ quay lại. Phòng rất sạch sẽ và thực sự đẹp. Nhân viên cực kỳ thân thiện.",
-    avatarColor = "bg-cyan-500"
-  } = review || {}
+  const data = review || {};
+
+  const authorName = data.reviewer_name || "Khách ẩn danh";
+  const authorInitial = authorName.charAt(0).toUpperCase();
+  const authorCountry = data.reviewer_country || "Việt Nam";
+  const authorCountryFlag = "🇻🇳"; 
+  
+  const roomType = data.room_type || "Phòng tiêu chuẩn";
+  const stayDuration = data.stay_duration || "";
+  const groupType = data.group_type || "Khách lẻ";
+  
+  const reviewedDate = formatDate(data.created_at);
+  const score = data.rating ? parseFloat(data.rating).toFixed(1).replace(".", ",") : "0,0";
+  const title = getTitleFromScore(data.rating);
+  
+  const positiveText = data.content || "";
+  const negativeText = "";
+  
+  const colors = ["bg-cyan-500", "bg-blue-500", "bg-indigo-500", "bg-purple-500", "bg-pink-500", "bg-rose-500", "bg-orange-500", "bg-green-500"];
+  const colorIndex = authorName.charCodeAt(0) % colors.length;
+  const avatarColor = colors[colorIndex] || "bg-cyan-500";
 
   return (
     <div className="flex flex-col md:flex-row gap-6 py-6 border-b border-gray-200 bg-white text-gray-900 px-4">
@@ -42,10 +64,12 @@ export default function HotelReviewListItem({ review }) {
             <Bed className="w-4.5 h-4.5 text-gray-400" />
             <span>{roomType}</span>
           </div>
-          <div className="flex items-center gap-3">
-            <Calendar className="w-4.5 h-4.5 text-gray-400" />
-            <span>{stayDuration}</span>
-          </div>
+          {stayDuration && (
+            <div className="flex items-center gap-3">
+              <Calendar className="w-4.5 h-4.5 text-gray-400" />
+              <span>{stayDuration}</span>
+            </div>
+          )}
           <div className="flex items-center gap-3">
             <Users className="w-4.5 h-4.5 text-gray-400" />
             <span>{groupType}</span>
@@ -55,18 +79,22 @@ export default function HotelReviewListItem({ review }) {
 
       <div className="flex flex-col w-full md:w-2/3 lg:w-[70%]">
         <div className="flex justify-between items-start mb-4">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-1">
             <span className="text-xs text-gray-500 mb-1">{reviewedDate}</span>
             <span className="text-xl font-bold text-gray-900">{title}</span>
           </div>
-          <div
-            className={clsx(
-              "flex h-8 w-8 items-center justify-center",
-              "bg-blue-600 text-sm font-bold text-white",
-              "rounded-t-md rounded-br-md rounded-bl-none"
-            )}
-          >
-            {score}
+          <div className="flex items-center gap-1">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <Star
+                key={star}
+                className={clsx(
+                  "w-5 h-5",
+                  star <= parseInt(data.rating || 0)
+                    ? "fill-yellow-400 text-yellow-400"
+                    : "fill-gray-200 text-gray-200"
+                )}
+              />
+            ))}
           </div>
         </div>
 
@@ -79,7 +107,6 @@ export default function HotelReviewListItem({ review }) {
           )}
           {positiveText && (
             <div className="flex items-start gap-3 text-gray-700 text-sm">
-              <Smile className="w-4.5 h-4.5 text-green-500 mt-0.5 shrink-0" />
               <span className="leading-relaxed">{positiveText}</span>
             </div>
           )}

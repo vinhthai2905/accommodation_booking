@@ -63,7 +63,19 @@ export default function HotelReviewListDrawer({ isReviewDrawerOpen, onClose }) {
                   <h3 className="text-lg font-bold text-gray-900">Đánh giá của khách</h3>
                 </div>
 
-                
+                <div className="flex flex-col">
+                  {isLoading ? (
+                    <div className="text-center py-8 text-gray-500">Đang tải đánh giá...</div>
+                  ) : isError ? (
+                    <div className="text-center py-8 text-red-500">Đã xảy ra lỗi khi tải đánh giá.</div>
+                  ) : reviews.length > 0 ? (
+                    reviews.map((review, index) => (
+                      <HotelReviewListItem key={review.id || index} review={review} />
+                    ))
+                  ) : (
+                    <div className="text-center py-8 text-gray-500">Chưa có đánh giá nào.</div>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>
