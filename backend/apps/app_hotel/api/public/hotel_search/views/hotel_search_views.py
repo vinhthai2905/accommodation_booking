@@ -12,8 +12,9 @@ from apps.app_booking.models import DatPhong
 from apps.app_location.models import Phuong
 from apps.app_hotel.models import KhachSan
 from apps.app_hotel.api.public.hotel_search.serializers import (
-    HotelSearchParamsSerializer,
     SearchParamsMapBoundsSerializer,
+    HotelSearchParamsSerializer,
+    HotelSearchPaginationSerializer,
     HotelSearchResultSerializer,
     HotelSearchResultMapSerializer,
 )
@@ -22,22 +23,47 @@ from apps.app_hotel.api.base.base import HotelSearchViewMixin
 
 class HotelSearchResultView(HotelSearchViewMixin):
     search_params_serializer = HotelSearchParamsSerializer
+    hotels_pagination_serializer = HotelSearchPaginationSerializer
     hotels_search_result_serializer = HotelSearchResultSerializer
 
     hotel_model = KhachSan
     booking_model = DatPhong
     ward_model = Phuong
-
+    
+    def _validate_hotels_pagination_params(self, request: Request):
+        pagination_params = {}
+        
+        pagination_params["page"] = request.query_params.get("page")
+        
+        serializer = self.hotels_pagination_serializer(data=pagination_params)
+        serializer.is_valid(raise_exception=True)
+        
+        return serializer.validated_data
+    
+    def _get_paginate_hotels(self, hotels_pagination_params, available_hotels_queryset):
+        selected_page = hotels_pagination_params["page"]
+        
+        offset = (selected_page - 1) * 10
+        
+        return available_hotels_queryset[offset: offset + 10]
+        
     def get(self, request: Request, *args, **kwargs):
-        available_hotels_queryset = self.get_available_hotels_for_requested_date(
+        hotels_pagination_params = self._validate_hotels_pagination_params(request)
+        
+        available_hotels_queryset: QuerySet[KhachSan] = self.get_available_hotels_for_requested_date(
             request
         )
+        
+        paginate_hotels = self._get_paginate_hotels(hotels_pagination_params, available_hotels_queryset)
 
         serializer = self.hotels_search_result_serializer(
-            instance=available_hotels_queryset, many=True
+            instance=paginate_hotels, many=True
         )
 
-        return Response(serializer.data)
+        return Response(data={
+            "total_hotels": available_hotels_queryset.count(),
+            "paginate_hotels": serializer.data
+        })
 
 
 class HotelSearchResultMapView(HotelSearchViewMixin):
@@ -112,7 +138,6 @@ class HotelSearchResultMapView(HotelSearchViewMixin):
 
     def get(self, request: Request, *args, **kwargs):
         available_hotels_queryset = self.get_available_hotels_for_requested_date(request)
-
 
         serializer = self.hotels_search_result_serializer(
             instance=available_hotels_queryset, many=True

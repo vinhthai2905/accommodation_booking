@@ -232,4 +232,12 @@ class ZaloPayRefundService(ZaloPayGetOrderStatusService):
         
         response = cls._send_refund_request(refund_payload)
         
-        return response.json()
+        result = response.json()
+        
+        result["refund_params"] = {
+            "m_refund_id": refund_payload["m_refund_id"],
+            "timestamp": refund_payload["timestamp"],
+            "app_id": refund_payload["app_id"],
+        }
+        
+        return result

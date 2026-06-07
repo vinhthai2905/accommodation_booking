@@ -9,11 +9,13 @@ import CustomerRegister from './pages/users/CustomerRegister'
 import CustomerSignIn from './pages/users/CustomerSignIn'
 import Home from './pages/users/Home'
 import Hotel from './pages/users/Hotel'
-import HotelsSearchResult from "./pages/users/HotelsSearchResult"
+import SearchHotelsResult from "./pages/users/SearchHotelsResult"
 import PaymentConfirmation from './pages/users/PaymentConfirmation'
 import Profile from './pages/users/Profile'
 import UserVerificationEmail from './features/profile/section/UserVerificationEmail'
 import UserCreateReview from './features/reviews/pages/UserCreateReview'
+
+import SearchHotelsPaginationProvider from './context/search/SearchHotelsPaginationProvider'
 
 import DashboardLanding from './features/dashboard/partner/pages/DashboardLanding'
 import PartnertLanding from './pages/partner/PartnerLanding'
@@ -105,7 +107,14 @@ function App() {
           children: [
             { index: true, element: <Navigate to="/index" replace /> },
             { path: "index", element: <Home /> },
-            { path: "searchresults", element: <HotelsSearchResult /> },
+            {
+              path: "searchresults",
+              element: (
+                <SearchHotelsPaginationProvider>
+                  <SearchHotelsResult />
+                </SearchHotelsPaginationProvider>
+              ),
+            },
             {
               path: "hotel/:slug/:uuid",
               element: <Hotel />,

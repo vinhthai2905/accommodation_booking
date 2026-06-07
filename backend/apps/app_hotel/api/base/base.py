@@ -64,6 +64,7 @@ class HotelSearchViewMixin(APIView):
         """Normalize each parameter in the query and validate each."""
 
         hotel_filters = {}
+        hotel_pagination_exclude = {"initial_search", "page"}
         map_bounds_exclude = {"north", "south", "east", "west", "zoom"}
 
         query_params = self._normalize_search_query_params(request)
@@ -74,7 +75,7 @@ class HotelSearchViewMixin(APIView):
             if hotel_query_key == "children_ages":
                 hotel_filters[hotel_query_key] = values
 
-            elif hotel_query_key not in map_bounds_exclude:
+            elif hotel_query_key not in (map_bounds_exclude and hotel_pagination_exclude):
                     hotel_filters[hotel_query_key] = values[0]
 
         serializer = self.search_params_serializer(data=hotel_filters)

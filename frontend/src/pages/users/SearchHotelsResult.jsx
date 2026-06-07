@@ -3,8 +3,7 @@ import SearchMap from "../../features/search/pages/SearchMap"
 
 import LoadingFullScreen from "../../features/book/components/Shared/LoadingFullScreen"
 
-import { useEffect } from "react"
-
+import useSearchHotelsPaginationContext from "../../hooks/search/hotel-search-hooks/useSearchHotelsPaginationContext"
 import useSearchHotels from "../../hooks/search/hotel-search-hooks/useSearchHotels"
 import useSearchHotelsMap from "../../hooks/search/hotel-search-hooks/useSearchHotelsMap"
 import useOpenMap from "../../hooks/search/map-search-hooks/useOpenMap"
@@ -13,23 +12,29 @@ import { useMapBounds } from "../../hooks/map/useMapBounds"
 import { useHotelsMapCacheRef } from "../../hooks/search/map-search-hooks/useHotelsMapCacheRef"
 import { useTabTitle } from "../../hooks/common/useTabTitle"
 
-export default function HotelsSearchResult() {
+export default function SearchHotelsResult() {
     useTabTitle("Booking.com: Kết quả tìm kiếm")
+
+    const { currentPage } = useSearchHotelsPaginationContext()
     const { isMapOpened, openMap, closeMap } = useOpenMap()
     const { mapBounds, setMapBounds, handleMapViewPortChange } = useMapBounds()
+    
     const {
         isLoadingHotelsList,
         errorLoadingHotelsList,
-        hotelsList
-    } = useSearchHotels(isMapOpened)
-
+        paginateHotelsList,
+        totalHotels
+    } = useSearchHotels(isMapOpened, currentPage)
+    
+    
     const {
         isPending: isLoadingHotelsMap,
         error: errorLoadingHotelsMap,
         data: hotelsMap
     } = useSearchHotelsMap(isMapOpened, mapBounds)
-
+    
     const { hotelsMapCacheRef } = useHotelsMapCacheRef(hotelsMap)
+
 
     if (!isMapOpened && isLoadingHotelsList) return <LoadingFullScreen />
 
@@ -47,7 +52,11 @@ export default function HotelsSearchResult() {
             />
         )
         : (
-            <SearchList onOpenMap={openMap} hotelList={hotelsList} />
+            <SearchList
+                onOpenMap={openMap}
+                paginateHotelsList={paginateHotelsList}
+                totalHotels={totalHotels}
+            />
         )
 
 }

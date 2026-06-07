@@ -12,7 +12,7 @@ export default function HotelReviewListDrawer({ isReviewDrawerOpen, onClose }) {
   const { hotelQuery } = useHotelDetailsContext()
   const id_hotel = hotelQuery.data?.id_hotel
 
-  const { data: reviewsData, isLoading, isError } = useReviewHotelList(id_hotel)
+  const { data: reviewsData, isLoading, isError } = useReviewHotelList(id_hotel, isReviewDrawerOpen)
 
   const reviews = Array.isArray(reviewsData) ? reviewsData : reviewsData?.results || []
 
@@ -62,20 +62,8 @@ export default function HotelReviewListDrawer({ isReviewDrawerOpen, onClose }) {
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-bold text-gray-900">Đánh giá của khách</h3>
                 </div>
-
-                <div className="flex flex-col">
-                  {isLoading ? (
-                    <div className="text-center py-8 text-gray-500">Đang tải đánh giá...</div>
-                  ) : isError ? (
-                    <div className="text-center py-8 text-red-500">Đã xảy ra lỗi khi tải đánh giá.</div>
-                  ) : reviews.length > 0 ? (
-                    reviews.map((review, index) => (
-                      <HotelReviewListItem key={review.id || index} review={review} />
-                    ))
-                  ) : (
-                    <div className="text-center py-8 text-gray-500">Chưa có đánh giá nào.</div>
-                  )}
-                </div>
+                <HotelReviewListDrawer />
+                
               </div>
             </div>
           </motion.div>
