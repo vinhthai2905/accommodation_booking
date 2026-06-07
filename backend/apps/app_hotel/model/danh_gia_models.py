@@ -26,11 +26,13 @@ class DanhGiaKhachSan(TimeStampedModel):
     )
 
     content = models.TextField(
+        null=False,
         db_column="noi_dung",
     )
 
     rating = models.CharField(
         max_length=1,
+        null=False,
         db_column="so_sao",
     )
 

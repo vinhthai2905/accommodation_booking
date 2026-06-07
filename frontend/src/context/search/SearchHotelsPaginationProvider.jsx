@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { SearchHotelsPaginationContext } from "./SearchHotelsPaginationContext";
+import { useState } from "react"
+import { SearchHotelsPaginationContext } from "./SearchHotelsPaginationContext"
 
 export default function SearchHotelsPaginationProvider({ children }) {
     const [currentPage, setCurrentPage] = useState(1)

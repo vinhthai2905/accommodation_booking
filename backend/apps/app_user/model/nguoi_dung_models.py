@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 from django.contrib.auth.models import BaseUserManager, AbstractUser
 
 from apps.app_user.choices import AuthTypeChoice
@@ -215,8 +216,15 @@ class ThongTinNguoiDung(models.Model):
 
     phone_number = models.CharField(
         max_length=25,
+        unique=True,
         db_column="so_dien_thoai",
         null=True,
+        validators=[
+            RegexValidator(
+                regex=r"^(03|05|07|08|09)\d{8}$",
+                message="Số điện thoại không hợp lệ."
+            )
+        ]
     )
 
     gender = models.CharField(
@@ -234,6 +242,13 @@ class ThongTinNguoiDung(models.Model):
                 condition=models.Q(gender__in=["Nam", "Nữ"])
                 | models.Q(gender__isnull=True),
                 name="gioi_tinh_hop_le",
+            ),
+            models.CheckConstraint(
+                condition=(
+                    models.Q(phone_number__regex=r'^(03|05|07|08|09)\d{8}$')
+                    | models.Q(phone_number__isnull=True)
+                ),
+                name="so_dien_thoai_hop_le",
             )
         ]
 

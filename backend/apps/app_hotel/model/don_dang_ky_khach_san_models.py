@@ -44,10 +44,11 @@ class DonDangKyKhachSan(models.Model):
         max_length=70,
         db_column="dia_chi",
     )
-
-    phone_number = models.CharField(
-        max_length=25,
-        db_column="so_dien_thoai",
+    
+    longitude = models.DecimalField(
+        max_digits=22, decimal_places=16,
+        null=True, blank=True,
+        db_column="kinh_do",
     )
 
     latitude = models.DecimalField(
@@ -55,11 +56,10 @@ class DonDangKyKhachSan(models.Model):
         null=True, blank=True,
         db_column="vi_do",
     )
-
-    longitude = models.DecimalField(
-        max_digits=22, decimal_places=16,
-        null=True, blank=True,
-        db_column="kinh_do",
+    
+    phone_number = models.CharField(
+        max_length=25,
+        db_column="so_dien_thoai",
     )
 
     status = models.CharField(

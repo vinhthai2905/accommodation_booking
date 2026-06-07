@@ -9,7 +9,7 @@ from apps.app_location.model.phuong_models import Phuong
 class LoaiKhachSan(models.Model):
     id = models.AutoField(
         primary_key=True,
-        db_column="id_loai",
+        db_column="id_loai_khach_san",
     )
 
     name = models.CharField(
@@ -44,6 +44,7 @@ class KhachSan(models.Model):
         on_delete=models.PROTECT,
         db_column="id_loai_khach_san",
         related_name="hotels",
+        null=True
     )
 
     id_user = models.OneToOneField(
@@ -51,6 +52,7 @@ class KhachSan(models.Model):
         on_delete=models.CASCADE,
         db_column="id_doi_tac",
         related_name="hotel",
+        null=True,
     )
 
     id_ward = models.ForeignKey(
@@ -58,27 +60,31 @@ class KhachSan(models.Model):
         on_delete=models.PROTECT,
         db_column="id_phuong",
         related_name="hotels",
+        null=False,
     )
     
     slug = models.SlugField(
         unique=True,
         max_length=70,
+        null=False,
         db_column="slug_khach_san",
     )
 
     name = models.CharField(
         max_length=70,
+        null=False,
         db_column="ten",
     )
 
     address = models.CharField(
         max_length=70,
+        null=False,
         db_column="dia_chi",
     )
 
     location = postgis_models.PointField(
         geography=True,
-        null=True,
+        null=False,
         blank=True,
         db_column="vi_tri",
     )
@@ -86,11 +92,11 @@ class KhachSan(models.Model):
     distance_to_beach = models.PositiveIntegerField(
         null=True,
         blank=True,
-        db_column="khoan_cach_toi_bien"
+        db_column="khoan_cach_bien"
     )
     
     is_near_beach = models.BooleanField(
-        null=True,
+        null=False,
         default=False,
         db_column="gan_bien"
     )
