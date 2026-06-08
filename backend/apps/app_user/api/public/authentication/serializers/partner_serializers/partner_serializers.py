@@ -1,7 +1,7 @@
 from rest_framework import serializers, exceptions, status
 from rest_framework.validators import UniqueValidator, ValidationError
 
-from apps.app_user.models import NguoiDung
+from apps.app_user.models import NguoiDung, ThongTinNguoiDung
 
 class PartnerRegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -13,7 +13,13 @@ class PartnerRegisterSerializer(serializers.ModelSerializer):
     )
     first_name = serializers.CharField()
     last_name = serializers.CharField()
-    phone_number = serializers.CharField(write_only=True)
+    phone_number = serializers.CharField(
+        write_only=True, 
+        validators=[
+        UniqueValidator(
+            queryset=ThongTinNguoiDung.objects.all(), message="Số điện thoại này đã được sử dụng"
+        )
+    ])
     confirm_password = serializers.CharField(write_only=True)
 
     class Meta:
@@ -40,7 +46,7 @@ class PartnerRegisterSerializer(serializers.ModelSerializer):
             )
         except Exception as e:
             raise exceptions.APIException(
-                detail={"Error": "The role wasn't assigned for the user during the progression."},
+                detail={"Error": f"{e}"},
                 code=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 

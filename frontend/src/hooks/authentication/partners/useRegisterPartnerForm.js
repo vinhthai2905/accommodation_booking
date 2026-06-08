@@ -8,10 +8,11 @@ import { registerPartner } from "../../../services/authentication/partnerAuthSer
 import { useAuthUserContext } from "../common/useAuthUserContext"
 
 import { defaultTestValues } from "../../../features/authentication/configs/DefaultValues"
+import { FocusFieldError } from "../../../helpers/authentication/focusFieldError"
 
 export default function useRegisterPartnerForm() {
   const [isLoading, setLoading] = useState(false)
-  const {setAuthUserState} = useAuthUserContext()
+  const { setAuthUserState } = useAuthUserContext()
 
   const navigate = useNavigate()
 
@@ -44,9 +45,8 @@ export default function useRegisterPartnerForm() {
       if (error.response && error.response.status >= 400 && error.response.status < 500) {
         const responseData = error.response.data
         toast.error("Đăng ký không thành công.")
-        for (const [keyInput, err] of Object.entries(responseData)) {
-          setError(keyInput, { type: "server", message: err }, { shouldFocus: true })
-        }
+
+        FocusFieldError(responseData, setError)
       } else {
         toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}`)
       }

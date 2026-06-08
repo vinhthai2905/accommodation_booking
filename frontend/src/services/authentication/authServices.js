@@ -2,6 +2,7 @@ import bookingAPI from "../base/bookingAPI"
 
 export const fetchAuthUser = async () => {
     const { data } = await bookingAPI.post(`/api/auth/user/refresh`, {}, {
+        withCredentials: true,
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
             "Content-Type": "application/json"
@@ -12,6 +13,7 @@ export const fetchAuthUser = async () => {
 
 export const loginAuthUser = async (data) => {
     const response = await bookingAPI.post(`/api/auth/user/login`, data, {
+        withCredentials: true,
         headers: {
             "Content-Type": "application/json"
         }
@@ -21,8 +23,10 @@ export const loginAuthUser = async (data) => {
 
 export const logoutAuthUser = async () => {
     const { data } = await bookingAPI.post(`/api/auth/user/logout`, {}, {
+        withCredentials: true,
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+
         }
     })
     return data

@@ -1,3 +1,5 @@
+import HotelReviewListItem from "./HotelReviewListItem"
+
 export default function HotelReviewList({ isFetchingReviewList, isErrorFetchingReviewList, reviews }) {
     const hasAnyReviews = reviews && reviews.length > 0
 

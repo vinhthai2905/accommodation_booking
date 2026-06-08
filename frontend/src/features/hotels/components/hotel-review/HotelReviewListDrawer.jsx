@@ -1,4 +1,3 @@
-import HotelReviewListItem from "./HotelReviewListItem"
 
 import { useEffect } from "react"
 import { X } from "lucide-react"
@@ -7,12 +6,13 @@ import { motion, AnimatePresence } from "framer-motion"
 import useHotelDetailsContext from "../../../../hooks/hotel/useHotelDetailsContext"
 
 import { useReviewHotelList } from "../../../../hooks/reviews/useReviewHotelList"
+import HotelReviewList from "./HotelReviewList"
 
 export default function HotelReviewListDrawer({ isReviewDrawerOpen, onClose }) {
   const { hotelQuery } = useHotelDetailsContext()
   const id_hotel = hotelQuery.data?.id_hotel
 
-  const { data: reviewsData, isLoading, isError } = useReviewHotelList(id_hotel, isReviewDrawerOpen)
+  const { data: reviewsData, isPending, isError } = useReviewHotelList(id_hotel, isReviewDrawerOpen)
 
   const reviews = Array.isArray(reviewsData) ? reviewsData : reviewsData?.results || []
 
@@ -58,12 +58,12 @@ export default function HotelReviewListDrawer({ isReviewDrawerOpen, onClose }) {
             </div>
 
             <div className="flex-1 overflow-y-auto">
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-bold text-gray-900">Đánh giá của khách</h3>
-                </div>
-                <HotelReviewListDrawer />
-                
+              <div>
+                <HotelReviewList
+                  isFetchingReviewList={isPending}
+                  isErrorFetchingReviewList={isError}
+                  reviews={reviews}
+                />
               </div>
             </div>
           </motion.div>

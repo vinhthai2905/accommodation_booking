@@ -63,6 +63,10 @@ export default function RegisterForm({ registerFormHook, submitText }) {
                 <FormInput
                     register={register("phoneNumber", {
                         required: "Số điện thoại không được để trống.",
+                        pattern: {
+                            value: /^(03|05|07|08|09)\d{8}$/,
+                            message: "Số điện thoại không hợp lệ.",
+                        },
                     })}
                     idFor="phoneNumber"
                     type="tel"

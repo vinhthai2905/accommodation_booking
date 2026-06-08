@@ -17,7 +17,13 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     )
     first_name = serializers.CharField()
     last_name = serializers.CharField()
-    phone_number = serializers.CharField(write_only=True)
+    phone_number = serializers.CharField(
+        write_only=True, 
+        validators=[
+        UniqueValidator(
+            queryset=ThongTinNguoiDung.objects.all(), message="Số điện thoại này đã được sử dụng"
+        )
+    ])
     confirm_password = serializers.CharField(write_only=True)
 
     class Meta:

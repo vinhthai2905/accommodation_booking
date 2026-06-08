@@ -44,7 +44,7 @@ class AuthLoginView(APIView):
             key="refresh_token",
             value=str(refresh),
             httponly=True,
-            secure=True,
+            secure=False,
             samesite="lax",
             path="/",
         )
