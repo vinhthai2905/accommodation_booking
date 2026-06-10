@@ -9,10 +9,10 @@ export function usePartnerBookingStatusMutation() {
         mutationFn: updatePartnerBookingStatus,
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["partnerBookings"] })
-            toast.success(data.message || "Cập nhật trạng thái thành công")
+            toast.success("Cập nhật trạng thái thành công")
         },
         onError: (error) => {
-            toast.error(error.response?.data?.error || "Cập nhật trạng thái thất bại")
+            toast.error("Cập nhật trạng thái thất bại")
         }
     })
 

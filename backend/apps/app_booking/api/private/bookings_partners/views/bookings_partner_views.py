@@ -91,21 +91,6 @@ class PartnerBookingStatusUpdateView(PartnerHotelViewMixin, APIView):
         if new_status not in ["CONFIRMED", "COMPLETED", "CANCELLED"]:
             return Response({"error": "Invalid status update."}, status=status.HTTP_400_BAD_REQUEST)
 
-        if new_status == "CONFIRMED" and booking.check_in_date and booking.check_in_time:
-            from datetime import datetime, timedelta
-            check_in_dt = datetime.combine(booking.check_in_date, booking.check_in_time)
-            
-            # Use local system time for comparison
-            current_dt = datetime.now()
-            
-            window_start = check_in_dt
-            window_end = check_in_dt + timedelta(hours=1)
-            
-            if current_dt < window_start or current_dt > window_end:
-                return Response(
-                    {"error": f"Chỉ được xác nhận nhận phòng trong khoảng từ {window_start.strftime('%H:%M')} đến {window_end.strftime('%H:%M')} ngày {check_in_dt.strftime('%d/%m/%Y')}."}, 
-                    status=status.HTTP_400_BAD_REQUEST
-                )
 
         booking.status = new_status
         booking.save()

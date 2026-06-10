@@ -45,7 +45,7 @@ class AuthLoginView(APIView):
             value=str(refresh),
             httponly=True,
             secure=False,
-            samesite="lax",
+            samesite="none",
             path="/",
         )
 
