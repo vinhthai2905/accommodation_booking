@@ -1,9 +1,8 @@
 import DashboardStatistics from "./DashboardStatistics"
 
-const AdminDashboardLanding = () => {
+export default function AdminDashboardLanding() {
   return (
     <DashboardStatistics />
   )
 }
 
-export default AdminDashboardLanding
