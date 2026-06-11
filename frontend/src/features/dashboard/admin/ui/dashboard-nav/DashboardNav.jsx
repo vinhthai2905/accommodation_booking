@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { LayoutDashboard, Users, Hotel, Settings, BadgeCheckIcon } from 'lucide-react'
+import { LayoutDashboard, Users, Hotel, Settings, BadgeCheckIcon, Building2 } from 'lucide-react'
 import { Link } from 'react-router'
 
 import { clsx } from "clsx"
@@ -9,6 +9,7 @@ const navItems = [
     { name: 'Xét duyệt hồ sơ', path: '/admin/dashboard/review-applications', icon: BadgeCheckIcon },
     { name: 'Người dùng', path: '/admin/dashboard/users', icon: Users },
     { name: 'Phường', path: '/admin/dashboard/wards', icon: Hotel },
+    { name: 'Loại khách sạn', path: '/admin/dashboard/hotel-types', icon: Building2 },
     { name: 'Danh mục tiện ích', path: '/admin/dashboard/category-amenities', icon: LayoutDashboard },
     { name: 'Tiện ích', path: '/admin/dashboard/amenities', icon: Settings },
 ]

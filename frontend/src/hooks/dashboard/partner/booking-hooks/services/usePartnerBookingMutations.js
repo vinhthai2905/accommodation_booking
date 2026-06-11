@@ -9,6 +9,7 @@ export function usePartnerBookingStatusMutation() {
         mutationFn: updatePartnerBookingStatus,
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ["partnerBookings"] })
+            queryClient.invalidateQueries({ queryKey: ["userBookings"] })
             toast.success("Cập nhật trạng thái thành công")
         },
         onError: (error) => {

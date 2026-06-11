@@ -46,8 +46,10 @@ import DashboardReviewApplications from './features/dashboard/admin/pages/Dashbo
 import DashboardCategoryAmenities from './features/dashboard/admin/pages/DashboardCategoryAmenities'
 import DashboardAmenities from './features/dashboard/admin/pages/DashboardAmenities'
 import DashboardWards from './features/dashboard/admin/pages/DashboardWards'
+import DashboardHotelTypes from './features/dashboard/admin/pages/DashboardHotelTypes'
 import DashboardUsers from './features/dashboard/admin/pages/DashboardUsers'
 import DBCreateWard from './features/dashboard/admin/components/dashboard-admin-main/dashboard-ward/crud-page/create/DBCreateWard'
+import DBCreateHotelType from './features/dashboard/admin/components/dashboard-admin-main/dashboard-hotel-types/crud-page/create/DBCreateHotelType'
 import DBCreateUser from './features/dashboard/admin/components/dashboard-admin-main/dashboard-users/crud-page/create/DBCreateUser'
 import DBEditUser from './features/dashboard/admin/components/dashboard-admin-main/dashboard-users/crud-page/edit/DBEditUser'
 
@@ -164,19 +166,15 @@ function App() {
                 { path: "info", element: <DBEditHotel /> },
                 { path: "images", element: <DashboardHotelImages /> },
                 { path: "amenities", element: <DashboardHotelAmenities /> },
-                { path: "policy/children", element: <DashboardChildrenPolicy /> },
-                { path: "policy/refund", element: <DashboardRefundPolicy /> },
                 { path: "room-type", element: <DashboardRoomTypes /> },
-                { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRooms /> },
-                { path: "bookings", element: <DashboardBookings /> },
-                { path: "bookings/:id_booking/details", element: <DashboardBookingDetail /> },
-
                 { path: "room-type/new", element: <DBCreateRoomType /> },
                 { path: "room-type/:slug/:id_room_type/edit", element: <DBEditRoomType /> },
-
-
-
                 { path: "room-type/:slug/:id_room_type/details", element: <DashboardRoomTypeDetail /> },
+                { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRooms /> },
+                { path: "policy/children", element: <DashboardChildrenPolicy /> },
+                { path: "policy/refund", element: <DashboardRefundPolicy /> },
+                { path: "bookings", element: <DashboardBookings /> },
+                { path: "bookings/:id_booking/details", element: <DashboardBookingDetail /> },
 
               ]
             }
@@ -193,17 +191,19 @@ function App() {
           element: <AdminDashboard />,
           children: [
             { path: "", element: <AdminDashboardLanding /> },
-            { path: "review-applications", element: <DashboardReviewApplications /> },
-            { path: "wards", element: <DashboardWards /> },
-            { path: "wards/new", element: <DBCreateWard /> },
             { path: "users", element: <DashboardUsers /> },
             { path: "users/new", element: <DBCreateUser /> },
             { path: "users/:id_user/edit", element: <DBEditUser /> },
-            { path: "amenities", element: <DashboardAmenities /> },
-            { path: "amenities/new", element: <DBCreateAmenity /> },
+            { path: "review-applications", element: <DashboardReviewApplications /> },
+            { path: "hotel-types", element: <DashboardHotelTypes /> },
+            { path: "hotel-types/new", element: <DBCreateHotelType /> },
+            { path: "wards", element: <DashboardWards /> },
+            { path: "wards/new", element: <DBCreateWard /> },
             { path: "category-amenities", element: <DashboardCategoryAmenities /> },
             { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
-            { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> }
+            { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> },
+            { path: "amenities", element: <DashboardAmenities /> },
+            { path: "amenities/new", element: <DBCreateAmenity /> },
           ]
         }
       ]

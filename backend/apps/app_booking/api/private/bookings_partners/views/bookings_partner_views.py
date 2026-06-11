@@ -95,12 +95,6 @@ class PartnerBookingStatusUpdateView(PartnerHotelViewMixin, APIView):
         booking.status = new_status
         booking.save()
 
-        if new_status in ["COMPLETED", "CANCELLED"]:
-            from apps.app_hotel.models import PhongKhachSan
-            PhongKhachSan.objects.filter(booking_details__id_booking=booking).update(
-                status=PhongKhachSan.RoomStatus.AVAILABLE
-            )
-
         return Response({"message": "Status updated successfully", "status": new_status}, status=status.HTTP_200_OK)
 
 
