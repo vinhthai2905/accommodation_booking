@@ -4,11 +4,25 @@ import { formatCurrency } from "../../../../helpers/booking/bookingHelpers"
 
 import { BedDouble, ChevronRight, CreditCard, Wallet } from "lucide-react"
 import { Link } from "react-router"
+import BookingReviewStatus from "./BookingReviewStatus"
 
-export default function BookingCardFooter({ booking, paymentLabel, invoice, payment, hotel, activeTab }) {
+export default function BookingCardFooter({
+    paymentLabel,
+    activeTab,
+    booking,
+    hotel,
+    invoice,
+    payment,
+    isFetchingReviews,
+    reviews,
+    isFetchingRefundPolicy,
+    refundPolicy
+}) {
+    const isCheckoutBooking = ['CONFIRMED', 'COMPLETED'].includes(booking?.status)
+
     return (
         <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-4 flex-wrap">
-            <div className="flex items-center gap-4 text-xs text-slate-500">
+            <div className="flex items-center gap-4 text-xs text-slate-500 flex-wrap">
                 {payment?.payment_method && (
                     <span className="flex items-center gap-1">
                         <CreditCard size={13} className="text-blue-500" />
@@ -25,17 +39,41 @@ export default function BookingCardFooter({ booking, paymentLabel, invoice, paym
                         {formatCurrency(invoice.total_amount)}
                     </span>
                 )}
+
+                {/* Displaying Refund Policy in Footer
+                {activeTab === 'upcoming' && (
+                    <span className="flex items-center gap-1">
+                        {isFetchingRefundPolicy ? (
+                            <div className="h-4 w-32 bg-gray-200 rounded animate-pulse" />
+                        ) : (
+                            <span className="font-semibold text-orange-600">
+                                {refundPolicy ?
+                                    (refundPolicy.is_cancellation_allowed
+                                        ? `Hoàn tiền ${refundPolicy.penalty_percentage}% (hủy trước ${refundPolicy.days_before_arrival_penalty} ngày)`
+                                        : 'Không hoàn tiền')
+                                    : 'Chính sách: Không rõ'}
+                            </span>
+                        )}
+                    </span>
+                )} */}
             </div>
 
             <div className="flex items-center gap-3">
-                {activeTab === 'upcoming' && <BookingCancelButton booking={booking} />}
-                {hotel?.slug && hotel?.id_hotel && (
-                    <Link
-                        to={`/hotel/${hotel.slug}/${hotel.id_hotel}`}
-                        className="flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors"
-                    >
-                        Xem khách sạn <ChevronRight size={14} />
-                    </Link>
+                {activeTab === 'upcoming' && booking.status === 'PENDING' && !isFetchingRefundPolicy
+                    && <BookingCancelButton
+                        booking={booking}
+                        refundPolicy={refundPolicy}
+                        isFetchingRefundPolicy={isFetchingRefundPolicy}
+                    />
+                }
+
+                {isCheckoutBooking && !isFetchingReviews && (
+                    <BookingReviewStatus
+                        booking={booking}
+                        hotel={hotel}
+                        reviews={reviews}
+                        isFetchingReviews={isFetchingReviews}
+                    />
                 )}
             </div>
         </div>

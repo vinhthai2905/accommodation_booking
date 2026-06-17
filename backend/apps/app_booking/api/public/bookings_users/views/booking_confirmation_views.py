@@ -8,12 +8,15 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 from apps.common.permission.user_permissions import IsCustomer
+from apps.common.helpers import get_booking
+
 from apps.app_booking.api.public.bookings_users.serializers import (
     IDBookingConfirmationSerializer,
     BookingConfirmationDetailSerializer,
 )
 from apps.app_booking.models import DatPhong, ThanhToan
 from apps.app_booking.choices import TrangThaiThanhToan
+from apps.app_booking.models import TrangThaiThanhToan
 
 from apps.app_payment.services.zalo import ZaloPayGetOrderStatusService
 from apps.app_payment.api.exceptions.zalo import ZaloPaymentGatewayException
@@ -28,23 +31,17 @@ class BookingConfirmationView(views.APIView):
         serializer.is_valid(raise_exception=True)
 
         return serializer.validated_data["id_booking"]
-
-    def _get_booking(self, id_booking) -> DatPhong:
-        try:
-            booking = DatPhong.objects.select_related("invoice__payments").get(
-                id_booking=id_booking
-            )
-        except Exception as e:
-            raise exceptions.NotFound(
-                detail={"error": "Booking wasn't found with the given ID."}
-            )
-        return booking
+   
+    def _get_booking_status(self, booking: DatPhong):
+        return booking.invoice.payments.status
 
     def _get_zalo_status_order_service(self, booking: DatPhong) -> dict:
         id_transaction = booking.invoice.payments.id_transaction_service
 
         try:
-            zalo_transaction_status = ZaloPayGetOrderStatusService.get_order_status(id_transaction)
+            zalo_transaction_status = ZaloPayGetOrderStatusService.get_order_status(
+                id_transaction
+            )
         except Exception as e:
             raise ZaloPaymentGatewayException(detail={"error": e})
 
@@ -58,6 +55,7 @@ class BookingConfirmationView(views.APIView):
             case 1:
                 booking_payment.paid_at = timezone.now()
                 booking_payment.status = TrangThaiThanhToan.PAID
+                
             case 3:
                 return booking_payment
 
@@ -68,16 +66,15 @@ class BookingConfirmationView(views.APIView):
 
     def get(self, request: Request, id_booking, *args, **kwargs):
         validated_id_booking = self._validate_id_booking_path_params(id_booking)
+        booking = get_booking(validated_id_booking, request.user)
+        payment_status = self._get_booking_status(booking)
 
         try:
             with transaction.atomic():
-                booking = self._get_booking(validated_id_booking)
-
                 zalo_transaction_status = self._get_zalo_status_order_service(booking)
                 booking_payment = self._update_booking_payment(
                     booking, zalo_transaction_status
                 )
-
                 return Response(
                     {
                         **zalo_transaction_status,
@@ -87,6 +84,5 @@ class BookingConfirmationView(views.APIView):
                     },
                     status=status.HTTP_200_OK,
                 )
-
         except exceptions.APIException as e:
             raise e

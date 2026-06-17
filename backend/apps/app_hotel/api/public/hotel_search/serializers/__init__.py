@@ -1,1 +1,7 @@
-from .hotel_search_serializer import HotelSearchResultSerializer, HotelSearchResultMapSerializer, HotelSearchParamsSerializer, SearchParamsMapBoundsSerializer
+from .hotel_search_serializer import (
+    HotelSearchResultSerializer, 
+    HotelSearchResultMapSerializer, 
+    HotelSearchParamsSerializer, 
+    HotelSearchPaginationSerializer,
+    SearchParamsMapBoundsSerializer,
+)

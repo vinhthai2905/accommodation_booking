@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router"
 
-export function useSearchHotelsParams() {
+export function useSearchHotelsParams(currentPage) {
     const [searchParams] = useSearchParams()
 
     const searchHotelsParams = new URLSearchParams({
@@ -10,6 +10,7 @@ export function useSearchHotelsParams() {
         rooms: searchParams.get("rooms") || "",
         adults: searchParams.get("adults") || "",
         children: searchParams.get("children") || "0",
+        page: currentPage,
     })
 
     if (Number(searchParams.get("children")) >= 1) {

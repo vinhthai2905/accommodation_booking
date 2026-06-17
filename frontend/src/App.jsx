@@ -1,4 +1,3 @@
-import AdminLayout from "./components/layout/AdminLayout"
 import AppLayout from './components/layout/AppLayout'
 import AuthLayout from './components/layout/AuthLayout'
 import PartnerDashboard from './pages/partner/PartnerDashboard'
@@ -10,16 +9,22 @@ import CustomerRegister from './pages/users/CustomerRegister'
 import CustomerSignIn from './pages/users/CustomerSignIn'
 import Home from './pages/users/Home'
 import Hotel from './pages/users/Hotel'
-import HotelsSearchResult from "./pages/users/HotelsSearchResult"
+import SearchHotelsResult from "./pages/users/SearchHotelsResult"
 import PaymentConfirmation from './pages/users/PaymentConfirmation'
 import Profile from './pages/users/Profile'
+import UserVerificationEmail from './features/profile/section/UserVerificationEmail'
+import UserCreateReview from './features/reviews/pages/UserCreateReview'
+
+import SearchHotelsPaginationProvider from './context/search/SearchHotelsPaginationProvider'
 
 import DashboardLanding from './features/dashboard/partner/pages/DashboardLanding'
 import PartnertLanding from './pages/partner/PartnerLanding'
 import PartnerRegister from './pages/partner/PartnerRegister'
+import PartnerLogin from './pages/partner/PartnerLogin'
 import PartnerOnboarding from './pages/partner/PartnerOnboarding'
 
 import DashboardBookings from './features/dashboard/partner/pages/DashboardBookings'
+import DashboardBookingDetail from './features/dashboard/partner/pages/DashboardBookingDetail'
 import DashboardHotel from './features/dashboard/partner/pages/DashboardHotel'
 import DashboardHotelImages from './features/dashboard/partner/pages/DashboardHotelImages'
 import DashboardHotelAmenities from './features/dashboard/partner/pages/DashboardHotelAmenities'
@@ -31,14 +36,20 @@ import DBEditHotel from './features/dashboard/partner/components/dashboard-main/
 import DBCreateRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/create/DBCreateRoomType'
 import DBEditRoomType from './features/dashboard/partner/components/dashboard-main/dashboard-room-type/crud-page/edit/DBEditRoomType'
 import DashboardChildrenPolicy from './features/dashboard/partner/pages/DashboardChildrenPolicy'
+import DashboardRefundPolicy from './features/dashboard/partner/pages/DashboardRefundPolicy'
 
+import AdminLogin from './pages/admin/AdminLogin'
+import AdminProtectedRoute from "./pages/protectedroutes/AdminProtectedRoute"
 import AdminDashboard from './pages/admin/AdminDashboard'
+import AdminDashboardLanding from './features/dashboard/admin/pages/AdminDashboardLanding'
 import DashboardReviewApplications from './features/dashboard/admin/pages/DashboardReviewApplications'
 import DashboardCategoryAmenities from './features/dashboard/admin/pages/DashboardCategoryAmenities'
 import DashboardAmenities from './features/dashboard/admin/pages/DashboardAmenities'
 import DashboardWards from './features/dashboard/admin/pages/DashboardWards'
+import DashboardHotelTypes from './features/dashboard/admin/pages/DashboardHotelTypes'
 import DashboardUsers from './features/dashboard/admin/pages/DashboardUsers'
 import DBCreateWard from './features/dashboard/admin/components/dashboard-admin-main/dashboard-ward/crud-page/create/DBCreateWard'
+import DBCreateHotelType from './features/dashboard/admin/components/dashboard-admin-main/dashboard-hotel-types/crud-page/create/DBCreateHotelType'
 import DBCreateUser from './features/dashboard/admin/components/dashboard-admin-main/dashboard-users/crud-page/create/DBCreateUser'
 import DBEditUser from './features/dashboard/admin/components/dashboard-admin-main/dashboard-users/crud-page/edit/DBEditUser'
 
@@ -62,7 +73,7 @@ import BookingProvider from './context/booking/BookingProvider'
 import ToasterUI from './components/ui/ToasterUI'
 
 import ChildAgeInput from './features/search/components/search-bar/input/ChildAgeInput'
-import PartnerLogin from './pages/partner/PartnerLogin'
+import Page404Redirect from './features/404/pages/404PageRedirect'
 
 const queryClient = new QueryClient()
 
@@ -83,7 +94,8 @@ function App() {
             { path: "sign-up", element: <CustomerRegister /> },
             { path: "sign-in", element: <CustomerSignIn /> },
             { path: "partner/sign-up", element: <PartnerRegister /> },
-            { path: "partner/sign-in", element: <PartnerLogin /> }
+            { path: "partner/sign-in", element: <PartnerLogin /> },
+            { path: "admin/sign-in", element: <AdminLogin /> }
           ]
         }
       ]
@@ -97,7 +109,14 @@ function App() {
           children: [
             { index: true, element: <Navigate to="/index" replace /> },
             { path: "index", element: <Home /> },
-            { path: "searchresults", element: <HotelsSearchResult /> },
+            {
+              path: "searchresults",
+              element: (
+                <SearchHotelsPaginationProvider>
+                  <SearchHotelsResult />
+                </SearchHotelsPaginationProvider>
+              ),
+            },
             {
               path: "hotel/:slug/:uuid",
               element: <Hotel />,
@@ -113,6 +132,10 @@ function App() {
           ]
         },
         {
+          path: "profile/booking/review/:slug/:id_booking",
+          element: <UserCreateReview />
+        },
+        {
           path: "book.html",
           element: <Book />
         },
@@ -120,6 +143,7 @@ function App() {
           path: "payment/confirmation.html",
           element: <PaymentConfirmation />,
         },
+
       ]
     },
     {
@@ -142,17 +166,15 @@ function App() {
                 { path: "info", element: <DBEditHotel /> },
                 { path: "images", element: <DashboardHotelImages /> },
                 { path: "amenities", element: <DashboardHotelAmenities /> },
-                { path: "policy/children", element: <DashboardChildrenPolicy /> },
                 { path: "room-type", element: <DashboardRoomTypes /> },
-                { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRooms /> },
-                { path: "bookings", element: <DashboardBookings /> },
-
                 { path: "room-type/new", element: <DBCreateRoomType /> },
                 { path: "room-type/:slug/:id_room_type/edit", element: <DBEditRoomType /> },
-
-
-
                 { path: "room-type/:slug/:id_room_type/details", element: <DashboardRoomTypeDetail /> },
+                { path: "room-type/:slug/:id_room_type/rooms", element: <DashboardRooms /> },
+                { path: "policy/children", element: <DashboardChildrenPolicy /> },
+                { path: "policy/refund", element: <DashboardRefundPolicy /> },
+                { path: "bookings", element: <DashboardBookings /> },
+                { path: "bookings/:id_booking/details", element: <DashboardBookingDetail /> },
 
               ]
             }
@@ -161,27 +183,43 @@ function App() {
       ]
     },
     {
-      path: "admin",
-      element: <AdminLayout />,
+      path: "/admin",
+      element: <AdminProtectedRoute />,
       children: [
-        { path: "dashboard", element: <AdminDashboard /> },
-        { path: "review-applications", element: <DashboardReviewApplications /> },
-        { path: "wards", element: <DashboardWards /> },
-        { path: "wards/new", element: <DBCreateWard /> },
-        { path: "users", element: <DashboardUsers /> },
-        { path: "users/new", element: <DBCreateUser /> },
-        { path: "users/:id_user/edit", element: <DBEditUser /> },
-        { path: "amenities", element: <DashboardAmenities /> },
-        { path: "amenities/new", element: <DBCreateAmenity /> },
-        { path: "category-amenities", element: <DashboardCategoryAmenities /> },
-        { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
-        { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> }
+        {
+          path: "dashboard",
+          element: <AdminDashboard />,
+          children: [
+            { path: "", element: <AdminDashboardLanding /> },
+            { path: "users", element: <DashboardUsers /> },
+            { path: "users/new", element: <DBCreateUser /> },
+            { path: "users/:id_user/edit", element: <DBEditUser /> },
+            { path: "review-applications", element: <DashboardReviewApplications /> },
+            { path: "hotel-types", element: <DashboardHotelTypes /> },
+            { path: "hotel-types/new", element: <DBCreateHotelType /> },
+            { path: "wards", element: <DashboardWards /> },
+            { path: "wards/new", element: <DBCreateWard /> },
+            { path: "category-amenities", element: <DashboardCategoryAmenities /> },
+            { path: "category-amenities/new", element: <DBCreateCategoryAmenity /> },
+            { path: "category-amenities/:id/edit", element: <DBEditCategoryAmenity /> },
+            { path: "amenities", element: <DashboardAmenities /> },
+            { path: "amenities/new", element: <DBCreateAmenity /> },
+          ]
+        }
       ]
     }
     ,
     {
+      path: "verify-email",
+      element: <UserVerificationEmail />
+    },
+    {
       path: "testground",
       element: <ChildAgeInput />
+    },
+    {
+      path: "*",
+      element: <Page404Redirect />
     }
   ])
   return (

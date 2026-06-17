@@ -7,8 +7,8 @@ export default function OnboardingStepper({ steps, currentStep, setCurrentStep, 
             <div className="max-w-3xl mx-auto px-6">
                 <div className="flex justify-around text-xs md:text-sm font-medium">
                     {steps.map((s) => {
-                        const isActive = currentStep === s.id;
-                        const isCompleted = currentStep > s.id;
+                        const isActive = currentStep === s.id
+                        const isCompleted = currentStep > s.id
                         return (
                             <div 
                                 key={s.id}
@@ -20,10 +20,10 @@ export default function OnboardingStepper({ steps, currentStep, setCurrentStep, 
                                 )}
                                 onClick={() => {
                                     if (s.id < currentStep) {
-                                        setCurrentStep(s.id);
+                                        setCurrentStep(s.id)
                                     } else if (s.id > currentStep) {
                                         if (validateStep()) {
-                                            setCurrentStep(s.id);
+                                            setCurrentStep(s.id)
                                         }
                                     }
                                 }}
@@ -41,7 +41,7 @@ export default function OnboardingStepper({ steps, currentStep, setCurrentStep, 
                                     )
                                 )}
                             </div>
-                        );
+                        )
                     })}
                 </div>
             </div>

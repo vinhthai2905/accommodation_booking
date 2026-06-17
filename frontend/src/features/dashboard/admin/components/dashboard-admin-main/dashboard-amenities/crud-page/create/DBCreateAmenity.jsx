@@ -71,9 +71,9 @@ export default function DBCreateAmenity() {
         createAmenity(payload, {
             onSuccess: () => {
                 if (categoryIdParam) {
-                    navigate(`/admin/category-amenities/${categoryIdParam}`)
+                    navigate(`/admin/dashboard/category-amenities/${categoryIdParam}`)
                 } else {
-                    navigate("/admin/amenities")
+                    navigate("/admin/dashboard/amenities")
                 }
             }
         })

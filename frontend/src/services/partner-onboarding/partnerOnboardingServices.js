@@ -1,70 +1,23 @@
 import { buildTokenHeader } from "../../helpers/authentication/buildTokenHeader"
-
-const apiURL = import.meta.env.VITE_API_URL
+import { selectContentType } from "../../helpers/partner-onboarding/selectContentType"
+import bookingAPI from "../base/bookingAPI"
 
 export const fetchHotelTypes = async () => {
-    const response = await fetch(`${apiURL}/api/partner/hotel-types`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-
-    if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`)
-    }
-
-    return await response.json()
-}
-
-export const fetchWards = async () => {
-    const response = await fetch(`${apiURL}/api/location/ward`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-
-    if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`)
-    }
-
-    return await response.json()
-}
-
-export const submitHotelRegistration = async (data) => {
     const headers = buildTokenHeader()
-    let body
-    if (data instanceof FormData) {
-        delete headers["Content-Type"]
-        body = data
-    } else {
-        body = JSON.stringify(data)
-    }
+    const { data } = await bookingAPI.get(`/api/partner/hotel-types`, { headers })
+    return data
+}
 
-    const response = await fetch(`${apiURL}/api/partner/hotel/register`, {
-        method: "POST",
-        headers,
-        body
-    })
+export const submitHotelRegistration = async (dataPayload) => {
+    const headers = buildTokenHeader()
+    const body = selectContentType(dataPayload, headers)
 
-    if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(JSON.stringify(errorData) || `Response status: ${response.status}`)
-    }
-
-    return await response.json()
+    const { data } = await bookingAPI.post(`/api/partner/hotel/register`, body, { headers })
+    return data
 }
 
 export const fetchHotelRegistrationStatus = async () => {
-    const response = await fetch(`${apiURL}/api/partner/hotel/register`, {
-        method: "GET",
-        headers: buildTokenHeader()
-    })
-
-    if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`)
-    }
-
-    return await response.json()
+    const headers = buildTokenHeader()
+    const { data } = await bookingAPI.get(`/api/partner/hotel/register`, { headers })
+    return data
 }

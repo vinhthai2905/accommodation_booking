@@ -1,9 +1,8 @@
-import axios from "axios"
+import bookingAPI from "../base/bookingAPI"
 
-const apiUrl = import.meta.env.VITE_API_URL
 
 export const fetchHotelAmenitiesCount = async (searchHotelsParams) => {
-    const { data } = await axios.get(`${apiUrl}/api/hotels/search/amenities/hotel_count`, {
+    const { data } = await bookingAPI.get(`/api/hotels/search/amenities/hotel_count`, {
         params: searchHotelsParams,
     })
 

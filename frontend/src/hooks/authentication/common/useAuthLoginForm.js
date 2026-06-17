@@ -33,29 +33,23 @@ export default function useAuthLoginForm() {
         setIsLoading(true)
 
         try {
-            const response = await loginAuthUser(credentials)
-            const responseData = await response.json()
-
-            if (!response.ok) {
-                const errorMessage = responseData.detail || (responseData.error ? JSON.stringify(responseData.error) : "Đăng nhập thất bại");
-
+            const responseData = await loginAuthUser(credentials)
+            const { user, access_token } = responseData
+            authContext.setAuthUserState(access_token, user.email, user.personal_info, user.role)
+            toast.success("Đăng nhập thành công")
+            navigateAfterAuth(user.role)
+        }
+        catch (error) {
+            if (error.response && error.response.status >= 400 && error.response.status < 500) {
+                const responseData = error.response.data
+                const errorMessage = responseData.detail || (responseData.error ? JSON.stringify(responseData.error) : "Đăng nhập thất bại")
                 setError("root.server", {
                     type: "server",
                     message: errorMessage,
                 })
+            } else {
+                toast.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error}`)
             }
-            else {
-                const { user, access_token } = responseData
-
-                authContext.setAuthUserState(access_token, user.email, user.personal_info, user.role)
-
-                toast.success("Đăng nhập thành công")
-
-                navigateAfterAuth(user.role)
-            }
-        }
-        catch (error) {
-            toast.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error}`)
         }
         finally {
             setIsLoading(false)

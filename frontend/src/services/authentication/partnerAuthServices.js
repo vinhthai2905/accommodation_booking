@@ -1,16 +1,12 @@
 import { parsePythonData } from "../../helpers/common/parsePythonData"
 
-const apiURL = import.meta.env.VITE_API_URL
+import bookingAPI from "../base/bookingAPI"
 
 export const registerPartner = async (data) => {
-    const response = await fetch(`${apiURL}/api/partners`, {
-        method: "POST",
-        // credentials: "include",
+    const { data: responseData } = await bookingAPI.post(`/api/partners`, parsePythonData(data), {
         headers: {
             "Content-Type": "application/json"
-        },
-        body: JSON.stringify(parsePythonData(data))
+        }
     })
- 
-    return response
+    return responseData
 }

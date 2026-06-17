@@ -2,11 +2,8 @@ import HotelCardSummary from "./HotelCardSummary"
 import HotelCardSummaryPrice from "./HotelCardSummaryPrice"
 
 import { clsx } from "clsx"
-import { useLocation } from "react-router"
 
 export default function HotelCardSearchResult({ hotel }) {
-    const location = useLocation()
-
     const originalPrice = hotel.appealing_price ? Math.round(hotel.appealing_price * 1.25) : 0
 
     return (

@@ -79,5 +79,5 @@ export default function BumblebeeChatbox({
                 watch={watch}
             />
         </div>
-    );
+    )
 }

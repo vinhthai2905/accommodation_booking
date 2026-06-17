@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework import status, exceptions
 
+from django.db.models import ProtectedError
 from django.db.models import QuerySet
 
 from apps.app_user.models import NguoiDung
@@ -107,8 +108,6 @@ class PartnerRoomDetailView(APIView):
         room = self._get_room(hotel, id_room)
         
         room_name = request.data.get("room_name")
-        status_val = request.data.get("status")
-        
         if not room_name:
             return Response(
                 {"error": "Tên phòng không được để trống."},
@@ -116,8 +115,6 @@ class PartnerRoomDetailView(APIView):
             )
             
         room.room_name = room_name
-        if status_val:
-            room.status = status_val
             
         room.save()
         
@@ -128,6 +125,13 @@ class PartnerRoomDetailView(APIView):
         hotel = self._get_partner_hotel(request.user)
         room = self._get_room(hotel, id_room)
         
-        room.delete()
+        
+        try:
+            room.delete()
+        except ProtectedError:
+            return Response(
+                {"error": "Không thể xóa phòng này vì đã có dữ liệu lịch sử đặt phòng liên quan."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
         return Response(status=status.HTTP_204_NO_CONTENT)

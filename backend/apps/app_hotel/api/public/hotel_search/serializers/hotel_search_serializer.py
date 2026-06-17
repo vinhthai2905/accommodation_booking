@@ -1,8 +1,16 @@
-from rest_framework import serializers
+from rest_framework import serializers, exceptions
 
 from apps.app_hotel.models import KhachSan
 from apps.app_hotel.helpers import get_full_address
 from apps.app_hotel.api.public.hotel_detail.serializers import BookingDateSerializer
+
+
+class HotelSearchPaginationSerializer(serializers.Serializer):
+    
+    page = serializers.IntegerField(min_value=1)
+    
+    def validate(self, attrs):
+        return attrs
 
 
 class HotelSearchParamsSerializer(BookingDateSerializer):

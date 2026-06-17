@@ -3,12 +3,12 @@ from django.http import QueryDict
 
 from rest_framework.request import Request
 from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from rest_framework import exceptions, views
 
 from apps.app_user.models import NguoiDung
 from apps.app_hotel.models import KhachSan, LoaiPhong, ChinhSachTreEm
-from apps.app_booking.models import DatPhong
+from apps.app_booking.models import DatPhong, TrangThaiDatPhong
 from apps.app_location.models import Phuong
 
 
@@ -40,7 +40,8 @@ class PartnerHotelViewMixin:
         return self.get_room_type(hotel, id_room_type)
 
 
-class HotelSearchViewMixin:
+class HotelSearchViewMixin(APIView):
+    permission_classes=[AllowAny]
     search_params_serializer = None
     hotels_search_result_serializer = None
 
@@ -63,6 +64,7 @@ class HotelSearchViewMixin:
         """Normalize each parameter in the query and validate each."""
 
         hotel_filters = {}
+        hotel_pagination_exclude = {"initial_search", "page"}
         map_bounds_exclude = {"north", "south", "east", "west", "zoom"}
 
         query_params = self._normalize_search_query_params(request)
@@ -73,7 +75,7 @@ class HotelSearchViewMixin:
             if hotel_query_key == "children_ages":
                 hotel_filters[hotel_query_key] = values
 
-            elif hotel_query_key not in map_bounds_exclude:
+            elif hotel_query_key not in (map_bounds_exclude and hotel_pagination_exclude):
                     hotel_filters[hotel_query_key] = values[0]
 
         serializer = self.search_params_serializer(data=hotel_filters)
@@ -111,6 +113,9 @@ class HotelSearchViewMixin:
                 check_in_date__lt=check_out_request,
                 check_out_date__gt=check_in_request,
                 id_hotel__in=hotels_list,
+            )
+            .exclude(
+                status=TrangThaiDatPhong.CANCELLED
             )
             .select_related("id_hotel")
             .prefetch_related("booking_details")

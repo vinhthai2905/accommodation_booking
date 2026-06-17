@@ -1,19 +1,19 @@
+import EditableNameField from "../components/user-profile/EditableNameField"
+import EditableEmailField from "../components/user-profile/EditableEmailField"
 import EditableTextField from "../components/user-profile/EditableTextField"
 import EditableDateField from "../components/user-profile/EditableDateField"
 import EditableSelectField from "../components/user-profile/EditableSelectField"
-import EditableNameField from "../components/user-profile/EditableNameField"
-import EditablePhoneFieldInfo from "../components/user-profile/EditablePhoneFieldInfo"
 
 import { Camera } from "lucide-react"
 import { FormProvider } from "react-hook-form"
 
-import useUserProfile from "../../../hooks/profile/useUserProfile"
-import useUserProfileMutation from "../../../hooks/profile/useUserProfileMutation"
-import useEditingState from "../../../hooks/profile/useEditingState"
-import useUserProfileForm from "../../../hooks/profile/useUserProfileForm"
+import useUserProfile from "../../../hooks/profile/user-profile/useUserProfile"
+import useUserProfileMutation from "../../../hooks/profile/user-profile/useUserProfileMutation"
+import useEditingState from "../../../hooks/profile/user-profile/useEditingState"
+import useUserProfileForm from "../../../hooks/profile/user-profile/useUserProfileForm"
 
 export default function UserInformation() {
-    const { userProfile, isLoading, isError } = useUserProfile()
+    const { userProfile, isPending, isError } = useUserProfile()
     const { handleMutatingField, handleMutatingName } = useUserProfileMutation()
     const { methods, onMutatingValidatedField } = useUserProfileForm(userProfile, handleMutatingField, handleMutatingName)
     const {
@@ -26,7 +26,7 @@ export default function UserInformation() {
     } = useEditingState(onMutatingValidatedField, methods.resetField)
 
 
-    if (isLoading) {
+    if (isPending) {
         return (
             <div className="max-w-4xl mx-auto px-4 py-10 flex items-center justify-center min-h-100">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
@@ -46,6 +46,8 @@ export default function UserInformation() {
 
     const info = userProfile?.personal_info || {}
     const email = userProfile?.email
+    const verifiedAt = userProfile?.verified_at
+    const verificationExpiresAt = userProfile?.verification_expires_at
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-10">
@@ -94,7 +96,11 @@ export default function UserInformation() {
                         isDisabledField={isDisabledField("display_name")}
                     />
 
-                    <EditablePhoneFieldInfo email={email} />
+                    <EditableEmailField
+                        email={email}
+                        verifiedAt={verifiedAt}
+                        verificationExpiresAt={verificationExpiresAt}
+                    />
 
                     <EditableTextField
                         label="Số điện thoại"

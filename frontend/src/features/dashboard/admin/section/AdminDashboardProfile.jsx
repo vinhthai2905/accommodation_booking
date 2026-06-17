@@ -12,12 +12,12 @@ export default function AdminDashboardProfile() {
     const { ref } = useClickOutside(setIsOpen)
     const { user, clearAuthUserState } = useAuthUserContext()
 
-    if (!user || !user.personal_info) return null;
+    if (!user) return null
 
-    const userName = parseFullName(
-        user.personal_info.first_name,
-        user.personal_info.last_name
-    )
+    const userName =parseFullName(
+            user?.personal_info?.first_name,
+            user?.personal_info?.last_name
+        )
 
     return (
         <div ref={ref} className="relative">
@@ -38,7 +38,7 @@ export default function AdminDashboardProfile() {
                         "flex items-center justify-center w-full h-full",
                         "bg-white rounded-full text-sm font-bold text-[#003b95]"
                     )}>
-                        {user.personal_info.first_name[0]}
+                        {"A"}
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@ export default function AdminDashboardProfile() {
                     : "opacity-0 translate-y-3 pointer-events-none"
             )}>
                 <Link
-                    to="/index"
+                    to="/auth/admin/sign-in"
                     className={clsx(
                         "w-full px-5 py-3 flex items-center gap-2",
                         "text-left text-[#1a1a1a] text-[0.8rem]",
@@ -70,7 +70,7 @@ export default function AdminDashboardProfile() {
                     onClick={clearAuthUserState}
                 >
                     <LogOut size={18} strokeWidth={1.75} className="text-[#3d3d3d]" />
-                    <span>Sign out</span>
+                    <span>Đăng xuất</span>
                 </Link>
             </div>
         </div>

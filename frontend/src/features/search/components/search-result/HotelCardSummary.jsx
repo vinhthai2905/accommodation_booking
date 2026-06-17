@@ -1,11 +1,13 @@
 import { clsx } from "clsx"
 import { Star, ThumbsUp, Plus, Heart, MapPin, Building } from "lucide-react"
-import { Link } from "react-router"
+import { Link, useLocation } from "react-router"
 
 export default function HotelCardSummary({ hotel }) {
+    const location = useLocation()
+
     return (
         <>
-            <div className="relative w-full md:w-70 h-55 md:h-auto shrink-0 overflow-hidden bg-slate-50">
+            <div className="relative w-full md:w-48 lg:w-56 xl:w-64 h-56 md:h-auto shrink-0 overflow-hidden bg-slate-50">
                 <Link to={`/hotel/${hotel.slug}/${hotel.id_hotel}${location.search}`} className="block h-full w-full">
                     {hotel.primary_image ? (
                         <img
@@ -33,12 +35,12 @@ export default function HotelCardSummary({ hotel }) {
                 </button>
             </div>
 
-            <div className="flex flex-1 flex-col md:flex-row justify-between p-4 gap-4">
+            <div className="flex flex-1 flex-col justify-between p-3 md:p-4 gap-3 md:gap-4">
                 <div className="flex-1 flex flex-col gap-2">
                     <div>
                         <Link
                             to={`/hotel/${hotel.slug}/${hotel.id_hotel}${location.search}`}
-                            className="text-lg font-bold text-[#003b95] hover:text-blue-800 hover:underline leading-snug"
+                            className="text-lg md:text-xl font-bold text-[#003b95] hover:text-blue-800 hover:underline leading-snug"
                         >
                             {hotel.name}
                         </Link>
@@ -82,10 +84,10 @@ export default function HotelCardSummary({ hotel }) {
                             <span className="text-xs font-bold text-slate-800">Tuyệt vời</span>
                             <span className="text-xs text-slate-500">· 34 đánh giá</span>
                         </div>
-                        <span className="text-[11px] font-medium text-slate-600 ml-9">9.3 Địa điểm</span>
+                        <span className="text-[11px] font-medium text-slate-600 md:ml-9">9.3 Địa điểm</span>
                     </div>
 
-                    <p className="text-xs text-slate-600 line-clamp-2 mt-2 leading-relaxed">
+                    <p className="text-[11px] md:text-xs text-slate-600 line-clamp-2 mt-2 leading-relaxed">
                         Căn hộ có hồ bơi riêng, nằm gần bãi biển Mỹ Khê xinh đẹp.
                         Nơi nghỉ dưỡng lý tưởng với đầy đủ tiện nghi đẳng cấp quốc tế,
                         phòng ngủ hiện đại và tầm nhìn hướng phố tuyệt đẹp.

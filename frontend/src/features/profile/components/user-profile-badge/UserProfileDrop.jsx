@@ -18,7 +18,7 @@ import { AuthUserContext } from "../../../../context/authentication/AuthUserCont
 
 const menuItems = [
     { title: "Quản lý tài khoản", icon: CircleUserRound, to: "/profile/user" },
-    { title: "Đặt phòng & Chuyến đi", icon: BriefcaseBusiness, to:"/profile/mytrips.html" },
+    { title: "Đặt phòng & Chuyến đi", icon: BriefcaseBusiness, to:"/profile/mytrips.html?tab=upcoming" },
     { title: "Chương trình khách hàng thân thiết Genius", icon: BadgeDollarSign },
     { title: "Phần thưởng & Ví", icon: Wallet },
     { title: "Đánh giá", icon: MessageSquareText },

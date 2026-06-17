@@ -1,7 +1,8 @@
 import BookingCard from "./BookingCard"
 
+export default function BookingList({ filteredBooking, activeTab }) {
 
-export default function BookingList({ filteredBooking, activeTab, motion }) {
+
     return (
         <div className="flex flex-col gap-4">
             {

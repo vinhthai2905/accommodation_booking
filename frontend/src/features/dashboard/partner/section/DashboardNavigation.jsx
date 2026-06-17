@@ -2,7 +2,6 @@ import AnimatedSidebarDashboard from "../../../../components/ui/AnimatedSidebarD
 
 import HotelNavGroup from "../components/dashboard-navigation/HotelNavGroup"
 import HotelRoomTypeNavGroup from "../components/dashboard-navigation/HotelRoomTypeNavGroup"
-import HotelImgNavGroup from "../components/dashboard-navigation/HotelImgNavGroup"
 import HotelBookingNavGroup from "../components/dashboard-navigation/HotelBookingNavGroup"
 import HotelPolicyNavGroup from "../components/dashboard-navigation/HotelPolicyNavGroup"
 
@@ -15,7 +14,6 @@ export default function DashboardNavigation() {
     const {
         navStates,
         toggleHotelNav,
-        toggleImgNav,
         toggleBookingNav,
         toggleRoomTypeNav,
         togglePolicyNav,
@@ -57,12 +55,7 @@ export default function DashboardNavigation() {
                     
                 />
 
-                <HotelImgNavGroup
-                    navStates={navStates}
-                    toggleImgNav={toggleImgNav}
-                    closeAllNav={closeAllNav}
-                    
-                />
+
 
                 <HotelBookingNavGroup
                     navStates={navStates}

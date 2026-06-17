@@ -1,12 +1,12 @@
 import { clsx } from "clsx"
 
-import { useQuery } from "@tanstack/react-query";
-import { fetchWard } from "../../../../services/location/locationServices";
+import { useQuery } from "@tanstack/react-query"
+import { fetchWards } from "../../../../services/location/locationServices"
 
 export default function PlaceSearchDropdown({ onSelect }) {
     const { data, isPending, error } = useQuery({
         queryKey: ["destinationQueries"],
-        queryFn: fetchWard
+        queryFn: fetchWards
     })
 
     return (
@@ -29,5 +29,5 @@ export default function PlaceSearchDropdown({ onSelect }) {
                 </div>
             ))}
         </div>
-    );
+    )
 }

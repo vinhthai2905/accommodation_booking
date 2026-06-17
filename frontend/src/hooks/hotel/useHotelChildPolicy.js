@@ -1,21 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
+import { fetchHotelChildPolicy } from "../../services/hotel/hotelServices"
 
-import { fetchHotelChildPolicy } from "../../services/hotelServices"
-import { useSearchParams } from "react-router"
-
-export default function useHotelChildPolicy() {
-    const [searchParams] = useSearchParams()
-
-    const { isLoading, data, error } = useQuery({
-        queryKey: ["fetchHotelChildPolicy"],
-        queryFn: () => {
-            return fetchHotelChildPolicy(searchParams.get("hotel_id"))
-        }
+export default function useHotelChildPolicy(hotelID) {
+    return useQuery({
+        queryKey: ["hotelChildPolicy", hotelID],
+        queryFn: () => fetchHotelChildPolicy(hotelID),
+        enabled: !!hotelID
     })
-
-    return {
-        isLoading,
-        data,
-        error
-    }
 }

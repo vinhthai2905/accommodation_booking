@@ -49,7 +49,7 @@ class UserBookingListView(APIView):
         bookings = (
             DatPhong.objects
             .filter(id_user=current_user)
-            .select_related("id_hotel", "invoice")
+            .select_related("id_hotel", "invoice", "review")
             .order_by("-created_at")
         )
         

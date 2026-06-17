@@ -1,2 +1,0 @@
-from .views import HotelBookingPreviewView, ChildPolicyPreviewView
-from .serializers import HotelBookingPreviewSerializer, ChildPolicyPreviewSerializer

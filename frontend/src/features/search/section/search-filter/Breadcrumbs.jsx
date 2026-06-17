@@ -25,7 +25,7 @@ export default function Breadcrumbs({ usedFor }) {
                 "flex gap-2"
             )}>
                 {
-                    usedFor === "HotelsSearchResult"
+                    usedFor === "SearchHotelsResult"
                         ? (
                             searchNav.map(item => {
                                 return <BreadcrumItem key={item.label} item={item} />
@@ -39,7 +39,7 @@ export default function Breadcrumbs({ usedFor }) {
                 }
                 <li className="text-black">
                     {
-                        usedFor === "HotelsSearchResult"
+                        usedFor === "SearchHotelsResult"
                             ? " Search result"
                             : "Ưu đãi cho Diny ApartHotel - Rooftop Pool - The Manor 2 (Căn hộ) (Việt Nam)"
                     }

@@ -1,8 +1,8 @@
-from django.contrib.auth.models import AbstractUser, UserManager, BaseUserManager
 from django.db import models
+from django.core.validators import RegexValidator
+from django.contrib.auth.models import BaseUserManager, AbstractUser
 
 from apps.app_user.choices import AuthTypeChoice
-from apps.app_user import models as table
 
 import uuid
 
@@ -29,9 +29,11 @@ class NguoiDungManager(BaseUserManager):
         ).save()
         
     def _create_user_role(self, user, role_name):
-        role = table.VaiTro.objects.get(role_name=role_name)
+        from .vai_tro_models import VaiTro, VaiTroNguoiDung
+
+        role = VaiTro.objects.get(role_name=role_name)
         
-        table.VaiTroNguoiDung(
+        VaiTroNguoiDung(
             id_role=role,
             id_user=user
         ).save()
@@ -61,9 +63,11 @@ class NguoiDungManager(BaseUserManager):
             raise ValueError("Superuser phải có is_staff=True.")
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser phải có is_superuser=True.")
+        
+        admin_user = self._create_user(email, password, **extra_fields)
+        admin_user_role = self._create_user_role(admin_user, role_name="Admin")
 
-        return self._create_user(email, password, **extra_fields)
-
+        return admin_user
 
 class NguoiDung(AbstractUser):
     username = None
@@ -90,24 +94,36 @@ class NguoiDung(AbstractUser):
         db_column="email",
     )
 
-    lan_xac_nhan_email = models.DateTimeField(
+    verified_at = models.DateTimeField(
         null=True,
         blank=True,
         db_column="lan_xac_nhan_email",
     )
-
-    password = models.CharField(
-        max_length=255,
-        db_column="mat_khau",
+    
+    verification_token = models.UUIDField(
+        null=True,
+        blank=True,
+        db_column="token_xac_nhan_email"
     )
-
-    loai_xac_thuc = models.CharField(
+    
+    verification_expires_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        db_column="xac_nhan_email_het_han_luc"
+    )
+    
+    verification_type = models.CharField(
         max_length=20,
         choices=AuthTypeChoice,
         default=AuthTypeChoice.EMAIL,
         db_column="loai_xac_thuc",
     )
 
+    password = models.CharField(
+        max_length=255,
+        db_column="mat_khau",
+    )
+   
     is_superuser = models.BooleanField(
         default=False,
         db_column="la_superuser",
@@ -140,7 +156,8 @@ class NguoiDung(AbstractUser):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = [
+    ]
 
     objects = NguoiDungManager()
 
@@ -199,8 +216,15 @@ class ThongTinNguoiDung(models.Model):
 
     phone_number = models.CharField(
         max_length=25,
+        unique=True,
         db_column="so_dien_thoai",
         null=True,
+        validators=[
+            RegexValidator(
+                regex=r"^(03|05|07|08|09)\d{8}$",
+                message="Số điện thoại không hợp lệ."
+            )
+        ]
     )
 
     gender = models.CharField(
@@ -218,6 +242,13 @@ class ThongTinNguoiDung(models.Model):
                 condition=models.Q(gender__in=["Nam", "Nữ"])
                 | models.Q(gender__isnull=True),
                 name="gioi_tinh_hop_le",
+            ),
+            models.CheckConstraint(
+                condition=(
+                    models.Q(phone_number__regex=r'^(03|05|07|08|09)\d{8}$')
+                    | models.Q(phone_number__isnull=True)
+                ),
+                name="so_dien_thoai_hop_le",
             )
         ]
 

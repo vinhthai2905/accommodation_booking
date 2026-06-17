@@ -106,7 +106,7 @@ export default function DBAmenitiesToolBar({
                     </div>
                 )}
 
-                <DBAmenitiesToolBarButton onClick={() => navigate("/admin/amenities/new")}>
+                <DBAmenitiesToolBarButton onClick={() => navigate("/admin/dashboard/amenities/new")}>
                     <Plus size={16} />
                     Thêm tiện nghi
                 </DBAmenitiesToolBarButton>

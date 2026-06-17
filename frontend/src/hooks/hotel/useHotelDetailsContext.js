@@ -2,10 +2,10 @@ import { useContext } from "react"
 import { HotelDetailsContext } from "../../context/hotels/HotelDetailsContext"
 
 export default function useHotelDetailsContext() {
-    const { hotelQuery, roomTypesQuery, childPolicyQuery, hotelAmenitiesQuery } = useContext(HotelDetailsContext)
+    const { hotelQuery, roomTypesQuery, childPolicyQuery, hotelAmenitiesQuery, refundPolicyQuery } = useContext(HotelDetailsContext)
 
     const isFetchingHotelData = (
-        hotelQuery.isLoading || roomTypesQuery.isLoading || childPolicyQuery.isLoading || hotelAmenitiesQuery.isLoading
+        hotelQuery.isPending || roomTypesQuery.isPending || childPolicyQuery.isPending || hotelAmenitiesQuery.isPending || refundPolicyQuery.isPending
     )
 
     return {
@@ -13,6 +13,7 @@ export default function useHotelDetailsContext() {
         roomTypesQuery,
         childPolicyQuery,
         hotelAmenitiesQuery,
+        refundPolicyQuery,
         isFetchingHotelData
     }
 }

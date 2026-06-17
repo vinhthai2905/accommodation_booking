@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 
 from apps.app_booking.model.dat_phong_models import DatPhong
-from backend.apps.common.model.models import TimeStampedModel
+from apps.common.model.models import TimeStampedModel
 
 
 class DanhGiaKhachSan(TimeStampedModel):
@@ -11,11 +11,11 @@ class DanhGiaKhachSan(TimeStampedModel):
         db_column="id_danh_gia",
     )
 
-    id_booking = models.ForeignKey(
+    id_booking = models.OneToOneField(
         DatPhong,
         on_delete=models.CASCADE,
         db_column="id_dat_phong",
-        related_name="reviews",
+        related_name="review",
     )
 
     id_user = models.ForeignKey(
@@ -26,11 +26,13 @@ class DanhGiaKhachSan(TimeStampedModel):
     )
 
     content = models.TextField(
+        null=False,
         db_column="noi_dung",
     )
 
     rating = models.CharField(
         max_length=1,
+        null=False,
         db_column="so_sao",
     )
 

@@ -14,7 +14,7 @@ export default function DBCategoryAmenityRowActions({setIsMenuOpen, setIsDeleteM
                 type="button"
                 onClick={() => {
                     setIsMenuOpen(false)
-                    navigate(`/admin/category-amenities/${category.id_amenity_category}/edit`)
+                    navigate(`/admin/dashboard/category-amenities/${category.id_amenity_category}/edit`)
                 }}
                 className={clsx(
                     "flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-semibold text-gray-700",

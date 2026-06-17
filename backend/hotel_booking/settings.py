@@ -21,11 +21,11 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-if os.name == "nt":
-    GDAL_DLL_DIR = r"C:\Users\ASUS\miniconda3\envs\django\Library\bin"
-    os.add_dll_directory(GDAL_DLL_DIR)
+# if os.name == "nt":
+#     GDAL_DLL_DIR = r"C:\Users\ASUS\miniconda3\envs\django\Library\bin"
+#     os.add_dll_directory(GDAL_DLL_DIR)
 
-    GDAL_LIBRARY_PATH = os.path.join(GDAL_DLL_DIR, "gdal.dll")
+#     GDAL_LIBRARY_PATH = os.path.join(GDAL_DLL_DIR, "gdal.dll")
 
 load_dotenv(BASE_DIR / ".env")
 
@@ -58,12 +58,14 @@ INSTALLED_APPS = [
     'apps.app_ai',
     'apps.app_user',
     'apps.app_hotel',
+    'apps.app_hotel_reviews',
     'apps.app_location',
     'apps.app_booking',
     'apps.app_payment'
 ]
 
 MIDDLEWARE = [
+    'logs.write_API_logs.APILogMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -79,7 +81,7 @@ ROOT_URLCONF = 'hotel_booking.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -138,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 USE_I18N = True
 
@@ -159,12 +161,23 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 
+
 ZALOPAY_APP_ID = int(os.getenv("ZALOPAY_APP_ID"))
 ZALOPAY_SECRET_KEY = os.getenv("ZALOPAY_SECRET_KEY")
 ZALOPAY_CREATE_ORDER_URL = os.getenv("ZALOPAY_CREATE_ORDER_URL")
 ZALOPAY_CANCEL_ORDER_URL = os.getenv("ZALOPAY_CANCEL_ORDER_URL")
 ZALOPAY_GET_ORDER_STATUS_URL = os.getenv("ZALOPAY_GET_ORDER_STATUS_URL")
 
+DEFAULT_FROM_EMAIL = "noreply@booking.com"
+EMAIL_HOST=os.getenv("EMAIL_HOST")
+EMAIL_PORT=os.getenv("EMAIL_PORT")
+EMAIL_USE_TLS= os.getenv("EMAIL_USE_TLS")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_VERIFICATION_TIMEOUT = 1 * 60
+
+
+FRONT_END_URL = "http://localhost:5173"
 
 CORS_ALLOW_ALL_ORIGINS = False
 

@@ -6,10 +6,13 @@ import { useContext } from "react"
 import { Navigate } from "react-router"
 
 import usePaymentConfirmation from "../../hooks/payment/usePaymentConfirmation"
+import { useTabTitle } from "../../hooks/common/useTabTitle"
 
 import { AuthUserContext } from "../../context/authentication/AuthUserContext"
 
 export default function PaymentConfirmation() {
+    useTabTitle("Xác nhận đơn đặt phòng của bạn | Booking.com")
+
     const { user } = useContext(AuthUserContext)
 
     const {
@@ -20,7 +23,7 @@ export default function PaymentConfirmation() {
     } = usePaymentConfirmation()
 
     if (!user)
-        return <Navigate to="/index" replace/>
+        return <Navigate to="/index" replace />
 
     if (isFetchingUser || isFetchingPayment)
         return <PaymentConfirmationLoadingScreen />

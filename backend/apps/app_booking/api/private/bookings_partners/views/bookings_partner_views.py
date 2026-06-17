@@ -75,3 +75,38 @@ class PartnerBookingListView(PartnerHotelViewMixin, APIView):
         serializer = self.serializer_class(bookings, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class PartnerBookingStatusUpdateView(PartnerHotelViewMixin, APIView):
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
+
+    def patch(self, request: Request, id_booking, *args, **kwargs):
+        hotel = self.get_partner_hotel(request.user)
+        try:
+            booking = DatPhong.objects.get(id_booking=id_booking, id_hotel=hotel)
+        except DatPhong.DoesNotExist:
+            raise exceptions.NotFound("Booking not found.")
+
+        new_status = request.data.get("status")
+        if new_status not in ["CONFIRMED", "COMPLETED", "CANCELLED"]:
+            return Response({"error": "Invalid status update."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+        booking.status = new_status
+        booking.save()
+
+        return Response({"message": "Status updated successfully", "status": new_status}, status=status.HTTP_200_OK)
+
+
+class PartnerBookingDetailView(PartnerHotelViewMixin, APIView):
+    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
+    
+    def get(self, request: Request, id_booking, *args, **kwargs):
+        hotel = self.get_partner_hotel(request.user)
+        try:
+            from apps.app_booking.api.private.bookings_partners.serializers import PartnerBookingDetailSerializer
+            booking = DatPhong.objects.select_related("invoice", "id_user", "invoice__payments").get(id_booking=id_booking, id_hotel=hotel)
+            serializer = PartnerBookingDetailSerializer(booking)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except DatPhong.DoesNotExist:
+            raise exceptions.NotFound("Booking not found.")

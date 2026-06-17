@@ -11,5 +11,5 @@ export default function FilterItem({ label, count, subtext }) {
 
             <span>{count}</span>
         </label>
-    );
+    )
 }

@@ -18,7 +18,7 @@ export default function DBBookingTable({ bookings }) {
                         bookings.map((booking) => (
                             <DBBookingRow
                                 key={booking.id_booking || booking.id_dat_phong}
-                                initialBooking={booking}
+                                booking={booking}
                             />
                         ))
                     )}

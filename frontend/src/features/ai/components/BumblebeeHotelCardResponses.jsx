@@ -1,5 +1,5 @@
 import { clsx } from "clsx"
-import { Award, MapPin, DollarSign } from "lucide-react";
+import { Award, MapPin, DollarSign } from "lucide-react"
 
 export default function BumblebeeHotelCardResponses({ message, handleHotelClick }) {
     return (
@@ -7,10 +7,10 @@ export default function BumblebeeHotelCardResponses({ message, handleHotelClick 
             {message.hotels.map((rec) => {
                 const minPriceVND = rec.hotel.appealing_price
                     ? `${Number(rec.hotel.appealing_price).toLocaleString("vi-VN")} VNĐ`
-                    : "Liên hệ";
+                    : "Liên hệ"
                 const distText = rec.hotel.is_near_beach
                     ? `${rec.hotel.distance_to_beach}m ra biển`
-                    : "Không gần biển";
+                    : "Không gần biển"
 
                 return (
                     <div

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác minh email của bạn</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f5f5f5; color: #333333;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f5f5f5; padding: 20px 0;">
+        <tr>
+            <td align="center">
+                <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 100%;">
+                    <!-- Header -->
+                    <tr>
+                        <td style="background-color: #003580; padding: 20px 30px; text-align: left;">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td>
+                                        <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: bold;">Booking.com</h1>
+                                    </td>
+                                    <td align="right">
+                                        <span style="color: #ffffff; font-size: 14px;">{{ user.email }}</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            <h2 style="margin: 0 0 20px 0; font-size: 22px; color: #1a1a1a;">Xác minh địa chỉ email của bạn</h2>
+                            
+                            <p style="margin: 0 0 15px 0; font-size: 16px; line-height: 1.5; color: #333333;">
+                                Xin chào {{ user.first_name|default:"bạn" }},
+                            </p>
+                            
+                            <p style="margin: 0 0 25px 0; font-size: 16px; line-height: 1.5; color: #333333;">
+                                Bạn đã yêu cầu thay đổi địa chỉ email liên kết với tài khoản Booking.com của mình. Vì lý do bảo mật, chúng tôi cần xác minh địa chỉ email hiện tại của bạn trước.
+                            </p>
+                            
+                            <p style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.5; color: #333333;">
+                                Vui lòng nhấn vào nút bên dưới để xác minh email một cách an toàn:
+                            </p>
+                            
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center">
+                                        <a href="{{ verification_url }}" style="display: inline-block; background-color: #0071c2; color: #ffffff; font-size: 16px; font-weight: bold; text-decoration: none; padding: 14px 30px; border-radius: 4px; cursor: pointer;">Xác minh email</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <p style="margin: 30px 0 15px 0; font-size: 14px; line-height: 1.5; color: #666666;">
+                                Đường dẫn này chỉ có thể sử dụng một lần và sẽ hết hạn sau 10 phút. Đừng chia sẻ đường dẫn này với bất kỳ ai khác.
+                            </p>
+                            
+                            <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #666666;">
+                                Nếu bạn không yêu cầu email xác minh cho <a href="mailto:{{ user.email }}" style="color: #0071c2; text-decoration: none;">{{ user.email }}</a>, bạn có thể bỏ qua email này một cách an toàn.
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f8f8f8; padding: 20px 30px; border-top: 1px solid #eeeeee; text-align: center;">
+                            <p style="margin: 0 0 10px 0; font-size: 12px; color: #999999;">
+                                Bản quyền © 1996–2026 Booking.com. Bảo lưu mọi quyền.<br>
+                                Email này được gửi bởi hệ thống
+                            </p>
+                            <p style="margin: 0; font-size: 12px;">
+                                <a href="#" style="color: #0071c2; text-decoration: none;">Quyền riêng tư và Cookie</a> | 
+                                <a href="#" style="color: #0071c2; text-decoration: none;">Dịch vụ khách hàng</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+

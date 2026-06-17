@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "clsx"
 
 export function AmenityItem({ icon: Icon, label, subLabel }) {
   return (
@@ -11,7 +11,7 @@ export function AmenityItem({ icon: Icon, label, subLabel }) {
         {subLabel && <p className="text-xs text-gray-500">{subLabel}</p>}
       </div>
     </li>
-  );
+  )
 }
 
 

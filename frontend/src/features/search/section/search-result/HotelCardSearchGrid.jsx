@@ -1,10 +1,10 @@
 
 import HotelCardSearchResult from "../../components/search-result/HotelCardSearchResult"
 
-export default function HotelCardSearchGrid({ hotelList }) {
+export default function HotelCardSearchGrid({ paginateHotelsList }) {
     return (
         <div className="flex flex-col gap-4 w-full">
-            {hotelList.map(hotel => {
+            {paginateHotelsList.map(hotel => {
                 return (
                     <HotelCardSearchResult 
                         key={hotel.id_hotel} 

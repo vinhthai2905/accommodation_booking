@@ -6,7 +6,7 @@ from .booking_confirmation_serializers import (
 from .bookings_user_serializer import (
     UserBookingHotelSerializer,
     UserBookingInvoiceSerializer,
-    UserPaymentSerializer,
+    UserBookingPaymentSerializer,
     UserBookingListSerializer,
     FilterBookingSerializer,
 )

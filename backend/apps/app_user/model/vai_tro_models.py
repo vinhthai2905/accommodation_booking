@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.app_user import models as table
+from apps.app_user.model.nguoi_dung_models import NguoiDung
 
 class VaiTro(models.Model):
     id_role = models.AutoField(
@@ -36,7 +36,7 @@ class VaiTroNguoiDung(models.Model):
     )
 
     id_user = models.ForeignKey(
-        table.NguoiDung,
+        NguoiDung,
         on_delete=models.CASCADE,
         db_column="id_nguoi_dung",
         related_name="role_set",

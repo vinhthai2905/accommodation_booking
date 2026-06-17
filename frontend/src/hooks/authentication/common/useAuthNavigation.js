@@ -4,10 +4,14 @@ export default function useAuthNavigation() {
     const navigate = useNavigate()
 
     const navigateAfterAuth = (userRole) => {
+        console.log(userRole)
+        
         const navigateTo =
-            userRole === "Đối tác"
-                ? "/partner/dashboard"
-                : "/index"
+            userRole === "Admin"
+                ? "/admin/dashboard"
+                : userRole === "Đối tác"
+                    ? "/partner/dashboard"
+                    : "/index"
 
         navigate(navigateTo, { replace: true })
     }

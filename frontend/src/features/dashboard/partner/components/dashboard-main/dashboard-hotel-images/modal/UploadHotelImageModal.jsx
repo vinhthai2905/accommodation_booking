@@ -6,9 +6,7 @@ export default function UploadHotelImageModal({
     handleSaveNewImage,
     uploadForm,
     setUploadForm,
-    isPending,
-    previewUrl,
-    handleFileChange
+    isPending
 }) {
     return (
         <div
@@ -76,14 +74,14 @@ export default function UploadHotelImageModal({
                                 "text-gray-600"
                             )}
                         >
-                            Tải lên hình ảnh *
+                            Đường dẫn hình ảnh (URL) *
                         </label>
 
                         <div className="relative">
                             <input
-                                type="file"
-                                accept="image/*"
-                                required={!previewUrl} // Only required if no file is selected yet
+                                type="url"
+                                required
+                                placeholder="Nhập link hình ảnh (VD: https://...)"
                                 className={clsx(
                                     "w-full rounded-xl px-4 py-2.5 outline-none",
                                     "border border-gray-200",
@@ -92,20 +90,24 @@ export default function UploadHotelImageModal({
                                     "focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20",
                                     isPending && "bg-gray-50 text-gray-500"
                                 )}
-                                onChange={handleFileChange}
+                                value={uploadForm.url || ""}
+                                onChange={(e) => setUploadForm({ ...uploadForm, url: e.target.value })}
                                 disabled={isPending}
                             />
                         </div>
                     </div>
 
                     {/* Image Preview */}
-                    {previewUrl && (
+                    {uploadForm.url && (
                         <div className="mt-4 flex justify-center">
                             <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-gray-200 bg-gray-50 flex items-center justify-center">
                                 <img 
-                                    src={previewUrl} 
+                                    src={uploadForm.url} 
                                     alt="Preview" 
                                     className="max-w-full max-h-full object-contain"
+                                    onError={(e) => {
+                                        e.target.src = "https://via.placeholder.com/400x300?text=Invalid+Image+URL"
+                                    }}
                                 />
                             </div>
                         </div>

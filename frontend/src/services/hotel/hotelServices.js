@@ -1,25 +1,24 @@
-import axios from "axios"
+import bookingAPI from "../base/bookingAPI"
 
-const apiUrl = import.meta.env.VITE_API_URL
 
 export const fetchHotel = async (hotelID) => {
-  const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}`)
+  const { data } = await bookingAPI.get(`/api/hotel/${hotelID}`)
   return data
 }
 
 export const fetchHotelImages = async (hotelID) => {
-  const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/images`)
+  const { data } = await bookingAPI.get(`/api/hotel/${hotelID}/images`)
   return data
 }
 
 export const fetchHotelAmenities = async (hotelID) => {
-  const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/amenities`)
+  const { data } = await bookingAPI.get(`/api/hotel/${hotelID}/amenities`)
   return data
 }
 
 export const fetchHotelRoomTypesAvailability = async (hotelID, check_in, check_out) => {
-  const { data } = await axios.get(
-    `${apiUrl}/api/hotel/${hotelID}/room_types`,
+  const { data } = await bookingAPI.get(
+    `/api/hotel/${hotelID}/room_types`,
     {
       params: {
         check_in: check_in,
@@ -32,10 +31,13 @@ export const fetchHotelRoomTypesAvailability = async (hotelID, check_in, check_o
 }
 
 export const fetchHotelChildPolicy = async (hotelID) => {
-  const { data } = await axios.get(`${apiUrl}/api/hotel/${hotelID}/child_policy`)
+  const { data } = await bookingAPI.get(`/api/hotel/${hotelID}/child_policy`)
 
   return data
 }
 
+export const fetchHotelRefundPolicy = async (hotelID) => {
+  const { data } = await bookingAPI.get(`/api/hotel/${hotelID}/refund_policy`)
 
-
+  return data
+}

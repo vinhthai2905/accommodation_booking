@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.db import models
 
 from apps.app_booking.models import DatPhong, HoaDon, ThanhToan
 from apps.app_user.models import NguoiDung
@@ -59,3 +60,31 @@ class PartnerBookingListSerializer(serializers.ModelSerializer):
         ]
         
         read_only_fields = fields
+
+
+class PartnerBookingDetailSerializer(PartnerBookingListSerializer):
+    booked_rooms = serializers.SerializerMethodField()
+
+    class Meta(PartnerBookingListSerializer.Meta):
+        fields = PartnerBookingListSerializer.Meta.fields + ["booked_rooms", "check_in_time"]
+        read_only_fields = fields
+
+    def get_booked_rooms(self, booking):
+        details = booking.booking_details.select_related('id_room__id_room_type')
+        
+        result = {}
+        for detail in details:
+            rt_name = detail.id_room.id_room_type.type_name
+            room_name = detail.id_room.room_name
+            
+            if rt_name not in result:
+                result[rt_name] = {
+                    "room_type_name": rt_name,
+                    "quantity": 0,
+                    "room_names": []
+                }
+            
+            result[rt_name]["quantity"] += 1
+            result[rt_name]["room_names"].append(room_name)
+            
+        return list(result.values())

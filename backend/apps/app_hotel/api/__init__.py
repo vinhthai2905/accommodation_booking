@@ -11,9 +11,10 @@ from .public.hotel_detail.views import (
     RoomTypeAvailabilityView
 )
 
-from .public.booking_preview import (
+from .public.hotel_preview import (
     HotelBookingPreviewView,
-    ChildPolicyPreviewView
+    ChildPolicyPreviewView,
+    RefundPolicyPreviewView
 )
 
 from .private.partner_hotel_detail.views.room_type_views import (
@@ -27,7 +28,8 @@ from .private.partner_hotel_detail.views.room_views import (
 )
 
 from .private.partner_hotel_detail.views.hotel_policy_views import (
-    PartnerChildrenPolicyView
+    PartnerChildrenPolicyView,
+    PartnerRefundPolicyView
 )
 
 from .private.partner_hotel_detail.views.room_type_detail_views import (

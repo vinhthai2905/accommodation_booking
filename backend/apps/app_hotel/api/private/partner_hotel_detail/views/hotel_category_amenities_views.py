@@ -57,7 +57,7 @@ class PartnerHotelCategoryAmenitiesListView(APIView):
 
 
 class PartnerHotelCategoryListView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
+    permission_classes = [IsAuthenticatedUserActive]
     serializer_class = HotelCategorySerializer
 
     def get(self, request: Request, *args, **kwargs):
@@ -74,7 +74,7 @@ class PartnerHotelCategoryListView(APIView):
 
 
 class PartnerHotelCategoryDetailView(APIView):
-    permission_classes = [IsAuthenticatedPartner, IsAuthenticatedUserActive]
+    permission_classes = [IsAuthenticatedUserActive]
     serializer_class = HotelCategorySerializer
 
     def _get_category(self, id_amenity_category: int) -> DanhMucTienNghi:
