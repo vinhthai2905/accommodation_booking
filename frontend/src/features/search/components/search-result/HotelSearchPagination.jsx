@@ -15,6 +15,11 @@ export default function HotelSearchPagination({
 
     const totalPages = Math.ceil(totalHotels / 10)
 
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage)
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
     return (
         <div
             className={clsx(
@@ -23,44 +28,21 @@ export default function HotelSearchPagination({
                 "sm:flex-row"
             )}
         >
-            {/* <div className="flex items-center gap-2">
-                <span>
-                    Hiển thị {startItem}-{endItem} trong số {totalItems} kết quả
-                </span>
-                {onItemsPerPageChange && (
-                    <select
-                        value={itemsPerPage}
-                        onChange={(e) => onItemsPerPageChange(Number(e.target.value))}
-                        className={clsx(
-                            "ml-2 rounded px-2 py-1 outline-none",
-                            "border border-gray-300 bg-white",
-                            "text-gray-700",
-                            "focus:border-blue-500"
-                        )}
-                    >
-                        <option value={5}>5</option>
-                        <option value={10}>10</option>
-                        <option value={20}>20</option>
-                        <option value={50}>50</option>
-                    </select>
-                )}
-            </div> */}
-
             <div className="flex items-center gap-1.5">
                 <HotelsSearchPreviousPageButton
-                    onPageChange={() => setCurrentPage(currentPage - 1)}
+                    onPageChange={() => handlePageChange(currentPage - 1)}
                     currentPage={currentPage}
                 />
 
                 <HotelsSearchTotalPages 
                     totalPages={totalPages}
                     paginateHotelsList={paginateHotelsList}
-                    setCurrentPage={setCurrentPage}
+                    setCurrentPage={handlePageChange}
                     currentPage={currentPage}
                 />
 
                 <HotelsSearchNextPageButton
-                    onPageChange={() => setCurrentPage(currentPage + 1)}
+                    onPageChange={() => handlePageChange(currentPage + 1)}
                     currentPage={currentPage}
                     totalPages={totalPages}
                 />

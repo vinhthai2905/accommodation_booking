@@ -10,7 +10,7 @@ export function useReviewMutation() {
     const createReviewMutation = useMutation({
         mutationFn: createUserReview,
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["user-bookings"] })
+            queryClient.invalidateQueries({ queryKey: ["userBookings"] })
         },
         onError: (error) => {
             let errorMessage = error.message

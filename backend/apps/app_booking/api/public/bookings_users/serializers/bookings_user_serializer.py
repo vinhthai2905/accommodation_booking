@@ -38,16 +38,17 @@ class UserBookingPaymentSerializer(serializers.ModelSerializer):
         fields = ["paid_amount", "payment_method", "status"]
 
 
-# class UserBookingReviewSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = DanhGiaKhachSan
-#         fields = ["content"]
+class UserBookingReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DanhGiaKhachSan
+        fields = ["content", "rating", "created_at"]
 
 
 class UserBookingListSerializer(serializers.ModelSerializer):
     hotel = UserBookingHotelSerializer(source="id_hotel", read_only=True)
     invoice = UserBookingInvoiceSerializer(read_only=True)
     payment = UserBookingPaymentSerializer(source="invoice.payments", read_only=True)
+    review = UserBookingReviewSerializer(read_only=True)
 
     class Meta:
         model = DatPhong
@@ -64,5 +65,6 @@ class UserBookingListSerializer(serializers.ModelSerializer):
             "hotel",
             "invoice",
             "payment",
+            "review",
         ]
         read_only_fields = fields

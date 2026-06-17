@@ -47,7 +47,6 @@ class UserCreateReviewSerializer(serializers.ModelSerializer):
             rating=validated_data["rating"]
         ).save()
         
-        
     
     # def validate_id_user(self, id_user):
     #     return get_object_or_404(NguoiDung, id_user)

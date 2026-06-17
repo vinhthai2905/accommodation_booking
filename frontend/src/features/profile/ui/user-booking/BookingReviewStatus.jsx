@@ -6,12 +6,13 @@ export default function BookingReviewStatus({ booking, hotel, reviews, isFetchin
     return (
         <div className="flex items-center gap-2">
             {isReviewed ? (
-                <button
-                    type="button"
+                <Link
+                    to={`/profile/booking/review-detail/${booking.hotel.slug}/${booking.id_booking}`}
+                    state={{ hotelName: hotel?.name, review: booking.review }}
                     className="flex items-center gap-1.5 px-4 py-1.5 text-gray-700 font-medium text-xs rounded-lg border border-gray-200 transition-colors shadow-sm bg-gray-50 hover:bg-gray-100 cursor-pointer"
                 >
                     Xem đánh giá
-                </button>
+                </Link>
             ) : (
                 <Link
                     to={`/profile/booking/review/${booking.hotel.slug}/${booking.id_booking}`}
