@@ -1,13 +1,14 @@
-import { useEffect } from "react"
-import { set, useFormContext } from "react-hook-form"
-import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet"
-
+import PropertyLocationPicker from "../onboarding-map/PropertyLocationPicker"
 import OnboardingPropertyLocationForm from "../onboarding-form/OnboardingPropertyLocationForm"
+
+import { useFormContext } from "react-hook-form"
+import { MapContainer, TileLayer } from "react-leaflet"
+
 import { usePropertyBeachDistanceAnalyzation } from "../../../../hooks/partner-onboarding/common/usePropertyBeachDistanceAnalyzation"
+import { usePropertyLocation } from "../../../../hooks/partner-onboarding/common/usePropertyLocation"
 
 import "leaflet/dist/leaflet.css"
 import L from "leaflet"
-import { usePropertyLocation } from "../../../../hooks/partner-onboarding/common/usePropertyLocation"
 
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -16,29 +17,6 @@ L.Icon.Default.mergeOptions({
     shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png"
 })
 
-function LocationPicker() {
-    const { setValue, watch } = useFormContext()
-    const lat = watch("latitude")
-    const lng = watch("longitude")
-    const map = useMap()
-
-    useEffect(() => {
-        if (lat && lng) {
-            map.flyTo([lat, lng], 16, { animate: true })
-        }
-    }, [lat, lng, map])
-
-    useMapEvents({
-        click(e) {
-            setValue("latitude", e.latlng.lat, { shouldValidate: true })
-            setValue("longitude", e.latlng.lng, { shouldValidate: true })
-        },
-    })
-
-    return lat && lng ? (
-        <Marker position={[lat, lng]} />
-    ) : null
-}
 
 export default function PropertySetupStep({ wards, prevStep, nextStep }) {
     const { register, watch, setValue } = useFormContext()
@@ -51,19 +29,26 @@ export default function PropertySetupStep({ wards, prevStep, nextStep }) {
 
     const notValue = usePropertyBeachDistanceAnalyzation(latitude, longitude, setValue)
 
+    const daNangBounds = [
+        [15.85, 107.9],
+        [16.35, 108.55],
+    ]
+
     return (
         <div className="absolute inset-0 z-0">
             <MapContainer
                 center={[16.047079, 108.20623]}
                 zoom={13}
                 scrollWheelZoom={true}
+                minZoom={10}
+                maxBounds={daNangBounds}
                 className="h-full w-full z-0"
             >
                 <TileLayer
-                    attribution='&copy OpenStreetMap contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; OpenStreetMap contributors &copy; CARTO'
+                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                 />
-                <LocationPicker />
+                <PropertyLocationPicker />
             </MapContainer>
 
             <div className="absolute top-6 left-6 z-10 w-full max-w-105 bg-white rounded-xl shadow-2xl p-6 max-h-[calc(100vh-180px)] overflow-y-auto border border-gray-100">

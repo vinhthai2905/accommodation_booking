@@ -48,11 +48,12 @@ export default function HotelDisplayMapMarkers({
                 zoom={DA_NANG_ZOOM}
                 scrollWheelZoom={true}
                 className={"z-0 h-full w-full"}
-                // minZoom={10}
-                // maxBounds={daNangBounds}
+                minZoom={10}
+                maxBounds={daNangBounds}
                 maxBoundsViscosity={1.0}
             >
                 <TileLayer
+                    attribution='&copy; OpenStreetMap contributors &copy; CARTO'
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                 />
 
