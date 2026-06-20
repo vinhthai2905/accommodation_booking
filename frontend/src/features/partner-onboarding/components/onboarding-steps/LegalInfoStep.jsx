@@ -60,7 +60,6 @@ export default function LegalInfoStep({ handleFileChange, hotelTypes, wards }) {
                     </label>
                 </div>
 
-                {/* Review summary inline at final step */}
                 <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">
                     <h3 className="font-bold text-gray-800 text-sm flex items-center gap-1.5">
                         <Info size={16} className="text-blue-600" /> Xem lại thông tin đã khai báo:
