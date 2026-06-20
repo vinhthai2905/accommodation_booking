@@ -1,5 +1,4 @@
-import React from 'react'
-import DBRefundPolicy from '../components/dashboard-main/dashboard-policy-refund/list-page/DBRefundPolicy'
+import DBRefundPolicy from "../components/dashboard-main/dashboard-policy-refund/list-page/section/DBRefundPolicy"
 
 export default function DashboardRefundPolicy() {
     return (

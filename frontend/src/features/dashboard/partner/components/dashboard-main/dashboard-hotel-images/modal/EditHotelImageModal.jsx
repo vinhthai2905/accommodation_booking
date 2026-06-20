@@ -1,5 +1,6 @@
 import { clsx } from "clsx"
 import { Pencil, Save, X } from "lucide-react"
+import ModalActionButtons from "../ui/ModalActionButtons"
 
 export default function EditHotelImageModal({
     setIsEditModalOpen,
@@ -9,36 +10,28 @@ export default function EditHotelImageModal({
     isPending
 }) {
     return (
-        <div
-            className={clsx(
-                "fixed inset-0 z-50 flex items-center justify-center p-4",
-                "bg-black/40 backdrop-blur-sm",
-                "text-left transition-all"
-            )}
-        >
-            <div
-                className={clsx(
-                    "w-full max-w-md overflow-hidden",
-                    "rounded-2xl border border-gray-100 bg-white shadow-2xl",
-                    "transform transition-all duration-200",
-                    "animate-in fade-in zoom-in-95"
-                )}
-            >
+        <div className={clsx(
+            "fixed inset-0 z-50 flex items-center justify-center p-4",
+            "bg-black/40 backdrop-blur-sm",
+            "text-left transition-all"
+        )}>
+            <div className={clsx(
+                "w-full max-w-md overflow-hidden",
+                "rounded-2xl border border-gray-100 bg-white shadow-2xl",
+                "transform transition-all duration-200",
+                "animate-in fade-in zoom-in-95"
+            )}>
                 {/* Header */}
-                <div
-                    className={clsx(
-                        "flex items-center justify-between px-6 py-4",
-                        "border-b border-gray-100",
-                        "bg-gradient-to-r from-gray-50/50 to-white"
-                    )}
-                >
+                <div className={clsx(
+                    "flex items-center justify-between px-6 py-4",
+                    "border-b border-gray-100",
+                    "bg-linear-to-r from-gray-50/50 to-white"
+                )}>
                     <div className="flex items-center gap-2.5">
-                        <div
-                            className={clsx(
-                                "rounded-xl p-2",
-                                "bg-blue-50 text-blue-600"
-                            )}
-                        >
+                        <div className={clsx(
+                            "rounded-xl p-2",
+                            "bg-blue-50 text-blue-600"
+                        )}>
                             <Pencil size={18} />
                         </div>
 
@@ -67,13 +60,11 @@ export default function EditHotelImageModal({
                 {/* Form */}
                 <form onSubmit={handleSaveImageEdit} className="space-y-4 p-6">
                     <div>
-                        <label
-                            className={clsx(
-                                "mb-1.5 block",
-                                "text-xs font-semibold uppercase tracking-wider",
-                                "text-gray-600"
-                            )}
-                        >
+                        <label className={clsx(
+                            "mb-1.5 block",
+                            "text-xs font-semibold uppercase tracking-wider",
+                            "text-gray-600"
+                        )}>
                             Tên hình ảnh
                         </label>
 
@@ -103,45 +94,11 @@ export default function EditHotelImageModal({
                     </div>
 
                     {/* Footer */}
-                    <div
-                        className={clsx(
-                            "mt-6 flex items-center justify-end gap-3 pt-4",
-                            "border-t border-gray-100"
-                        )}
-                    >
-                        <button
-                            type="button"
-                            onClick={() => setIsEditModalOpen(false)}
-                            className={clsx(
-                                "rounded-xl px-4 py-2",
-                                "text-sm font-semibold text-gray-600",
-                                "transition-colors",
-                                "cursor-pointer",
-                                "hover:bg-gray-100",
-                                isPending && "opacity-50 cursor-not-allowed"
-                            )}
-                            disabled={isPending}
-                        >
-                            Hủy
-                        </button>
-
-                        <button
-                            type="submit"
-                            className={clsx(
-                                "flex items-center gap-2 rounded-xl px-5 py-2",
-                                "bg-blue-600 text-white",
-                                "text-sm font-semibold",
-                                "shadow-md shadow-blue-500/20",
-                                "transition-all",
-                                "cursor-pointer",
-                                "hover:bg-blue-700 active:scale-[0.98]",
-                                isPending && "opacity-70 cursor-wait"
-                            )}
-                            disabled={isPending}
-                        >
-                            <Save size={16} />
-                            <span>{isPending ? "Đang lưu..." : "Lưu thay đổi"}</span>
-                        </button>
+                    <div className={clsx(
+                        "mt-6 flex items-center justify-end gap-3 pt-4",
+                        "border-t border-gray-100"
+                    )}>
+                       <ModalActionButtons setModal={setIsEditModalOpen} isPending={isPending}/>
                     </div>
                 </form>
             </div>

@@ -124,7 +124,6 @@ export default function DBEditHotel() {
 
                         {/* Details Grid */}
                         <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 bg-linear-to-b from-white to-gray-50/50">
-                            {/* Card: Tên khách sạn */}
                             <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-xs flex items-start gap-4">
                                 <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
                                     <Building size={20} />
@@ -135,7 +134,6 @@ export default function DBEditHotel() {
                                 </div>
                             </div>
 
-                            {/* Card: Địa chỉ */}
                             <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-xs flex items-start gap-4">
                                 <div className="p-3 bg-amber-50 text-amber-600 rounded-xl">
                                     <MapPin size={20} />
@@ -146,7 +144,6 @@ export default function DBEditHotel() {
                                 </div>
                             </div>
 
-                            {/* Card: Đường dẫn công khai */}
                             <div className="p-5 rounded-2xl bg-white border border-gray-100 shadow-xs flex items-start gap-4">
                                 <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
                                     <Globe size={20} />

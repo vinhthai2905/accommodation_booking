@@ -74,7 +74,6 @@ export default function DashboardBookingDetail() {
                 animate={{ opacity: 1, y: 0 }}
                 className="grid grid-cols-1 lg:grid-cols-3 gap-6"
             >
-                {/* Thông tin chính */}
                 <div className="lg:col-span-2 space-y-6">
                     <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
                         <h2 className="text-lg font-semibold flex items-center gap-2 mb-4">
@@ -95,7 +94,7 @@ export default function DashboardBookingDetail() {
                             </div>
                             <div className="col-span-2 mt-2">
                                 <p className="text-sm text-gray-500">Ghi chú của khách</p>
-                                <p className="font-medium text-gray-800 bg-gray-50 p-3 rounded-lg mt-1 min-h-[60px]">
+                                <p className="font-medium text-gray-800 bg-gray-50 p-3 rounded-lg mt-1 min-h-15">
                                     {booking.note || "Không có ghi chú"}
                                 </p>
                             </div>
@@ -166,7 +165,6 @@ export default function DashboardBookingDetail() {
                         </div>
                     </div>
 
-                    {/* Hành động */}
                     <div className="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
                         <h2 className="text-lg font-semibold mb-4">Cập nhật trạng thái</h2>
                         <div className="flex flex-col gap-3">
