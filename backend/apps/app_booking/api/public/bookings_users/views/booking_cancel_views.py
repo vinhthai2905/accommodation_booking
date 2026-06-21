@@ -14,7 +14,7 @@ from apps.app_booking.api.public.bookings_users.serializers.booking_cancel_seria
     BookingCancelSerializer,
 )
 
-from logs.write_API_logs import api_logger
+from logs.write_API_logs import refund_logger
 
 from apps.app_hotel.models import ChinhSachHoanTien
 from apps.app_payment.services import ZaloPayRefundService
@@ -102,7 +102,7 @@ class BookingCancelView(APIView):
         refund_params = refund_result.pop("refund_params", None)
         
         if refund_params:
-            api_logger.info(f"[ZALOPAY REFUND STATUS PARAMS] Booking {id_booking}: {refund_params}")
+            refund_logger.info(f"[ZALOPAY REFUND STATUS PARAMS] Booking {id_booking}: {refund_params}")
 
     def _build_response_data(self, refund_result):
         response_data = {"message": "Booking has been processing for refund."}

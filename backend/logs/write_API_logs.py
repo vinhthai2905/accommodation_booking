@@ -2,22 +2,21 @@ import json
 import logging
 import os
 
-# Set up a specific logger for API logs
-api_logger = logging.getLogger('bookingAPI_logger')
-api_logger.setLevel(logging.INFO)
+def setup_logger(name, log_file):
+    logger = logging.getLogger(name)
+    logger.setLevel(logging.INFO)
+    log_file_path = os.path.join(os.path.dirname(__file__), log_file)
+    file_handler = logging.FileHandler(log_file_path, encoding='utf-8')
+    file_handler.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+    file_handler.setFormatter(formatter)
+    if not logger.handlers:
+        logger.addHandler(file_handler)
+    return logger
 
-# Create file handler which logs even debug messages
-log_file_path = os.path.join(os.path.dirname(__file__), 'bookingAPI.log')
-file_handler = logging.FileHandler(log_file_path, encoding='utf-8')
-file_handler.setLevel(logging.INFO)
-
-# Create formatter and add it to the handler
-formatter = logging.Formatter('%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
-file_handler.setFormatter(formatter)
-
-# Add the handler to the logger
-if not api_logger.handlers:
-    api_logger.addHandler(file_handler)
+crud_logger = setup_logger('crudAPI_logger', 'commonCRUD.log')
+payment_logger = setup_logger('zalopayPayment_logger', 'zalopayPayment.log')
+refund_logger = setup_logger('zalopayRefund_logger', 'zalopayRefund.log')
 
 class APILogMiddleware:
     def __init__(self, get_response):
@@ -27,7 +26,16 @@ class APILogMiddleware:
         if not request.path.startswith('/api/'):
             return self.get_response(request)
 
+        path = request.path
         method = request.method
+        
+        if (path == '/api/hotel/booking' and method == 'POST') or '/api/payments/zalopay' in path:
+            current_logger = payment_logger
+        elif '/cancel' in path and method in ['POST', 'PATCH', 'PUT']:
+            current_logger = refund_logger
+        else:
+            current_logger = crud_logger
+
         url = request.get_full_path()
         
         payload = None
@@ -52,7 +60,7 @@ class APILogMiddleware:
             else:
                 req_log += f"\n  Payload: {payload}"
             
-        api_logger.info(req_log)
+        current_logger.info(req_log)
 
         response = self.get_response(request)
 
@@ -77,7 +85,7 @@ class APILogMiddleware:
             indented_data = "\n".join(f"    {line}" for line in pretty_data.splitlines())
             res_log += f"\n  Response Data:\n{indented_data}"
             
-        api_logger.info(res_log)
-        api_logger.info("-" * 50) # separator between requests
+        current_logger.info(res_log)
+        current_logger.info("-" * 50) # separator between requests
 
         return response
