@@ -1,3 +1,12 @@
+import PropertySetupStep from "../onboarding-steps/PropertySetupStep"
+import OnboardingStepper from "../../section/OnboardingStepper"
+import RejectionAlert from "../onboarding-status/RejectionAlert"
+import BasicInfoStep from "../onboarding-steps/BasicInfoStep"
+import LegalInfoStep from "../onboarding-steps/LegalInfoStep"
+import OnboardingNavigation from "../onboarding/OnboardingNavigation"
+
+import { FormProvider } from "react-hook-form"
+
 export default function OnboardingForm({ 
     methods,
     currentStep, 

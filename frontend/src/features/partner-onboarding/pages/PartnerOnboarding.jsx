@@ -2,9 +2,10 @@ import BasicInfoStep from "../components/onboarding-steps/BasicInfoStep"
 import PropertySetupStep from "../components/onboarding-steps/PropertySetupStep"
 import LegalInfoStep from "../components/onboarding-steps/LegalInfoStep"
 import OnboardingHeader from "../section/OnboardingHeader"
-import OnboardingStepper from "../section/OnboardingStepper"
 import PendingApproval from "../components/onboarding-status/PendingApproval"
-import RejectionAlert from "../components/onboarding-status/RejectionAlert"
+import OnboardingSubmitButton from "../components/onboarding/OnboardingSubmitButton"
+import OnboardingNavigation from "../components/onboarding/OnboardingNavigation"
+import OnboardingForm from "../components/onboarding-form/OnboardingForm"
 
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react"
 import { FormProvider } from "react-hook-form"
@@ -15,9 +16,7 @@ import { usePartnerOnboardingStatus } from "../../../hooks/partner-onboarding/co
 import { usePartnerOnboardingOptions } from "../../../hooks/partner-onboarding/common/usePartnerOnboardingOptions"
 import { usePartnerOnboardingSteps } from "../../../hooks/partner-onboarding/common/usePartnerOnboardingSteps"
 import { usePartnerOnboardingSubmit } from "../../../hooks/partner-onboarding/form/usePartnerOnboardingSubmit"
-import OnboardingSubmitButton from "../components/onboarding/OnboardingSubmitButton"
-import OnboardingNavigation from "../components/onboarding/OnboardingNavigation"
-import OnboardingForm from "../components/onboarding-form/OnboardingForm"
+
 
 export default function PartnerOnboarding() {
     const { user, clearAuthUserState } = useAuthUserContext()
