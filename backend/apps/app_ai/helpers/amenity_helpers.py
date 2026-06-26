@@ -5,9 +5,6 @@ Shared amenity utilities used by both the training pipeline
 and the BumblebeeRecommendationService at inference time.
 """
 
-
-# Amenity weights  (higher = guests want it more / correlates with quality)
-
 AMENITY_WEIGHTS: dict[str, float] = {
     # Beach / pool lifestyle  ★★★★★
     "Bãi biển":                              5.0,   
@@ -75,10 +72,8 @@ AMENITY_WEIGHTS: dict[str, float] = {
     "Bình chữa cháy":                         0.5,  
 }
 
-# Stable sorted list used as the canonical column order for the model
 ALL_AMENITIES: list[str] = sorted(AMENITY_WEIGHTS.keys())
 
-# Default weight for amenities not present in the dictionary
 DEFAULT_AMENITY_WEIGHT: float = 0.3
 
 
@@ -97,7 +92,6 @@ def compute_amenity_score(amenity_list: list[str]) -> float:
     )
 
 
-# Vietnamese stop words to skip when tokenising amenity names for message matching
 _STOP_WORDS: set[str] = {
     "các", "và", "có", "ở", "với", "đến", "cho", "của", "này", "tại",
     "một", "là", "không", "trong", "ngoài", "theo",
@@ -108,18 +102,30 @@ _STOP_WORDS: set[str] = {
     "phòng",   # "room" — too generic on its own
 }
 
-# Keywords that signal a low-price preference
 _CHEAP_KEYWORDS: list[str] = [
     "rẻ", "giá rẻ", "tiết kiệm", "cheap", "budget", "tiền ít", "ít tiền",
     "giá thấp", "phòng rẻ", "affordable", "cost",
 ]
 
-# Pattern that signals the guest does NOT want a near-beach hotel
 _NO_BEACH_PATTERN = re.compile(
     r"không.{0,10}(gần biển|biển|beach|ở biển|sát biển)"
     r"|tránh biển|không thích biển|xa biển",
     re.IGNORECASE,
 )
+
+def _extract_desired_amenities(message_words: set[str]) -> list[str]:
+    desired_amenities: list[str] = []
+    for amenity_name in AMENITY_WEIGHTS:
+        tokens = [
+            w.strip("&/,.()")
+            for w in amenity_name.lower().split()
+            if len(w) >= 3 and w not in _STOP_WORDS
+        ]
+        
+        if tokens and any(token in message_words for token in tokens):
+            desired_amenities.append(amenity_name)
+            
+    return desired_amenities
 
 def parse_guest_preferences(message: str) -> dict:
     """
@@ -132,26 +138,15 @@ def parse_guest_preferences(message: str) -> dict:
     """
     message_lower = message.lower()
 
-    # Split message into a word set for exact word-boundary matching
-    # (prevents "khô" from matching inside "không", etc.)
     message_words = set(re.split(r'[\s,.!?;:""()\-/]+', message_lower))
 
     prefer_cheap    = any(kw in message_lower for kw in _CHEAP_KEYWORDS)
     prefer_no_beach = bool(_NO_BEACH_PATTERN.search(message_lower))
-
-    desired_amenities: list[str] = []
-    for amenity_name in AMENITY_WEIGHTS:
-        tokens = [
-            w.strip("&/,.()")
-            for w in amenity_name.lower().split()
-            if len(w) >= 3 and w not in _STOP_WORDS
-        ]
-        # Use word-set membership — not substring — to avoid false positives
-        if tokens and any(token in message_words for token in tokens):
-            desired_amenities.append(amenity_name)
+    desired_amenities = _extract_desired_amenities(message_words)
 
     return {
         "prefer_cheap": prefer_cheap,
         "prefer_no_beach": prefer_no_beach,
         "desired_amenities": desired_amenities,
     }
+

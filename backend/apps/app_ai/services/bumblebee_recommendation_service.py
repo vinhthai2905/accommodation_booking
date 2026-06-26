@@ -123,14 +123,10 @@ class BumblebeeRecommendationService:
             desired_amenities=desired_amenities,
         )
 
-        # Penalise hotels that have zero desired-amenity matches so they don't
-        # outrank hotels that actually have what the guest asked for.
         no_match_penalty = -5.0 if (desired_amenities and not matched_amenities) else 0.0
 
-        # Bonus for cheap preference: same inverse formula as training (0 – 10)
         cheap_bonus = (10.0 / (1 + price / 300_000)) if prefer_cheap else 0.0
         
-        # Penalise near-beach hotels if the guest explicitly doesn't want them
         no_beach_penalty = -15.0 if (prefer_no_beach and is_near_beach) else 0.0
 
         return base_score + amenity_bonus + cheap_bonus + no_match_penalty + no_beach_penalty, amenity_quality_score, matched_amenities
