@@ -21,3 +21,12 @@ export const updateAdminRegistrationStatus = async (id, payload) => {
 
     return data
 }
+
+export const downloadAdminRegistrationDocument = async (id) => {
+    const response = await bookingAPI.get(`/api/admin/hotel/registrations/${id}/document`, {
+        headers: buildTokenHeader(),
+        responseType: 'blob'
+    })
+    
+    return response.data
+}

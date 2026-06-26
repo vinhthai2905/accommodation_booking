@@ -1,4 +1,5 @@
 import pandas as pd
+
 from sklearn.preprocessing import MultiLabelBinarizer
 from apps.app_ai.helpers.amenity_helpers import ( 
     ALL_AMENITIES,
@@ -6,8 +7,9 @@ from apps.app_ai.helpers.amenity_helpers import (
     compute_amenity_score,
 )
 
-def build_feature_matrix(df: pd.DataFrame) -> pd.DataFrame:
+def clean_hotel_data(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
+    
     df["gia_phong_thap_nhat"] = df["gia_phong_thap_nhat"].astype(float)
     df["khoan_cach_toi_bien"] = df["khoan_cach_toi_bien"].astype(float)
     df["gan_bien"] = (
@@ -19,27 +21,30 @@ def build_feature_matrix(df: pd.DataFrame) -> pd.DataFrame:
         .astype(int)
     )
     df["amenity_list"] = df["tien_nghi"].apply(parse_amenities)
-    df["amenity_count"] = df["amenity_list"].apply(len)
-    df["amenity_score"] = df["amenity_list"].apply(compute_amenity_score)
+    
+    return df
+
+def build_feature_matrix(df: pd.DataFrame) -> pd.DataFrame:
+    amenity_count = df["amenity_list"].apply(len)
+    amenity_score = df["amenity_list"].apply(compute_amenity_score)
+    
     mlb = MultiLabelBinarizer(classes=ALL_AMENITIES)
     amenity_matrix = pd.DataFrame(
         mlb.fit_transform(df["amenity_list"]),
         columns=[f"has__{a}" for a in ALL_AMENITIES],
         index=df.index,
     )
+    
     feature_df = pd.concat(
         [
-            df[[
-                "gia_phong_thap_nhat",
-                "khoan_cach_toi_bien",
-                "gan_bien",
-                "amenity_count",
-                "amenity_score",
-            ]],
+            df[["gia_phong_thap_nhat", "khoan_cach_toi_bien", "gan_bien"]],
+            amenity_count.rename("amenity_count"),
+            amenity_score.rename("amenity_score"),
             amenity_matrix,
         ],
         axis=1,
     )
+    
     return feature_df
 
 def compute_recommendation_score(df: pd.DataFrame) -> pd.Series:

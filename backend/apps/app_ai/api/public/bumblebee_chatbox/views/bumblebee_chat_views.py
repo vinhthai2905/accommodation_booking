@@ -12,19 +12,18 @@ from apps.app_ai.api.public.bumblebee_chatbox.serializers.bumblebee_chat_seriali
 )
 from apps.app_ai.helpers.amenity_helpers import parse_guest_preferences
 class BumblebeeChatView(APIView):
-    def _detect_user_intents(self, user_message: str, prefer_no_beach: bool):
+    def _detect_user_intents(self, user_message: str, prefer_no_beach: bool, desired_amenities: list[str]):
+        import re
         has_price_intent = any(
-            keyword in user_message
+            re.search(rf"\b{keyword}\b", user_message)
             for keyword in ["rẻ", "giá", "tiền", "cheap", "cost", "tiết kiệm"]
         )
         has_beach_intent = any(
-            keyword in user_message
+            re.search(rf"\b{keyword}\b", user_message)
             for keyword in ["biển", "beach", "cát", "sóng", "đại dương"]
         ) and not prefer_no_beach
-        has_amenity_intent = any(
-            keyword in user_message
-            for keyword in ["tiện nghi", "wifi", "bể bơi", "hồ bơi", "pool", "dịch vụ", "ăn sáng"]
-        )
+        
+        has_amenity_intent = len(desired_amenities) > 0
         return has_price_intent, has_beach_intent, has_amenity_intent
     def _generate_chatbot_response(self, prefer_no_beach: bool, has_price_intent: bool, has_beach_intent: bool, has_amenity_intent: bool) -> str:
         if prefer_no_beach and has_price_intent:
@@ -58,7 +57,7 @@ class BumblebeeChatView(APIView):
         prefer_no_beach   = preferences["prefer_no_beach"]
         desired_amenities = preferences["desired_amenities"]
         has_price_intent, has_beach_intent, has_amenity_intent = self._detect_user_intents(
-            user_message, prefer_no_beach
+            user_message, prefer_no_beach, desired_amenities
         )
         response_text = self._generate_chatbot_response(
             prefer_no_beach, has_price_intent, has_beach_intent, has_amenity_intent

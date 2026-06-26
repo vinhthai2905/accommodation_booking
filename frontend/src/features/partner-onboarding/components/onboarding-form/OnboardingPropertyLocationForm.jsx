@@ -1,6 +1,6 @@
-import { Map, MapPin, Umbrella, TreePine } from "lucide-react"
+import { Map, MapPin, Umbrella, TreePine, Loader2 } from "lucide-react"
 
-export default function OnboardingPropertyLocationForm({register, wards, watch}) {
+export default function OnboardingPropertyLocationForm({register, wards, watch, errors, isSearching}) {
     return (
         <>
             <div className="mb-6">
@@ -12,8 +12,12 @@ export default function OnboardingPropertyLocationForm({register, wards, watch})
                 <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Khu vực / Phường xã (*)</label>
                     <select
-                        {...register("id_ward", { required: true })}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white text-gray-900 transition-all text-sm"
+                        {...register("id_ward", { required: "Vui lòng chọn phường/xã" })}
+                        className={`w-full px-4 py-2.5 border rounded-lg outline-none bg-white transition-all text-sm ${
+                            errors?.id_ward 
+                                ? "border-red-500 focus:ring-2 focus:ring-red-200 focus:border-red-500 text-red-900" 
+                                : "border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                        }`}
                     >
                         <option value="">-- Chọn Phường / Xã --</option>
                         {wards.map(ward => (
@@ -22,16 +26,37 @@ export default function OnboardingPropertyLocationForm({register, wards, watch})
                             </option>
                         ))}
                     </select>
+                    {errors?.id_ward && (
+                        <p className="mt-1 text-sm text-red-500">{errors.id_ward.message}</p>
+                    )}
                 </div>
 
                 <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Địa chỉ chi tiết (*)</label>
+                    <div className="flex items-center gap-2 mb-1">
+                        <label className="block text-sm font-semibold text-gray-700">Địa chỉ chi tiết (*)</label>
+                        {isSearching && (
+                            <span className="flex items-center gap-1.5 text-xs text-blue-600 font-medium animate-pulse">
+                                <Loader2 size={14} className="animate-spin" />
+                                Đang quét bản đồ...
+                            </span>
+                        )}
+                    </div>
                     <input
                         type="text"
-                        {...register("address", { required: true })}
+                        {...register("address", { 
+                            required: "Vui lòng nhập địa chỉ chi tiết",
+                            minLength: { value: 5, message: "Địa chỉ chi tiết phải có ít nhất 5 ký tự" }
+                        })}
                         placeholder="Ví dụ: 02 Thanh Sơn, Phường Thanh Bình..."
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all text-sm text-gray-900 bg-white"
+                        className={`w-full px-4 py-2.5 border rounded-lg outline-none transition-all text-sm bg-white ${
+                            errors?.address 
+                                ? "border-red-500 focus:ring-2 focus:ring-red-200 focus:border-red-500 text-red-900" 
+                                : "border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                        }`}
                     />
+                    {errors?.address && (
+                        <p className="mt-1 text-sm text-red-500">{errors.address.message}</p>
+                    )}
                 </div>
 
                 <div className="pt-2">

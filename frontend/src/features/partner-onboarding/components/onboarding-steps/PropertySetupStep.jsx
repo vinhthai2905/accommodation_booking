@@ -19,13 +19,13 @@ L.Icon.Default.mergeOptions({
 
 
 export default function PropertySetupStep({ wards, prevStep, nextStep }) {
-    const { register, watch, setValue } = useFormContext()
+    const { register, watch, setValue, setError, clearErrors, formState: { errors } } = useFormContext()
     const address = watch("address")
     const id_ward = watch("id_ward")
     const latitude = watch("latitude")
     const longitude = watch("longitude")
 
-    const notLocationValue = usePropertyLocation(address, id_ward, wards, setValue)
+    const { isSearching } = usePropertyLocation(address, id_ward, wards, setValue, setError, clearErrors) || { isSearching: false }
 
     const notValue = usePropertyBeachDistanceAnalyzation(latitude, longitude, setValue)
 
@@ -33,6 +33,9 @@ export default function PropertySetupStep({ wards, prevStep, nextStep }) {
         [15.85, 107.9],
         [16.35, 108.55],
     ]
+
+    const hasStep2Errors = !!errors.address || !!errors.id_ward
+    const isNextDisabled = isSearching || hasStep2Errors
 
     return (
         <div className="absolute inset-0 z-0">
@@ -56,6 +59,8 @@ export default function PropertySetupStep({ wards, prevStep, nextStep }) {
                     register={register}
                     wards={wards}
                     watch={watch}
+                    errors={errors}
+                    isSearching={isSearching}
                 />
 
                 <div className="mt-8 pt-6 border-t border-gray-100 flex justify-between items-center">
@@ -69,7 +74,12 @@ export default function PropertySetupStep({ wards, prevStep, nextStep }) {
                     <button
                         type="button"
                         onClick={nextStep}
-                        className="px-6 py-2.5 bg-[#006ce4] hover:bg-[#0053b4] text-white font-bold rounded-lg shadow transition-colors flex items-center gap-2 text-sm"
+                        disabled={isNextDisabled}
+                        className={`px-6 py-2.5 font-bold rounded-lg shadow transition-colors flex items-center gap-2 text-sm ${
+                            isNextDisabled 
+                                ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
+                                : "bg-[#006ce4] hover:bg-[#0053b4] text-white"
+                        }`}
                     >
                         Tiếp tục
                     </button>

@@ -3,6 +3,7 @@ import toast from "react-hot-toast"
 
 export function usePartnerOnboardingForm() {
     const methods = useForm({
+        mode: "onTouched",
         defaultValues: {
             hotel_name: "",
             id_hotel_type: "",

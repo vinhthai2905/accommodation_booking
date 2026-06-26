@@ -140,7 +140,7 @@ def parse_guest_preferences(message: str) -> dict:
 
     message_words = set(re.split(r'[\s,.!?;:""()\-/]+', message_lower))
 
-    prefer_cheap    = any(kw in message_lower for kw in _CHEAP_KEYWORDS)
+    prefer_cheap = any(re.search(rf"\b{kw}\b", message_lower) for kw in _CHEAP_KEYWORDS)
     prefer_no_beach = bool(_NO_BEACH_PATTERN.search(message_lower))
     desired_amenities = _extract_desired_amenities(message_words)
 

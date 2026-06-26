@@ -35,7 +35,9 @@ load_dotenv(BASE_DIR / ".env")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-tj8a^b&&bqea=5j530!(sqb%*km-d5e-q5nw8g#e1j1#_ib7m4'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# Secret key for encrypting partner uploaded documents (e.g., business licenses)
+# WARNING: If this key is lost, all encrypted documents will be unrecoverable.
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -176,6 +178,7 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_VERIFICATION_TIMEOUT = 1 * 60
 
+DOCUMENT_ENCRYPTION_KEY = os.environ.get('DOCUMENT_ENCRYPTION_KEY')
 
 FRONT_END_URL = "http://localhost:5173"
 

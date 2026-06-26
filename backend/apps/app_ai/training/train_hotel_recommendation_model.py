@@ -5,7 +5,6 @@ import numpy as np
 import pandas as pd
 
 from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.model_selection import cross_val_score
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
@@ -16,26 +15,16 @@ from apps.app_ai.helpers.amenity_helpers import (
     parse_amenities,
 )
 
-from apps.app_ai.helpers.train_bumblebee_helpers import build_feature_matrix, compute_recommendation_score
+from apps.app_ai.helpers.train_bumblebee_helpers import clean_hotel_data, build_feature_matrix, compute_recommendation_score
 from apps.app_ai.config.settings import MODEL_PATH, DATASET_PATH
 
 def load_and_prepare_data(dataset_path: str):
-    df = pd.read_csv(dataset_path, encoding="utf-8-sig")
+    raw_df = pd.read_csv(dataset_path, encoding="utf-8-sig")
 
+    df = clean_hotel_data(raw_df)
+ 
     feature_matrix = build_feature_matrix(df)
-
-    df["amenity_list"] = df["tien_nghi"].apply(parse_amenities)
-    df["gan_bien"] = (
-        df["gan_bien"]
-        .astype(str)
-        .str.lower()
-        .map({"true": 1, "false": 0, "1": 1, "0": 0})
-        .fillna(0)
-        .astype(int)
-    )
-    df["khoan_cach_toi_bien"] = df["khoan_cach_toi_bien"].astype(float)
-    df["gia_phong_thap_nhat"] = df["gia_phong_thap_nhat"].astype(float)
-
+    
     target_scores = compute_recommendation_score(df)
     
     return df, feature_matrix, target_scores
