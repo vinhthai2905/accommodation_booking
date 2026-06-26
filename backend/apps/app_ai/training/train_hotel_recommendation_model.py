@@ -22,7 +22,7 @@ from apps.app_ai.config.settings import MODEL_PATH, DATASET_PATH
 def load_and_prepare_data(dataset_path: str):
     df = pd.read_csv(dataset_path, encoding="utf-8-sig")
 
-    X = build_feature_matrix(df)
+    feature_matrix = build_feature_matrix(df)
 
     df["amenity_list"] = df["tien_nghi"].apply(parse_amenities)
     df["gan_bien"] = (
@@ -36,11 +36,11 @@ def load_and_prepare_data(dataset_path: str):
     df["khoan_cach_toi_bien"] = df["khoan_cach_toi_bien"].astype(float)
     df["gia_phong_thap_nhat"] = df["gia_phong_thap_nhat"].astype(float)
 
-    y = compute_recommendation_score(df)
+    target_scores = compute_recommendation_score(df)
     
-    return df, X, y
+    return df, feature_matrix, target_scores
 
-def train_and_evaluate_model(X: pd.DataFrame, y: pd.Series):
+def train_and_evaluate_model(feature_matrix: pd.DataFrame, target_scores: pd.Series):
     model = GradientBoostingRegressor(
         n_estimators=300,
         max_depth=4,
@@ -49,11 +49,11 @@ def train_and_evaluate_model(X: pd.DataFrame, y: pd.Series):
         random_state=42,
     )
 
-    cv_scores = cross_val_score(model, X, y, cv=5, scoring="r2")
+    cv_scores = cross_val_score(model, feature_matrix, target_scores, cv=5, scoring="r2")
     print(f"Cross-val R² scores: {np.round(cv_scores, 4)}")
     print(f"Mean R²: {cv_scores.mean():.4f}  ±  {cv_scores.std():.4f}")
 
-    model.fit(X, y)
+    model.fit(feature_matrix, target_scores)
     return model
 
 def export_model_bundle(model, feature_columns: list[str]):
@@ -68,9 +68,9 @@ def export_model_bundle(model, feature_columns: list[str]):
     joblib.dump(artifact, MODEL_PATH)
     print("\n Bumblebee model trained and saved to:", MODEL_PATH)
 
-def print_training_report(df: pd.DataFrame, X: pd.DataFrame, y: pd.Series, model):
-    df["recommendation_score"] = y
-    df["predicted_score"] = model.predict(X)
+def print_training_report(df: pd.DataFrame, feature_matrix: pd.DataFrame, target_scores: pd.Series, model):
+    df["recommendation_score"] = target_scores
+    df["predicted_score"] = model.predict(feature_matrix)
 
     report = df[["ten_khach_san", "gia_phong_thap_nhat", "gan_bien",
                  "recommendation_score", "predicted_score"]].sort_values(
@@ -79,19 +79,19 @@ def print_training_report(df: pd.DataFrame, X: pd.DataFrame, y: pd.Series, model
     print("\n── Hotel Recommendation Scores ───────────────────────────────")
     print(report.to_string(index=False))
 
-    importances = pd.Series(model.feature_importances_, index=X.columns)
+    importances = pd.Series(model.feature_importances_, index=feature_matrix.columns)
     print("\n── Top 15 Feature Importances ────────────────────────────────")
     print(importances.nlargest(15).round(4).to_string())
 
 
 def bumblebee_train():
-    df, X, y = load_and_prepare_data(DATASET_PATH)
+    df, feature_matrix, target_scores = load_and_prepare_data(DATASET_PATH)
     
-    model = train_and_evaluate_model(X, y)
+    model = train_and_evaluate_model(feature_matrix, target_scores)
     
-    export_model_bundle(model, list(X.columns))
+    export_model_bundle(model, list(feature_matrix.columns))
     
-    print_training_report(df, X, y, model)
+    print_training_report(df, feature_matrix, target_scores, model)
 
 
 if __name__ == "__main__":

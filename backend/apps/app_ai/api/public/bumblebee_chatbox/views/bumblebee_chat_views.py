@@ -68,6 +68,7 @@ class BumblebeeChatView(APIView):
             desired_amenities=desired_amenities,
             prefer_cheap=prefer_cheap,
             prefer_no_beach=prefer_no_beach,
+            prefer_beach=has_beach_intent,
         )
         serialized = BumblebeeRecommendResultSerializer(
             recommendations,

@@ -98,6 +98,7 @@ class BumblebeeRecommendationService:
         desired_amenities: list[str],
         prefer_cheap: bool = False,
         prefer_no_beach: bool = False,
+        prefer_beach: bool = False,
     ) -> tuple[float, float, list[str]]:
         """
         Run the ML model and apply personalised bonuses.
@@ -128,8 +129,9 @@ class BumblebeeRecommendationService:
         cheap_bonus = (10.0 / (1 + price / 300_000)) if prefer_cheap else 0.0
         
         no_beach_penalty = -15.0 if (prefer_no_beach and is_near_beach) else 0.0
+        not_beach_penalty = -15.0 if (prefer_beach and not is_near_beach) else 0.0
 
-        return base_score + amenity_bonus + cheap_bonus + no_match_penalty + no_beach_penalty, amenity_quality_score, matched_amenities
+        return base_score + amenity_bonus + cheap_bonus + no_match_penalty + no_beach_penalty + not_beach_penalty, amenity_quality_score, matched_amenities
 
     @classmethod
     def _build_hotel_entry(
@@ -167,6 +169,7 @@ class BumblebeeRecommendationService:
         desired_amenities: list[str] | None = None,
         prefer_cheap: bool = False,
         prefer_no_beach: bool = False,
+        prefer_beach: bool = False,
     ) -> list[dict]:
         model_bundle    = cls._load_model_bundle()
         model           = model_bundle["model"]
@@ -193,6 +196,7 @@ class BumblebeeRecommendationService:
                 desired_amenities=desired_amenities,
                 prefer_cheap=prefer_cheap,
                 prefer_no_beach=prefer_no_beach,
+                prefer_beach=prefer_beach,
             )
 
             recommendations.append(cls._build_hotel_entry(

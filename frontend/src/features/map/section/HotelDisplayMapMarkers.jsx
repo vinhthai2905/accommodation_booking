@@ -43,7 +43,6 @@ export default function HotelDisplayMapMarkers({
             </button>
 
             <MapContainer
-
                 center={[16.047079, 108.20623]}
                 zoom={DA_NANG_ZOOM}
                 scrollWheelZoom={true}
