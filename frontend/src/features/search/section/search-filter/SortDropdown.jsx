@@ -1,13 +1,16 @@
 import { clsx } from "clsx"
+import { useSearchParams } from "react-router"
 
 import SortOptionItem from "../../components/search-filter/SortOptionItem"
 
 export default function SortDropdown({ paginateHotelsList }) {
+    const [searchParams] = useSearchParams()
+    const location = searchParams.get("location") || "Kết quả"
 
     return (
         <div className="relative flex flex-col gap-3">
             <h2 className="text-lg font-semibold text-black">
-                TP. Ho Chi Minh: tìm thấy {paginateHotelsList.length} chỗ nghĩ
+                {location}: tìm thấy {paginateHotelsList.length} chỗ nghỉ
             </h2>
             <div className={clsx(
                 "w-fit inline items-center",

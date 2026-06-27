@@ -35,7 +35,7 @@ export default function useRegisterPartnerForm() {
     try {
       const responseData = await registerPartner(data)
       const { user, access_token } = responseData
-      setAuthUserState(access_token, user.email, user.personal_info, user.role)
+      setAuthUserState(access_token, user.email, user.personal_info, user.role, user.verified_at)
       toaster.success("Tạo tài khoản thành công.")
       reset()
       navigate("/partner/onboarding")

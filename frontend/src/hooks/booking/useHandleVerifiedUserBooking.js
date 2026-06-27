@@ -2,7 +2,7 @@ import { toast } from "react-hot-toast"
 import { useAuthUserContext } from "../authentication/common/useAuthUserContext"
 
 export default function useHandleVerifiedUserBooking() {
-    const { user } = useAuthUserContext()
+    const { user, isVerified } = useAuthUserContext()
 
     const checkVerifiedUser = () => {
         if (!user) {
@@ -10,7 +10,7 @@ export default function useHandleVerifiedUserBooking() {
             return false
         }
         
-        if (!user.verified_at) {
+        if (!isVerified) {
             toast.error("Tài khoản của bạn chưa được xác thực. Vui lòng xác thực email để tiếp tục đặt phòng.")
             return false
         }

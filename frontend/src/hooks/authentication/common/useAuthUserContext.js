@@ -9,6 +9,7 @@ export const useAuthUserContext = () => {
         setAuthUserState,
         clearAuthUserState,
         isAuthenticated,
+        isVerified,
         accessToken
     } = useContext(AuthUserContext)
 
@@ -18,6 +19,7 @@ export const useAuthUserContext = () => {
         setAuthUserState,
         clearAuthUserState,
         isAuthenticated,
+        isVerified,
         accessToken
     }
 }
