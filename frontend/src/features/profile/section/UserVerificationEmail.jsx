@@ -5,6 +5,7 @@ import VerificationStateIcons from "../ui/user-profile/verify-email/Verification
 import { useEffect } from "react"
 import { useSearchParams, useNavigate } from "react-router"
 import { clsx } from "clsx"
+import { useQueryClient } from "@tanstack/react-query"
 
 import { useUserVerifyEmailMutation } from "../../../hooks/profile/user-profile/useUserVerifyEmailMutation"
 
@@ -13,6 +14,7 @@ export default function UserVerificationEmail() {
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
     const verifyMutation = useUserVerifyEmailMutation()
+    const queryClient = useQueryClient()
 
     const uid = searchParams.get("uid")
     const token = searchParams.get("token")
@@ -30,6 +32,13 @@ export default function UserVerificationEmail() {
             verifyMutation.mutate({ uid, token })
         }
     })
+
+    useEffect(() => {
+        if (verifyMutation.isSuccess) {
+            queryClient.invalidateQueries({ queryKey: ["fetchAuthUser"] })
+            queryClient.invalidateQueries({ queryKey: ["userProfile"] })
+        }
+    }, [verifyMutation.isSuccess, queryClient])
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-indigo-50 via-white to-purple-50 px-4 relative overflow-hidden">

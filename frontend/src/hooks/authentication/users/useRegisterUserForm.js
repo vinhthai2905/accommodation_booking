@@ -8,6 +8,7 @@ import { useAuthUserContext } from "../common/useAuthUserContext"
 import { registerUser } from "../../../services/authentication/userAuthServices"
 
 import { defaultTestValues } from "../../../features/authentication/configs/DefaultValues"
+import { FocusFieldError } from "../../../helpers/authentication/focusFieldError"
 
 export default function useRegisterUserForm() {
   const [isLoading, setLoading] = useState(false)
@@ -48,10 +49,7 @@ export default function useRegisterUserForm() {
       if (error.response && error.response.status >= 400 && error.response.status < 500) {
         const responseData = error.response.data
         toast.error("Đăng ký không thành công.")
-        for (const [keyInput, err] of Object.entries(responseData)) {
-          const errorMessage = Array.isArray(err) ? err[0] : err
-          setError(keyInput, { type: "server", message: errorMessage }, { shouldFocus: true })
-        }
+        FocusFieldError(responseData, setError)
       } else {
         toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}`)
       }
