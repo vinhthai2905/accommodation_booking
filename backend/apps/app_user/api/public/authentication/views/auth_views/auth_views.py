@@ -58,12 +58,14 @@ class AuthLogoutView(APIView):
     serializer_class = LogoutSerializer
 
     def post(self, request: Request, *args, **kwargs):
-        logout_serializer = self.serializer_class(
-            data={"refresh": request.COOKIES.get("refresh_token")}
-        )
+        refresh_token = request.COOKIES.get("refresh_token")
 
-        logout_serializer.is_valid(raise_exception=True)
-        logout_serializer.perform_blacklist()
+        if refresh_token:
+            logout_serializer = self.serializer_class(
+                data={"refresh": refresh_token}
+            )
+            logout_serializer.is_valid(raise_exception=True)
+            logout_serializer.perform_blacklist()
 
         response = Response(
             data={"message": "Token successfully deleted."},

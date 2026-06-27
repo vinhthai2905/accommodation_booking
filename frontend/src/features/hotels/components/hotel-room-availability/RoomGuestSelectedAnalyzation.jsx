@@ -1,6 +1,7 @@
 import { clsx } from "clsx"
 import { AlertTriangle, Baby, ChevronRight } from "lucide-react"
 import { Link } from "react-router"
+import useHandleVerifiedUserBooking from "../../../../hooks/booking/useHandleVerifiedUserBooking"
 
 export default function RoomGuestSelectedAnalyzation({
     selectedRoomIds,
@@ -11,6 +12,8 @@ export default function RoomGuestSelectedAnalyzation({
     childPolicy,
     bookingSearchParams
 }) {
+    const { checkVerifiedUser } = useHandleVerifiedUserBooking()
+
     return (
         <>
             <div className="flex flex-col gap-1">
@@ -69,7 +72,16 @@ export default function RoomGuestSelectedAnalyzation({
                         ? "bg-slate-200 text-slate-400 cursor-not-allowed"
                         : "bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-200 hover:shadow-blue-300 active:scale-[0.98]"
                 )}
-                onClick={(e) => isOverCapacity && e.preventDefault()}
+                onClick={(e) => {
+                    if (isOverCapacity) {
+                        e.preventDefault()
+                        return
+                    }
+                    if (!checkVerifiedUser()) {
+                        e.preventDefault()
+                        return
+                    }
+                }}
             >
                 <span>Đặt ngay</span>
                 {!isOverCapacity && <ChevronRight size={18} />}

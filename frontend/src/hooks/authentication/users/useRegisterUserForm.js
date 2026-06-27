@@ -32,39 +32,25 @@ export default function useRegisterUserForm() {
     setLoading(true)
 
     try {
-      const response = await registerUser(data)
-      const responseData = await response.json()
+      const responseData = await registerUser(data)
 
-      if (!response.ok) {
-        toast.error("Đăng ký không thành công.")
+      const { user, access_token } = responseData
 
-        for (const [keyInput, error] of Object.entries(responseData)) {
-          setError(
-            keyInput,
-            { type: "server", message: error },
-            { shouldFocus: true }
-          )
-        }
-      }
+      setAuthUserState(access_token, user.email, user.personal_info, user.role)
 
-      else {
-        const { user, access_token } = responseData
+      toaster.success("Tạo tài khoản thành công.")
+      reset()
 
-        setAuthUserState(access_token, user.email, user.personal_info, user.role)
-
-        toaster.success("Tạo tài khoản thành công.")
-        reset()
-
-        navigate("/index")
-      }
-
+      navigate("/index")
     }
+    
     catch (error) {
       if (error.response && error.response.status >= 400 && error.response.status < 500) {
         const responseData = error.response.data
         toast.error("Đăng ký không thành công.")
         for (const [keyInput, err] of Object.entries(responseData)) {
-          setError(keyInput, { type: "server", message: err }, { shouldFocus: true })
+          const errorMessage = Array.isArray(err) ? err[0] : err
+          setError(keyInput, { type: "server", message: errorMessage }, { shouldFocus: true })
         }
       } else {
         toaster.error(`Hệ thống xảy ra lỗi, vui lòng thử lại sau. ${error.message}`)
