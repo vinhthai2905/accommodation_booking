@@ -130,8 +130,8 @@ class AuthenticatedUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NguoiDung
-        fields = ["email", "personal_info", "role"]
-        read_only_fields = ["email", "personal_info", "role"]
+        fields = ["email", "personal_info", "role", "verified_at"]
+        read_only_fields = ["email", "personal_info", "role", "verified_at"]
 
     def get_role(self, user: NguoiDung):
         role: VaiTroNguoiDung = self.context.get("role")
