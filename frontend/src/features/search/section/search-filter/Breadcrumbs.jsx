@@ -1,12 +1,7 @@
 import { clsx } from "clsx"
+import { useSearchParams } from "react-router"
 
 import BreadcrumItem from "../../components/search-filter/BreadcrumItem"
-
-const searchNav = [
-    { label: "Home page", to: "/" },
-    { label: "Vietnam", to: "/vietnam" },
-    { label: "TP. Ho Chi Minh", to: "/hcm" },
-]
 
 const hotelNav = [
     { label: "Trang chủ", to: "/" },
@@ -18,6 +13,14 @@ const hotelNav = [
 ]
 
 export default function Breadcrumbs({ usedFor }) {
+    const [searchParams] = useSearchParams()
+    const location = searchParams.get("location") || "Kết quả"
+
+    const searchNav = [
+        { label: "Home page", to: "/" },
+        { label: "Vietnam", to: "/vietnam" },
+        { label: location, to: `/?location=${encodeURIComponent(location)}` },
+    ]
 
     return (
         <div className="text-xs text-[#066ce4]">

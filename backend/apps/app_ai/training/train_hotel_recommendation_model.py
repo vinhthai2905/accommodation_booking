@@ -5,10 +5,8 @@ import numpy as np
 import pandas as pd
 
 from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.model_selection import cross_val_score
 
-# Allow running the script directly from the backend/ directory
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 from apps.app_ai.helpers.amenity_helpers import ( 
@@ -16,31 +14,22 @@ from apps.app_ai.helpers.amenity_helpers import (
     ALL_AMENITIES,
     parse_amenities,
 )
-from apps.app_ai.helpers.train_bumblebee_helpers import build_feature_matrix, compute_recommendation_score
+
+from apps.app_ai.helpers.train_bumblebee_helpers import clean_hotel_data, build_feature_matrix, compute_recommendation_score
 from apps.app_ai.config.settings import MODEL_PATH, DATASET_PATH
 
-def bumblebee_train():
-    df = pd.read_csv(DATASET_PATH, encoding="utf-8-sig")
+def load_and_prepare_data(dataset_path: str):
+    raw_df = pd.read_csv(dataset_path, encoding="utf-8-sig")
 
-    # ── Features ─────────────────────────────────────────────────────────────
-    X = build_feature_matrix(df)
+    df = clean_hotel_data(raw_df)
+ 
+    feature_matrix = build_feature_matrix(df)
+    
+    target_scores = compute_recommendation_score(df)
+    
+    return df, feature_matrix, target_scores
 
-    # Temporarily attach amenity_list to df for score computation
-    df["amenity_list"] = df["tien_nghi"].apply(parse_amenities)
-    df["gan_bien"] = (
-        df["gan_bien"]
-        .astype(str)
-        .str.lower()
-        .map({"true": 1, "false": 0, "1": 1, "0": 0})
-        .fillna(0)
-        .astype(int)
-    )
-    df["khoan_cach_toi_bien"] = df["khoan_cach_toi_bien"].astype(float)
-    df["gia_phong_thap_nhat"] = df["gia_phong_thap_nhat"].astype(float)
-
-    y = compute_recommendation_score(df)
-
-    # Model 
+def train_and_evaluate_model(feature_matrix: pd.DataFrame, target_scores: pd.Series):
     model = GradientBoostingRegressor(
         n_estimators=300,
         max_depth=4,
@@ -49,26 +38,28 @@ def bumblebee_train():
         random_state=42,
     )
 
-    # Cross-validate to check overfitting on small dataset
-    cv_scores = cross_val_score(model, X, y, cv=5, scoring="r2")
+    cv_scores = cross_val_score(model, feature_matrix, target_scores, cv=5, scoring="r2")
     print(f"Cross-val R² scores: {np.round(cv_scores, 4)}")
     print(f"Mean R²: {cv_scores.mean():.4f}  ±  {cv_scores.std():.4f}")
 
-    model.fit(X, y)
+    model.fit(feature_matrix, target_scores)
+    return model
 
-    # Save
+def export_model_bundle(model, feature_columns: list[str]):
     artifact = {
         "model": model,
         "all_amenities": ALL_AMENITIES,
         "amenity_weights": AMENITY_WEIGHTS,
-        "feature_columns": list(X.columns),
+        "feature_columns": feature_columns,
     }
+    
     os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
     joblib.dump(artifact, MODEL_PATH)
+    print("\n Bumblebee model trained and saved to:", MODEL_PATH)
 
-    # Report 
-    df["recommendation_score"] = y
-    df["predicted_score"] = model.predict(X)
+def print_training_report(df: pd.DataFrame, feature_matrix: pd.DataFrame, target_scores: pd.Series, model):
+    df["recommendation_score"] = target_scores
+    df["predicted_score"] = model.predict(feature_matrix)
 
     report = df[["ten_khach_san", "gia_phong_thap_nhat", "gan_bien",
                  "recommendation_score", "predicted_score"]].sort_values(
@@ -77,12 +68,19 @@ def bumblebee_train():
     print("\n── Hotel Recommendation Scores ───────────────────────────────")
     print(report.to_string(index=False))
 
-    # Feature importances (top 15)
-    importances = pd.Series(model.feature_importances_, index=X.columns)
+    importances = pd.Series(model.feature_importances_, index=feature_matrix.columns)
     print("\n── Top 15 Feature Importances ────────────────────────────────")
     print(importances.nlargest(15).round(4).to_string())
 
-    print("\n✅  Bumblebee model trained and saved to:", MODEL_PATH)
+
+def bumblebee_train():
+    df, feature_matrix, target_scores = load_and_prepare_data(DATASET_PATH)
+    
+    model = train_and_evaluate_model(feature_matrix, target_scores)
+    
+    export_model_bundle(model, list(feature_matrix.columns))
+    
+    print_training_report(df, feature_matrix, target_scores, model)
 
 
 if __name__ == "__main__":

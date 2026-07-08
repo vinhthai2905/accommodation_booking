@@ -1,5 +1,4 @@
-import React from 'react'
-import DBChildrenPolicy from '../components/dashboard-main/dashboard-policy-children/list-page/DBChildrenPolicy'
+import DBChildrenPolicy from '../components/dashboard-main/dashboard-policy-children/list-page/section/DBChildrenPolicy'
 
 export default function DashboardChildrenPolicy() {
     return (

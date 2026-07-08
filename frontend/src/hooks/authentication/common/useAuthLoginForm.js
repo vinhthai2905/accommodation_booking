@@ -35,7 +35,7 @@ export default function useAuthLoginForm() {
         try {
             const responseData = await loginAuthUser(credentials)
             const { user, access_token } = responseData
-            authContext.setAuthUserState(access_token, user.email, user.personal_info, user.role)
+            authContext.setAuthUserState(access_token, user.email, user.personal_info, user.role, user.verified_at)
             toast.success("Đăng nhập thành công")
             navigateAfterAuth(user.role)
         }

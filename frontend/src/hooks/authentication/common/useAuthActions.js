@@ -12,21 +12,22 @@ export default function useAuthActions(setUserState, queryClient) {
         localStorage.setItem("access_token", token)
     }
 
-    const setCurrentUser = (email, personal_info, role) => {
+    const setCurrentUser = (email, personal_info, role, verified_at) => {
         if (!email || !role)
             throw new Error("Thông tin không tồn tại")
 
         setUserState({
             email,
             personal_info: personal_info || {},
-            role
+            role,
+            verified_at
         })
     }
 
-    const setAuthUserState = (access_token, email, personal_info, role) => {
+    const setAuthUserState = (access_token, email, personal_info, role, verified_at) => {
         queryClient.clear()
         setAccessToken(access_token)
-        setCurrentUser(email, personal_info, role)
+        setCurrentUser(email, personal_info, role, verified_at)
     }
 
     const clearAuthUserState = async () => {
@@ -49,7 +50,8 @@ export default function useAuthActions(setUserState, queryClient) {
             setCurrentUser(
                 responseData.user.email, 
                 responseData.user.personal_info, 
-                responseData.user.role
+                responseData.user.role,
+                responseData.user.verified_at
             )
             return responseData
         }

@@ -18,8 +18,11 @@ export default function AuthUserProvider({ children }) {
         setAuthUserState,
         clearAuthUserState,
         isAuthenticated: !!user,
+        isVerified: !!user?.verified_at,
         accessToken
     }
+
+    console.log(user)
 
     return (
         <AuthUserContext value={authUserContext}>

@@ -2,7 +2,7 @@ import { Upload, Check, Info } from "lucide-react"
 import { useFormContext } from "react-hook-form"
 
 export default function LegalInfoStep({ handleFileChange, hotelTypes, wards }) {
-    const { register, watch } = useFormContext()
+    const { register, watch, formState: { errors } } = useFormContext()
     
     const document_file = watch("document_file")
     const document_url = watch("document_url")
@@ -22,13 +22,20 @@ export default function LegalInfoStep({ handleFileChange, hotelTypes, wards }) {
                 <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Tên tài liệu chứng thực (*)</label>
                     <select 
-                        {...register("document_name", { required: true })}
-                        className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white text-gray-900 transition-all text-sm"
+                        {...register("document_name", { required: "Vui lòng chọn loại tài liệu chứng thực" })}
+                        className={`w-full px-4 py-2.5 border rounded-lg outline-none bg-white transition-all text-sm ${
+                            errors?.document_name 
+                                ? "border-red-500 focus:ring-2 focus:ring-red-200 focus:border-red-500 text-red-900" 
+                                : "border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                        }`}
                     >
                         <option value="Giấy phép kinh doanh">Giấy phép đăng ký kinh doanh</option>
                         <option value="Căn cước công dân">Căn cước công dân (Đại diện pháp luật)</option>
                         <option value="Giấy phép PCCC">Giấy chứng nhận an toàn PCCC</option>
                     </select>
+                    {errors?.document_name && (
+                        <p className="mt-1 text-sm text-red-500">{errors.document_name.message}</p>
+                    )}
                 </div>
 
                 <div>
@@ -60,7 +67,6 @@ export default function LegalInfoStep({ handleFileChange, hotelTypes, wards }) {
                     </label>
                 </div>
 
-                {/* Review summary inline at final step */}
                 <div className="mt-6 pt-6 border-t border-gray-200 space-y-3">
                     <h3 className="font-bold text-gray-800 text-sm flex items-center gap-1.5">
                         <Info size={16} className="text-blue-600" /> Xem lại thông tin đã khai báo:

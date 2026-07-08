@@ -7,6 +7,8 @@ import { Outlet, useLocation } from "react-router"
 export default function AppLayout() {
     const location = useLocation()
 
+    const isBumblebeeVisible = location.pathname.startsWith("/searchresults") || location.pathname.startsWith("/hotel")
+
     return (
         <div className={clsx(
             "min-h-screen flex flex-col"
@@ -15,7 +17,7 @@ export default function AppLayout() {
             <main className="flex-1">
                 <Outlet />
             </main>
-            <Bumblebee />
+            {isBumblebeeVisible && <Bumblebee />}
             {location.hash === "#map_opened" ? undefined : <Footer />}
         </div>
     )

@@ -209,13 +209,14 @@ class ZaloPayRefundService(ZaloPayGetOrderStatusService):
     @classmethod
     def refund(cls, app_trans_id: str, amount: int, description: str = "") -> dict:
         zp_trans_id = cls._get_zp_trans_id(app_trans_id)
+        current_timestamp = int(time.time() * 1000)
         
         mac_payload = {
             "app_id": cls.app_id,
             "zp_trans_id": zp_trans_id,
             "amount": amount,
             "description": description,
-            "timestamp": cls.timestamp
+            "timestamp": current_timestamp
         }
         
         mac = cls._generate_refund_mac(mac_payload, cls.secret_key)
@@ -225,7 +226,7 @@ class ZaloPayRefundService(ZaloPayGetOrderStatusService):
             "app_id": cls.app_id,
             "zp_trans_id": zp_trans_id,
             "amount": amount,
-            "timestamp": cls.timestamp,
+            "timestamp": current_timestamp,
             "mac": mac,
             "description": description,
         }

@@ -5,7 +5,6 @@ import hmac
 import hashlib
 
 class ZaloPayBaseService:
-    timestamp = int(time.time() * 1000)
     secret_key = settings.ZALOPAY_SECRET_KEY
     app_id = settings.ZALOPAY_APP_ID
     

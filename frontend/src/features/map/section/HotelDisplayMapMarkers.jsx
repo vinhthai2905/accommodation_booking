@@ -4,7 +4,7 @@ import MapBoundsWatcher from "../components/MapBoundsWatcher"
 import HotelMarkerIcon from "../ui/HotelMarkerIcon"
 
 import { clsx } from "clsx"
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet"
 import { Hotel, List as ListIcon } from "lucide-react"
 
 import "leaflet/dist/leaflet.css"
@@ -53,8 +53,10 @@ export default function HotelDisplayMapMarkers({
             >
                 <TileLayer
                     attribution='&copy; OpenStreetMap contributors &copy; CARTO'
-                    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                 />
+
+
                 {hotelListMap.map((hotel) => {
                     const isSelectedHotel = selectedHotel && hotel.id_hotel === selectedHotel
 

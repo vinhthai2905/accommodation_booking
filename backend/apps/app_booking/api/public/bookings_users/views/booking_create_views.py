@@ -98,7 +98,7 @@ class BookingCreateView(HotelBaseView):
 
         return PhongKhachSan.objects.select_related("id_room_type").filter(
             id_room__in=selected_room_ids
-        )
+        ).select_for_update()
 
     def _create_booking_details(
         self, booking: DatPhong, selected_rooms: QuerySet[PhongKhachSan]
@@ -184,6 +184,31 @@ class BookingCreateView(HotelBaseView):
             paid_amount = invoice.total_amount
         )
 
+    def _check_and_lock_rooms(self, selected_rooms: list, check_in_date, check_out_date):
+        selected_room_ids = [room.id_room for room in selected_rooms]
+
+        # Evaluate the queryset to apply the database lock
+        locked_rooms = list(PhongKhachSan.objects.filter(id_room__in=selected_room_ids).select_for_update())
+        
+        if len(locked_rooms) != len(selected_room_ids):
+            raise exceptions.ValidationError("Some rooms are not found.")
+
+        # Check for overlapping bookings
+        overlapping_details = ChiTietDatPhong.objects.filter(
+            id_room__in=selected_room_ids,
+            id_booking__check_in_date__lt=check_out_date,
+            id_booking__check_out_date__gt=check_in_date
+        ).exclude(id_booking__status=TrangThaiDatPhong.CANCELLED)
+
+        if overlapping_details.exists():
+            booked_room_ids = list(overlapping_details.values_list("id_room_id", flat=True).distinct())
+            booked_room_ids = [str(room_id) for room_id in booked_room_ids]
+            
+            raise exceptions.ValidationError({
+                "error": "One or more selected rooms are already booked for the specified dates.",
+                "booked_room_ids": booked_room_ids
+            })
+
     def post(self, request: Request, *args, **kwargs):
         flatten_data = self._flatten_booking_payload(request.data)
         validated_data = self._validate_booking_payload(flatten_data)
@@ -193,6 +218,12 @@ class BookingCreateView(HotelBaseView):
                 hotel = get_hotel(id_hotel=validated_data["id_hotel"])
                 hotel_child_policy = self._get_hotel_child_policy(hotel)
                 user = self._get_user_by_id(email=validated_data["email"])
+
+                self._check_and_lock_rooms(
+                    validated_data["selected_rooms"],
+                    validated_data["check_in"],
+                    validated_data["check_out"],
+                )
 
                 booking = self._create_booking(validated_data, hotel, user)
                 room_amount = self._create_booking_details(
@@ -221,6 +252,9 @@ class BookingCreateView(HotelBaseView):
                 )
         except exceptions.NotFound as e:
             raise exceptions.NotFound(detail={"error": str(e)})
+
+        except exceptions.ValidationError as e:
+            raise e
 
         except Exception as e:
             raise exceptions.APIException(detail={"error": str(e)})

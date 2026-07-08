@@ -14,6 +14,7 @@ import PaymentConfirmation from './pages/users/PaymentConfirmation'
 import Profile from './pages/users/Profile'
 import UserVerificationEmail from './features/profile/section/UserVerificationEmail'
 import UserCreateReview from './features/reviews/pages/UserCreateReview'
+import UserReviewDetail from './features/reviews/pages/UserReviewDetail'
 
 import SearchHotelsPaginationProvider from './context/search/SearchHotelsPaginationProvider'
 
@@ -134,6 +135,10 @@ function App() {
         {
           path: "profile/booking/review/:slug/:id_booking",
           element: <UserCreateReview />
+        },
+        {
+          path: "profile/booking/review-detail/:slug/:id_booking",
+          element: <UserReviewDetail />
         },
         {
           path: "book.html",

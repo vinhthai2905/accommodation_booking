@@ -40,4 +40,4 @@ class DanhGiaKhachSan(TimeStampedModel):
         db_table = "danh_gia_khach_san"
 
     def __str__(self):
-        return f"Review {self.id} - {self.rating}★"
+        return f"Review {self.id_rating} - {self.rating}★"

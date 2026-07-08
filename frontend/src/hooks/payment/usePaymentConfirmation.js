@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router"
-import { useQuery } from "@tanstack/react-query"
-import { useContext } from "react"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useContext, useEffect } from "react"
 
 import { AuthUserContext } from "../../context/authentication/AuthUserContext"
 
@@ -17,7 +17,7 @@ export default function usePaymentConfirmation() {
         enabled: !!user && !!bookingID,
         staleTime: Infinity
     })
-    
+
     const booking = isSuccess ? data?.booking_details : null
 
     return {

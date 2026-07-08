@@ -13,7 +13,7 @@ export default function ErrorLocationInput() {
                 "border-x-8 border-x-transparent",
                 "border-b-8 border-b-[rgb(204,0,0)]",
             )} />
-            Enter a destination to start searching.
+            Vui lòng chọn khu vực bạn muốn lưu trú.
         </div>
     )
 }

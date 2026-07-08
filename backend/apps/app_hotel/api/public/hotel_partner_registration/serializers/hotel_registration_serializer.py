@@ -1,5 +1,12 @@
+import os
+import uuid
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.core.files.base import ContentFile
 from rest_framework import serializers
+
 from apps.app_hotel.models import DonDangKyKhachSan, TaiLieuDangKy, LoaiKhachSan
+from helpers.encryption_utils import encrypt_document
 
 class LoaiKhachSanSerializer(serializers.ModelSerializer):
     class Meta:
@@ -50,6 +57,28 @@ class DonDangKyKhachSanSerializer(serializers.ModelSerializer):
             pass
         return ret
 
+    def _process_and_save_document(self, document_file):
+        """
+        Encrypts and saves the uploaded document to the file system.
+        Returns the final URL of the saved file.
+        """
+        doc_dir = os.path.join(settings.MEDIA_ROOT, 'registration_documents')
+        os.makedirs(doc_dir, exist_ok=True)
+        
+        fs = FileSystemStorage(location=doc_dir)
+        ext = document_file.name.split('.')[-1]
+        
+        file_bytes = document_file.read()
+        encrypted_bytes = encrypt_document(file_bytes)
+        
+        is_encrypted = (encrypted_bytes != file_bytes)
+        unique_filename = f"{uuid.uuid4().hex}.{ext}{'.enc' if is_encrypted else ''}"
+        
+        content_to_save = ContentFile(encrypted_bytes)
+        filename = fs.save(unique_filename, content_to_save)
+        
+        return f"{settings.MEDIA_URL}registration_documents/{filename}"
+
     def create(self, validated_data):
         document_name = validated_data.pop("document_name", None)
         document_url = validated_data.pop("document_url", None)
@@ -63,19 +92,7 @@ class DonDangKyKhachSanSerializer(serializers.ModelSerializer):
 
         final_url = document_url
         if document_file:
-            from django.core.files.storage import FileSystemStorage
-            from django.conf import settings
-            import os
-            import uuid
-            
-            doc_dir = os.path.join(settings.MEDIA_ROOT, 'registration_documents')
-            os.makedirs(doc_dir, exist_ok=True)
-            
-            fs = FileSystemStorage(location=doc_dir)
-            ext = document_file.name.split('.')[-1]
-            unique_filename = f"{uuid.uuid4().hex}.{ext}"
-            filename = fs.save(unique_filename, document_file)
-            final_url = f"{settings.MEDIA_URL}registration_documents/{filename}"
+            final_url = self._process_and_save_document(document_file)
 
         if document_name and final_url:
             TaiLieuDangKy.objects.create(

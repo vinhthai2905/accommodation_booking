@@ -7,7 +7,7 @@ import { registerPartner } from "../../../services/authentication/partnerAuthSer
 
 import { useAuthUserContext } from "../common/useAuthUserContext"
 
-import { defaultTestValues } from "../../../features/authentication/configs/DefaultValues"
+import { defaultTestValues, defaultPartnerTestValues } from "../../../features/authentication/configs/DefaultValues"
 import { FocusFieldError } from "../../../helpers/authentication/focusFieldError"
 
 export default function useRegisterPartnerForm() {
@@ -26,7 +26,7 @@ export default function useRegisterPartnerForm() {
   } = useForm({
     shouldFocusError: false,
     mode: "onChange",
-    defaultValues: defaultTestValues,
+    defaultValues: defaultPartnerTestValues,
   })
 
   const onValidSubmit = async (data) => {
@@ -35,7 +35,7 @@ export default function useRegisterPartnerForm() {
     try {
       const responseData = await registerPartner(data)
       const { user, access_token } = responseData
-      setAuthUserState(access_token, user.email, user.personal_info, user.role)
+      setAuthUserState(access_token, user.email, user.personal_info, user.role, user.verified_at)
       toaster.success("Tạo tài khoản thành công.")
       reset()
       navigate("/partner/onboarding")
