@@ -1,14 +1,13 @@
 import AuthTitle from "../components/AuthTitle"
 import LoginForm from "../components/LoginForm"
 import AuthSwitchLink from "../components/AuthSwitchLink"
-import SocialLoginSection from "../components/SocialLoginSection"
-import Policies from "/src/components/ui/Policies"
+import Policies from "../../../components/ui/Policies"
 
 import { useOutletContext } from "react-router"
 
 
 export default function LoginPage() {
-  const isPartner = useOutletContext()
+  const isPartner: string = useOutletContext()
   const switchLink = isPartner ? "/auth/partner/sign-up" : "/auth/sign-up"
 
   return (
