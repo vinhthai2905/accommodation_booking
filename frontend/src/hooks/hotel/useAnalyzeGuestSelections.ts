@@ -1,5 +1,5 @@
 export default function useAnalyzeGuestSelections(
-    bookingSearchParams, 
+    bookingSearchParams: URLSearchParams,
     childPolicy, 
     selectedRoomIds, 
     maxCapacitySelected

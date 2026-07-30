@@ -1,4 +1,4 @@
-/*  */import { HotelDetailsContext } from "./HotelDetailsContext"
+import { HotelDetailsContext } from "./HotelDetailsContext"
 import { useParams, useSearchParams } from "react-router"
 
 import useHotelInfo from "../../hooks/hotel/useHotelInfo"

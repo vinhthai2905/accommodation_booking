@@ -21,6 +21,6 @@ export default function useBookingNavigation() {
     }
 
     return {
-        bookingSearchParams,
+        bookingSearchParams
     }
 }
