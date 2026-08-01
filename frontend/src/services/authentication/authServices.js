@@ -1,7 +1,7 @@
 import bookingAPI from "../base/bookingAPI"
 
 export const fetchAuthUser = async () => {
-    const { data } = await bookingAPI.post(`/api/auth/user/refresh`, {}, {
+    const { data } = await bookingAPI.post(`/api/auth/user/fetch`, {}, {
         withCredentials: true,
         headers: {
             "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
@@ -38,5 +38,13 @@ export const verifyEmail = async (uidb64, token) => {
             "Content-Type": "application/json"
         }
     })
+    return data
+}
+
+export const refreshAuthUser = async () => {
+    const { data } = await bookingAPI.post(`/api/token/refresh`, {}, {
+        withCredentials: true,
+    })
+
     return data
 }

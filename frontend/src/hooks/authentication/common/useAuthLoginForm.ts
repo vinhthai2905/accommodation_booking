@@ -9,6 +9,7 @@ import { AuthUserContext } from "../../../context/authentication/AuthUserContext
 import { buildPayLoaderUserType } from "../../../helpers/authentication/buildPayloadUserType"
 import useBuildPayloadAuthType from "./useBuildPayloadAuthType"
 import useAuthNavigation from "./useAuthNavigation"
+import { AxiosError } from "axios"
 
 export default function useAuthLoginForm() {
     const authContext = useContext(AuthUserContext)
@@ -33,8 +34,7 @@ export default function useAuthLoginForm() {
         setIsLoading(true)
 
         try {
-            const responseData = await loginAuthUser(credentials)
-            const { user, access_token } = responseData
+            const { user, access_token } = await loginAuthUser(credentials)
             authContext.setAuthUserState(access_token, user.email, user.personal_info, user.role, user.verified_at)
             toast.success("Đăng nhập thành công")
             navigateAfterAuth(user.role)

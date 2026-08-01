@@ -159,7 +159,7 @@ AUTH_USER_MODEL = "app_user.NguoiDung"
 SIMPLE_JWT = {
     "USER_ID_FIELD": "id_user",
     "USER_ID_CLAIM": "user_id",
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 

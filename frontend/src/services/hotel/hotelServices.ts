@@ -1,11 +1,13 @@
+import axios from "axios"
 import bookingAPI from "../base/bookingAPI"
 
 import { Hotel } from "../../types/hotels/hotel"
 import { UUID } from "../../types/common/common"
 
-export const fetchHotel = async (hotelID: UUID): Promise<Hotel> => {
-  const { data } = await bookingAPI.get<Hotel>(`/api/hotel/${hotelID}`)
-  return data
+export const fetchHotel = async (hotelID: UUID): Promise<Hotel>=> {
+  const axiosPromise = await bookingAPI.get<Hotel>(`/api/hotel/${hotelID}`)
+  
+  return axiosPromise.data
 }
 
 export const fetchHotelImages = async (hotelID) => {

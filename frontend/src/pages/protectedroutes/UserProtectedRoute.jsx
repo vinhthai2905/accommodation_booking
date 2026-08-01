@@ -5,14 +5,14 @@ import LoadingFullScreen from "../../features/book/components/Shared/LoadingFull
 
 export default function UserProtectedRoute() {
     const { user, isFetchingUser, accessToken: hasSession, isAuthenticated } = useAuthUserContext()
-    // const isAdmin = hasSession || user.role === "Admin"
-    // const isPartner = hasSession || user.role === "Partner"
 
     const isPartnerSession = hasSession && isAuthenticated && user?.role === "Partner"
     const isAdminSession = hasSession && isAuthenticated && user?.role === "Admin"
 
-    if (hasSession && isFetchingUser)
+    if (hasSession && isFetchingUser) {
         return <LoadingFullScreen />
+    }
+
 
     if (isPartnerSession)
         return <Navigate to="/partner/dashboard" replace />

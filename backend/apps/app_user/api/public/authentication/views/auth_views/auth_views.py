@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
-from rest_framework.views import Request, Response
+from rest_framework.request import Request
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
 
@@ -13,6 +14,7 @@ from apps.app_user.api.public.authentication.serializers import (
     LogoutSerializer,
     AuthenticatedUserSerializer,
     FetchAuthUserSerializer,
+    RefreshAuthUserSerializer,
 )
 
 
@@ -61,9 +63,7 @@ class AuthLogoutView(APIView):
         refresh_token = request.COOKIES.get("refresh_token")
 
         if refresh_token:
-            logout_serializer = self.serializer_class(
-                data={"refresh": refresh_token}
-            )
+            logout_serializer = self.serializer_class(data={"refresh": refresh_token})
             logout_serializer.is_valid(raise_exception=True)
             logout_serializer.perform_blacklist()
 
@@ -90,15 +90,30 @@ class FetchAuthUserView(APIView):
             }
         )
         fetch_user_serializer.is_valid(raise_exception=True)
-        
+
         user_data = AuthenticatedUserSerializer(
             instance=request.user,
-            context={
-                "role": fetch_user_serializer.validated_data["auth_user_role"]
-            },
+            context={"role": fetch_user_serializer.validated_data["auth_user_role"]},
         ).data
 
         return Response(
             data={"user": user_data},
             status=status.HTTP_200_OK,
         )
+
+
+class RefreshAuthUserView(APIView):
+    serializer_class = RefreshAuthUserSerializer
+
+    def post(self, request: Request, *args, **kwargs):
+        refresh_token = request._request.COOKIES.get("refresh_token")
+
+        serializer: RefreshAuthUserSerializer = self.serializer_class(
+            data={"refresh_token": refresh_token}
+        )
+        
+        serializer.is_valid(raise_exception=True)
+        
+        return Response(data={
+            "message": "Successfully refresh the new token for user."
+        })

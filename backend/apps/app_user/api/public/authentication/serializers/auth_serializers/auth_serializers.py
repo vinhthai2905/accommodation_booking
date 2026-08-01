@@ -112,6 +112,20 @@ class FetchAuthUserSerializer(Serializer):
             )
 
         return auth_user_role
+    
+class RefreshAuthUserSerializer(Serializer):
+    refresh_token = serializers.CharField(required=True, write_only=True)
+    
+        
+    def validate_refresh_token(self, refresh_token: str):
+        try:
+            refresh_token = RefreshToken(token=refresh_token, verify=True)
+            
+            return refresh_token
+        except TokenError as error:
+            raise ValidationError(detail={
+                "message": error
+            })
 
 
 class PersonalInfoSerializer(serializers.ModelSerializer):
