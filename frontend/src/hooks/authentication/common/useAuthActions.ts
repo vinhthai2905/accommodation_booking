@@ -2,7 +2,7 @@ import toast from "react-hot-toast"
 import axios, { AxiosError } from "axios"
 import { useQueryClient } from "@tanstack/react-query"
 
-import { logoutAuthUser, fetchAuthUser } from "../../../services/authentication/authServices"
+import { logoutAuthUser, fetchAuthUser, refreshAuthUser } from "../../../services/authentication/authServices"
 
 import { ErrorFetchUserResponse } from "../../../types/authentication/api/apiErrorResponse"
 import { isTokenExpired } from "../../../helpers/authentication/inspectAPIMessage"
@@ -69,6 +69,8 @@ export default function useAuthActions(setUserState) {
         catch (error) {
             if (axios.isAxiosError<ErrorFetchUserResponse>(error)) {
                 if (isTokenExpired(error)) {
+                    const responseData = await refreshAuthUser()
+                    
                 }
 
                 // toast.error(`Hệ thống xảy ra lỗi. ${error.message || error}`)

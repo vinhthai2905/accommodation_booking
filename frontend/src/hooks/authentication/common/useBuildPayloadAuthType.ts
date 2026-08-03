@@ -1,13 +1,15 @@
 import { useLocation } from "react-router"
 
-export default function useBuildPayloadAuthType() {
+import { Role } from "../../../types/authentication/domain/choices"
+
+export default function useBuildPayloadAuthType(): Role {
     const location = useLocation()
 
     if (location.pathname.includes("partner")) {
-        return "Đối tác"
+        return Role.Partner
     } else if (location.pathname.includes("admin")) {
-        return "Admin"
+        return Role.Admin
     }
-    
-    return "Khách hàng"
+
+    return Role.Customer
 }

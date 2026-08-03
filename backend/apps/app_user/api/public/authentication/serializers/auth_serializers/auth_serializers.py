@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer, Serializer, ValidationEr
 from rest_framework.exceptions import ValidationError
 from rest_framework.exceptions import AuthenticationFailed, APIException
 
-from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.contrib.auth import authenticate
@@ -115,8 +115,8 @@ class FetchAuthUserSerializer(Serializer):
     
 class RefreshAuthUserSerializer(Serializer):
     refresh_token = serializers.CharField(required=True, write_only=True)
+    access_token = serializers.CharField(read_only=True)
     
-        
     def validate_refresh_token(self, refresh_token: str):
         try:
             refresh_token = RefreshToken(token=refresh_token, verify=True)
@@ -124,9 +124,16 @@ class RefreshAuthUserSerializer(Serializer):
             return refresh_token
         except TokenError as error:
             raise ValidationError(detail={
-                "message": error
+                "detail": "Refresh token is invalid or expired",
+                "code": "invalid_refresh_token"
             })
-
+            
+    def validate(self, attrs):
+        refresh_token: RefreshToken = attrs["refresh_token"]
+        
+        attrs["access_token"] = str(refresh_token.access_token)
+        
+        return attrs
 
 class PersonalInfoSerializer(serializers.ModelSerializer):
     class Meta:

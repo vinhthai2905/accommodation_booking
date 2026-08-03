@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
 
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.exceptions import ValidationError
 
 from apps.app_user.helpers import create_auth_tokens
 from apps.app_user.models import NguoiDung, VaiTroNguoiDung
@@ -16,6 +17,8 @@ from apps.app_user.api.public.authentication.serializers import (
     FetchAuthUserSerializer,
     RefreshAuthUserSerializer,
 )
+
+from pprint import pprint
 
 
 class AuthLoginView(APIView):
@@ -106,14 +109,28 @@ class RefreshAuthUserView(APIView):
     serializer_class = RefreshAuthUserSerializer
 
     def post(self, request: Request, *args, **kwargs):
-        refresh_token = request._request.COOKIES.get("refresh_token")
+        try:
+            refresh_token = request._request.COOKIES.get("refresh_token")
 
-        serializer: RefreshAuthUserSerializer = self.serializer_class(
-            data={"refresh_token": refresh_token}
-        )
-        
-        serializer.is_valid(raise_exception=True)
-        
-        return Response(data={
-            "message": "Successfully refresh the new token for user."
-        })
+            serializer: RefreshAuthUserSerializer = self.serializer_class(
+                data={"refresh_token": refresh_token},
+            )
+
+            serializer.is_valid(raise_exception=True)
+
+            return Response(
+                data={
+                    "message": "Successfully refresh the new token for user.",
+                    "test": serializer.data,
+                }
+            )
+        except ValidationError as error:
+            refresh_token_errors = serializer.errors.get("refresh_token")
+
+            return Response(
+                data={
+                    "detail": refresh_token_errors["detail"],
+                    "code": refresh_token_errors["code"],
+                },
+                status=status.HTTP_401_UNAUTHORIZED,
+            )

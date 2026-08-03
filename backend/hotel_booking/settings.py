@@ -21,12 +21,6 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# if os.name == "nt":
-#     GDAL_DLL_DIR = r"C:\Users\ASUS\miniconda3\envs\django\Library\bin"
-#     os.add_dll_directory(GDAL_DLL_DIR)
-
-#     GDAL_LIBRARY_PATH = os.path.join(GDAL_DLL_DIR, "gdal.dll")
-
 load_dotenv(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
